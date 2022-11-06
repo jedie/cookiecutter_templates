@@ -28,7 +28,7 @@ assert FINALPATH.is_dir(), f'Directory not exists: {FINALPATH}'
 PUBLIC_PATH = __Path('__PUBLIC_PATH__')  # /var/www/$app
 assert PUBLIC_PATH.is_dir(), f'Directory not exists: {PUBLIC_PATH}'
 
-LOG_FILE = __Path('__LOG_FILE__')  # /var/log/$app/{{cookiecutter.upstream_pkg_name}}_ynh.log
+LOG_FILE = __Path('__LOG_FILE__')  # /var/log/$app/{{cookiecutter.ynh_app_pkg_name}}.log
 assert LOG_FILE.is_file(), f'File not exists: {LOG_FILE}'
 
 PATH_URL = '__PATH_URL__'  # $YNH_APP_ARG_PATH

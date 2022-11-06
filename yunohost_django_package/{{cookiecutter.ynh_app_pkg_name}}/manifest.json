@@ -1,6 +1,6 @@
 {
 	"name": "{{cookiecutter.project_name}}",
-	"id": "{{cookiecutter.upstream_pkg_name}}_ynh",
+	"id": "{{cookiecutter.ynh_app_pkg_name}}",
 	"packaging_format": 1,
 	"description": {
         "en": "{{cookiecutter.description}}"

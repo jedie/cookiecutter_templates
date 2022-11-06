@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "{{cookiecutter.upstream_pkg_name}}_ynh"
+name = "{{cookiecutter.ynh_app_pkg_name}}"
 version = "{{cookiecutter.upstream_version}}~ynh{{cookiecutter.ynh_version}}"
 description = "{{cookiecutter.description}}"
 authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
