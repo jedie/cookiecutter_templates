@@ -16,7 +16,7 @@ from django_yunohost_integration.secret_key import get_or_create_secret as __get
 
 
 # https://github.com/jedie/django-example/
-from {{cookiecutter.upstream_name}}.settings.prod import *  # noqa:F401,F403 isort:skip
+from {{cookiecutter.upstream_pkg_name}}.settings.prod import *  # noqa:F401,F403 isort:skip
 
 
 from django_yunohost_integration.base_settings import LOGGING  # noqa:F401 isort:skip
@@ -28,7 +28,7 @@ assert FINALPATH.is_dir(), f'Directory not exists: {FINALPATH}'
 PUBLIC_PATH = __Path('__PUBLIC_PATH__')  # /var/www/$app
 assert PUBLIC_PATH.is_dir(), f'Directory not exists: {PUBLIC_PATH}'
 
-LOG_FILE = __Path('__LOG_FILE__')  # /var/log/$app/{{cookiecutter.upstream_name}}_ynh.log
+LOG_FILE = __Path('__LOG_FILE__')  # /var/log/$app/{{cookiecutter.upstream_pkg_name}}_ynh.log
 assert LOG_FILE.is_file(), f'File not exists: {LOG_FILE}'
 
 PATH_URL = '__PATH_URL__'  # $YNH_APP_ARG_PATH
@@ -160,7 +160,7 @@ MEDIA_ROOT = str(PUBLIC_PATH / 'media')
 LOGGING['handlers']['log_file']['filename'] = str(LOG_FILE)
 
 # Example how to add logging to own app:
-LOGGING['loggers']['{{cookiecutter.upstream_name}}'] = {
+LOGGING['loggers']['{{cookiecutter.upstream_pkg_name}}'] = {
     'handlers': ['syslog', 'log_file', 'mail_admins'],
     'level': 'INFO',
     'propagate': False,

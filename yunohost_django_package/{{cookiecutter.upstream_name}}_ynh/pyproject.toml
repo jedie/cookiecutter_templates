@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "{{cookiecutter.upstream_name}}_ynh"
+name = "{{cookiecutter.upstream_pkg_name}}_ynh"
 version = "{{cookiecutter.upstream_version}}~ynh{{cookiecutter.ynh_version}}"
 description = "{{cookiecutter.description}}"
 authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
 license = "{{cookiecutter.license}}"
-homepage = "{{cookiecutter.upstream_url}}"
+homepage = "{{cookiecutter.ynh_app_url}}"
 
 [tool.poetry.urls]
 "Bug Tracker" = "{{cookiecutter.bug_tracker_url}}"
@@ -12,7 +12,7 @@ homepage = "{{cookiecutter.upstream_url}}"
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0.0"  # Stay with 3.9 until YunoHost used >=Debian 11 (Bullseye)
 
-{{cookiecutter.upstream_name}} = ">={{cookiecutter.upstream_version}}"  # {{cookiecutter.upstream_url}}
+{{cookiecutter.upstream_pkg_name}} = ">={{cookiecutter.upstream_version}}"  # {{cookiecutter.upstream_url}}
 
 # extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
 # see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
@@ -63,7 +63,7 @@ log_level = "INFO"
 atomic=true
 profile='black'
 skip_glob=["*/htmlcov/*","*/migrations/*","*/local_test/*"]
-known_first_party=['{{cookiecutter.upstream_name}}']
+known_first_party=['{{cookiecutter.upstream_pkg_name}}']
 line_length=100
 lines_after_imports=2
 

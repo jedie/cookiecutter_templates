@@ -7,7 +7,7 @@ from bx_django_utils.test_utils.html_assertion import (
 from django.conf import settings
 from django.test.testcases import TestCase
 from django.urls.base import reverse
-from {{cookiecutter.upstream_name}} import __version__
+from {{cookiecutter.upstream_pkg_name}} import __version__
 
 
 class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
@@ -19,7 +19,7 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
         ###############################################################################
         # Test as anonymous user
 
-        with self.assertLogs('{{cookiecutter.upstream_name}}') as logs:
+        with self.assertLogs('{{cookiecutter.upstream_pkg_name}}') as logs:
             response = self.client.get(
                 path='/app_path/',
                 secure=True,
@@ -35,7 +35,7 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
             ),
         )
         self.assertEqual(
-            logs.output, ['INFO:{{cookiecutter.upstream_name}}.views:DebugView request from user: AnonymousUser']
+            logs.output, ['INFO:{{cookiecutter.upstream_pkg_name}}.views:DebugView request from user: AnonymousUser']
         )
         assert_html_response_snapshot(response, query_selector='#container', validate=False)
 
@@ -44,7 +44,7 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
 
         self.client.cookies['SSOwAuthUser'] = 'test'
 
-        with self.assertLogs('{{cookiecutter.upstream_name}}') as logs:
+        with self.assertLogs('{{cookiecutter.upstream_pkg_name}}') as logs:
             response = self.client.get(
                 path='/app_path/',
                 HTTP_REMOTE_USER='test',
@@ -62,5 +62,5 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
             ),
         )
         self.assertEqual(
-            logs.output, ['INFO:{{cookiecutter.upstream_name}}.views:DebugView request from user: test']
+            logs.output, ['INFO:{{cookiecutter.upstream_pkg_name}}.views:DebugView request from user: test']
         )

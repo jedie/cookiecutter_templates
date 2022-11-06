@@ -1,10 +1,12 @@
 {
 	"name": "{{cookiecutter.project_name}}",
-	"id": "{{cookiecutter.upstream_name}}_ynh",
+	"id": "{{cookiecutter.upstream_pkg_name}}_ynh",
 	"packaging_format": 1,
-	"description": "{{cookiecutter.description}}",
+	"description": {
+        "en": "{{cookiecutter.description}}"
+    },
 	"version": "{{cookiecutter.upstream_version}}~ynh{{cookiecutter.ynh_version}}",
-	"url": "{{cookiecutter.upstream_url}}",
+	"url": "{{cookiecutter.ynh_app_url}}",
     "upstream": {
         "license": "GPL-3.0",
         "website": "{{cookiecutter.upstream_url}}",
@@ -34,8 +36,8 @@
 			{
 				"name": "path",
 				"type": "path",
-				"example": "/{{cookiecutter.upstream_name}}",
-				"default": "/{{cookiecutter.upstream_name}}"
+				"example": "/{{cookiecutter.upstream_pkg_name}}",
+				"default": "/{{cookiecutter.upstream_pkg_name}}"
 			},
 			{
 				"name": "admin",
