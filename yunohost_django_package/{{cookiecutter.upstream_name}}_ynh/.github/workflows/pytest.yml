@@ -1,3 +1,4 @@
+{% raw %}{# https://jinja.palletsprojects.com/en/latest/templates/#escaping #}
 name: pytest
 
 on:
@@ -54,3 +55,4 @@ jobs:
       with:
         fail_ci_if_error: false
         verbose: true
+{% endraw %}
