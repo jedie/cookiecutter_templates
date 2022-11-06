@@ -16,7 +16,7 @@
     },
 	"license": "{{cookiecutter.license}}",
 	"maintainer": {
-		"name": "{{cookiecutter.author_name}}",
+		"name": "{{cookiecutter.full_name}}",
 		"email": "{{cookiecutter.author_email}}"
 	},
 	"previous_maintainers": [],

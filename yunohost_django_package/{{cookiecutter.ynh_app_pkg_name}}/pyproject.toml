@@ -2,7 +2,7 @@
 name = "{{cookiecutter.ynh_app_pkg_name}}"
 version = "{{cookiecutter.upstream_version}}~ynh{{cookiecutter.ynh_version}}"
 description = "{{cookiecutter.description}}"
-authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
+authors = ["{{cookiecutter.full_name}} <{{cookiecutter.author_email}}>"]
 license = "{{cookiecutter.license}}"
 homepage = "{{cookiecutter.ynh_app_url}}"
 
