@@ -1,0 +1,12 @@
+{
+    "project_name": "Django Example",
+    "author_name": "John Doh",
+    "author_email": "{{ cookiecutter.author_name.lower()|replace(' ', '-') }}@example.tld",
+    "upstream_name": "example_pkg_name",
+    "upstream_url": "https://github.com/YunoHost-Apps/{{cookiecutter.upstream_name}}_ynh",
+    "bug_tracker_url": "{{cookiecutter.upstream_url}}/issues",
+    "upstream_version": "0.0.1",
+    "ynh_version": "1",
+    "description": "A example YunoHost App",
+    "license": "GPL-3.0"
+}
