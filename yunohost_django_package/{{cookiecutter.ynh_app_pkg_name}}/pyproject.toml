@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "{{cookiecutter.ynh_app_pkg_name}}"
-version = "{{cookiecutter.upstream_version}}~ynh{{cookiecutter.ynh_version}}"
+version = "{{cookiecutter.upstream_version}}+ynh{{cookiecutter.ynh_version}}"
 description = "{{cookiecutter.description}}"
 authors = ["{{cookiecutter.full_name}} <{{cookiecutter.author_email}}>"]
 license = "{{cookiecutter.license}}"
