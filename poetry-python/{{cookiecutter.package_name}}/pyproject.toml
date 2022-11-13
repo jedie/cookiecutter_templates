@@ -3,11 +3,14 @@ name = "{{ cookiecutter.package_name }}"
 version = "{{ cookiecutter.package_version }}"
 description = "{{ cookiecutter.package_description }}"
 authors = [
-    {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
+    "{{ cookiecutter.full_name }} <{{ cookiecutter.author_email }}>",
+]
+maintainers = [
+    "{{ cookiecutter.full_name }} <{{ cookiecutter.author_email }}>",
 ]
 homepage = "{{ cookiecutter.package_url }}"
 packages = [{ include = "{{ cookiecutter.package_name }}" }]
-license = {text = "{{ cookiecutter.license }}"}
+license = "{{ cookiecutter.license }}"
 readme = 'README.md'
 
 [tool.poetry.urls]

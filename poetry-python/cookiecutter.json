@@ -8,5 +8,5 @@
     "package_description": "A minimal Python package",
     "package_url": "https://github.com/{{ cookiecutter.github_username }}/{{cookiecutter.package_name}}",
     "issues_url": "{{ cookiecutter.package_url }}/issues",
-    "license": "GNU General Public License v3.0"
+    "license": "GPL-3.0-or-later"
 }
