@@ -1,4 +1,6 @@
 """{{ cookiecutter.package_name }} - {{ cookiecutter.package_description }}"""
 
-__version__ = '{{ cookiecutter.package_version }}'
+from importlib.metadata import version
+
+__version__ = version('{{ cookiecutter.package_name }}')
 __author__ = '{{ cookiecutter.full_name }} <{{ cookiecutter.author_email }}>'
