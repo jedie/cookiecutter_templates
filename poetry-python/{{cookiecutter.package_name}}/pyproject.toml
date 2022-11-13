@@ -1,0 +1,85 @@
+[tool.poetry]
+name = "{{ cookiecutter.package_name }}"
+version = "{{ cookiecutter.package_version }}"
+description = "{{ cookiecutter.package_description }}"
+authors = [
+    {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
+]
+homepage = "{{ cookiecutter.package_url }}"
+packages = [{ include = "{{ cookiecutter.package_name }}" }]
+license = {text = "{{ cookiecutter.license }}"}
+readme = 'README.md'
+
+[tool.poetry.urls]
+"Bug Tracker" = "{{ cookiecutter.issues_url }}"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0.0"
+
+[tool.poetry.dev-dependencies]
+bx_py_utils = "*"
+tox = "*"
+darker = "*"  # https://github.com/akaihola/pytest-darker
+coveralls = "*"
+isort = "*"
+flake8 = "*"
+EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
+safety = "*"  # https://github.com/pyupio/safety
+poetry-publish = "*"  # https://github.com/jedie/poetry-publish
+mypy = "*"
+pyproject-flake8="*"
+
+[tool.poetry.scripts]
+{{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.main:main"
+publish = "{{ cookiecutter.package_name }}.publish:publish"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.darker]
+src = ['.']
+revision = "origin/main..."
+line_length = 100
+verbose = true
+skip_string_normalization = true
+diff = false
+check = false
+stdout = false
+isort = true
+lint = [
+    "flake8",
+]
+log_level = "INFO"
+
+
+[tool.isort]
+# https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
+atomic=true
+profile='black'
+skip_glob=["*/htmlcov/*"]
+known_first_party=['{{ cookiecutter.package_name }}']
+line_length=100
+lines_after_imports=2
+
+
+[tool.coverage.run]
+omit = [".*"]
+
+
+[tool.tox]
+# https://tox.readthedocs.io/en/latest/example/basic.html#pyproject-toml-tox-legacy-ini
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+envlist = py{39,310}
+skip_missing_interpreters = True
+
+[testenv]
+passenv = *
+whitelist_externals = make
+commands =
+    make test
+"""
