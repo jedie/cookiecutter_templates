@@ -16,6 +16,7 @@ readme = 'README.md'
 [tool.poetry.urls]
 "Bug Tracker" = "{{ cookiecutter.issues_url }}"
 
+
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0.0"
 typer = "*"
@@ -32,6 +33,8 @@ safety = "*"  # https://github.com/pyupio/safety
 poetry-publish = "*"  # https://github.com/jedie/poetry-publish
 mypy = "*"
 pyproject-flake8="*"
+tomli = "*"
+
 
 [tool.poetry.scripts]
 {{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.main:main"
