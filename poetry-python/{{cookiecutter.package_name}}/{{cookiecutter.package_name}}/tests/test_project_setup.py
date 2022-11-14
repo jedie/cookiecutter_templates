@@ -5,9 +5,11 @@ from bx_py_utils.path import assert_is_file
 
 import {{ cookiecutter.package_name }}
 from {{ cookiecutter.package_name }} import __version__
+from {{ cookiecutter.package_name }}.cli import check_code_style, fix_code_style, mypy
 
 
 PACKAGE_ROOT = Path({{ cookiecutter.package_name }}.__file__).parent.parent
+
 
 class ProjectSetupTestCase(TestCase):
 
@@ -21,3 +23,10 @@ class ProjectSetupTestCase(TestCase):
         pyproject_version = pyproject_toml['tool']['poetry']['version']
 
         self.assertEqual(__version__, pyproject_version)
+
+    def test_code_style(self):
+        fix_code_style()
+        check_code_style(verbose=False)
+
+    def test_mypy(self):
+        mypy(verbose=False)
