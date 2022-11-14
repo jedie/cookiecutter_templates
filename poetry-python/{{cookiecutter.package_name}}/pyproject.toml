@@ -18,9 +18,10 @@ readme = 'README.md'
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0.0"
+typer = "*"
+bx_py_utils = "*"
 
 [tool.poetry.dev-dependencies]
-bx_py_utils = "*"
 tox = "*"
 darker = "*"  # https://github.com/akaihola/pytest-darker
 coveralls = "*"
@@ -69,7 +70,10 @@ lines_after_imports=2
 
 
 [tool.coverage.run]
-omit = [".*"]
+branch = true
+source = ['.']
+omit = ['.*', '*/tests/*']
+command_line = "-m unittest"
 
 
 [tool.tox]
