@@ -1,0 +1,114 @@
+[tool.poetry]
+name = "managetemplates"
+version = "0.0.1"
+description = "Pseudo package to test the https://github.com/jedie/cookiecutter_templates cookiecutter templates"
+authors = [
+    "Jens Diemer <managetemplates@jensdiemer.de>",
+]
+maintainers = [
+    "Jens Diemer <managetemplates@jensdiemer.de>",
+]
+homepage = "https://github.com/jedie/cookiecutter_templates"
+packages = [{ include = "managetemplates" }]
+license = "GPL-3.0-or-later"
+readme = 'README.md'
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/jedie/cookiecutter_templates/issues"
+
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0.0"
+typer = "*"
+bx_py_utils = "*"
+cookiecutter = "*"
+
+[tool.poetry.dev-dependencies]
+tox = "*"
+darker = "*"  # https://github.com/akaihola/pytest-darker
+coveralls = "*"
+isort = "*"
+flake8 = "*"
+EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
+safety = "*"  # https://github.com/pyupio/safety
+poetry-publish = "*"  # https://github.com/jedie/poetry-publish
+pyproject-flake8="*"
+tomli = "*"
+
+
+[tool.poetry.scripts]
+managetemplates = "managetemplates.main:main"
+publish = "managetemplates.publish:publish"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.darker]
+src = ['managetemplates']
+revision = "origin/main..."
+line_length = 100
+verbose = true
+skip_string_normalization = true
+diff = false
+check = false
+stdout = false
+isort = true
+lint = [
+    "flake8",
+]
+log_level = "INFO"
+
+
+[tool.isort]
+# https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
+atomic=true
+profile='black'
+skip_glob=["*/htmlcov/*"]
+known_first_party=['managetemplates']
+line_length=100
+lines_after_imports=2
+
+
+[tool.coverage.run]
+branch = true
+source = ['managetemplates']
+omit = ['.*', '*/tests/*']
+command_line = "-m unittest"
+
+
+[tool.tox]
+# https://tox.readthedocs.io/en/latest/example/basic.html#pyproject-toml-tox-legacy-ini
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+envlist = py{39,310}
+skip_missing_interpreters = True
+
+[testenv]
+passenv = *
+whitelist_externals = make
+commands =
+    make test
+"""
+
+
+[manageprojects] # https://github.com/jedie/manageprojects
+initial_revision = "70d8d2e"
+initial_date = 2022-11-14T08:56:42+01:00
+cookiecutter_template = "https://github.com/jedie/cookiecutter_templates/"
+cookiecutter_directory = "poetry-python"
+
+[manageprojects.cookiecutter_context.cookiecutter]
+full_name = "Jens Diemer"
+github_username = "jedie"
+author_email = "managetemplates@jensdiemer.de"
+package_name = "managetemplates"
+package_version = "0.0.1"
+package_description = "Pseudo package to test the https://github.com/jedie/cookiecutter_templates cookiecutter templates"
+package_url = "https://github.com/jedie/cookiecutter_templates"
+issues_url = "https://github.com/jedie/cookiecutter_templates/issues"
+license = "GPL-3.0-or-later"
+_template = "https://github.com/jedie/cookiecutter_templates/"
