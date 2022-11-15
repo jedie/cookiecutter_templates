@@ -400,7 +400,7 @@ testing = ["flake8 (<5)", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-chec
 
 [[package]]
 name = "manageprojects"
-version = "0.2.0"
+version = "0.3.1"
 description = "Manage Python / Django projects"
 category = "main"
 optional = false
@@ -900,7 +900,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.9,<4.0.0"
-content-hash = "c14a9a4d5771a08a94d6f2d1d81ac9140505647495642b83c95fe1e75a76a172"
+content-hash = "911731ddbb6b52a76ad8b641e2b9f0682ff997801e74e91726bf1d84b44b2e23"
 
 [metadata.files]
 arrow = [
@@ -1184,8 +1184,8 @@ keyring = [
     {file = "keyring-23.11.0.tar.gz", hash = "sha256:ad192263e2cdd5f12875dedc2da13534359a7e760e77f8d04b50968a821c2361"},
 ]
 manageprojects = [
-    {file = "manageprojects-0.2.0-py3-none-any.whl", hash = "sha256:984365736ac5232e9e66492acf3c82f29ff4eddb6d14c9a126aa35731333d361"},
-    {file = "manageprojects-0.2.0.tar.gz", hash = "sha256:1dd736eab3860d0288aea71936acfab1938b16461751a756eabc49435e9d80e0"},
+    {file = "manageprojects-0.3.1-py3-none-any.whl", hash = "sha256:04e5d18c730b239da19601a42f9d6e473e389cf0bc3a3b912503309c3cedede6"},
+    {file = "manageprojects-0.3.1.tar.gz", hash = "sha256:9479bed9c2b1d477fe0a46f1fd35e8562df6995d25c82fee5ca50b44421fe72e"},
 ]
 markupsafe = [
     {file = "MarkupSafe-2.1.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:86b1f75c4e7c2ac2ccdaec2b9022845dbb81880ca318bb7a0a01fbf7813e3812"},
