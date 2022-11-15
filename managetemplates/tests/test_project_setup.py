@@ -1,15 +1,12 @@
+import subprocess
 from pathlib import Path
 from unittest import TestCase
 
 import tomli
 from bx_py_utils.path import assert_is_file
 
-import managetemplates
 from managetemplates import __version__
-from managetemplates.cli import check_code_style, fix_code_style
-
-
-PACKAGE_ROOT = Path(managetemplates.__file__).parent.parent
+from managetemplates.cli import PACKAGE_ROOT, check_code_style, fix_code_style
 
 
 class ProjectSetupTestCase(TestCase):
@@ -23,6 +20,10 @@ class ProjectSetupTestCase(TestCase):
         pyproject_version = pyproject_toml['tool']['poetry']['version']
 
         self.assertEqual(__version__, pyproject_version)
+
+    def test_poetry_check(self):
+        output = subprocess.check_output(['poetry', 'check'], cwd=PACKAGE_ROOT, text=True)
+        self.assertEqual(output, 'All set!\n')
 
     def test_code_style(self):
         fix_code_style()

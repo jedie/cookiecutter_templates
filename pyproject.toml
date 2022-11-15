@@ -21,7 +21,9 @@ readme = 'README.md'
 python = ">=3.9,<4.0.0"
 typer = "*"
 bx_py_utils = "*"
+manageprojects = "*"
 cookiecutter = "*"
+
 
 [tool.poetry.dev-dependencies]
 tox = "*"
@@ -32,7 +34,6 @@ flake8 = "*"
 EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
 safety = "*"  # https://github.com/pyupio/safety
 poetry-publish = "*"  # https://github.com/jedie/poetry-publish
-pyproject-flake8="*"
 tomli = "*"
 
 

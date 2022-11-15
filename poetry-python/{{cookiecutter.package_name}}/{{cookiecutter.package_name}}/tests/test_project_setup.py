@@ -1,5 +1,7 @@
+import subprocess
 from pathlib import Path
 from unittest import TestCase
+
 import tomli
 from bx_py_utils.path import assert_is_file
 
@@ -12,7 +14,6 @@ PACKAGE_ROOT = Path({{ cookiecutter.package_name }}.__file__).parent.parent
 
 
 class ProjectSetupTestCase(TestCase):
-
     def test_version(self):
         pyproject_toml_path = Path(PACKAGE_ROOT, 'pyproject.toml')
         assert_is_file(pyproject_toml_path)
@@ -30,3 +31,7 @@ class ProjectSetupTestCase(TestCase):
 
     def test_mypy(self):
         mypy(verbose=False)
+
+    def test_poetry_check(self):
+        output = subprocess.check_output(['poetry', 'check'], cwd=PACKAGE_ROOT, text=True)
+        self.assertEqual(output, 'All set!\n')
