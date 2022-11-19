@@ -22,16 +22,21 @@ django_yunohost_integration = {version = ">=0.5.0rc1", extras = ["ynh"]}  # http
 [tool.poetry.dev-dependencies]
 bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
 bx_django_utils = "*"  # https://github.com/boxine/bx_django_utils
-tox = "*"
+tox = "*"  # https://github.com/tox-dev/tox
+coveralls = "*"  # http://github.com/TheKevJames/coveralls-python
+darker = "*"  # https://github.com/akaihola/pytest-darker
+isort = "*"  # https://github.com/pycqa/isort
+flake8 = "*"  # https://github.com/pycqa/flake8
+EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
+safety = "*"  # https://github.com/pyupio/safety
+mypy = "*"  # https://github.com/python/mypy
+tomli = "*"  # https://github.com/hukkin/tomli
+twine = "*"  # https://github.com/pypa/twine
+poetry-publish = "*"  # https://github.com/jedie/poetry-publish
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
 pytest-darker = "*"  # https://github.com/akaihola/pytest-darker
-coveralls = "*"
-isort = "*"
-flake8 = "*"
-EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
-safety = "*"  # https://github.com/pyupio/safety
 requests = "*"  # https://github.com/psf/requests
 packaging = "*"  # https://github.com/pypa/packagi
 beautifulsoup4 = "*"  # https://pypi.org/project/beautifulsoup4/

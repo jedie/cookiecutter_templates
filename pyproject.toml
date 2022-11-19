@@ -19,22 +19,24 @@ readme = 'README.md'
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0.0"
-typer = "*"
-bx_py_utils = "*"
-manageprojects = ">=0.3.1"
-cookiecutter = "*"
+typer = "*"  # https://github.com/tiangolo/typer
+bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
+manageprojects = ">=0.3.2"  # https://github.com/jedie/manageprojects
+cookiecutter = "*"  # https://github.com/cookiecutter/cookiecutter
 
 
 [tool.poetry.dev-dependencies]
-tox = "*"
+tox = "*"  # https://github.com/tox-dev/tox
+coveralls = "*"  # http://github.com/TheKevJames/coveralls-python
 darker = "*"  # https://github.com/akaihola/pytest-darker
-coveralls = "*"
-isort = "*"
-flake8 = "*"
+isort = "*"  # https://github.com/pycqa/isort
+flake8 = "*"  # https://github.com/pycqa/flake8
 EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
 safety = "*"  # https://github.com/pyupio/safety
+mypy = "*"  # https://github.com/python/mypy
+tomli = "*"  # https://github.com/hukkin/tomli
+twine = "*"  # https://github.com/pypa/twine
 poetry-publish = "*"  # https://github.com/jedie/poetry-publish
-tomli = "*"
 
 
 [tool.poetry.scripts]
@@ -67,7 +69,7 @@ log_level = "INFO"
 # https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
 atomic=true
 profile='black'
-skip_glob=["*/htmlcov/*"]
+skip_glob=['.*', '*/htmlcov/*', '*/{{cookiecutter*}}/*']
 known_first_party=['managetemplates']
 line_length=100
 lines_after_imports=2
@@ -77,7 +79,7 @@ lines_after_imports=2
 branch = true
 source = ['managetemplates']
 omit = ['.*', '*/tests/*']
-command_line = "-m unittest"
+command_line = "-m unittest --locals --verbose"
 
 
 [tool.tox]

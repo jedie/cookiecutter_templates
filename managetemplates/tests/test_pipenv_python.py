@@ -10,10 +10,10 @@ from managetemplates.utilities.cookiecutter_utils import run_cookiecutter
 from managetemplates.utilities.test_project_utils import TestProject
 
 
-class PoetryPythonTemplateTestCase(BaseTestCase):
+class PipenvPythonTemplateTestCase(BaseTestCase):
     def test_basic(self):
         pkg_path: Path = run_cookiecutter(
-            template_name='poetry-python',
+            template_name='pipenv-python',
             final_name='your_cool_package',  # {{cookiecutter.package_name}} replaced!
             # force_recreate=True
             force_recreate=False,
@@ -28,17 +28,13 @@ class PoetryPythonTemplateTestCase(BaseTestCase):
             # Reuse existing .git
             git = Git(cwd=git_path)
 
-        output = test_project.check_output('poetry', 'check')
-        self.assertEqual(output, 'All set!\n')
-
-        if not Path(pkg_path / '.venv' / 'bin' / 'your_cool_package').is_file():
+        if not Path(pkg_path / '.venv' / 'bin' / 'darker').exists():
             output = test_project.check_output('make', 'install')
-            self.assert_in('Poetry found, ok.', output)
-            self.assert_in('Installing the current project: your_cool_package (0.0.1)', output)
+            self.assert_in('Installing dependencies from Pipfile.lock', output)
 
         assert_is_file(pkg_path / '.venv' / 'bin' / 'pip')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'python')
-        assert_is_file(pkg_path / '.venv' / 'bin' / 'your_cool_package')
+        assert_is_file(pkg_path / '.venv' / 'bin' / 'pipenv')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'darker')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'flake8')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'coverage')
@@ -46,8 +42,8 @@ class PoetryPythonTemplateTestCase(BaseTestCase):
 
         output = test_project.check_output('make', 'fix-code-style')
         try:
-            self.assert_in('poetry run black', output)
-            self.assert_in('poetry run isort', output)
+            self.assert_in('.venv/bin/black ', output)
+            self.assert_in('.venv/bin/isort .', output)
         except Exception:
             self.display_git_diff(git)
             raise
@@ -55,4 +51,4 @@ class PoetryPythonTemplateTestCase(BaseTestCase):
         subprocess.check_call(['make', 'lint'], cwd=pkg_path)
 
         output = test_project.check_output('make', 'test')
-        self.assert_in('Ran 4 tests', output)
+        self.assert_in('Ran 1 test', output)

@@ -2,6 +2,6 @@
 # Move to pyproject.toml after: https://github.com/PyCQA/flake8/issues/234
 #
 [flake8]
-exclude = .*, dist, htmlcov, yunohost_django_package, poetry-python
+exclude = .*, dist, htmlcov, */{{cookiecutter*}}/*
 #ignore = E402
 max-line-length = 100
