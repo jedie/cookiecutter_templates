@@ -31,3 +31,8 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 ```shell
 ~/manageprojects$ ./mp.py start-project https://github.com/jedie/cookiecutter_templates/ --directory yunohost_django_package ~/output/directory/
 ```
+
+
+## Links
+
+* https://github.com/jedie/manageprojects/
