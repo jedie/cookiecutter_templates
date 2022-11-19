@@ -4,8 +4,11 @@
 """
 
 
+from {{cookiecutter.package_name}}.cli import cli_app
+
+
 def main():
-    print('Hello World from {{ cookiecutter.package_name }}')
+    cli_app.main()
 
 
 if __name__ == '__main__':
