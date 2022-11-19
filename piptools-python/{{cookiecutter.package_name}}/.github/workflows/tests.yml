@@ -1,3 +1,5 @@
+{# https://jinja.palletsprojects.com/en/latest/templates/#escaping #}
+{% raw %}
 name: tests
 
 on:
@@ -33,10 +35,6 @@ jobs:
         path: ~/.cache/
         key: dot-cache-files
 
-    - name: 'Install needed poetry'
-      run: |
-        curl -sSL https://install.python-poetry.org | python3 -
-
     - name: 'Bootstrap'
       run: |
         ./cli.py version
@@ -50,3 +48,4 @@ jobs:
       with:
         fail_ci_if_error: false
         verbose: true
+{% endraw %}

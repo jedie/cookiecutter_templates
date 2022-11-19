@@ -33,6 +33,47 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 ```
 
 
-## Links
+# contribute
+
+## setup local test enviorment
+
+```bash
+~$ git clone https://github.com/jedie/cookiecutter_templates.git
+~$ cd cookiecutter_templates
+~/cookiecutter_templates$ ./cli.py --help
+...
+ Usage: managetemplates [OPTIONS] COMMAND [ARGS]...
+
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.                                                │
+│ --show-completion             Show completion for the current shell, to copy it or customize the installation.         │
+│ --help                        Show this message and exit.                                                              │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ check-code-style                                                                                                       │
+│ coverage                  Run and show coverage.                                                                       │
+│ fix-code-style            Fix code style via darker                                                                    │
+│ install                   Run pip-sync and install 'managetemplates' via pip as editable.                              │
+│ mypy                      Run Mypy (configured in pyproject.toml)                                                      │
+│ publish                   Build and upload this project to PyPi                                                        │
+│ test                      Run unittests                                                                                │
+│ update                    Update the development environment                                                           │
+│ version                   Print version and exit                                                                       │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+Run tests, e.g.:
+```bash
+~/cookiecutter_templates$ ./cli.py test
+
+# or sub tests:
+~/cookiecutter_templates$ ./cli.py test managetemplates/tests/test_piptools_python.py
+
+# It's just a "python3 -m unittest" wrapper cli, see:
+~/cookiecutter_templates$ ./cli.py test --help
+```
+
+
+# Links
 
 * https://github.com/jedie/manageprojects/
