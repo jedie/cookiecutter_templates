@@ -33,13 +33,17 @@ jobs:
         path: ~/.cache/
         key: dot-cache-files
 
+    - name: 'Install needed poetry'
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+
     - name: 'Bootstrap'
       run: |
         ./cli.py version
 
     - name: 'Run tests with Python v${{ matrix.python-version }}'
       run: |
-        ./cli.sh coverage
+        ./cli.py coverage
 
     - name: 'Upload coverage report'
       uses: codecov/codecov-action@v2

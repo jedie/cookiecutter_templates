@@ -1,3 +1,5 @@
+{# https://jinja.palletsprojects.com/en/latest/templates/#escaping #}
+{% raw %}
 name: tests
 
 on:
@@ -39,10 +41,11 @@ jobs:
 
     - name: 'Run tests with Python v${{ matrix.python-version }}'
       run: |
-        ./cli.sh coverage
+        ./cli.py coverage
 
     - name: 'Upload coverage report'
       uses: codecov/codecov-action@v2
       with:
         fail_ci_if_error: false
         verbose: true
+{% endraw %}
