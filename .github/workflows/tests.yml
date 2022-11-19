@@ -33,13 +33,9 @@ jobs:
         path: ~/.cache/
         key: dot-cache-files
 
-    - name: 'Install Poetry'
+    - name: 'Bootstrap'
       run: |
-        make install-poetry
-
-    - name: 'Install'
-      run: |
-        make install
+        ./cli.py version
 
     - name: 'Run tests with Python v${{ matrix.python-version }}'
       run: |

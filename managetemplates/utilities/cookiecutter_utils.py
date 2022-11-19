@@ -4,7 +4,7 @@ from pathlib import Path
 from bx_py_utils.path import assert_is_dir
 from cookiecutter.main import cookiecutter
 
-from managetemplates.cli import PACKAGE_ROOT
+from managetemplates.constants import PACKAGE_ROOT
 
 
 def run_cookiecutter(template_name: str, final_name: str, force_recreate=False):

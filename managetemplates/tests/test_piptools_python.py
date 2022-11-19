@@ -5,7 +5,7 @@ from pathlib import Path
 
 from bx_py_utils.path import assert_is_dir, assert_is_file
 
-from managetemplates.cli import PACKAGE_ROOT
+from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.tests.base import BaseTestCase
 from managetemplates.utilities.cookiecutter_utils import run_cookiecutter
 from managetemplates.utilities.subprocess_utils import verbose_check_call
