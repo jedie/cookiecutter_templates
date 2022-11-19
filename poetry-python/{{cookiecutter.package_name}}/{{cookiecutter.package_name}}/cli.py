@@ -80,7 +80,7 @@ def mypy(verbose: bool = True):
     """Run Mypy (configured in pyproject.toml)"""
     args = [which('mypy')]
     if verbose:
-        args.append('--verbose')
+        args.append('--verbose')  # type: ignore[arg-type]
     verbose_check_call(*args, PACKAGE_ROOT)
 
 

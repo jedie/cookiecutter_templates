@@ -57,6 +57,9 @@ safety:  ## Run https://github.com/pyupio/safety
 publish: ## Release new version to PyPi
 	poetry run publish
 
+clean:
+	rm -Rf .tests
+
 ##############################################################################
 
 .PHONY: help check-poetry install-poetry install update local-test
