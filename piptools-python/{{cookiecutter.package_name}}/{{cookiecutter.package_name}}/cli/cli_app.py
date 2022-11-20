@@ -84,7 +84,6 @@ def update():
         'requirements/production.txt',
     )
     verbose_check_call('pip-sync', 'requirements/develop.txt')
-    install()
 
 
 @app.command()

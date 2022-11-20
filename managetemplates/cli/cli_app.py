@@ -58,7 +58,6 @@ def update():
         '--output-file',
         REQ_TXT_PATH,
     )
-    install()
 
 
 @app.command()
