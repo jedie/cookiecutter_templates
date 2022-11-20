@@ -53,4 +53,4 @@ class PiptoolsPythonTemplateTestCase(BaseTestCase):
             self.assert_in('flake8 exit code: 0', output)
 
         output = test_project.check_output(cli_bin, 'test')
-        self.assert_in('Ran 1 test', output)
+        self.assert_in('Ran 2 tests', output)

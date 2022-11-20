@@ -142,15 +142,14 @@ def _call_darker(*, argv):
     # FileNotFoundError: [Errno 2] No such file or directory: 'flake8'
     #
     # Just add .venv/bin/ to PATH:
-    venv_path = PACKAGE_ROOT / '.venv' / 'bin'
-
-    assert_is_dir(venv_path)
+    venv_path = Path(sys.executable).parent
     assert_is_file(venv_path / 'flake8')
+    assert_is_file(venv_path / 'darker')
     venv_path = str(venv_path)
     if venv_path not in os.environ['PATH']:
         os.environ['PATH'] = venv_path + os.pathsep + os.environ['PATH']
 
-    print(f'Run darker {shlex.join(str(part) for part in argv)}')
+    print(f'Run "darker {shlex.join(str(part) for part in argv)}"...')
     exit_code = darker_main(argv=argv)
     print(f'darker exit code: {exit_code!r}')
     return exit_code
