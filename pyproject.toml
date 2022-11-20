@@ -68,6 +68,10 @@ source = ['managetemplates']
 omit = ['.*', '*/tests/*']
 command_line = '-m unittest --locals --verbose'
 
+[tool.coverage.report]
+skip_empty = true
+fail_under = 45
+
 
 [manageprojects] # https://github.com/jedie/manageprojects
 initial_revision = "5b2334c"

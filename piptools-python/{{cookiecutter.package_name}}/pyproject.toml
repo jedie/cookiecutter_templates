@@ -43,7 +43,7 @@ log_level = "INFO"
 # https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
 atomic=true
 profile='black'
-skip_glob=["*/htmlcov/*"]
+skip_glob=['.*', '*/htmlcov/*']
 known_first_party=['{{ cookiecutter.package_name }}']
 line_length=100
 lines_after_imports=2
@@ -63,6 +63,10 @@ branch = true
 source = ['.']
 omit = ['.*', '*/tests/*']
 command_line = '-m unittest --locals --verbose'
+
+[tool.coverage.report]
+skip_empty = true
+fail_under = 45
 
 
 [tool.mypy]
