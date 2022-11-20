@@ -1,6 +1,8 @@
+import dataclasses
 import os
 import subprocess
 from pathlib import Path
+from unittest.mock import patch
 
 from bx_py_utils.path import assert_is_dir
 
@@ -48,3 +50,25 @@ class TestProject:
             stderr=subprocess.STDOUT,
             **kwargs,
         )
+
+
+@dataclasses.dataclass
+class Call:
+    args: tuple
+    kwargs: dict
+
+
+class SubprocessCallMock:
+    def __init__(self):
+        self.calls = []
+
+    def __enter__(self):
+        self.m = patch.object(subprocess, 'call', self)
+        self.m.__enter__()
+        return self
+
+    def __call__(self, *args, **kwargs):
+        self.calls.append(Call(args, kwargs))
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.m.__exit__(exc_type, exc_val, exc_tb)
