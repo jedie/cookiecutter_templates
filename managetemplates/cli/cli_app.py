@@ -9,11 +9,11 @@ import typer
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from darker.__main__ import main as darker_main
 from flake8.main.cli import main as flake8_main
+from manageprojects.git import Git
+from manageprojects.utilities.subprocess_utils import verbose_check_call
 from rich import print  # noqa
 
 from managetemplates import __version__
-from managetemplates.cli.git_utils import Git
-from managetemplates.cli.subprocess_utils import verbose_check_call
 from managetemplates.constants import PACKAGE_ROOT, REQ_IN_PATH, REQ_TXT_PATH
 
 
