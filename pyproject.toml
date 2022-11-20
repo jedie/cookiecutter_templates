@@ -24,7 +24,8 @@ build-backend = "setuptools.build_meta"
 
 
 [tool.darker]
-src = ['managetemplates']
+src = ['.']
+extend-exclude = '.*/{{cookiecutter.*}}/.*'
 revision = "origin/main..."
 line_length = 100
 verbose = true
@@ -37,6 +38,9 @@ lint = [
     "flake8",
 ]
 log_level = "INFO"
+
+[tool.black]
+extend-exclude = '.*/{{cookiecutter.*}}/.*' # for darker ;)
 
 
 [tool.isort]
@@ -70,6 +74,9 @@ initial_revision = "5b2334c"
 initial_date = 2022-11-19T22:40:01+01:00
 cookiecutter_template = "https://github.com/jedie/cookiecutter_templates/"
 cookiecutter_directory = "piptools-python"
+applied_migrations = [
+    "68124d4", # 2022-11-20T00:19:44+01:00
+]
 
 [manageprojects.cookiecutter_context.cookiecutter]
 full_name = "Jens Diemer"

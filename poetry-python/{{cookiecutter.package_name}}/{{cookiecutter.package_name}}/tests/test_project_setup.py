@@ -26,8 +26,19 @@ class ProjectSetupTestCase(TestCase):
         self.assertEqual(__version__, pyproject_version)
 
     def test_code_style(self):
-        fix_code_style()
-        check_code_style(verbose=False)
+        try:
+            fix_code_style()
+        except SystemExit as err:
+            self.assertEqual(err.code, 0)
+        else:
+            raise AssertionError('No sys.exit() !')
+
+        try:
+            check_code_style(verbose=False)
+        except SystemExit as err:
+            self.assertEqual(err.code, 0)
+        else:
+            raise AssertionError('No sys.exit() !')
 
     def test_mypy(self):
         mypy(verbose=False)

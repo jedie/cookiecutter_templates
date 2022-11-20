@@ -45,15 +45,17 @@ def _call_darker(*, argv):
     # FileNotFoundError: [Errno 2] No such file or directory: 'flake8'
     #
     # Just add .venv/bin/ to PATH:
-    venv_path = PACKAGE_ROOT / '.venv' / 'bin'
-
-    assert_is_dir(venv_path)
+    venv_path = Path(sys.executable).parent
     assert_is_file(venv_path / 'flake8')
+    assert_is_file(venv_path / 'darker')
     venv_path = str(venv_path)
     if venv_path not in os.environ['PATH']:
         os.environ['PATH'] = venv_path + os.pathsep + os.environ['PATH']
 
-    darker_main(argv=argv)
+    print(f'Run "darker {shlex.join(str(part) for part in argv)}"...')
+    exit_code = darker_main(argv=argv)
+    print(f'darker exit code: {exit_code!r}')
+    return exit_code
 
 
 @app.command()
@@ -61,18 +63,22 @@ def fix_code_style():
     """
     Fix code style via darker
     """
-    _call_darker(argv=['--color'])
+    exit_code = _call_darker(argv=['--color'])
+    sys.exit(exit_code)
 
 
 @app.command()
 def check_code_style(verbose: bool = True):
-    _call_darker(argv=['--color', '--check'])
+    darker_exit_code = _call_darker(argv=['--color', '--check'])
     if verbose:
         argv = ['--verbose']
     else:
         argv = []
 
-    flake8_main(argv=argv)
+    print(f'Run flake8 {shlex.join(str(part) for part in argv)}')
+    flake8_exit_code = flake8_main(argv=argv)
+    print(f'flake8 exit code: {flake8_exit_code!r}')
+    sys.exit(max(darker_exit_code, flake8_exit_code))
 
 
 @app.command()

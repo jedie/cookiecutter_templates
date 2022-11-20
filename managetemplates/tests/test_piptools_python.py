@@ -1,53 +1,15 @@
-import datetime
 import subprocess
-import sys
 from pathlib import Path
 
-from bx_py_utils.path import assert_is_dir, assert_is_file
+from bx_py_utils.path import assert_is_file
 
-from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.tests.base import BaseTestCase
 from managetemplates.utilities.cookiecutter_utils import run_cookiecutter
-from managetemplates.utilities.subprocess_utils import verbose_check_call
 from managetemplates.utilities.test_project_utils import TestProject
 
 
 class PiptoolsPythonTemplateTestCase(BaseTestCase):
     def test_basic(self):
-        ############################################################################
-        # Before we start -> Update requirements (But only once per day)
-        # piptools-python/{{cookiecutter.package_name}}/requirements/*.txt
-
-        requirements_path = (
-            PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}' / 'requirements'
-        )
-        assert_is_dir(requirements_path)
-
-        bin_path = Path(sys.executable).parent
-        base_command = [
-            bin_path / 'pip-compile',
-            '--resolver=backtracking',
-            '--upgrade',
-            '--generate-hashes',
-            requirements_path / 'production.in',
-        ]
-
-        develop_txt_path = requirements_path / 'develop.txt'
-        develop_mtime = develop_txt_path.stat().st_mtime
-        if datetime.date.fromtimestamp(develop_mtime) != datetime.date.today():
-            verbose_check_call(  # develop + production
-                *base_command, requirements_path / 'develop.in', '--output-file', develop_txt_path
-            )
-
-        production_txt_path = requirements_path / 'production.txt'
-        production_mtime = develop_txt_path.stat().st_mtime
-        if datetime.date.fromtimestamp(production_mtime) != datetime.date.today():
-            verbose_check_call(  # production only
-                *base_command, '--output-file', production_txt_path
-            )
-
-        ############################################################################
-
         pkg_path: Path = run_cookiecutter(
             template_name='piptools-python',
             final_name='your_cool_package',  # {{cookiecutter.package_name}} replaced!
@@ -91,4 +53,4 @@ class PiptoolsPythonTemplateTestCase(BaseTestCase):
             self.assert_in('flake8 exit code: 0', output)
 
         output = test_project.check_output(cli_bin, 'test')
-        self.assert_in('Ran 1 test', output)
+        self.assert_in('Ran 2 tests', output)

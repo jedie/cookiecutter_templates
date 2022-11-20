@@ -3,17 +3,18 @@ import os
 import shlex
 import shutil
 import sys
+from pathlib import Path
 
 import rich
 import typer
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from darker.__main__ import main as darker_main
 from flake8.main.cli import main as flake8_main
+from manageprojects.git import Git
+from manageprojects.utilities.subprocess_utils import verbose_check_call
 from rich import print  # noqa
 
 from managetemplates import __version__
-from managetemplates.cli.git_utils import Git
-from managetemplates.cli.subprocess_utils import verbose_check_call
 from managetemplates.constants import PACKAGE_ROOT, REQ_IN_PATH, REQ_TXT_PATH
 
 
@@ -47,18 +48,56 @@ def update():
     """
     Update the development environment
     """
+    extra_env = dict(
+        CUSTOM_COMPILE_COMMAND='./cli.py update',
+    )
+    bin_path = Path(sys.executable).parent
 
-    verbose_check_call(  # develop + production
-        'pip-compile',
+    pip_compile_base = [
+        bin_path / 'pip-compile',
         '--verbose',
+        '--allow-unsafe',  # https://pip-tools.readthedocs.io/en/latest/#deprecations
+        '--resolver=backtracking',  # https://pip-tools.readthedocs.io/en/latest/#deprecations
         '--upgrade',
-        '--allow-unsafe',
         '--generate-hashes',
+    ]
+
+    ############################################################################
+    # Update own develop + production:
+
+    verbose_check_call(
+        *pip_compile_base,
         REQ_IN_PATH,
         '--output-file',
         REQ_TXT_PATH,
+        extra_env=extra_env,
     )
-    install()
+
+    ############################################################################
+    # Update 'piptools-python' template:
+    #   piptools-python/{{cookiecutter.package_name}}/requirements/*.txt
+
+    requirements_path = (
+        PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}' / 'requirements'
+    )
+    assert_is_dir(requirements_path)
+
+    verbose_check_call(  # develop + production
+        *pip_compile_base,
+        requirements_path / 'production.in',
+        requirements_path / 'develop.in',
+        '--output-file',
+        requirements_path / 'develop.txt',
+        extra_env=extra_env,
+    )
+
+    verbose_check_call(  # production only
+        *pip_compile_base,
+        requirements_path / 'production.in',
+        '--output-file',
+        requirements_path / 'production.txt',
+        extra_env=extra_env,
+    )
 
 
 @app.command()
@@ -117,15 +156,14 @@ def _call_darker(*, argv):
     # FileNotFoundError: [Errno 2] No such file or directory: 'flake8'
     #
     # Just add .venv/bin/ to PATH:
-    venv_path = PACKAGE_ROOT / '.venv' / 'bin'
-
-    assert_is_dir(venv_path)
+    venv_path = Path(sys.executable).parent
     assert_is_file(venv_path / 'flake8')
+    assert_is_file(venv_path / 'darker')
     venv_path = str(venv_path)
     if venv_path not in os.environ['PATH']:
         os.environ['PATH'] = venv_path + os.pathsep + os.environ['PATH']
 
-    print(f'Run darker {shlex.join(str(part) for part in argv)}')
+    print(f'Run "darker {shlex.join(str(part) for part in argv)}"...')
     exit_code = darker_main(argv=argv)
     print(f'darker exit code: {exit_code!r}')
     return exit_code
