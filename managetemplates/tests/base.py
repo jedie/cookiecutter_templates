@@ -6,6 +6,8 @@ from manageprojects.git import Git
 
 
 class BaseTestCase(TestCase):
+    maxDiff = None
+
     def display_git_diff(self, git: Git):
         print('=' * 100)
         output = git.git_verbose_output('diff')

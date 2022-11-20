@@ -130,15 +130,20 @@ class ProjectSetupTestCase(BaseTestCase):
         )
 
     def test_publish(self):
-        with SubprocessCallMock(without_kwargs=True) as call_mock:
-            publish()
+        origin_sys_argv = sys.argv[:]
+        try:
+            sys.argv = ['./cli.py', 'publish']
+            with SubprocessCallMock(without_kwargs=True) as call_mock:
+                publish()
+        finally:
+            sys.argv = origin_sys_argv
 
         git_bin = shutil.which('git')
         self.assertEqual(
             call_mock.calls,
             [
-                Call(args=([str(VENV_BIN_PATH / 'python'), '-m', 'unittest'],), kwargs=None),
-                Call(args=([str(VENV_BIN_PATH / 'python'), '-m', 'build'],), kwargs=None),
+                Call(args=([sys.executable, '-m', 'unittest'],), kwargs=None),
+                Call(args=([sys.executable, '-m', 'build'],), kwargs=None),
                 Call(args=([str(VENV_BIN_PATH / 'twine'), 'check', 'dist/*'],), kwargs=None),
                 Call(args=([str(VENV_BIN_PATH / 'twine'), 'upload', 'dist/*'],), kwargs=None),
                 Call(
