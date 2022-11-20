@@ -1,6 +1,10 @@
-[![pytest]({{cookiecutter.upstream_url}}/actions/workflows/pytest.yml/badge.svg)]({{cookiecutter.upstream_url}}/actions/workflows/pytest.yml) [![YunoHost apps package linter]({{cookiecutter.upstream_url}}/actions/workflows/package_linter.yml/badge.svg)]({{cookiecutter.upstream_url}}/actions/workflows/package_linter.yml)
+[![tests]({{ cookiecutter.package_url }}/actions/workflows/tests.yml/badge.svg?branch=main)]({{ cookiecutter.package_url }}/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/github/{{ cookiecutter.github_username }}/{{ cookiecutter.package_name }}/branch/main/graph/badge.svg)](https://codecov.io/github/{{ cookiecutter.github_username }}/{{ cookiecutter.package_name }})
+[![{{ cookiecutter.package_name }} @ PyPi](https://img.shields.io/pypi/v/{{ cookiecutter.package_name }}?label={{ cookiecutter.package_name }}%20%40%20PyPi)](https://pypi.org/project/{{ cookiecutter.package_name }}/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/{{ cookiecutter.package_name }})]({{ cookiecutter.package_url }}/blob/main/pyproject.toml)
+[![License {{ cookiecutter.license }}](https://img.shields.io/pypi/l/{{ cookiecutter.package_name }})]({{ cookiecutter.package_url }}/blob/main/LICENSE)
 
-{{cookiecutter.description}}
+{{ cookiecutter.package_description }}
 
 [![Integration level](https://dash.yunohost.org/integration/{{cookiecutter.ynh_app_pkg_name}}.svg)](https://dash.yunohost.org/appci/app/{{cookiecutter.ynh_app_pkg_name}}) ![](https://ci-apps.yunohost.org/ci/badges/{{cookiecutter.ynh_app_pkg_name}}.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/{{cookiecutter.ynh_app_pkg_name}}.maintain.svg)
 [![Install {{cookiecutter.ynh_app_pkg_name}} with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app={{cookiecutter.ynh_app_pkg_name}})

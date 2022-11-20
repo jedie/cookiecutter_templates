@@ -10,6 +10,6 @@
     "bug_tracker_url": "{{cookiecutter.upstream_url}}/issues",
     "upstream_version": "0.0.1",
     "ynh_version": "1",
-    "description": "A example YunoHost App",
-    "license": "GPL-3.0"
+    "package_description": "A example YunoHost App",
+    "license": "GPL-3.0-or-later"
 }
