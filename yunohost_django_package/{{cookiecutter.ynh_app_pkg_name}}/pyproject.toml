@@ -67,7 +67,7 @@ log_level = "INFO"
 # https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
 atomic=true
 profile='black'
-skip_glob=["*/htmlcov/*","*/migrations/*","*/local_test/*"]
+skip_glob=[".*", "*/htmlcov/*","*/migrations/*","*/local_test/*"]
 known_first_party=['{{cookiecutter.upstream_pkg_name}}']
 line_length=100
 lines_after_imports=2
