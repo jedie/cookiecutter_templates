@@ -6,5 +6,6 @@
     "package_name": "your_cool_package",
     "package_version": "0.0.1",
     "package_description": "A minimal Python package",
-    "package_url": "https://github.com/{{ cookiecutter.github_username }}/{{cookiecutter.package_name}}"
+    "package_url": "https://github.com/{{ cookiecutter.github_username }}/{{cookiecutter.package_name}}",
+    "license": "GPL-3.0-or-later"
 }

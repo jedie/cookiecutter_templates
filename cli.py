@@ -80,6 +80,8 @@ def main(argv):
         print('Create virtual env here:', VENV_PATH.absolute())
         builder = venv.EnvBuilder(symlinks=True, upgrade=True, with_pip=True)
         builder.create(env_dir=VENV_PATH)
+        # Update pip
+        verbose_check_call(PYTHON_PATH, '-m', 'pip', 'install', '-U', 'pip')
 
     if not PIP_SYNC_PATH.is_file():
         # Install pip-tools
