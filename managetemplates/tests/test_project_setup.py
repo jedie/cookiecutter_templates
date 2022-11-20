@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 import tomli
-from bx_py_utils.path import assert_is_file
+from bx_py_utils.path import assert_is_dir, assert_is_file
 from manageprojects.utilities.subprocess_utils import verbose_check_output
 
 from managetemplates import __version__
@@ -29,7 +29,7 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assertEqual(__version__, pyproject_version)
 
         output = verbose_check_output(PACKAGE_ROOT / 'cli.py', 'version')
-        self.assert_in(f'\nmanagetemplates v{__version__}\n', output)
+        self.assert_in(f'managetemplates v{__version__}', output)
 
     def test_code_style(self):
         try:
@@ -70,6 +70,10 @@ class ProjectSetupTestCase(BaseTestCase):
         with SubprocessCallMock(without_kwargs=True) as call_mock:
             update()
 
+        requirements_path = (
+            PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}' / 'requirements'
+        )
+        assert_is_dir(requirements_path)
         self.assertEqual(
             call_mock.calls,
             [
@@ -78,8 +82,9 @@ class ProjectSetupTestCase(BaseTestCase):
                         [
                             str(VENV_BIN_PATH / 'pip-compile'),
                             '--verbose',
-                            '--upgrade',
                             '--allow-unsafe',
+                            '--resolver=backtracking',
+                            '--upgrade',
                             '--generate-hashes',
                             str(PACKAGE_ROOT / 'managetemplates/requirements.in'),
                             '--output-file',
@@ -87,7 +92,40 @@ class ProjectSetupTestCase(BaseTestCase):
                         ],
                     ),
                     kwargs=None,
-                )
+                ),
+                Call(
+                    args=(
+                        [
+                            str(VENV_BIN_PATH / 'pip-compile'),
+                            '--verbose',
+                            '--allow-unsafe',
+                            '--resolver=backtracking',
+                            '--upgrade',
+                            '--generate-hashes',
+                            str(requirements_path / 'production.in'),
+                            str(requirements_path / 'develop.in'),
+                            '--output-file',
+                            str(requirements_path / 'develop.txt'),
+                        ],
+                    ),
+                    kwargs=None,
+                ),
+                Call(
+                    args=(
+                        [
+                            str(VENV_BIN_PATH / 'pip-compile'),
+                            '--verbose',
+                            '--allow-unsafe',
+                            '--resolver=backtracking',
+                            '--upgrade',
+                            '--generate-hashes',
+                            str(requirements_path / 'production.in'),
+                            '--output-file',
+                            str(requirements_path / 'production.txt'),
+                        ],
+                    ),
+                    kwargs=None,
+                ),
             ],
         )
 

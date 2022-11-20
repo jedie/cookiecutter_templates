@@ -3,6 +3,7 @@ import os
 import shlex
 import shutil
 import sys
+from pathlib import Path
 
 import rich
 import typer
@@ -47,16 +48,55 @@ def update():
     """
     Update the development environment
     """
+    extra_env = dict(
+        CUSTOM_COMPILE_COMMAND='./cli.py update',
+    )
+    bin_path = Path(sys.executable).parent
 
-    verbose_check_call(  # develop + production
-        'pip-compile',
+    pip_compile_base = [
+        bin_path / 'pip-compile',
         '--verbose',
+        '--allow-unsafe',  # https://pip-tools.readthedocs.io/en/latest/#deprecations
+        '--resolver=backtracking',  # https://pip-tools.readthedocs.io/en/latest/#deprecations
         '--upgrade',
-        '--allow-unsafe',
         '--generate-hashes',
+    ]
+
+    ############################################################################
+    # Update own develop + production:
+
+    verbose_check_call(
+        *pip_compile_base,
         REQ_IN_PATH,
         '--output-file',
         REQ_TXT_PATH,
+        extra_env=extra_env,
+    )
+
+    ############################################################################
+    # Update 'piptools-python' template:
+    #   piptools-python/{{cookiecutter.package_name}}/requirements/*.txt
+
+    requirements_path = (
+        PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}' / 'requirements'
+    )
+    assert_is_dir(requirements_path)
+
+    verbose_check_call(  # develop + production
+        *pip_compile_base,
+        requirements_path / 'production.in',
+        requirements_path / 'develop.in',
+        '--output-file',
+        requirements_path / 'develop.txt',
+        extra_env=extra_env,
+    )
+
+    verbose_check_call(  # production only
+        *pip_compile_base,
+        requirements_path / 'production.in',
+        '--output-file',
+        requirements_path / 'production.txt',
+        extra_env=extra_env,
     )
 
 
