@@ -1,5 +1,7 @@
 # cookiecutter templates
 
+[![tests](https://github.com/jedie/cookiecutter_templates/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/jedie/cookiecutter_templates/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/github/jedie/cookiecutter_templates/branch/main/graph/badge.svg)](https://codecov.io/github/jedie/cookiecutter_templates)
 
 
 ## [Poetry Python Package](https://github.com/jedie/cookiecutter_templates/tree/main/poetry-python)
