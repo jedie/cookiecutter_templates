@@ -1,5 +1,6 @@
 import shutil
 from pathlib import Path
+from typing import Optional
 
 from bx_py_utils.path import assert_is_dir
 from cookiecutter.main import cookiecutter
@@ -7,7 +8,12 @@ from cookiecutter.main import cookiecutter
 from managetemplates.constants import PACKAGE_ROOT
 
 
-def run_cookiecutter(template_name: str, final_name: str, force_recreate=False):
+def run_cookiecutter(
+    template_name: str,
+    final_name: str,
+    force_recreate=False,
+    extra_context: Optional[dict] = None,
+):
     template_path = PACKAGE_ROOT / template_name
     assert_is_dir(template_path)
 
@@ -23,6 +29,7 @@ def run_cookiecutter(template_name: str, final_name: str, force_recreate=False):
         directory=template_name,
         output_dir=output_dir,
         no_input=True,
+        extra_context=extra_context,
         overwrite_if_exists=True,
     )
     pkg_path = Path(destination)

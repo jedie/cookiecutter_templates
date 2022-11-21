@@ -20,10 +20,15 @@ class TestProject:
         *popenargs,
         verbose: bool = True,
         exit_on_error: bool = False,
+        extra_env: Optional[dict] = None,
         **kwargs,
     ) -> str:
         kwargs.setdefault('text', True)
+
         env = dict(PATH=os.environ['PATH'])  # Use a clean environment
+        if extra_env:
+            env.update(extra_env)
+
         return verbose_check_call(
             *popenargs,
             verbose=verbose,
@@ -38,10 +43,15 @@ class TestProject:
         *popenargs,
         verbose: bool = True,
         exit_on_error: bool = False,
+        extra_env: Optional[dict] = None,
         **kwargs,
     ) -> str:
         kwargs.setdefault('text', True)
+
         env = dict(PATH=os.environ['PATH'])  # Use a clean environment
+        if extra_env:
+            env.update(extra_env)
+
         return verbose_check_output(
             *popenargs,
             verbose=verbose,

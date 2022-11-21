@@ -29,7 +29,7 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
             response,
             parts=(
                 f'<h2>YunoHost {{cookiecutter.project_name}} Project v{__version__}</h2>',
-                '<p>Go to <a href="/app_path/admin/">Django Admin</a>.</p>',
+                '<li><a href="/app_path/admin/">Django Admin</a></li>',
                 '<p>Log in to see more information</p>',
                 '<tr><td>User:</td><td>AnonymousUser</td></tr>',
                 '<tr><td>META:</td><td></td></tr>',
@@ -57,7 +57,7 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
             response,
             parts=(
                 f'<h2>YunoHost {{cookiecutter.project_name}} Project v{__version__}</h2>',
-                '<p>Go to <a href="/app_path/admin/">Django Admin</a>.</p>',
+                '<li><a href="/app_path/admin/">Django Admin</a></li>',
                 '<tr><td>User:</td><td>test</td></tr>',
                 f'<tr><td>Process ID:</td><td>{os.getpid()}</td></tr>',
             ),

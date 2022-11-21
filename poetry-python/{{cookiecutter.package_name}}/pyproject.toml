@@ -9,9 +9,9 @@ maintainers = [
     "{{ cookiecutter.full_name }} <{{ cookiecutter.author_email }}>",
 ]
 homepage = "{{ cookiecutter.package_url }}"
-packages = [{ include = "{{ cookiecutter.package_name }}" }]
 license = "{{ cookiecutter.license }}"
 readme = 'README.md'
+packages = [{ include = "{{ cookiecutter.package_name }}" }]
 
 [tool.poetry.urls]
 "Bug Tracker" = "{{ cookiecutter.issues_url }}"

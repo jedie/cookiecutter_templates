@@ -12,6 +12,8 @@ EditorConfig  # https://github.com/editorconfig/editorconfig-core-py
 tomli  # https://github.com/hukkin/tomli
 twine  # https://github.com/pypa/twine
 
+django_example  # Only to get the current version of this package ;)
+
 # Work-a-round for:
 # https://github.com/jazzband/pip-tools/issues/994#issuecomment-1321226661
 typing_extensions

@@ -20,7 +20,7 @@
    <!-- Content -->
    <div class="colM" id="content">
     <h2>
-     YunoHost {{cookiecutter.project_name}} Project v0.1.0rc0
+     YunoHost {{cookiecutter.project_name}} Project v{{cookiecutter.upstream_version}}
     </h2>
     <p>
      Go to
@@ -62,6 +62,14 @@
       </td>
       <td>
        AnonymousUser
+      </td>
+     </tr>
+     <tr>
+      <td>
+       Remote Address:
+      </td>
+      <td>
+       127.0.0.1
       </td>
      </tr>
      <tr>
@@ -134,8 +142,8 @@
    <!-- END Content -->
    <hr/>
    <p>
-    <a href="https://github.com/jedie/django-example">
-     github.com/jedie/django-example
+    <a href="{{cookiecutter.upstream_url}}">
+     github.com/{{ cookiecutter.github_username }}/{{cookiecutter.upstream_pkg_name}}
     </a>
    </p>
   </div>

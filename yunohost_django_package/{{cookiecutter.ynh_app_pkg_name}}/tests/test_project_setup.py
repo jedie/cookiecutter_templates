@@ -4,12 +4,13 @@ import shutil
 import subprocess
 from pathlib import Path
 
-import django_yunohost_integration
 import tomli
 from bx_django_utils.filename import clean_filename
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from django_tools.unittest_utils.project_setup import check_editor_config
 from django_yunohost_integration.test_utils import assert_project_version
+
+from {{cookiecutter.upstream_pkg_name}} import __version__
 
 
 PACKAGE_ROOT = Path(__file__).parent.parent
@@ -24,17 +25,17 @@ def assert_file_contains_string(file_path, string):
 
 
 def test_version():
-    upstream_version = django_yunohost_integration.__version__
-
     assert_project_version(
-        current_version=upstream_version,
-        github_project_url='https://github.com/YunoHost-Apps/django_yunohost_integration',
+        current_version=__version__,
+        github_project_url='{{cookiecutter.upstream_url}}',
     )
 
     pyproject_toml_path = Path(PACKAGE_ROOT, 'pyproject.toml')
     pyproject_toml = tomli.loads(pyproject_toml_path.read_text(encoding='UTF-8'))
     pyproject_version = pyproject_toml['tool']['poetry']['version']
-    assert pyproject_version.startswith(f'{upstream_version}+ynh')
+    assert pyproject_version.startswith(f'{__version__}+ynh'), (
+        f'{pyproject_version!r} does not start with "{__version__}+ynh"'
+    )
 
     # pyproject.toml needs a PEP 440 conform version and used "+ynh"
     # the YunoHost syntax is: "~ynh", just "convert this:
