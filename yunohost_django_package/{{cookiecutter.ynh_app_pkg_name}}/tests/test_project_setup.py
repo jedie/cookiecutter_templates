@@ -4,12 +4,11 @@ import shutil
 import subprocess
 from pathlib import Path
 
+import django_yunohost_integration
 import tomli
 from bx_django_utils.filename import clean_filename
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from django_tools.unittest_utils.project_setup import check_editor_config
-
-import django_yunohost_integration
 from django_yunohost_integration.test_utils import assert_project_version
 
 

@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.test import override_settings
 from django.test.testcases import TestCase
 from django.urls.base import reverse
-
 from django_yunohost_integration.test_utils import generate_basic_auth
 
 
