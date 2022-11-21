@@ -3,7 +3,7 @@
 	"id": "{{cookiecutter.ynh_app_pkg_name}}",
 	"packaging_format": 1,
 	"description": {
-        "en": "{{cookiecutter.description}}"
+        "en": "{{cookiecutter.package_description}}"
     },
 	"version": "{{cookiecutter.upstream_version}}~ynh{{cookiecutter.ynh_version}}",
 	"url": "{{cookiecutter.ynh_app_url}}",
