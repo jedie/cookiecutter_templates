@@ -3,7 +3,7 @@
     "full_name": "John Doh",
     "github_username": "{{ cookiecutter.full_name.lower()|replace(' ', '-') }}",
     "author_email": "{{ cookiecutter.github_username }}@example.tld",
-    "upstream_pkg_name": "django-example",
+    "upstream_pkg_name": "django_example",
     "upstream_url": "https://github.com/{{ cookiecutter.github_username }}/{{cookiecutter.upstream_pkg_name}}",
     "ynh_app_pkg_name": "{{cookiecutter.upstream_pkg_name}}_ynh",
     "ynh_app_url": "https://github.com/YunoHost-Apps/{{cookiecutter.upstream_pkg_name}}_ynh",

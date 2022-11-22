@@ -163,9 +163,10 @@ def _call_darker(*, argv):
     if venv_path not in os.environ['PATH']:
         os.environ['PATH'] = venv_path + os.pathsep + os.environ['PATH']
 
+    print('_' * 100)
     print(f'Run "darker {shlex.join(str(part) for part in argv)}"...')
     exit_code = darker_main(argv=argv)
-    print(f'darker exit code: {exit_code!r}')
+    print(f'\ndarker exit code: {exit_code!r}\n')
     return exit_code
 
 
@@ -186,9 +187,10 @@ def check_code_style(verbose: bool = True):
     else:
         argv = []
 
-    print(f'Run flake8 {shlex.join(str(part) for part in argv)}')
+    print('_' * 100)
+    print(f'Run "flake8 {shlex.join(str(part) for part in argv)}"...')
     flake8_exit_code = flake8_main(argv=argv)
-    print(f'flake8 exit code: {flake8_exit_code!r}')
+    print(f'\nflake8 exit code: {flake8_exit_code!r}\n')
     sys.exit(max(darker_exit_code, flake8_exit_code))
 
 

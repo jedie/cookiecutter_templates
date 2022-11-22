@@ -8,6 +8,10 @@ arrow==1.2.3 \
     --hash=sha256:3934b30ca1b9f292376d9db15b19446088d12ec58629bc3f0da28fd55fb633a1 \
     --hash=sha256:5a49ab92e3b7b71d96cd6bfcc4df14efefc9dfa96ea19045815914a6ab6b1fe2
     # via jinja2-time
+asgiref==3.5.2 \
+    --hash=sha256:1d2880b792ae8757289136f1db2b7b99100ce959b2aa57fd69dab783d05afac4 \
+    --hash=sha256:4a29362a6acebe09bf1d6640db38c1dc3d9217c68e6f9f6204d72667fc19a424
+    # via django
 binaryornot==0.4.4 \
     --hash=sha256:359501dfc9d40632edc9fac890e19542db1a287bbcfa58175b66658392018061 \
     --hash=sha256:b8b71173c917bddcd2c16070412e369c3ed7f0528926f70cac18a6c97fd563e4
@@ -43,10 +47,16 @@ build==0.9.0 \
     --hash=sha256:1a07724e891cbd898923145eb7752ee7653674c511378eb9c7691aab1612bc3c \
     --hash=sha256:38a7a2b7a0bdc61a42a0a67509d88c71ecfc37b393baba770fae34e20929ff69
     # via pip-tools
+bx-django-utils==37 \
+    --hash=sha256:2d94b168bf70ac011fb5cb37b2c6645b9845dd7ee91d2ef4a0653b2d9cabce6d \
+    --hash=sha256:ce3f954c5684194a1725d1678790a4ca1e6b34f0ac6cec2e191ffba6350526fe
+    # via django-example
 bx-py-utils==71 \
     --hash=sha256:02150263d58fa280caf5e0afbe99c10470f9b25f0cd69e4a2cc525c875e5ad70 \
     --hash=sha256:ceff6b29b41b6a797b87b3006f94d5394b067a551b004567d4ada7e1a6544806
-    # via -r /home/jens/repos/cookiecutter_templates/managetemplates/requirements.in
+    # via
+    #   -r /home/jens/repos/cookiecutter_templates/managetemplates/requirements.in
+    #   bx-django-utils
 certifi==2022.9.24 \
     --hash=sha256:0d9c601124e5a6ba9712dbc60d9c53c21e34f5f641fe83002317394311bdce14 \
     --hash=sha256:90c1a32f1d68f940488354e36370f6cca89f0f106db09518524c88d6ed83f382
@@ -233,6 +243,14 @@ darker==1.5.1 \
     --hash=sha256:bb4e7494511799e7989cefab290713f81ee3b36b36989427f70d9c786d5b13b0 \
     --hash=sha256:ea2e7ea20c74fc1faaea5bf49c60bc797a2a488b49ccafb90612a8c3643dbe9d
     # via -r /home/jens/repos/cookiecutter_templates/managetemplates/requirements.in
+django==4.1.3 \
+    --hash=sha256:678bbfc8604eb246ed54e2063f0765f13b321a50526bdc8cb1f943eda7fa31f1 \
+    --hash=sha256:6b1de6886cae14c7c44d188f580f8ba8da05750f544c80ae5ad43375ab293cd5
+    # via bx-django-utils
+django-example==0.2.0 \
+    --hash=sha256:2bcaeed97868e8be5c4d7d6a745b054f6983c931d5cefb763e6ff25807f15793 \
+    --hash=sha256:469beaa9e4f3e5d0ee98f043ee533f0f01fafef128391ac9f4ca9d9f35290da0
+    # via -r /home/jens/repos/cookiecutter_templates/managetemplates/requirements.in
 docopt==0.6.2 \
     --hash=sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491
     # via coveralls
@@ -398,6 +416,10 @@ python-slugify==7.0.0 \
     --hash=sha256:003aee64f9fd955d111549f96c4b58a3f40b9319383c70fad6277a4974bbf570 \
     --hash=sha256:7a0f21a39fa6c1c4bf2e5984c9b9ae944483fd10b54804cb0e23a3ccd4954f0b
     # via cookiecutter
+python-stdnum==1.18 \
+    --hash=sha256:bcc763d9c49ae23da5d2b7a686d5fd1deec9d9051341160a10d1ac723a26bec0 \
+    --hash=sha256:d7f2a3c7ef4635c957b9cbdd9b1993d1f6ee3a2959f03e172c45440d99f296eb
+    # via bx-django-utils
 pyyaml==6.0 \
     --hash=sha256:01b45c0191e6d66c470b6cf1b9531a771a83c1c4208272ead47a3ae4f2f603bf \
     --hash=sha256:0283c35a6a9fbf047493e3a0ce8d79ef5030852c51e9d911a27badfde0605293 \
@@ -481,6 +503,10 @@ six==1.16.0 \
     # via
     #   bleach
     #   python-dateutil
+sqlparse==0.4.3 \
+    --hash=sha256:0323c0ec29cd52bceabc1b4d9d579e311f3e4961b98d174201d5622a23b85e34 \
+    --hash=sha256:69ca804846bb114d2ec380e4360a8a340db83f0ccf3afceeb1404df028f57268
+    # via django
 text-unidecode==1.3 \
     --hash=sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8 \
     --hash=sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93

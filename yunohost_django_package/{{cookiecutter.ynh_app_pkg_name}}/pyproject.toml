@@ -1,19 +1,20 @@
 [tool.poetry]
 name = "{{cookiecutter.ynh_app_pkg_name}}"
 version = "{{cookiecutter.upstream_version}}+ynh{{cookiecutter.ynh_version}}"
-description = "{{cookiecutter.description}}"
+description = "{{cookiecutter.package_description}}"
 authors = ["{{cookiecutter.full_name}} <{{cookiecutter.author_email}}>"]
-license = "{{cookiecutter.license}}"
 homepage = "{{cookiecutter.ynh_app_url}}"
+license = "{{ cookiecutter.license }}"
+readme = 'README.md'
 
 [tool.poetry.urls]
 "Bug Tracker" = "{{cookiecutter.bug_tracker_url}}"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0.0"  # Stay with 3.9 until YunoHost used >=Debian 11 (Bullseye)
-
+#
 {{cookiecutter.upstream_pkg_name}} = ">={{cookiecutter.upstream_version}}"  # {{cookiecutter.upstream_url}}
-
+#
 # extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
 # see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
 django_yunohost_integration = {version = ">=0.5.0rc1", extras = ["ynh"]}  # https://github.com/YunoHost-Apps/django_yunohost_integration
@@ -101,7 +102,7 @@ addopts = """
 
 
 [tool.coverage.run]
-omit = [".*"]
+omit = ['.*', '*/tests/*']
 
 
 [tool.tox]

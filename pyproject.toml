@@ -24,8 +24,8 @@ build-backend = "setuptools.build_meta"
 
 
 [tool.darker]
-src = ['.']
-extend-exclude = '.*/{{cookiecutter.*}}/.*'
+src = ['cli.py', 'managetemplates'] # Exclude all Cookiecutter Templates!
+config = './pyproject.toml'
 revision = "origin/main..."
 line_length = 100
 verbose = true
@@ -39,15 +39,11 @@ lint = [
 ]
 log_level = "INFO"
 
-[tool.black]
-extend-exclude = '.*/{{cookiecutter.*}}/.*' # for darker ;)
-
 
 [tool.isort]
 # https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
 atomic=true
 profile='black'
-skip_glob=['.*', '*/htmlcov/*', '*/{{cookiecutter*}}/*']
 known_first_party=['managetemplates']
 line_length=100
 lines_after_imports=2

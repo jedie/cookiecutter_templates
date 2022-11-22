@@ -9,10 +9,13 @@ class BaseTestCase(TestCase):
     maxDiff = None
 
     def display_git_diff(self, git: Git):
-        print('=' * 100)
         output = git.git_verbose_output('diff')
-        print(output)
-        print('=' * 100)
+        if not output:
+            print('Git diff is empty -> nothing changed!')
+        else:
+            print('=' * 100)
+            print(output)
+            print('=' * 100)
 
     def assert_in(self, member, container, msg=None):
         try:
