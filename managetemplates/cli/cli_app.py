@@ -29,7 +29,7 @@ def coverage(verbose: bool = True):
     """
     Run and show coverage.
     """
-    verbose_check_call('coverage', 'run', verbose=verbose, exit_on_error=True)
+    verbose_check_call('coverage', 'run', verbose=verbose, exit_on_error=True, timeout=15 * 60)
     verbose_check_call('coverage', 'report', '--fail-under=50', verbose=verbose, exit_on_error=True)
     verbose_check_call('coverage', 'json', verbose=verbose, exit_on_error=True)
 
@@ -200,7 +200,7 @@ def test():
     Run unittests
     """
     # Use the CLI from unittest module and pass all args to it:
-    verbose_check_call(sys.executable, '-m', 'unittest', *sys.argv[2:])
+    verbose_check_call(sys.executable, '-m', 'unittest', *sys.argv[2:], timeout=15 * 60)
 
 
 def main():
