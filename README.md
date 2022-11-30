@@ -3,37 +3,93 @@
 [![tests](https://github.com/jedie/cookiecutter_templates/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/jedie/cookiecutter_templates/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/github/jedie/cookiecutter_templates/branch/main/graph/badge.svg)](https://codecov.io/github/jedie/cookiecutter_templates)
 
+All Templates are tested via unittests!
 
-## [Poetry Python Package](https://github.com/jedie/cookiecutter_templates/tree/main/poetry-python)
+Patches welcome!
+
+[comment]: <> (✂✂✂ auto generated start ✂✂✂)
+## pipenv based python package
+
+* Requirement management with [pipenv](https://pipenv.pypa.io)
+* Makefile with a simple "help" menu
+* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
+* Has basic unittest
+
 
 Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
-
 ```shell
-$ cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory poetry-python
+cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory pipenv-python
 ```
 
 Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
-
 ```shell
-~/manageprojects$ ./mp.py start-project https://github.com/jedie/cookiecutter_templates/ --directory poetry-python ~/output/directory/
+./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory pipenv-python ~/foobar/
 ```
 
+## pip-tools based python package
 
+* Requirement management with [pip-tools](https://github.com/jazzband/pip-tools):
+  * Used `pip-compile` to freeze/pin requirements with hashes
+  * Used `pip-sync` to install all needed packages
+* [Typer](https://typer.tiangolo.com/) based CLI
+* Auto virtualenv bootstrap, just by calling the `cli.py`
+* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
+* Has basic unittest
 
-## [YunoHost Package for Django Apps](https://github.com/jedie/cookiecutter_templates/tree/main/yunohost_django_package)
 
 Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
-
 ```shell
-$ cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory yunohost_django_package
+cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory piptools-python
 ```
 
 Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
-
 ```shell
-~/manageprojects$ ./mp.py start-project https://github.com/jedie/cookiecutter_templates/ --directory yunohost_django_package ~/output/directory/
+./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory piptools-python ~/foobar/
 ```
 
+## Poetry based python package
+
+* Requirement management with [Poetry](https://python-poetry.org/)
+* Bootstrap via `Makefile`
+* [Typer](https://typer.tiangolo.com/) based CLI
+* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
+* Has basic unittest
+
+
+Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
+```shell
+cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory poetry-python
+```
+
+Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
+```shell
+./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory poetry-python ~/foobar/
+```
+
+## Base Django YunoHost app
+
+[YunoHost](https://yunohost.org) is a Open-Source, Debian based self-hosting solution.
+
+This CookieCutter template is useful to build a [YunoHost App](https://github.com/YunoHost-Apps/) for a [Django](https://docs.djangoproject.com) based Web application
+
+* Contains all YunoHost scripts for install, backup, restore etc. action
+* Used [django_yunohost_integration](https://github.com/YunoHost-Apps/django_yunohost_integration)
+* Requirement management with [Poetry](https://python-poetry.org/)
+* `Makefile` helper
+* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
+* Project unittest with Django integration tests
+
+
+Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
+```shell
+cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory yunohost_django_package
+```
+
+Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
+```shell
+./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory yunohost_django_package ~/foobar/
+```
+[comment]: <> (✂✂✂ auto generated end ✂✂✂)
 
 # contribute
 
