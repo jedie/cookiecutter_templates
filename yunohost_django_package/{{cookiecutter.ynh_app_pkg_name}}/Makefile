@@ -31,11 +31,12 @@ update: check-poetry  ## update the sources and installation and generate "conf/
 	poetry export -f requirements.txt --output conf/requirements.txt
 
 lint: ## Run code formatters and linter
+	poetry run darker --check
 	poetry run isort --check-only .
 	poetry run flake8 .
 
 fix-code-style: ## Fix code formatting
-	poetry run black --verbose --safe --line-length=${MAX_LINE_LENGTH} --skip-string-normalization .
+	poetry run darker
 	poetry run isort .
 
 tox-listenvs: check-poetry ## List all tox test environments

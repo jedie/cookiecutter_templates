@@ -1,5 +1,4 @@
 import shutil
-import subprocess
 from pathlib import Path
 
 import django_example
@@ -55,22 +54,11 @@ class YunohostDjangoPackageTemplateTestCase(BaseTestCase):
         assert_is_file(venv_path / 'bin' / 'darker')
         assert_is_file(venv_path / 'bin' / 'black')
 
-        # Newly generated -> git init
+        # Newly generated -> git init (For darker)
         git, git_hash = init_git(
             path=pkg_path,
             branch_name='master',  # YunoHost apps doesn't switch to "main", yet :(
         )
-
-        try:
-            output = test_project.check_output('make', 'lint')
-        except subprocess.CalledProcessError:
-            # Just display what we should change in template to fix the code style:
-            test_project.check_call('make', 'fix-code-style')
-            self.display_git_diff(git)
-            raise
-        else:
-            self.assert_in('isort', output)
-            self.assert_in('flake8', output)
 
         test_project.check_call(
             'make',

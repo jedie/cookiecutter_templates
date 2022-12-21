@@ -108,3 +108,28 @@ def test_screenshot_filenames():
 
 def test_check_editor_config():
     check_editor_config(package_root=PACKAGE_ROOT)
+
+
+def _call_make(*args):
+    make_bin = shutil.which('make')
+    assert make_bin
+    return subprocess.check_output(
+        (make_bin,) + args,
+        text=True,
+        env=dict(PATH=os.environ['PATH']),
+        stderr=subprocess.STDOUT,
+        cwd=str(PACKAGE_ROOT),
+    )
+
+
+def test_check_code_style():
+    # First try:
+    try:
+        _call_make('lint')
+    except subprocess.CalledProcessError:
+        # Fix and test again:
+        _call_make('fix-code-style')
+        try:
+            _call_make('lint')
+        except subprocess.CalledProcessError as err:
+            raise AssertionError(f'Linting error:\n{"-"*100}\n{err.stdout}\n{"-"*100}')
