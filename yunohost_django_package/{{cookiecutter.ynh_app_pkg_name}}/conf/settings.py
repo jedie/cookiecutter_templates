@@ -15,7 +15,7 @@ from django_yunohost_integration.base_settings import *  # noqa:F401,F403
 from django_yunohost_integration.secret_key import get_or_create_secret as __get_or_create_secret
 
 
-# https://github.com/jedie/django_example/
+# {{cookiecutter.upstream_url}}
 from {{cookiecutter.upstream_pkg_name}}.settings.prod import *  # noqa:F401,F403 isort:skip
 
 
