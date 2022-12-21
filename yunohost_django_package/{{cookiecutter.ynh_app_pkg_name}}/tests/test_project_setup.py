@@ -128,8 +128,8 @@ def test_check_code_style():
         _call_make('lint')
     except subprocess.CalledProcessError:
         # Fix and test again:
-        _call_make('fix-code-style')
         try:
+            _call_make('fix-code-style')
             _call_make('lint')
         except subprocess.CalledProcessError as err:
             raise AssertionError(f'Linting error:\n{"-"*100}\n{err.stdout}\n{"-"*100}')
