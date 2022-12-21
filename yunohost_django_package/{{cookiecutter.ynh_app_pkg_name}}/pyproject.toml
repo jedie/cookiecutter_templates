@@ -37,7 +37,6 @@ poetry-publish = "*"  # https://github.com/jedie/poetry-publish
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
-pytest-darker = "*"  # https://github.com/akaihola/pytest-darker
 requests = "*"  # https://github.com/psf/requests
 packaging = "*"  # https://github.com/pypa/packagi
 beautifulsoup4 = "*"  # https://pypi.org/project/beautifulsoup4/
@@ -94,7 +93,6 @@ addopts = """
     --cov-report xml
     --no-cov-on-fail
     --showlocals
-    --darker
     --doctest-modules
     --failed-first
     --new-first
