@@ -26,7 +26,10 @@ assert_is_dir(PACKAGE_ROOT)
 assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 
 
-app = typer.Typer()
+app = typer.Typer(
+    name='./cli.py',
+    epilog='Project Homepage: {{ cookiecutter.package_url }}',
+)
 
 
 @app.command()

@@ -17,7 +17,10 @@ PACKAGE_ROOT = Path({{ cookiecutter.package_name }}.__file__).parent.parent
 assert_is_dir(PACKAGE_ROOT)
 assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 
-app = typer.Typer()
+app = typer.Typer(
+    name='./cli.py',
+    epilog='Project Homepage: {{ cookiecutter.package_url }}',
+)
 
 
 def which(file_name: str) -> Path:
