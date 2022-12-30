@@ -1,3 +1,4 @@
+manageprojects  # https://github.com/jedie/manageprojects
 pip-tools  # https://github.com/jazzband/pip-tools/
 tox  # https://github.com/tox-dev/tox
 coveralls  # http://github.com/TheKevJames/coveralls-python
