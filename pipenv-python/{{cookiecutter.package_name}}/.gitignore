@@ -1,6 +1,10 @@
 .*
-__pycache__
+*.egg-info
+/__pycache__/
+/dist/
+coverage.json
 
 !.github
 !.editorconfig
+!.flake8
 !.gitignore

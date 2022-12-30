@@ -20,6 +20,7 @@ packages = [{ include = "{{ cookiecutter.package_name }}" }]
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0.0"
 typer = "*"  # https://github.com/tiangolo/typer
+rich = "*"  # https://github.com/Textualize/rich
 bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
 
 [tool.poetry.dev-dependencies]
@@ -49,7 +50,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.darker]
 src = ['.']
 revision = "origin/main..."
-line_length = 100
+line_length = 119
 verbose = true
 skip_string_normalization = true
 diff = false
@@ -68,7 +69,7 @@ atomic=true
 profile='black'
 skip_glob=['.*', '*/htmlcov/*']
 known_first_party=['{{ cookiecutter.package_name }}']
-line_length=100
+line_length=119
 lines_after_imports=2
 
 

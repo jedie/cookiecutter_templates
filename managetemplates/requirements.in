@@ -2,7 +2,7 @@ pip-tools  # https://github.com/jazzband/pip-tools/
 cookiecutter  # https://github.com/cookiecutter/cookiecutter
 manageprojects  # https://github.com/jedie/manageprojects
 bx_py_utils  # https://github.com/boxine/bx_py_utils
-rich
+rich  # https://github.com/Textualize/rich
 typer[all]  # https://github.com/tiangolo/typer
 coveralls  # http://github.com/TheKevJames/coveralls-python
 darker  # https://github.com/akaihola/pytest-darker
