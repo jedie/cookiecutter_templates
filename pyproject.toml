@@ -27,7 +27,7 @@ build-backend = "setuptools.build_meta"
 src = ['cli.py', 'managetemplates'] # Exclude all Cookiecutter Templates!
 config = './pyproject.toml'
 revision = "origin/main..."
-line_length = 100
+line_length = 119
 verbose = true
 skip_string_normalization = true
 diff = false
@@ -45,7 +45,7 @@ log_level = "INFO"
 atomic=true
 profile='black'
 known_first_party=['managetemplates']
-line_length=100
+line_length=119
 lines_after_imports=2
 
 

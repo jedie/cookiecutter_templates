@@ -4,4 +4,4 @@
 [flake8]
 exclude = .*, dist, htmlcov, */{{cookiecutter*}}/*
 #ignore = E402
-max-line-length = 100
+max-line-length = 119
