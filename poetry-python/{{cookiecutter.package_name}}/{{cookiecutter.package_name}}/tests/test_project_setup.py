@@ -25,6 +25,9 @@ class ProjectSetupTestCase(TestCase):
 
         self.assertEqual(__version__, pyproject_version)
 
+        output = subprocess.check_output([PACKAGE_ROOT / 'cli.sh', 'version'], cwd=PACKAGE_ROOT, text=True)
+        self.assertIn(f'{{ cookiecutter.package_name }} v{__version__}', output)
+
     def test_code_style(self):
         try:
             fix_code_style()

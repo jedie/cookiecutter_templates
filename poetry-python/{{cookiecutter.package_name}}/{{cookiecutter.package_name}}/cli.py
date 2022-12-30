@@ -4,10 +4,12 @@ import subprocess
 import sys
 from pathlib import Path
 
+import rich
 import typer
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from darker.__main__ import main as darker_main
 from flake8.main.cli import main as flake8_main
+from rich import print  # noqa
 
 import {{ cookiecutter.package_name }}
 from {{ cookiecutter.package_name }} import __version__
@@ -98,8 +100,11 @@ def test():
     """
     Run unittests
     """
+    args = sys.argv[2:]
+    if not args:
+        args = ('--verbose', '--locals', '--buffer')
     # Use the CLI from unittest module and pass all args to it:
-    verbose_check_call(sys.executable, '-m', 'unittest', *sys.argv[2:])
+    verbose_check_call(sys.executable, '-m', 'unittest', *args)
 
 
 @app.command()
@@ -113,8 +118,16 @@ def coverage():
     verbose_check_call(coverage_bin, 'json')
 
 
-def main():
+@app.command()
+def version(no_color: bool = False):
+    """Print version and exit"""
+    if no_color:
+        rich.reconfigure(no_color=True)
+
     print(f'{{ cookiecutter.package_name }} v{__version__}')
+
+
+def main():
     if len(sys.argv) >= 2 and sys.argv[1] == 'test':
         # Just use the CLI from unittest with all available options and origin --help output ;)
         return test()

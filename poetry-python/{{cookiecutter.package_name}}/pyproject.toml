@@ -20,6 +20,7 @@ packages = [{ include = "{{ cookiecutter.package_name }}" }]
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0.0"
 typer = "*"  # https://github.com/tiangolo/typer
+rich = "*"  # https://github.com/Textualize/rich
 bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
 
 [tool.poetry.dev-dependencies]
