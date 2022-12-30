@@ -7,8 +7,9 @@ authors = [
     {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
 ]
 
-[tool.setuptools]
-packages = ["{{ cookiecutter.package_name }}"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["{{ cookiecutter.package_name }}*"]
 
 [project.scripts]
 {{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.__main__:main"
