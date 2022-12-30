@@ -15,8 +15,9 @@ Source = "{{ cookiecutter.package_url }}"
 [project.scripts]
 {{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.__main__:main"
 
-[tool.setuptools]
-packages = ["{{ cookiecutter.package_name }}"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["{{ cookiecutter.package_name }}*"]
 
 [build-system]
 requires = ["setuptools>=61.0"]

@@ -15,8 +15,9 @@ Source = "https://github.com/jedie/cookiecutter_templates"
 [project.scripts]
 managetemplates = "managetemplates.__main__:main"
 
-[tool.setuptools]
-packages = ["managetemplates"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["managetemplates*"]
 
 [build-system]
 requires = ["setuptools>=61.0"]
