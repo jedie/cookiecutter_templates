@@ -62,32 +62,43 @@ def install():
 @app.command()
 def update():
     """
-    Update the development environment by calling:
-    - pip-compile production.in develop.in -> develop.txt
-    - pip-compile production.in -> production.txt
-    - pip-sync develop.txt
+    Update "requirements*.txt" dependencies files
     """
-    base_command = [
-        'pip-compile',
+    extra_env = dict(
+        CUSTOM_COMPILE_COMMAND='./cli.py update',
+    )
+    bin_path = Path(sys.executable).parent
+
+    pip_compile_base = [
+        bin_path / 'pip-compile',
         '--verbose',
+        '--allow-unsafe',  # https://pip-tools.readthedocs.io/en/latest/#deprecations
+        '--resolver=backtracking',  # https://pip-tools.readthedocs.io/en/latest/#deprecations
         '--upgrade',
-        '--allow-unsafe',
         '--generate-hashes',
-        '--resolver=backtracking',
-        'requirements/production.in',
     ]
-    verbose_check_call(  # develop + production
-        *base_command,
-        'requirements/develop.in',
+
+    # Only "prod" dependencies:
+    verbose_check_call(
+        *pip_compile_base,
+        'pyproject.toml',
         '--output-file',
-        'requirements/develop.txt',
+        'requirements.txt',
+        extra_env=extra_env,
     )
-    verbose_check_call(  # production only
-        *base_command,
+
+    # dependencies + "tests"-optional-dependencies:
+    verbose_check_call(
+        *pip_compile_base,
+        'pyproject.toml',
+        '--extra=tests',
         '--output-file',
-        'requirements/production.txt',
+        'requirements.dev.txt',
+        extra_env=extra_env,
     )
-    verbose_check_call('pip-sync', 'requirements/develop.txt')
+
+    # Install new dependencies in current .venv:
+    verbose_check_call('pip-sync', 'requirements.dev.txt')
 
 
 @app.command()

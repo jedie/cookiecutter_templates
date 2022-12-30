@@ -8,7 +8,7 @@ from manageprojects.utilities.subprocess_utils import verbose_check_output
 
 from managetemplates import __version__
 from managetemplates.cli.cli_app import check_code_style, fix_code_style, install, publish, update
-from managetemplates.constants import PACKAGE_ROOT
+from managetemplates.constants import PACKAGE_ROOT, REQ_DEV_TXT_PATH, REQ_TXT_PATH
 from managetemplates.tests.base import BaseTestCase
 from managetemplates.utilities.test_project_utils import Call, SubprocessCallMock
 
@@ -57,7 +57,7 @@ class ProjectSetupTestCase(BaseTestCase):
                     args=(
                         [
                             str(VENV_BIN_PATH / 'pip-sync'),
-                            str(PACKAGE_ROOT / 'managetemplates/requirements.txt'),
+                            str(PACKAGE_ROOT / 'managetemplates/requirements.dev.txt'),
                         ],
                     ),
                     kwargs=None,
@@ -70,10 +70,15 @@ class ProjectSetupTestCase(BaseTestCase):
         with SubprocessCallMock(without_kwargs=True) as call_mock:
             update()
 
-        requirements_path = (
-            PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}' / 'requirements'
-        )
-        assert_is_dir(requirements_path)
+        package_path = PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}'
+        assert_is_dir(package_path)
+
+        req_prod_txt_path = package_path / 'requirements.txt'
+        assert_is_file(req_prod_txt_path)
+
+        req_dev_txt_path = package_path / 'requirements.dev.txt'
+        assert_is_file(req_dev_txt_path)
+
         self.assertEqual(
             call_mock.calls,
             [
@@ -86,9 +91,9 @@ class ProjectSetupTestCase(BaseTestCase):
                             '--resolver=backtracking',
                             '--upgrade',
                             '--generate-hashes',
-                            str(PACKAGE_ROOT / 'managetemplates/requirements.in'),
+                            'pyproject.toml',
                             '--output-file',
-                            str(PACKAGE_ROOT / 'managetemplates/requirements.txt'),
+                            str(REQ_TXT_PATH),
                         ],
                     ),
                     kwargs=None,
@@ -102,10 +107,10 @@ class ProjectSetupTestCase(BaseTestCase):
                             '--resolver=backtracking',
                             '--upgrade',
                             '--generate-hashes',
-                            str(requirements_path / 'production.in'),
-                            str(requirements_path / 'develop.in'),
+                            'pyproject.toml',
+                            '--extra=tests',
                             '--output-file',
-                            str(requirements_path / 'develop.txt'),
+                            str(REQ_DEV_TXT_PATH),
                         ],
                     ),
                     kwargs=None,
@@ -119,9 +124,26 @@ class ProjectSetupTestCase(BaseTestCase):
                             '--resolver=backtracking',
                             '--upgrade',
                             '--generate-hashes',
-                            str(requirements_path / 'production.in'),
+                            'pyproject.toml',
                             '--output-file',
-                            str(requirements_path / 'production.txt'),
+                            str(req_prod_txt_path),
+                        ],
+                    ),
+                    kwargs=None,
+                ),
+                Call(
+                    args=(
+                        [
+                            str(VENV_BIN_PATH / 'pip-compile'),
+                            '--verbose',
+                            '--allow-unsafe',
+                            '--resolver=backtracking',
+                            '--upgrade',
+                            '--generate-hashes',
+                            'pyproject.toml',
+                            '--extra=tests',
+                            '--output-file',
+                            str(req_dev_txt_path),
                         ],
                     ),
                     kwargs=None,
