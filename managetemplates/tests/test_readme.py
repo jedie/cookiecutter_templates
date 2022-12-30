@@ -89,13 +89,27 @@ class ReadmeTestCase(TestCase):
         template_paths = sorted(get_template_paths())
         self.assertEqual(
             [path.name for path in template_paths],
-            ['pipenv-python', 'piptools-python', 'poetry-python', 'yunohost_django_package'],
+            [
+                'pipenv-python',
+                'piptools-python',
+                'poetry-django-app',
+                'poetry-django-project',
+                'poetry-python',
+                'yunohost_django_package',
+            ],
         )
 
         template_readmes = get_template_readmes(template_paths=template_paths)
         self.assertEqual(
             sorted(template_readmes.keys()),
-            ['pipenv-python', 'piptools-python', 'poetry-python', 'yunohost_django_package'],
+            [
+                'pipenv-python',
+                'piptools-python',
+                'poetry-django-app',
+                'poetry-django-project',
+                'poetry-python',
+                'yunohost_django_package',
+            ],
         )
 
         readme_block = build_readme_block(template_readmes)
