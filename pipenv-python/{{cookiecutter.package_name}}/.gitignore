@@ -6,4 +6,5 @@ coverage.json
 
 !.github
 !.editorconfig
+!.flake8
 !.gitignore
