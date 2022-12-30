@@ -142,7 +142,10 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assertEqual(
             call_mock.calls,
             [
-                Call(args=([sys.executable, '-m', 'unittest'],), kwargs=None),
+                Call(
+                    args=([sys.executable, '-m', 'unittest', '--verbose', '--locals', '--buffer'],),
+                    kwargs=None,
+                ),
                 Call(args=([sys.executable, '-m', 'build'],), kwargs=None),
                 Call(args=([str(VENV_BIN_PATH / 'twine'), 'check', 'dist/*'],), kwargs=None),
                 Call(args=([str(VENV_BIN_PATH / 'twine'), 'upload', 'dist/*'],), kwargs=None),

@@ -10,12 +10,12 @@ import typer
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from darker.__main__ import main as darker_main
 from flake8.main.cli import main as flake8_main
+from manageprojects.git import Git
+from manageprojects.utilities.subprocess_utils import verbose_check_call
 from rich import print  # noqa
 
 import {{ cookiecutter.package_name }}
 from {{ cookiecutter.package_name }} import __version__
-from {{cookiecutter.package_name}}.cli.subprocess_utils import verbose_check_call
-from {{cookiecutter.package_name}}.cli.git_utils import Git
 
 
 logger = logging.getLogger(__name__)
@@ -184,8 +184,21 @@ def test():
     """
     Run unittests
     """
+    args = sys.argv[2:]
+    if not args:
+        args = ('--verbose', '--locals', '--buffer')
     # Use the CLI from unittest module and pass all args to it:
-    verbose_check_call(sys.executable, '-m', 'unittest', *sys.argv[2:])
+    verbose_check_call(
+        sys.executable,
+        '-m',
+        'unittest',
+        *args,
+        timeout=15 * 60,
+        extra_env=dict(
+            PYTHONUNBUFFERED='1',
+            PYTHONWARNINGS='always',
+        ),
+    )
 
 
 def main():

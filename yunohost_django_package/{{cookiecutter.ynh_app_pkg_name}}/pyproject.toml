@@ -17,7 +17,7 @@ python = ">=3.9,<4.0.0"  # Stay with 3.9 until YunoHost used >=Debian 11 (Bullse
 #
 # extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
 # see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
-django_yunohost_integration = {version = ">=0.5.0", extras = ["ynh"]}  # https://github.com/YunoHost-Apps/django_yunohost_integration
+django_yunohost_integration = {version = ">=0.5.1", extras = ["ynh"]}  # https://github.com/YunoHost-Apps/django_yunohost_integration
 
 
 [tool.poetry.dev-dependencies]
