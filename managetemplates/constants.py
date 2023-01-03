@@ -9,6 +9,10 @@ PACKAGE_ROOT = Path(managetemplates.__file__).parent.parent
 assert_is_dir(PACKAGE_ROOT)
 assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 
-REQ_IN_PATH = PACKAGE_ROOT / 'managetemplates' / 'requirements.in'
-assert_is_file(REQ_IN_PATH)
-REQ_TXT_PATH = REQ_IN_PATH.with_suffix('.txt')
+# Only "prod" dependencies:
+REQ_TXT_PATH = PACKAGE_ROOT / 'managetemplates' / 'requirements.txt'
+assert_is_file(REQ_TXT_PATH)
+
+# dependencies + "tests"-optional-dependencies:
+REQ_DEV_TXT_PATH = PACKAGE_ROOT / 'managetemplates' / 'requirements.dev.txt'
+assert_is_file(REQ_DEV_TXT_PATH)

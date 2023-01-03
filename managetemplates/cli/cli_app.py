@@ -15,7 +15,7 @@ from manageprojects.utilities.subprocess_utils import verbose_check_call
 from rich import print  # noqa
 
 from managetemplates import __version__
-from managetemplates.constants import PACKAGE_ROOT, REQ_IN_PATH, REQ_TXT_PATH
+from managetemplates.constants import PACKAGE_ROOT, REQ_DEV_TXT_PATH, REQ_TXT_PATH
 
 
 logger = logging.getLogger(__name__)
@@ -39,7 +39,7 @@ def install():
     """
     Run pip-sync and install 'managetemplates' via pip as editable.
     """
-    verbose_check_call('pip-sync', REQ_TXT_PATH)
+    verbose_check_call('pip-sync', REQ_DEV_TXT_PATH)
     verbose_check_call('pip', 'install', '-e', '.')
 
 
@@ -63,39 +63,47 @@ def update():
     ]
 
     ############################################################################
-    # Update own develop + production:
+    # Update own dependencies:
 
+    # Only "prod" dependencies:
     verbose_check_call(
         *pip_compile_base,
-        REQ_IN_PATH,
+        'pyproject.toml',
         '--output-file',
         REQ_TXT_PATH,
+        extra_env=extra_env,
+    )
+    # dependencies + "tests"-optional-dependencies:
+    verbose_check_call(
+        *pip_compile_base,
+        'pyproject.toml',
+        '--extra=tests',
+        '--output-file',
+        REQ_DEV_TXT_PATH,
         extra_env=extra_env,
     )
 
     ############################################################################
     # Update 'piptools-python' template:
-    #   piptools-python/{{cookiecutter.package_name}}/requirements/*.txt
+    #   piptools-python/{{cookiecutter.package_name}}/requirements*.txt
 
-    requirements_path = (
-        PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}' / 'requirements'
-    )
-    assert_is_dir(requirements_path)
+    package_path = PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}'
+    assert_is_dir(package_path)
 
     verbose_check_call(  # develop + production
         *pip_compile_base,
-        requirements_path / 'production.in',
-        requirements_path / 'develop.in',
+        'pyproject.toml',
         '--output-file',
-        requirements_path / 'develop.txt',
+        package_path / 'requirements.txt',
         extra_env=extra_env,
     )
 
     verbose_check_call(  # production only
         *pip_compile_base,
-        requirements_path / 'production.in',
+        'pyproject.toml',
+        '--extra=tests',
         '--output-file',
-        requirements_path / 'production.txt',
+        package_path / 'requirements.dev.txt',
         extra_env=extra_env,
     )
 
