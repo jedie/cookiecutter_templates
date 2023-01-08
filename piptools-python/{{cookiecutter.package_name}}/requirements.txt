@@ -69,9 +69,9 @@ jinja2-time==0.2.0 \
     --hash=sha256:d14eaa4d315e7688daa4969f616f226614350c48730bfa1692d2caebd8c90d40 \
     --hash=sha256:d3eab6605e3ec8b7a0863df09cc1d23714908fa61aa6986a845c20ba488b4efa
     # via cookiecutter
-manageprojects==0.4.0rc2 \
-    --hash=sha256:61f9e09920f4732544387e8f3e5daa58bad04888211f06bde05222edd4031e55 \
-    --hash=sha256:8151d4fb82097bb0ff1d441978414ca252dd6c64cfe3ff2c759fd4f3b02f5678
+manageprojects==0.5.0 \
+    --hash=sha256:c1f014430fc506a5ca103b73a6793447ee5bb55aa0bf782d14c171189b1d7952 \
+    --hash=sha256:d0e3dd3dd8d9eebf05b9e93a0fef740222d54aeb4f60ae03e61a0d4e58cd7bf7
     # via managetemplates (pyproject.toml)
 markupsafe==2.1.1 \
     --hash=sha256:0212a68688482dc52b2d45013df70d169f542b7394fc744c02a57374a4207003 \
@@ -119,6 +119,10 @@ packaging==22.0 \
     --hash=sha256:2198ec20bd4c017b8f9717e00f0c8714076fc2fd93816750ab48e2c41de2cfd3 \
     --hash=sha256:957e2148ba0e1a3b282772e791ef1d8083648bc131c8ab0c1feba110ce1146c3
     # via build
+pathspec==0.10.3 \
+    --hash=sha256:3c95343af8b756205e2aba76e843ba9520a24dd84f68c22b9f93251507509dd6 \
+    --hash=sha256:56200de4077d9d0791465aa9095a01d421861e405b5096955051deefd697d6f6
+    # via manageprojects
 pep517==0.13.0 \
     --hash=sha256:4ba4446d80aed5b5eac6509ade100bff3e7943a8489de249654a5ae9b33ee35b \
     --hash=sha256:ae69927c5c172be1add9203726d4b84cf3ebad1edcd5f71fcdc746e66e829f59
