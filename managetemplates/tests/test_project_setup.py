@@ -4,6 +4,7 @@ from pathlib import Path
 
 import tomli
 from bx_py_utils.path import assert_is_dir, assert_is_file
+from bx_py_utils.test_utils.redirect import RedirectOut
 from manageprojects.utilities.subprocess_utils import verbose_check_output
 
 from managetemplates import __version__
@@ -32,19 +33,42 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assert_in(f'managetemplates v{__version__}', output)
 
     def test_code_style(self):
-        try:
-            fix_code_style()
-        except SystemExit as err:
-            self.assertEqual(err.code, 0)
-        else:
-            raise AssertionError('No sys.exit() !')
+        with RedirectOut() as buffer:
+            try:
+                check_code_style(verbose=False)
+            except SystemExit as err:
+                if err.code == 0:
+                    self.assertEqual(buffer.stderr, '')
+                    self.assert_in_content(
+                        got=buffer.stdout,
+                        parts=(
+                            '.venv/bin/darker',
+                            '.venv/bin/flake8',
+                            'Code style: OK',
+                        ),
+                    )
+                    return  # Code style is ok -> Nothing to fix ;)
+            else:
+                raise AssertionError('No sys.exit() !')
 
-        try:
-            check_code_style(verbose=False)
-        except SystemExit as err:
-            self.assertEqual(err.code, 0)
-        else:
-            raise AssertionError('No sys.exit() !')
+        # Try to "auto" fix code style:
+
+        with RedirectOut() as buffer:
+            try:
+                fix_code_style(verbose=False)
+            except SystemExit as err:
+                self.assertEqual(err.code, 0, 'Code style can not be fixed, see output above!')
+            else:
+                raise AssertionError('No sys.exit() !')
+
+        self.assertEqual(buffer.stderr, '')
+        self.assert_in_content(
+            got=buffer.stdout,
+            parts=(
+                '.venv/bin/darker',
+                'Code style fixed, OK.',
+            ),
+        )
 
     def test_install(self):
         with SubprocessCallMock(without_kwargs=True) as call_mock:

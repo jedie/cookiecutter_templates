@@ -1,0 +1,111 @@
+[tool.poetry]
+name = "{{ cookiecutter.package_name }}"
+version = "{{ cookiecutter.package_version }}"
+description = "{{ cookiecutter.package_description }}"
+homepage = "{{ cookiecutter.package_url }}"
+authors = [
+    "{{ cookiecutter.full_name }} <{{ cookiecutter.author_email }}>",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+    "Framework :: Django",
+    "Intended Audience :: Developers",
+]
+license = "{{ cookiecutter.license }}"
+keywords=["django", "utilities"]
+include = ["LICENSE", "README.md"]
+readme="README.md"
+packages = [
+    { include = "{{ cookiecutter.package_name }}" },
+    { include = "{{ cookiecutter.package_name }}_tests" }
+]
+
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0.0"
+django = ">=3.2,<4.2"  # Enforce 4.0 in the future
+bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
+bx_django_utils = "*"  # https://github.com/boxine/bx_django_utils
+
+
+[tool.poetry.dev-dependencies]
+model-bakery = "*"  # https://github.com/model-bakers/model_bakery
+requests-mock = "*"
+tox = "*"
+coverage = "*"  # https://github.com/nedbat/coveragepy
+darker = "*"  # https://github.com/akaihola/darker
+flake8 = "*"
+isort = "*"
+poetry-publish = "*"  # https://github.com/jedie/poetry-publish
+django-debug-toolbar = "*"
+playwright = "*"  # https://playwright.dev/python/
+tblib = "*"  # https://github.com/ionelmc/python-tblib
+
+[tool.poetry.scripts]
+publish = "{{ cookiecutter.package_name }}_tests.test_project.publish:publish"
+
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+
+[tool.darker]
+src = [
+    "{{ cookiecutter.package_name }}",
+    "{{ cookiecutter.package_name }}_tests"
+]
+revision = "origin/main..."
+line_length = 119
+verbose = true
+skip_string_normalization = true
+diff = false
+check = false
+stdout = false
+isort = true
+lint = [
+    "flake8",
+]
+log_level = "INFO"
+
+
+[tool.isort]
+# https://pycqa.github.io/isort/docs/configuration/config_files.html
+atomic=true
+profile="black"
+line_length=119
+skip_glob=[".*", "*/htmlcov/*","*/migrations/*"]
+lines_after_imports=2
+
+
+[tool.coverage.run]
+omit=[".*"]
+source_pkgs=["{{ cookiecutter.package_name }}"]
+
+
+[tool.tox]
+# https://tox.readthedocs.io/en/latest/example/basic.html#pyproject-toml-tox-legacy-ini
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+envlist = py{39,310,311}-django{4.0,4.1}
+skip_missing_interpreters = True
+
+[testenv]
+passenv = *
+deps =
+    django4.0: django>=4.0,<4.1
+    django4.1: django>=4.1,<4.2
+    model-bakery
+    playwright
+    django-debug-toolbar
+    tblib
+allowlist_externals = make
+commands =
+    make test
+"""

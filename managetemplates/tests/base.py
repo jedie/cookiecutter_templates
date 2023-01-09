@@ -1,4 +1,5 @@
 import os
+from collections.abc import Iterable
 from unittest import TestCase
 
 from bx_py_utils.path import assert_is_file
@@ -25,6 +26,16 @@ class BaseTestCase(TestCase):
             print(container)
             print('-' * 100)
             raise
+
+    def assert_in_content(self, *, got: str, parts: Iterable[str]):
+        assert parts
+        missing_parts = [part for part in parts if part not in got]
+        if missing_parts:
+            print('-' * 79)
+            print(got)
+            print('-' * 79)
+            info = ', '.join(repr(part) for part in missing_parts)
+            raise AssertionError(f'Text parts: {info} not found in: {got!r}')
 
     def assert_is_executeable(self, file_path):
         assert_is_file(file_path)
