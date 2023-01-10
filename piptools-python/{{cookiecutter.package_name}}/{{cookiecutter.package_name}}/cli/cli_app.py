@@ -1,15 +1,12 @@
 import logging
 import os
-import shlex
 import shutil
 import sys
 from pathlib import Path
 
 import rich
 import typer
-from bx_py_utils.path import assert_is_dir, assert_is_file
-from darker.__main__ import main as darker_main
-from flake8.main.cli import main as flake8_main
+from bx_py_utils.path import assert_is_file
 from manageprojects.git import Git
 from manageprojects.utilities.subprocess_utils import verbose_check_call
 from rich import print  # noqa
@@ -22,7 +19,6 @@ logger = logging.getLogger(__name__)
 
 
 PACKAGE_ROOT = Path({{ cookiecutter.package_name }}.__file__).parent.parent
-assert_is_dir(PACKAGE_ROOT)
 assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 
 
@@ -146,7 +142,7 @@ def publish():
     git.push(tags=True)
 
 
-def _call_darker(*, argv):
+def _call_darker(*args):
     # Work-a-round for:
     #
     #   File ".../site-packages/darker/linting.py", line 148, in _check_linter_output
@@ -162,35 +158,52 @@ def _call_darker(*, argv):
     assert_is_file(venv_path / 'darker')
     venv_path = str(venv_path)
     if venv_path not in os.environ['PATH']:
-        os.environ['PATH'] = venv_path + os.pathsep + os.environ['PATH']
+        extra_env = dict(PATH=venv_path + os.pathsep + os.environ['PATH'])
+    else:
+        extra_env = None
 
-    print(f'Run "darker {shlex.join(str(part) for part in argv)}"...')
-    exit_code = darker_main(argv=argv)
-    print(f'darker exit code: {exit_code!r}')
-    return exit_code
+    verbose_check_call(
+        'darker',
+        '--color',
+        *args,
+        cwd=PACKAGE_ROOT,
+        extra_env=extra_env,
+        exit_on_error=True,
+    )
 
 
 @app.command()
-def fix_code_style():
+def fix_code_style(verbose: bool = False):
     """
     Fix code style via darker
     """
-    exit_code = _call_darker(argv=['--color'])
-    sys.exit(exit_code)
+    if verbose:
+        args = ['--verbose']
+    else:
+        args = []
+
+    _call_darker(*args)
+    print('Code style fixed, OK.')
+    sys.exit(0)
 
 
 @app.command()
-def check_code_style(verbose: bool = True):
-    darker_exit_code = _call_darker(argv=['--color', '--check'])
+def check_code_style(verbose: bool = False):
     if verbose:
-        argv = ['--verbose']
+        args = ['--verbose']
     else:
-        argv = []
+        args = []
 
-    print(f'Run flake8 {shlex.join(str(part) for part in argv)}')
-    flake8_exit_code = flake8_main(argv=argv)
-    print(f'flake8 exit code: {flake8_exit_code!r}')
-    sys.exit(max(darker_exit_code, flake8_exit_code))
+    _call_darker('--check', *args)
+
+    verbose_check_call(
+        'flake8',
+        *args,
+        cwd=PACKAGE_ROOT,
+        exit_on_error=True,
+    )
+    print('Code style: OK')
+    sys.exit(0)
 
 
 @app.command()  # Just add this command to help page

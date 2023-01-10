@@ -70,6 +70,12 @@ class ProjectSetupTestCase(BaseTestCase):
             ),
         )
 
+        # Better safe than sorry: Just lint again:
+        try:
+            check_code_style(verbose=False)
+        except SystemExit as err:
+            self.assertEqual(err.code, 0)
+
     def test_install(self):
         with SubprocessCallMock(without_kwargs=True) as call_mock:
             install()

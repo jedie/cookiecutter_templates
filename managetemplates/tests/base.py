@@ -9,6 +9,14 @@ from manageprojects.git import Git
 class BaseTestCase(TestCase):
     maxDiff = None
 
+    def assert_no_git_diff(self, git: Git):
+        output = git.git_verbose_output('diff')
+        if not output:
+            # Git diff is empty -> OK
+            return
+
+        raise AssertionError(f'Git diff:\n{"=" * 100}\n{output}\n{"=" * 100}\n')
+
     def display_git_diff(self, git: Git):
         output = git.git_verbose_output('diff')
         if not output:
