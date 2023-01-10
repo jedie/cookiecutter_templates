@@ -40,15 +40,6 @@ log_level = "INFO"
 profile = "black"
 
 
-[tool.flake8]
-statistics = "True"
-ignore = ["D203" , "W503"]
-max-line-length = 119
-exclude = '''
-    .git,
-'''
-
-
 [tool.pytest.ini_options]
 filterwarnings = []
 
