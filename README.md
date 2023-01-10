@@ -8,6 +8,24 @@ All Templates are tested via unittests!
 Patches welcome!
 
 [comment]: <> (✂✂✂ auto generated start ✂✂✂)
+## Django "reuseable App" package
+
+* Requirement management with [Poetry](https://python-poetry.org/)
+* Bootstrap via `Makefile`
+* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
+* Has basic unittest
+
+
+Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
+```shell
+cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory django-app
+```
+
+Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
+```shell
+./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory django-app ~/foobar/
+```
+
 ## pipenv based python package
 
 * Requirement management with [pipenv](https://pipenv.pypa.io)

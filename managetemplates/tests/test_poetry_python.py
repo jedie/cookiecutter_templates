@@ -21,7 +21,7 @@ class PoetryPythonTemplateTestCase(BaseTestCase):
         test_project = TestProject(pkg_path)
 
         git_path = pkg_path / '.git'
-        if not git_path.exists():
+        if not git_path.is_dir():
             # Newly generated -> git init
             git, git_hash = init_git(path=pkg_path)  # Helpful to display diffs, see below ;)
         else:

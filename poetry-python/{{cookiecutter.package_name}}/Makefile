@@ -35,10 +35,12 @@ without-poetry-install: ## Install/update without poetry (not recommended!)
 	.venv/bin/pip install -e .
 
 lint: ## Run code formatters and linter
+	poetry run darker --diff --check
 	poetry run isort --check-only .
 	poetry run flake8 .
 
 fix-code-style: ## Fix code formatting
+	poetry run darker
 	poetry run black --verbose --safe --line-length=${MAX_LINE_LENGTH} --skip-string-normalization .
 	poetry run isort .
 
