@@ -1,6 +1,5 @@
 import logging
 import os
-import shlex
 import shutil
 import sys
 from pathlib import Path
@@ -8,20 +7,27 @@ from pathlib import Path
 import rich
 import typer
 from bx_py_utils.path import assert_is_dir, assert_is_file
-from darker.__main__ import main as darker_main
-from flake8.main.cli import main as flake8_main
 from manageprojects.git import Git
 from manageprojects.utilities.subprocess_utils import verbose_check_call
 from rich import print  # noqa
 
-from managetemplates import __version__
-from managetemplates.constants import PACKAGE_ROOT, REQ_DEV_TXT_PATH, REQ_TXT_PATH
+import managetemplates
+from managetemplates import __version__, constants
+from managetemplates.utilities.reverse import reverse_test_project
 
 
 logger = logging.getLogger(__name__)
 
 
-app = typer.Typer()
+PACKAGE_ROOT = Path(managetemplates.__file__).parent.parent
+assert_is_dir(PACKAGE_ROOT)
+assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
+
+
+app = typer.Typer(
+    name='./cli.py',
+    epilog='Project Homepage: https://github.com/jedie/cookiecutter_templates',
+)
 
 
 @app.command()
@@ -39,7 +45,7 @@ def install():
     """
     Run pip-sync and install 'managetemplates' via pip as editable.
     """
-    verbose_check_call('pip-sync', REQ_DEV_TXT_PATH)
+    verbose_check_call('pip-sync', constants.REQ_DEV_TXT_PATH)
     verbose_check_call('pip', 'install', '-e', '.')
 
 
@@ -70,7 +76,7 @@ def update():
         *pip_compile_base,
         'pyproject.toml',
         '--output-file',
-        REQ_TXT_PATH,
+        constants.REQ_TXT_PATH,
         extra_env=extra_env,
     )
     # dependencies + "tests"-optional-dependencies:
@@ -79,7 +85,7 @@ def update():
         'pyproject.toml',
         '--extra=tests',
         '--output-file',
-        REQ_DEV_TXT_PATH,
+        constants.REQ_DEV_TXT_PATH,
         extra_env=extra_env,
     )
 
@@ -87,7 +93,7 @@ def update():
     # Update 'piptools-python' template:
     #   piptools-python/{{cookiecutter.package_name}}/requirements*.txt
 
-    package_path = PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}'
+    package_path = constants.PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}'
     assert_is_dir(package_path)
 
     verbose_check_call(  # develop + production
@@ -124,12 +130,12 @@ def publish():
     """
     test()  # Don't publish a broken state
 
-    git = Git(cwd=PACKAGE_ROOT, detect_root=True)
+    git = Git(cwd=constants.PACKAGE_ROOT, detect_root=True)
 
     # TODO: Add the checks from:
     #       https://github.com/jedie/poetry-publish/blob/main/poetry_publish/publish.py
 
-    dist_path = PACKAGE_ROOT / 'dist'
+    dist_path = constants.PACKAGE_ROOT / 'dist'
     if dist_path.exists():
         shutil.rmtree(dist_path)
 
@@ -153,7 +159,7 @@ def publish():
     git.push(tags=True)
 
 
-def _call_darker(*, argv):
+def _call_darker(*args):
     # Work-a-round for:
     #
     #   File ".../site-packages/darker/linting.py", line 148, in _check_linter_output
@@ -169,37 +175,52 @@ def _call_darker(*, argv):
     assert_is_file(venv_path / 'darker')
     venv_path = str(venv_path)
     if venv_path not in os.environ['PATH']:
-        os.environ['PATH'] = venv_path + os.pathsep + os.environ['PATH']
+        extra_env = dict(PATH=venv_path + os.pathsep + os.environ['PATH'])
+    else:
+        extra_env = None
 
-    print('_' * 100)
-    print(f'Run "darker {shlex.join(str(part) for part in argv)}"...')
-    exit_code = darker_main(argv=argv)
-    print(f'\ndarker exit code: {exit_code!r}\n')
-    return exit_code
+    verbose_check_call(
+        'darker',
+        '--color',
+        *args,
+        cwd=PACKAGE_ROOT,
+        extra_env=extra_env,
+        exit_on_error=True,
+    )
 
 
 @app.command()
-def fix_code_style():
+def fix_code_style(verbose: bool = False):
     """
     Fix code style via darker
     """
-    exit_code = _call_darker(argv=['--color'])
-    sys.exit(exit_code)
+    if verbose:
+        args = ['--verbose']
+    else:
+        args = []
+
+    _call_darker(*args)
+    print('Code style fixed, OK.')
+    sys.exit(0)
 
 
 @app.command()
-def check_code_style(verbose: bool = True):
-    darker_exit_code = _call_darker(argv=['--color', '--check'])
+def check_code_style(verbose: bool = False):
     if verbose:
-        argv = ['--verbose']
+        args = ['--verbose']
     else:
-        argv = []
+        args = []
 
-    print('_' * 100)
-    print(f'Run "flake8 {shlex.join(str(part) for part in argv)}"...')
-    flake8_exit_code = flake8_main(argv=argv)
-    print(f'\nflake8 exit code: {flake8_exit_code!r}\n')
-    sys.exit(max(darker_exit_code, flake8_exit_code))
+    _call_darker('--check', *args)
+
+    verbose_check_call(
+        'flake8',
+        *args,
+        cwd=PACKAGE_ROOT,
+        exit_on_error=True,
+    )
+    print('Code style: OK')
+    sys.exit(0)
 
 
 @app.command()  # Just add this command to help page
