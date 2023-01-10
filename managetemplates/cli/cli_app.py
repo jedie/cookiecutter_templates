@@ -223,6 +223,14 @@ def check_code_style(verbose: bool = False):
     sys.exit(0)
 
 
+@app.command()
+def reverse(pkg_name: str):
+    """
+    Reverse a /.tests/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/
+    """
+    reverse_test_project(pkg_name=pkg_name)
+
+
 @app.command()  # Just add this command to help page
 def test():
     """
