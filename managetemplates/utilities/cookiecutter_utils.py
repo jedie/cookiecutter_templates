@@ -5,7 +5,7 @@ from typing import Optional
 from bx_py_utils.path import assert_is_dir
 from cookiecutter.main import cookiecutter
 
-from managetemplates.constants import PACKAGE_ROOT
+from managetemplates import constants
 
 
 def run_cookiecutter(
@@ -14,10 +14,10 @@ def run_cookiecutter(
     force_recreate=False,
     extra_context: Optional[dict] = None,
 ):
-    template_path = PACKAGE_ROOT / template_name
+    template_path = constants.PACKAGE_ROOT / template_name
     assert_is_dir(template_path)
 
-    output_dir = PACKAGE_ROOT / '.tests' / template_name
+    output_dir = constants.TEST_PATH / template_name
 
     # Create always a fresh checkout:
     final_path = output_dir / final_name
@@ -25,7 +25,7 @@ def run_cookiecutter(
         shutil.rmtree(final_path)
 
     destination = cookiecutter(
-        template=str(PACKAGE_ROOT),
+        template=str(constants.PACKAGE_ROOT),
         directory=template_name,
         output_dir=output_dir,
         no_input=True,

@@ -74,15 +74,6 @@ line_length=119
 lines_after_imports=2
 
 
-[tool.flake8]
-statistics = "True"
-ignore = ["D203" , "W503"]
-max-line-length = 119
-exclude = '''
-    .git,
-'''
-
-
 [tool.coverage.run]
 branch = true
 source = ['.']

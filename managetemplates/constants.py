@@ -16,3 +16,13 @@ assert_is_file(REQ_TXT_PATH)
 # dependencies + "tests"-optional-dependencies:
 REQ_DEV_TXT_PATH = PACKAGE_ROOT / 'managetemplates' / 'requirements.dev.txt'
 assert_is_file(REQ_DEV_TXT_PATH)
+
+# Path to checkout Cookiecutter template for running tests:
+TEST_PATH = PACKAGE_ROOT / '.tests'
+
+ALL_TEMPLATES = (
+    'pipenv-python',
+    'piptools-python',
+    'poetry-python',
+    'yunohost_django_package',
+)

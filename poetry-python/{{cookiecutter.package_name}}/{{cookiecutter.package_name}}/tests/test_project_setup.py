@@ -3,7 +3,7 @@ from pathlib import Path
 from unittest import TestCase
 
 import tomli
-from bx_py_utils.path import assert_is_file
+from bx_py_utils.path import assert_is_dir, assert_is_file
 
 import {{ cookiecutter.package_name }}
 from {{ cookiecutter.package_name }} import __version__
@@ -11,6 +11,8 @@ from {{ cookiecutter.package_name }}.cli import check_code_style, fix_code_style
 
 
 PACKAGE_ROOT = Path({{ cookiecutter.package_name }}.__file__).parent.parent
+assert_is_dir(PACKAGE_ROOT)
+assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 
 
 class ProjectSetupTestCase(TestCase):

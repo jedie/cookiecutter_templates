@@ -32,7 +32,7 @@ class YunohostDjangoPackageTemplateTestCase(BaseTestCase):
 
         # must be a "git clone", because of darker ;)
         git_path = pkg_path / '.git'
-        if git_path.exists():
+        if git_path.is_dir():
             shutil.rmtree(git_path)
 
         poetry_lock = pkg_path / 'poetry.lock'

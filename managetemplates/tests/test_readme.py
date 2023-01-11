@@ -5,6 +5,7 @@ from unittest import TestCase
 from bx_py_utils.path import assert_is_file
 from bx_py_utils.test_utils.assertion import assert_text_equal
 
+from managetemplates import constants
 from managetemplates.constants import PACKAGE_ROOT
 
 
@@ -88,14 +89,14 @@ class ReadmeTestCase(TestCase):
     def test_templates_doc(self):
         template_paths = sorted(get_template_paths())
         self.assertEqual(
-            [path.name for path in template_paths],
-            ['pipenv-python', 'piptools-python', 'poetry-python', 'yunohost_django_package'],
+            tuple(path.name for path in template_paths),
+            constants.ALL_TEMPLATES,
         )
 
         template_readmes = get_template_readmes(template_paths=template_paths)
         self.assertEqual(
-            sorted(template_readmes.keys()),
-            ['pipenv-python', 'piptools-python', 'poetry-python', 'yunohost_django_package'],
+            tuple(sorted(template_readmes.keys())),
+            constants.ALL_TEMPLATES,
         )
 
         readme_block = build_readme_block(template_readmes)
