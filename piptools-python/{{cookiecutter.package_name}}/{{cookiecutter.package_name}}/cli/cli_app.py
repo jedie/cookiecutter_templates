@@ -83,7 +83,7 @@ def update():
         extra_env=extra_env,
     )
 
-    # dependencies + "tests"-optional-dependencies:
+    # dependencies + "dev"-optional-dependencies:
     verbose_check_call(
         *pip_compile_base,
         'pyproject.toml',
