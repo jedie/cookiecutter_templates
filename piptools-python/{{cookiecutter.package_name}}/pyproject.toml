@@ -13,7 +13,7 @@ dependencies = [
     "typer[all]",  # https://github.com/tiangolo/typer
 ]
 [project.optional-dependencies]
-tests = [
+dev = [
     "manageprojects",  # https://github.com/jedie/manageprojects
     "pip-tools",  # https://github.com/jazzband/pip-tools/
     "tox",  # https://github.com/tox-dev/tox

@@ -87,7 +87,7 @@ def update():
     verbose_check_call(
         *pip_compile_base,
         'pyproject.toml',
-        '--extra=tests',
+        '--extra=dev',
         '--output-file',
         'requirements.dev.txt',
         extra_env=extra_env,
