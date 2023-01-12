@@ -13,7 +13,7 @@ assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 REQ_TXT_PATH = PACKAGE_ROOT / 'managetemplates' / 'requirements.txt'
 assert_is_file(REQ_TXT_PATH)
 
-# dependencies + "tests"-optional-dependencies:
+# dependencies + "dev"-optional-dependencies:
 REQ_DEV_TXT_PATH = PACKAGE_ROOT / 'managetemplates' / 'requirements.dev.txt'
 assert_is_file(REQ_DEV_TXT_PATH)
 

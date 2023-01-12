@@ -25,7 +25,7 @@ bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
 
 [tool.poetry.dev-dependencies]
 tox = "*"  # https://github.com/tox-dev/tox
-coveralls = "*"  # http://github.com/TheKevJames/coveralls-python
+coveralls = "*"  # https://github.com/TheKevJames/coveralls-python
 darker = "*"  # https://github.com/akaihola/darker
 isort = "*"  # https://github.com/pycqa/isort
 flake8 = "*"  # https://github.com/pycqa/flake8
@@ -85,7 +85,7 @@ command_line = "-m unittest --locals --verbose"
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{39,310}
+envlist = py{39,310,311}
 skip_missing_interpreters = True
 
 [testenv]
