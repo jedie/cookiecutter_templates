@@ -16,6 +16,9 @@ Patches welcome!
 * Has basic unittest
 
 
+Cookiecutter template tests are here: [pipenv-python/tests.py](https://github.com/jedie/cookiecutter_templates/blob/main/pipenv-python/tests.py)
+
+
 Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
 ```shell
 cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory pipenv-python
@@ -37,6 +40,9 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 * Has basic unittest
 
 
+Cookiecutter template tests are here: [piptools-python/tests.py](https://github.com/jedie/cookiecutter_templates/blob/main/piptools-python/tests.py)
+
+
 Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
 ```shell
 cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory piptools-python
@@ -54,6 +60,9 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 * [Typer](https://typer.tiangolo.com/) based CLI
 * used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
 * Has basic unittest
+
+
+Cookiecutter template tests are here: [poetry-python/tests.py](https://github.com/jedie/cookiecutter_templates/blob/main/poetry-python/tests.py)
 
 
 Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
@@ -78,6 +87,9 @@ This CookieCutter template is useful to build a [YunoHost App](https://github.co
 * `Makefile` helper
 * used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
 * Project unittest with Django integration tests
+
+
+Cookiecutter template tests are here: [yunohost_django_package/tests.py](https://github.com/jedie/cookiecutter_templates/blob/main/yunohost_django_package/tests.py)
 
 
 Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:

@@ -30,6 +30,10 @@ tests = [
     "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
     "twine",  # https://github.com/pypa/twine
     "django_example",  # Only to get the current version of this package ;)
+
+    # pdoc is not directly used, but needed because of:
+    # https://github.com/boxine/bx_py_utils/issues/157
+    "pdoc",
 ]
 
 [project.urls]
