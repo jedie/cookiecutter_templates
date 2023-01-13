@@ -90,7 +90,9 @@ skip_missing_interpreters = True
 
 [testenv]
 passenv = *
-whitelist_externals = make
+allowlist_externals = make
+commands_pre =
+    make install
 commands =
     make test
 """

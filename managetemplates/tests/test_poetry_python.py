@@ -54,5 +54,7 @@ class PoetryPythonTemplateTestCase(BaseTestCase):
 
         subprocess.check_call(['make', 'lint'], cwd=pkg_path)
 
-        output = test_project.check_output('make', 'test')
+        output = test_project.check_output('make', 'tox')
+        self.assert_in('poetry install', output)
+        self.assert_in('make test', output)
         self.assert_in('Ran 4 tests', output)
