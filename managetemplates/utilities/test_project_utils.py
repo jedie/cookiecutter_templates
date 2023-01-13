@@ -25,7 +25,7 @@ class TestProject:
     ) -> str:
         kwargs.setdefault('text', True)
 
-        env = dict(PATH=os.environ['PATH'])  # Use a clean environment
+        env = dict(os.environ)
         if extra_env:
             env.update(extra_env)
 
