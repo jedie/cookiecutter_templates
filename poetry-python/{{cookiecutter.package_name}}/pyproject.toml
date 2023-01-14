@@ -89,7 +89,7 @@ fail_under = 45
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{39,310,311}
+envlist = py{311,310,39}
 skip_missing_interpreters = True
 
 [testenv]
