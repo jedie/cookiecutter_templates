@@ -79,6 +79,10 @@ source = ['.']
 omit = ['.*', '*/tests/*']
 command_line = "-m unittest --locals --verbose"
 
+[tool.coverage.report]
+skip_empty = true
+fail_under = 45
+
 
 [tool.tox]
 # https://tox.readthedocs.io/en/latest/example/basic.html#pyproject-toml-tox-legacy-ini

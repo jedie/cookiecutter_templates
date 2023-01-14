@@ -100,7 +100,12 @@ addopts = """
 
 
 [tool.coverage.run]
+source = ['.']
 omit = ['.*', '*/tests/*']
+
+[tool.coverage.report]
+skip_empty = true
+fail_under = 45
 
 
 [tool.tox]
