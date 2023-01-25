@@ -79,13 +79,17 @@ source = ['.']
 omit = ['.*', '*/tests/*']
 command_line = "-m unittest --locals --verbose"
 
+[tool.coverage.report]
+skip_empty = true
+fail_under = 45
+
 
 [tool.tox]
 # https://tox.readthedocs.io/en/latest/example/basic.html#pyproject-toml-tox-legacy-ini
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{39,310,311}
+envlist = py{311,310,39}
 skip_missing_interpreters = True
 
 [testenv]

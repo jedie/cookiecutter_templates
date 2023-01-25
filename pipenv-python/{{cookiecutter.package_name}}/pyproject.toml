@@ -50,6 +50,10 @@ source = ["apps"]
 omit = ["apps/*/tests/*", "apps/*/migrations/*"]
 command_line = "-m pytest"
 
+[tool.coverage.report]
+skip_empty = true
+fail_under = 45
+
 
 [tool.mypy]
 warn_unused_configs = true
