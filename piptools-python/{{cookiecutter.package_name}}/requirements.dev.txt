@@ -38,13 +38,13 @@ build==0.10.0 \
     --hash=sha256:af266720050a66c893a6096a2f410989eeac74ff9a68ba194b3f6473e8e26171 \
     --hash=sha256:d5b71264afdb5951d6704482aac78de887c80691c52b88a9ad195983ca2c9269
     # via pip-tools
-bx-django-utils==38 \
-    --hash=sha256:0bb192a183c935c5040e15af10ae7699be29ff8795f94fc450500540ebfd43fd \
-    --hash=sha256:488dec3af1ba96cffa5cc94cd71d100daa88df0d7c6dcb4487f454bd760c01cd
+bx-django-utils==39 \
+    --hash=sha256:862acbc85311492a3e1a1b8b4e36023af3dc1ec548f510953e04b941615f40ce \
+    --hash=sha256:abd3f4f0853d6a28bf057f944d1ccab9cb449816689470bd83983cabc467a62e
     # via django-example
-bx-py-utils==74 \
-    --hash=sha256:39a354727facc1a970102cbd2f786f7be6977dcf299c7d27aa5a46f580341043 \
-    --hash=sha256:9656a8e4c9aef4c876e39ac3decc0796709412dff5a549385acf1bd834e40e88
+bx-py-utils==75 \
+    --hash=sha256:2cd1053197e579f12b3d1b942f77c9736838c63cd13035db3fe5cb426283c458 \
+    --hash=sha256:8b5aefea276516217bcb1b99af7c28020448d2595439c44927d0f5a880ce0c8b
     # via
     #   bx-django-utils
     #   manageprojects
@@ -355,9 +355,9 @@ importlib-metadata==6.0.0 \
     # via
     #   keyring
     #   twine
-isort==5.11.4 \
-    --hash=sha256:6db30c5ded9815d813932c04c2f85a360bcdd35fed496f4d8f35495ef0a261b6 \
-    --hash=sha256:c033fd0edb91000a7f09527fe5c75321878f98322a77ddcc81adbd83724afb7b
+isort==5.12.0 \
+    --hash=sha256:8bef7dde241278824a6d83f44a544709b065191b95b6e50894bdc722fcba0504 \
+    --hash=sha256:f84c2818376e66cf843d497486ea8fed8700b340f308f076c6fb1229dff318b6
     # via managetemplates (pyproject.toml)
 jaraco-classes==3.2.3 \
     --hash=sha256:2353de3288bc6b82120752201c6b1c1a14b058267fa424ed5ce5984e3b922158 \
@@ -384,9 +384,9 @@ keyring==23.13.1 \
     --hash=sha256:771ed2a91909389ed6148631de678f82ddc73737d85a927f382a8a1b157898cd \
     --hash=sha256:ba2e15a9b35e21908d0aaf4e0a47acc52d6ae33444df0da2b49d41a46ef6d678
     # via twine
-manageprojects==0.7.1 \
-    --hash=sha256:86fbf857563313bd7bef0cfed14a0dc3edf01981a9a8fbe732bb1dc45e66ed9f \
-    --hash=sha256:f7ba545058de05307c86ceb478571f9834aba58e1fec23dfd500aea4607022c1
+manageprojects==0.7.3 \
+    --hash=sha256:85cf65044f28c10039110e935d9dff620f296a50c4dc3c8b8c0bb185b5c2a67f \
+    --hash=sha256:c31f9a20d62ba81ea52a07c9ccd8bf1bb9ca2a729cd40912eb0cd72e72cce10c
     # via managetemplates (pyproject.toml)
 markupsafe==2.1.2 \
     --hash=sha256:0576fe974b40a400449768941d5d0858cc624e3249dfd1e0c33674e5c7ca7aed \
@@ -509,9 +509,9 @@ python-dateutil==2.8.2 \
     --hash=sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86 \
     --hash=sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9
     # via arrow
-python-slugify==7.0.0 \
-    --hash=sha256:003aee64f9fd955d111549f96c4b58a3f40b9319383c70fad6277a4974bbf570 \
-    --hash=sha256:7a0f21a39fa6c1c4bf2e5984c9b9ae944483fd10b54804cb0e23a3ccd4954f0b
+python-slugify==8.0.0 \
+    --hash=sha256:51f217508df20a6c166c7821683384b998560adcf8f19a6c2ca8b460528ccd9c \
+    --hash=sha256:f1da83f3c7ab839b3f84543470cd95bdb5a81f1a0b80fed502f78b7dca256062
     # via cookiecutter
 python-stdnum==1.18 \
     --hash=sha256:bcc763d9c49ae23da5d2b7a686d5fd1deec9d9051341160a10d1ac723a26bec0 \
@@ -596,9 +596,9 @@ secretstorage==3.3.3 \
     --hash=sha256:2403533ef369eca6d2ba81718576c5e0f564d5cca1b58f73a8b23e7d4eeebd77 \
     --hash=sha256:f356e6628222568e3af06f2eba8df495efa13b3b63081dafd4f7d9a7b7bc9f99
     # via keyring
-setuptools==66.1.1 \
-    --hash=sha256:6f590d76b713d5de4e49fe4fbca24474469f53c83632d5d0fd056f7ff7e8112b \
-    --hash=sha256:ac4008d396bc9cd983ea483cb7139c0240a07bbc74ffb6232fceffedc6cf03a8
+setuptools==67.0.0 \
+    --hash=sha256:883131c5b6efa70b9101c7ef30b2b7b780a4283d5fc1616383cdf22c83cbefe6 \
+    --hash=sha256:9d790961ba6219e9ff7d9557622d2fe136816a264dd01d5997cfc057d804853d
     # via pip-tools
 shellingham==1.5.0.post1 \
     --hash=sha256:368bf8c00754fd4f55afb7bbb86e272df77e4dc76ac29dbcbb81a59e9fc15744 \
@@ -660,7 +660,7 @@ wheel==0.38.4 \
     --hash=sha256:965f5259b566725405b05e7cf774052044b1ed30119b5d586b2703aafe8719ac \
     --hash=sha256:b60533f3f5d530e971d6737ca6d58681ee434818fab630c83a734bb10c083ce8
     # via pip-tools
-zipp==3.11.0 \
-    --hash=sha256:83a28fcb75844b5c0cdaf5aa4003c2d728c77e05f5aeabe8e95e56727005fbaa \
-    --hash=sha256:a7a22e05929290a67401440b39690ae6563279bced5f314609d9d03798f56766
+zipp==3.12.0 \
+    --hash=sha256:73efd63936398aac78fd92b6f4865190119d6c91b531532e798977ea8dd402eb \
+    --hash=sha256:9eb0a4c5feab9b08871db0d672745b53450d7f26992fd1e4653aa43345e97b86
     # via importlib-metadata
