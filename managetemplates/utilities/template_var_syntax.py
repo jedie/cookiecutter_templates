@@ -66,7 +66,7 @@ def content_template_var_syntax(path: Path) -> int:
         buffer = []
         for line in origin_content.splitlines(keepends=True):
             if 'fmt: skip' not in line:
-                line=re.sub(r'{{(\S+?)}}', r'{{ \1 }}', line)  # fmt: skip
+                line = re.sub(r'{{(\S+?)}}', r'{{ \1 }}', line)  # fmt: skip
             buffer.append(line)
 
         new_content = ''.join(buffer)
