@@ -94,7 +94,7 @@ def update():
     # Update 'piptools-python' template:
     #   piptools-python/{{cookiecutter.package_name}}/requirements*.txt
 
-    package_path = constants.PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}'
+    package_path = constants.PACKAGE_ROOT / 'piptools-python' / '{{ cookiecutter.package_name }}'
     assert_is_dir(package_path)
 
     verbose_check_call(  # develop + production
