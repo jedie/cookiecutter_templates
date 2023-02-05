@@ -56,15 +56,21 @@ def filesystem_template_var_syntax(path: Path) -> int:
         return rename_count
 
 
+def fnmatches(path, excludes):
+    for exclude in excludes:
+        if fnmatch.fnmatch(path.name, exclude):
+            return True
+    return False
+
+
 def content_template_var_syntax(path: Path, excludes=('*.md',)) -> int:
     print(f'Fix Cookiecutter variable name syntax in file content of: {path}')
     git = Git(cwd=path, detect_root=True)
     git_root_path = git.cwd
     fixed_files = 0
     for path in git.ls_files(verbose=False):
-        for exclude in excludes:
-            if fnmatch.fnmatch(path.name, exclude):
-                continue
+        if fnmatches(path, excludes):
+            continue
 
         assert_is_file(path)
         origin_content = path.read_text(encoding='UTF-8')
