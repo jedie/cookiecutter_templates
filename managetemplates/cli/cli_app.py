@@ -14,6 +14,7 @@ from rich import print  # noqa
 import managetemplates
 from managetemplates import __version__, constants
 from managetemplates.utilities.reverse import reverse_test_project
+from managetemplates.utilities.template_var_syntax import filesystem_template_var_syntax
 
 
 logger = logging.getLogger(__name__)
@@ -157,6 +158,15 @@ def publish():
     git.tag(git_tag, message=f'publish version {git_tag}')
     print('\ngit push tag to server')
     git.push(tags=True)
+
+
+@app.command()
+def fix_filesystem():
+    """
+    Unify cookiecutter variables in the filesystem. e.g.: "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"
+    """
+    rename_count = filesystem_template_var_syntax(path=PACKAGE_ROOT)
+    sys.exit(rename_count)
 
 
 def _call_darker(*args):
