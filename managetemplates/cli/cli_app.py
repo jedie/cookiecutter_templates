@@ -14,7 +14,7 @@ from rich import print  # noqa
 import managetemplates
 from managetemplates import __version__, constants
 from managetemplates.utilities.reverse import reverse_test_project
-from managetemplates.utilities.template_var_syntax import filesystem_template_var_syntax
+from managetemplates.utilities.template_var_syntax import content_template_var_syntax, filesystem_template_var_syntax
 
 
 logger = logging.getLogger(__name__)
@@ -163,10 +163,21 @@ def publish():
 @app.command()
 def fix_filesystem():
     """
-    Unify cookiecutter variables in the filesystem. e.g.: "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"
+    Unify cookiecutter variables in the file/directory paths.
+    e.g.: "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"  # fmt: skip
     """
     rename_count = filesystem_template_var_syntax(path=PACKAGE_ROOT)
     sys.exit(rename_count)
+
+
+@app.command()
+def fix_file_content():
+    """
+    Unify cookiecutter variables in file content.
+    e.g.: "{{foo}}" -> "{{ foo }}"  # fmt: skip
+    """
+    fixed_files = content_template_var_syntax(path=PACKAGE_ROOT)
+    sys.exit(fixed_files)
 
 
 def _call_darker(*args):

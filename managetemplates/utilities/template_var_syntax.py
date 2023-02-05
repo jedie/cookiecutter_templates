@@ -21,7 +21,7 @@ def filesystem_template_var_syntax(path: Path) -> int:
             assert_is_file(path)
 
             origin_path_str = str(path)
-            new_path_str = re.sub(r'{{(\S+?)}}', r'{{ \1 }}', origin_path_str)
+            new_path_str = re.sub(r'{{(\S+?)}}', r'{{ \1 }}', origin_path_str)  # fmt: skip
             if new_path_str != origin_path_str:
                 new_path = Path(new_path_str)
                 rel_new_path = new_path.relative_to(git_root_path)
@@ -53,3 +53,31 @@ def filesystem_template_var_syntax(path: Path) -> int:
             print(f'{rename_count} files/directories renamed')
 
         return rename_count
+
+
+def content_template_var_syntax(path: Path) -> int:
+    print(f'Fix Cookiecutter variable name syntax in file content of: {path}')
+    git = Git(cwd=path, detect_root=True)
+    git_root_path = git.cwd
+    fixed_files = 0
+    for path in git.ls_files(verbose=False):
+        assert_is_file(path)
+        origin_content = path.read_text(encoding='UTF-8')
+        buffer = []
+        for line in origin_content.splitlines(keepends=True):
+            if 'fmt: skip' not in line:
+                line=re.sub(r'{{(\S+?)}}', r'{{ \1 }}', line)  # fmt: skip
+            buffer.append(line)
+
+        new_content = ''.join(buffer)
+        if origin_content != new_content:
+            print(f'Fix content of: {path.relative_to(git_root_path)}')
+            path.write_text(new_content, encoding='UTF-8')
+            fixed_files += 1
+
+    if not fixed_files:
+        print('Nothing to fixed, ok.')
+    else:
+        print(f'{fixed_files} file content fixed.')
+
+    return fixed_files
