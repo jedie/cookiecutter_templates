@@ -1,22 +1,16 @@
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
 import tomli
 from bx_py_utils.path import assert_is_dir, assert_is_file
-from bx_py_utils.test_utils.redirect import RedirectOut
+from manageprojects.test_utils.click_cli_utils import subprocess_cli
+from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_output
 
 from managetemplates import __version__
-from managetemplates.cli.cli_app import (
-    check_code_style,
-    fix_code_style,
-    fix_file_content,
-    fix_filesystem,
-    install,
-    publish,
-    update,
-)
+from managetemplates.cli.cli_app import fix_file_content, fix_filesystem, install, publish, update
 from managetemplates.constants import PACKAGE_ROOT, REQ_DEV_TXT_PATH, REQ_TXT_PATH
 from managetemplates.tests.base import BaseTestCase
 from managetemplates.utilities.test_project_utils import Call, SubprocessCallMock
@@ -41,48 +35,50 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assert_in(f'managetemplates v{__version__}', output)
 
     def test_code_style(self):
-        with RedirectOut() as buffer:
-            try:
-                check_code_style(verbose=False)
-            except SystemExit as err:
-                if err.code == 0:
-                    self.assertEqual(buffer.stderr, '')
-                    self.assert_in_content(
-                        got=buffer.stdout,
-                        parts=(
-                            '.venv/bin/darker',
-                            '.venv/bin/flake8',
-                            'Code style: OK',
-                        ),
-                    )
-                    return  # Code style is ok -> Nothing to fix ;)
-            else:
-                raise AssertionError('No sys.exit() !')
+        cli_bin = PACKAGE_ROOT / 'cli.py'
+        assert_is_file(cli_bin)
+
+        try:
+            output = subprocess_cli(
+                cli_bin=cli_bin,
+                args=('check-code-style',),
+                exit_on_error=False,
+            )
+        except subprocess.CalledProcessError as err:
+            self.assert_in_content(  # darker was called?
+                got=err.stdout,
+                parts=('.venv/bin/darker',),
+            )
+        else:
+            if 'Code style: OK' in output:
+                self.assert_in_content(  # darker was called?
+                    got=output,
+                    parts=('.venv/bin/darker',),
+                )
+                return  # Nothing to fix -> OK
 
         # Try to "auto" fix code style:
 
-        with RedirectOut() as buffer:
-            try:
-                fix_code_style(verbose=False)
-            except SystemExit as err:
-                self.assertEqual(err.code, 0, 'Code style can not be fixed, see output above!')
-            else:
-                raise AssertionError('No sys.exit() !')
+        try:
+            output = subprocess_cli(
+                cli_bin=cli_bin,
+                args=('fix-code-style',),
+                exit_on_error=False,
+            )
+        except subprocess.CalledProcessError as err:
+            output = err.stdout
 
-        self.assertEqual(buffer.stderr, '')
-        self.assert_in_content(
-            got=buffer.stdout,
-            parts=(
-                '.venv/bin/darker',
-                'Code style fixed, OK.',
-            ),
+        self.assert_in_content(  # darker was called?
+            got=output,
+            parts=('.venv/bin/darker',),
         )
 
-        # Better safe than sorry: Just lint again:
+        # Check again and display the output:
+
         try:
-            check_code_style(verbose=False)
+            code_style.check(package_root=PACKAGE_ROOT)
         except SystemExit as err:
-            self.assertEqual(err.code, 0)
+            self.assertEqual(err.code, 0, 'Code style error, see output above!')
 
     def test_install(self):
         with SubprocessCallMock(without_kwargs=True) as call_mock:

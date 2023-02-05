@@ -26,3 +26,4 @@ ALL_TEMPLATES = (
     'poetry-python',
     'yunohost_django_package',
 )
+CLI_EPILOG = 'Project Homepage: https://github.com/jedie/cookiecutter_templates'

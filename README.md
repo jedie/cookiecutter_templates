@@ -111,26 +111,33 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 ~$ git clone https://github.com/jedie/cookiecutter_templates.git
 ~$ cd cookiecutter_templates
 ~/cookiecutter_templates$ ./cli.py --help
-...
- Usage: managetemplates [OPTIONS] COMMAND [ARGS]...
-
-╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --install-completion          Install completion for the current shell.                                                │
-│ --show-completion             Show completion for the current shell, to copy it or customize the installation.         │
-│ --help                        Show this message and exit.                                                              │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ check-code-style                                                                                                       │
-│ coverage                  Run and show coverage.                                                                       │
-│ fix-code-style            Fix code style via darker                                                                    │
-│ install                   Run pip-sync and install 'managetemplates' via pip as editable.                              │
-│ mypy                      Run Mypy (configured in pyproject.toml)                                                      │
-│ publish                   Build and upload this project to PyPi                                                        │
-│ test                      Run unittests                                                                                │
-│ update                    Update the development environment                                                           │
-│ version                   Print version and exit                                                                       │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
+
+The output of `./cli.py --help` looks like:
+
+[comment]: <> (✂✂✂ auto generated main help start ✂✂✂)
+```
+Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...
+
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help      Show this message and exit.                                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
+│ check-code-style  Check code style by calling darker + flake8                                    │
+│ coverage          Run and show coverage.                                                         │
+│ fix-code-style    Fix code style via darker                                                      │
+│ fix-file-content  Unify cookiecutter variables in file content. e.g.: "{{foo}}" -> "{{ foo }}"   │
+│ fix-filesystem    Unify cookiecutter variables in the file/directory paths. e.g.:                │
+│                   "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"                           │
+│ install           Run pip-sync and install 'managetemplates' via pip as editable.                │
+│ publish           Build and upload this project to PyPi                                          │
+│ reverse           Reverse a /.tests/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/  │
+│ test              Run unittests                                                                  │
+│ update            Update the development environment                                             │
+│ version           Print version and exit                                                         │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+[comment]: <> (✂✂✂ auto generated main help end ✂✂✂)
 
 Run tests, e.g.:
 ```bash

@@ -1,17 +1,20 @@
+# no:vars_cleanup
+
+
 import logging
-import os
 import shutil
 import sys
 from pathlib import Path
 
 import rich
-import typer
-from bx_py_utils.path import assert_is_dir, assert_is_file
+import rich_click as click
+from bx_py_utils.path import assert_is_dir
 from manageprojects.git import Git
+from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_call
 from rich import print  # noqa
+from rich_click import RichGroup
 
-import managetemplates
 from managetemplates import __version__, constants
 from managetemplates.utilities.reverse import reverse_test_project
 from managetemplates.utilities.template_var_syntax import content_template_var_syntax, filesystem_template_var_syntax
@@ -20,18 +23,25 @@ from managetemplates.utilities.template_var_syntax import content_template_var_s
 logger = logging.getLogger(__name__)
 
 
-PACKAGE_ROOT = Path(managetemplates.__file__).parent.parent
-assert_is_dir(PACKAGE_ROOT)
-assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
+OPTION_ARGS_DEFAULT_TRUE = dict(is_flag=True, show_default=True, default=True)
+OPTION_ARGS_DEFAULT_FALSE = dict(is_flag=True, show_default=True, default=False)
 
 
-app = typer.Typer(
-    name='./cli.py',
-    epilog='Project Homepage: https://github.com/jedie/cookiecutter_templates',
+class ClickGroup(RichGroup):  # FIXME: How to set the "info_name" easier?
+    def make_context(self, info_name, *args, **kwargs):
+        info_name = './cli.py'
+        return super().make_context(info_name, *args, **kwargs)
+
+
+@click.group(
+    cls=ClickGroup,
+    epilog=constants.CLI_EPILOG,
 )
+def cli():
+    pass
 
 
-@app.command()
+@click.command()
 def coverage(verbose: bool = True):
     """
     Run and show coverage.
@@ -41,7 +51,10 @@ def coverage(verbose: bool = True):
     verbose_check_call('coverage', 'json', verbose=verbose, exit_on_error=True)
 
 
-@app.command()
+cli.add_command(coverage)
+
+
+@click.command()
 def install():
     """
     Run pip-sync and install 'managetemplates' via pip as editable.
@@ -50,7 +63,10 @@ def install():
     verbose_check_call('pip', 'install', '-e', '.')
 
 
-@app.command()
+cli.add_command(install)
+
+
+@click.command()
 def update():
     """
     Update the development environment
@@ -115,7 +131,10 @@ def update():
     )
 
 
-@app.command()
+cli.add_command(update)
+
+
+@click.command()
 def version(no_color: bool = False):
     """Print version and exit"""
     if no_color:
@@ -124,7 +143,10 @@ def version(no_color: bool = False):
     print(f'managetemplates v{__version__}')
 
 
-@app.command()
+cli.add_command(version)
+
+
+@click.command()
 def publish():
     """
     Build and upload this project to PyPi
@@ -160,91 +182,62 @@ def publish():
     git.push(tags=True)
 
 
-@app.command()
+cli.add_command(publish)
+
+
+@click.command()
 def fix_filesystem():
     """
     Unify cookiecutter variables in the file/directory paths.
-    e.g.: "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"  # fmt: skip
+    e.g.: "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"
     """
-    rename_count = filesystem_template_var_syntax(path=PACKAGE_ROOT)
+    rename_count = filesystem_template_var_syntax(path=constants.PACKAGE_ROOT)
     sys.exit(rename_count)
 
 
-@app.command()
+cli.add_command(fix_filesystem)
+
+
+@click.command()
 def fix_file_content():
     """
     Unify cookiecutter variables in file content.
-    e.g.: "{{foo}}" -> "{{ foo }}"  # fmt: skip
+    e.g.: "{{foo}}" -> "{{ foo }}"
     """
-    fixed_files = content_template_var_syntax(path=PACKAGE_ROOT)
+    fixed_files = content_template_var_syntax(path=constants.PACKAGE_ROOT)
     sys.exit(fixed_files)
 
 
-def _call_darker(*args):
-    # Work-a-round for:
-    #
-    #   File ".../site-packages/darker/linting.py", line 148, in _check_linter_output
-    #     with Popen(  # nosec
-    #   ...
-    #   File "/usr/lib/python3.10/subprocess.py", line 1845, in _execute_child
-    #     raise child_exception_type(errno_num, err_msg, err_filename)
-    # FileNotFoundError: [Errno 2] No such file or directory: 'flake8'
-    #
-    # Just add .venv/bin/ to PATH:
-    venv_path = Path(sys.executable).parent
-    assert_is_file(venv_path / 'flake8')
-    assert_is_file(venv_path / 'darker')
-    venv_path = str(venv_path)
-    if venv_path not in os.environ['PATH']:
-        extra_env = dict(PATH=venv_path + os.pathsep + os.environ['PATH'])
-    else:
-        extra_env = None
-
-    verbose_check_call(
-        'darker',
-        '--color',
-        *args,
-        cwd=PACKAGE_ROOT,
-        extra_env=extra_env,
-        exit_on_error=True,
-    )
+cli.add_command(fix_file_content)
 
 
-@app.command()
-def fix_code_style(verbose: bool = False):
+@click.command()
+@click.option('--color/--no-color', **OPTION_ARGS_DEFAULT_TRUE)
+@click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
+def fix_code_style(color: bool = True, verbose: bool = False):
     """
     Fix code style via darker
     """
-    if verbose:
-        args = ['--verbose']
-    else:
-        args = []
-
-    _call_darker(*args)
-    print('Code style fixed, OK.')
-    sys.exit(0)
+    code_style.fix(package_root=constants.PACKAGE_ROOT, color=color, verbose=verbose)
 
 
-@app.command()
-def check_code_style(verbose: bool = False):
-    if verbose:
-        args = ['--verbose']
-    else:
-        args = []
-
-    _call_darker('--check', *args)
-
-    verbose_check_call(
-        'flake8',
-        *args,
-        cwd=PACKAGE_ROOT,
-        exit_on_error=True,
-    )
-    print('Code style: OK')
-    sys.exit(0)
+cli.add_command(fix_code_style)
 
 
-@app.command()
+@click.command()
+@click.option('--color/--no-color', **OPTION_ARGS_DEFAULT_TRUE)
+@click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
+def check_code_style(color: bool = True, verbose: bool = False):
+    """
+    Check code style by calling darker + flake8
+    """
+    code_style.check(package_root=constants.PACKAGE_ROOT, color=color, verbose=verbose)
+
+
+cli.add_command(check_code_style)
+
+
+@click.command()
 def reverse(pkg_name: str):
     """
     Reverse a /.tests/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/
@@ -252,7 +245,10 @@ def reverse(pkg_name: str):
     reverse_test_project(pkg_name=pkg_name)
 
 
-@app.command()  # Just add this command to help page
+cli.add_command(reverse)
+
+
+@click.command()  # Just add this command to help page
 def test():
     """
     Run unittests
@@ -274,10 +270,17 @@ def test():
     )
 
 
+cli.add_command(test)
+
+
 def main():
     if len(sys.argv) >= 2 and sys.argv[1] == 'test':
         # Just use the CLI from unittest with all available options and origin --help output ;)
         return test()
     else:
-        # Execute Typer App:
-        app()
+        # Execute Click CLI:
+        # context = click.get_current_context()
+        # context.info_name='./cli.py'
+        cli.name = './cli.py'
+        # print(cli.__dict__)
+        cli()
