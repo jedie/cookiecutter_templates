@@ -5,12 +5,12 @@ from pathlib import Path
 
 import tomli
 from bx_py_utils.path import assert_is_dir, assert_is_file
-from manageprojects.test_utils.click_cli_utils import subprocess_cli
+from manageprojects.test_utils.click_cli_utils import invoke_click, subprocess_cli
 from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_output
 
 from managetemplates import __version__
-from managetemplates.cli.cli_app import fix_file_content, fix_filesystem, install, publish, update
+from managetemplates.cli.cli_app import cli, fix_file_content, fix_filesystem, install, update
 from managetemplates.constants import PACKAGE_ROOT, REQ_DEV_TXT_PATH, REQ_TXT_PATH
 from managetemplates.tests.base import BaseTestCase
 from managetemplates.utilities.test_project_utils import Call, SubprocessCallMock
@@ -186,13 +186,8 @@ class ProjectSetupTestCase(BaseTestCase):
         )
 
     def test_publish(self):
-        origin_sys_argv = sys.argv[:]
-        try:
-            sys.argv = ['./cli.py', 'publish']
-            with SubprocessCallMock(without_kwargs=True) as call_mock:
-                publish()
-        finally:
-            sys.argv = origin_sys_argv
+        with SubprocessCallMock(without_kwargs=True) as call_mock:
+            stdout = invoke_click(cli, 'publish')
 
         git_bin = shutil.which('git')
         self.assertEqual(
@@ -220,6 +215,13 @@ class ProjectSetupTestCase(BaseTestCase):
                 ),
                 Call(args=([git_bin, 'push', '--tags'],), kwargs=None),
             ],
+        )
+        self.assert_in_content(
+            got=stdout,
+            parts=(
+                'check git tag',
+                'git push tag to server',
+            ),
         )
 
     def test_filesystem_var_syntax(self):
