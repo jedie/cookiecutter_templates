@@ -8,7 +8,7 @@ from django.conf import settings
 from django.test.testcases import TestCase
 from django.urls.base import reverse
 
-from {{cookiecutter.upstream_pkg_name}} import __version__
+from {{ cookiecutter.upstream_pkg_name }} import __version__
 
 
 class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
@@ -20,7 +20,7 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
         ###############################################################################
         # Test as anonymous user
 
-        with self.assertLogs('{{cookiecutter.upstream_pkg_name}}') as logs:
+        with self.assertLogs('{{ cookiecutter.upstream_pkg_name }}') as logs:
             response = self.client.get(
                 path='/app_path/',
                 secure=True,
@@ -28,7 +28,7 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                f'<h2>YunoHost {{cookiecutter.project_name}} Project v{__version__}</h2>',
+                f'<h2>YunoHost {{ cookiecutter.project_name }} Project v{__version__}</h2>',
                 '<li><a href="/app_path/admin/">Django Admin</a></li>',
                 '<p>Log in to see more information</p>',
                 '<tr><td>User:</td><td>AnonymousUser</td></tr>',
@@ -36,7 +36,7 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
             ),
         )
         self.assertEqual(
-            logs.output, ['INFO:{{cookiecutter.upstream_pkg_name}}.views:DebugView request from user: AnonymousUser']
+            logs.output, ['INFO:{{ cookiecutter.upstream_pkg_name }}.views:DebugView request from user: AnonymousUser']
         )
         assert_html_response_snapshot(response, query_selector='#container', validate=False)
 
@@ -45,7 +45,7 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
 
         self.client.cookies['SSOwAuthUser'] = 'test'
 
-        with self.assertLogs('{{cookiecutter.upstream_pkg_name}}') as logs:
+        with self.assertLogs('{{ cookiecutter.upstream_pkg_name }}') as logs:
             response = self.client.get(
                 path='/app_path/',
                 HTTP_REMOTE_USER='test',
@@ -56,12 +56,12 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                f'<h2>YunoHost {{cookiecutter.project_name}} Project v{__version__}</h2>',
+                f'<h2>YunoHost {{ cookiecutter.project_name }} Project v{__version__}</h2>',
                 '<li><a href="/app_path/admin/">Django Admin</a></li>',
                 '<tr><td>User:</td><td>test</td></tr>',
                 f'<tr><td>Process ID:</td><td>{os.getpid()}</td></tr>',
             ),
         )
         self.assertEqual(
-            logs.output, ['INFO:{{cookiecutter.upstream_pkg_name}}.views:DebugView request from user: test']
+            logs.output, ['INFO:{{ cookiecutter.upstream_pkg_name }}.views:DebugView request from user: test']
         )

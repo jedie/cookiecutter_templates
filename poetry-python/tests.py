@@ -14,7 +14,7 @@ class PoetryPythonTemplateTestCase(BaseTestCase):
     def test_basic(self):
         pkg_path: Path = run_cookiecutter(
             template_name='poetry-python',
-            final_name='your_cool_package',  # {{cookiecutter.package_name}} replaced!
+            final_name='your_cool_package',  # {{ cookiecutter.package_name }} replaced!
             # force_recreate=True
             force_recreate=False,
         )

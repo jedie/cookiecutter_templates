@@ -10,7 +10,7 @@ from bx_py_utils.path import assert_is_dir, assert_is_file
 from django_tools.unittest_utils.project_setup import check_editor_config
 from django_yunohost_integration.test_utils import assert_project_version
 
-from {{cookiecutter.upstream_pkg_name}} import __version__
+from {{ cookiecutter.upstream_pkg_name }} import __version__
 
 
 PACKAGE_ROOT = Path(__file__).parent.parent
@@ -29,7 +29,7 @@ def test_version():
         # Github has a rate-limiting... So don't fetch the API if we run as GitHub action
         assert_project_version(
             current_version=__version__,
-            github_project_url='{{cookiecutter.upstream_url}}',
+            github_project_url='{{ cookiecutter.upstream_url }}',
         )
 
     pyproject_toml_path = Path(PACKAGE_ROOT, 'pyproject.toml')
