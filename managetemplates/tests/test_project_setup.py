@@ -8,7 +8,7 @@ from bx_py_utils.test_utils.redirect import RedirectOut
 from manageprojects.utilities.subprocess_utils import verbose_check_output
 
 from managetemplates import __version__
-from managetemplates.cli.cli_app import check_code_style, fix_code_style, install, publish, update
+from managetemplates.cli.cli_app import check_code_style, fix_code_style, fix_filesystem, install, publish, update
 from managetemplates.constants import PACKAGE_ROOT, REQ_DEV_TXT_PATH, REQ_TXT_PATH
 from managetemplates.tests.base import BaseTestCase
 from managetemplates.utilities.test_project_utils import Call, SubprocessCallMock
@@ -100,7 +100,7 @@ class ProjectSetupTestCase(BaseTestCase):
         with SubprocessCallMock(without_kwargs=True) as call_mock:
             update()
 
-        package_path = PACKAGE_ROOT / 'piptools-python' / '{{cookiecutter.package_name}}'
+        package_path = PACKAGE_ROOT / 'piptools-python' / '{{ cookiecutter.package_name }}'
         assert_is_dir(package_path)
 
         req_prod_txt_path = package_path / 'requirements.txt'
@@ -217,3 +217,9 @@ class ProjectSetupTestCase(BaseTestCase):
                 Call(args=([git_bin, 'push', '--tags'],), kwargs=None),
             ],
         )
+
+    def test_filesystem_var_syntax(self):
+        try:
+            fix_filesystem()
+        except SystemExit as err:
+            self.assertEqual(err.code, 0)

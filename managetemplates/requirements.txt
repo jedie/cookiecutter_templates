@@ -16,9 +16,9 @@ build==0.10.0 \
     --hash=sha256:af266720050a66c893a6096a2f410989eeac74ff9a68ba194b3f6473e8e26171 \
     --hash=sha256:d5b71264afdb5951d6704482aac78de887c80691c52b88a9ad195983ca2c9269
     # via pip-tools
-bx-py-utils==74 \
-    --hash=sha256:39a354727facc1a970102cbd2f786f7be6977dcf299c7d27aa5a46f580341043 \
-    --hash=sha256:9656a8e4c9aef4c876e39ac3decc0796709412dff5a549385acf1bd834e40e88
+bx-py-utils==75 \
+    --hash=sha256:2cd1053197e579f12b3d1b942f77c9736838c63cd13035db3fe5cb426283c458 \
+    --hash=sha256:8b5aefea276516217bcb1b99af7c28020448d2595439c44927d0f5a880ce0c8b
     # via
     #   manageprojects
     #   managetemplates (pyproject.toml)
@@ -157,9 +157,9 @@ jinja2-time==0.2.0 \
     --hash=sha256:d14eaa4d315e7688daa4969f616f226614350c48730bfa1692d2caebd8c90d40 \
     --hash=sha256:d3eab6605e3ec8b7a0863df09cc1d23714908fa61aa6986a845c20ba488b4efa
     # via cookiecutter
-manageprojects==0.7.1 \
-    --hash=sha256:86fbf857563313bd7bef0cfed14a0dc3edf01981a9a8fbe732bb1dc45e66ed9f \
-    --hash=sha256:f7ba545058de05307c86ceb478571f9834aba58e1fec23dfd500aea4607022c1
+manageprojects==0.7.3 \
+    --hash=sha256:85cf65044f28c10039110e935d9dff620f296a50c4dc3c8b8c0bb185b5c2a67f \
+    --hash=sha256:c31f9a20d62ba81ea52a07c9ccd8bf1bb9ca2a729cd40912eb0cd72e72cce10c
     # via managetemplates (pyproject.toml)
 markupsafe==2.1.2 \
     --hash=sha256:0576fe974b40a400449768941d5d0858cc624e3249dfd1e0c33674e5c7ca7aed \
@@ -217,13 +217,13 @@ packaging==23.0 \
     --hash=sha256:714ac14496c3e68c99c29b00845f7a2b85f3bb6f1078fd9f72fd20f0570002b2 \
     --hash=sha256:b6ad297f8907de0fa2fe1ccbd26fdaf387f5f47c7275fedf8cce89f99446cf97
     # via build
-pip==22.3.1 \
-    --hash=sha256:65fd48317359f3af8e593943e6ae1506b66325085ea64b706a998c6e83eeaf38 \
-    --hash=sha256:908c78e6bc29b676ede1c4d57981d490cb892eb45cd8c214ab6298125119e077
+pip==23.0 \
+    --hash=sha256:aee438284e82c8def684b0bcc50b1f6ed5e941af97fa940e83e2e8ef1a59da9b \
+    --hash=sha256:b5f88adff801f5ef052bcdef3daa31b55eb67b0fccd6d0106c206fa248e0463c
     # via pip-tools
-pip-tools==6.12.1 \
-    --hash=sha256:88efb7b29a923ffeac0713e6f23ef8529cc6175527d42b93f73756cc94387293 \
-    --hash=sha256:f0c0c0ec57b58250afce458e2e6058b1f30a4263db895b7d72fd6311bf1dc6f7
+pip-tools==6.12.2 \
+    --hash=sha256:6a51f4fd67140d5e83703ebfa9610fb61398727151f56a1be02a972d062e4679 \
+    --hash=sha256:8b903696df4598b10d469026ef9995c5f9a874b416e88e7a214884ebe4a70245
     # via managetemplates (pyproject.toml)
 pygments==2.14.0 \
     --hash=sha256:b3ed06a9e8ac9a9aae5a6f5dbe78a8a58655d17b43b93c078f094ddc476ae297 \
@@ -237,9 +237,9 @@ python-dateutil==2.8.2 \
     --hash=sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86 \
     --hash=sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9
     # via arrow
-python-slugify==7.0.0 \
-    --hash=sha256:003aee64f9fd955d111549f96c4b58a3f40b9319383c70fad6277a4974bbf570 \
-    --hash=sha256:7a0f21a39fa6c1c4bf2e5984c9b9ae944483fd10b54804cb0e23a3ccd4954f0b
+python-slugify==8.0.0 \
+    --hash=sha256:51f217508df20a6c166c7821683384b998560adcf8f19a6c2ca8b460528ccd9c \
+    --hash=sha256:f1da83f3c7ab839b3f84543470cd95bdb5a81f1a0b80fed502f78b7dca256062
     # via cookiecutter
 pyyaml==6.0 \
     --hash=sha256:01b45c0191e6d66c470b6cf1b9531a771a83c1c4208272ead47a3ae4f2f603bf \
@@ -299,9 +299,9 @@ rich-click==1.6.1 \
     --hash=sha256:0fcf4d1a09029d79322dd814ab0b2e66ac183633037561881d45abae8a161d95 \
     --hash=sha256:f8ff96693ec6e261d1544e9f7d9a5811c5ef5d74c8adb4978430fc0dac16777e
     # via manageprojects
-setuptools==66.1.1 \
-    --hash=sha256:6f590d76b713d5de4e49fe4fbca24474469f53c83632d5d0fd056f7ff7e8112b \
-    --hash=sha256:ac4008d396bc9cd983ea483cb7139c0240a07bbc74ffb6232fceffedc6cf03a8
+setuptools==67.1.0 \
+    --hash=sha256:a7687c12b444eaac951ea87a9627c4f904ac757e7abdc5aac32833234af90378 \
+    --hash=sha256:e261cdf010c11a41cb5cb5f1bf3338a7433832029f559a6a7614bd42a967c300
     # via pip-tools
 shellingham==1.5.0.post1 \
     --hash=sha256:368bf8c00754fd4f55afb7bbb86e272df77e4dc76ac29dbcbb81a59e9fc15744 \
