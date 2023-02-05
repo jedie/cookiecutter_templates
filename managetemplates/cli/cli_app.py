@@ -151,7 +151,7 @@ def publish():
     """
     Build and upload this project to PyPi
     """
-    test()  # Don't publish a broken state
+    _run_unittest_cli(verbose=False)  # Don't publish a broken state
 
     git = Git(cwd=constants.PACKAGE_ROOT, detect_root=True)
 
@@ -248,26 +248,44 @@ def reverse(pkg_name: str):
 cli.add_command(reverse)
 
 
-@click.command()  # Just add this command to help page
-def test():
+def _run_unittest_cli(extra_env=None, verbose=True):
     """
-    Run unittests
+    Call the origin unittest CLI and pass all args to it.
     """
+    if extra_env is None:
+        extra_env = dict()
+
+    extra_env.update(
+        dict(
+            PYTHONUNBUFFERED='1',
+            PYTHONWARNINGS='always',
+        )
+    )
+
     args = sys.argv[2:]
     if not args:
-        args = ('--verbose', '--locals', '--buffer')
-    # Use the CLI from unittest module and pass all args to it:
+        if verbose:
+            args = ('--verbose', '--locals', '--buffer')
+        else:
+            args = ('--locals', '--buffer')
+
     verbose_check_call(
         sys.executable,
         '-m',
         'unittest',
         *args,
         timeout=15 * 60,
-        extra_env=dict(
-            PYTHONUNBUFFERED='1',
-            PYTHONWARNINGS='always',
-        ),
+        extra_env=extra_env,
     )
+
+
+@click.command()  # Dummy command, to add "tests" into help page ;)
+def test():
+    """
+    Run unittests
+    """
+    _run_unittest_cli()
+    sys.exit(0)
 
 
 cli.add_command(test)
@@ -276,7 +294,7 @@ cli.add_command(test)
 def main():
     if len(sys.argv) >= 2 and sys.argv[1] == 'test':
         # Just use the CLI from unittest with all available options and origin --help output ;)
-        return test()
+        _run_unittest_cli()
     else:
         # Execute Click CLI:
         # context = click.get_current_context()

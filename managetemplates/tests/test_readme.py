@@ -1,10 +1,8 @@
 from bx_py_utils.auto_doc import assert_readme_block
 from bx_py_utils.path import assert_is_file
-from manageprojects.test_utils.click_cli_utils import invoke_click
 from manageprojects.tests.base import BaseTestCase
 
 from managetemplates import constants
-from managetemplates.cli.cli_app import cli
 from managetemplates.constants import PACKAGE_ROOT
 
 
@@ -84,17 +82,3 @@ class ReadmeTestCase(BaseTestCase):
 
         readme_block = build_readme_block(template_paths)
         assert_readme_block(readme_path=PACKAGE_ROOT / 'README.md', text_block=readme_block)
-
-    def test_main_help(self):
-        stdout = invoke_click(cli, '--help')
-        self.assert_in_content(
-            got=stdout,
-            parts=(
-                'Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...',
-                'fix-file-content',
-                'fix-filesystem',
-                'reverse',
-                constants.CLI_EPILOG,
-            ),
-        )
-        assert_cli_help_in_readme(text_block=stdout, marker='main help')

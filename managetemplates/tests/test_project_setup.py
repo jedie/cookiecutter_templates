@@ -10,7 +10,7 @@ from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_output
 
 from managetemplates import __version__
-from managetemplates.cli.cli_app import cli, fix_file_content, fix_filesystem, install, update
+from managetemplates.cli.cli_app import cli
 from managetemplates.constants import PACKAGE_ROOT, REQ_DEV_TXT_PATH, REQ_TXT_PATH
 from managetemplates.tests.base import BaseTestCase
 from managetemplates.utilities.test_project_utils import Call, SubprocessCallMock
@@ -82,7 +82,7 @@ class ProjectSetupTestCase(BaseTestCase):
 
     def test_install(self):
         with SubprocessCallMock(without_kwargs=True) as call_mock:
-            install()
+            stdout = invoke_click(cli, 'install')
 
         self.assertEqual(
             call_mock.calls,
@@ -99,10 +99,14 @@ class ProjectSetupTestCase(BaseTestCase):
                 Call(args=([str(VENV_BIN_PATH / 'pip'), 'install', '-e', '.'],), kwargs=None),
             ],
         )
+        self.assert_in_content(
+            got=stdout,
+            parts=('pip install -e .',),
+        )
 
     def test_update(self):
         with SubprocessCallMock(without_kwargs=True) as call_mock:
-            update()
+            invoke_click(cli, 'update')
 
         package_path = PACKAGE_ROOT / 'piptools-python' / '{{ cookiecutter.package_name }}'
         assert_is_dir(package_path)
@@ -194,7 +198,7 @@ class ProjectSetupTestCase(BaseTestCase):
             call_mock.calls,
             [
                 Call(
-                    args=([sys.executable, '-m', 'unittest', '--verbose', '--locals', '--buffer'],),
+                    args=([sys.executable, '-m', 'unittest', '--locals', '--buffer'],),
                     kwargs=None,
                 ),
                 Call(args=([sys.executable, '-m', 'build'],), kwargs=None),
@@ -225,13 +229,15 @@ class ProjectSetupTestCase(BaseTestCase):
         )
 
     def test_filesystem_var_syntax(self):
-        try:
-            fix_filesystem()
-        except SystemExit as err:
-            self.assertEqual(err.code, 0)
+        stdout = invoke_click(cli, 'fix-filesystem')
+        self.assert_in_content(
+            got=stdout,
+            parts=('Nothing to rename, ok.',),
+        )
 
     def test_file_content_var_syntax(self):
-        try:
-            fix_file_content()
-        except SystemExit as err:
-            self.assertEqual(err.code, 0)
+        stdout = invoke_click(cli, 'fix-file-content')
+        self.assert_in_content(
+            got=stdout,
+            parts=('Nothing to fixed, ok.',),
+        )

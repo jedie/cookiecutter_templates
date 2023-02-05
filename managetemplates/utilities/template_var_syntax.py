@@ -63,7 +63,7 @@ def fnmatches(path, excludes):
     return False
 
 
-def content_template_var_syntax(path: Path, excludes=('*.md',)) -> int:
+def content_template_var_syntax(path: Path, excludes=('*.md', '*.snapshot.*')) -> int:
     print(f'Fix Cookiecutter variable name syntax in file content of: {path}')
     git = Git(cwd=path, detect_root=True)
     git_root_path = git.cwd
