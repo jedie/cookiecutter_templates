@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 from bx_py_utils.path import assert_is_file
@@ -11,11 +12,20 @@ from managetemplates.utilities.test_project_utils import TestProject
 
 class PiptoolsPythonTemplateTestCase(BaseTestCase):
     def test_basic(self):
-        pkg_path: Path = run_cookiecutter(
-            template_name='piptools-python',
-            final_name='your_cool_package',  # {{ cookiecutter.package_name }} replaced!
-            # force_recreate=True
-            force_recreate=False,
+        with self.assertLogs('cookiecutter', level=logging.DEBUG) as logs:
+            pkg_path: Path = run_cookiecutter(
+                template_name='piptools-python',
+                final_name='your_cool_package',  # {{ cookiecutter.package_name }} replaced!
+                # force_recreate=True
+                force_recreate=False,
+            )
+        self.assert_in_content(
+            got='\n'.join(logs.output),
+            parts=(
+                'piptools-python/cookiecutter.json',
+                'Writing contents to file',
+
+            ),
         )
         test_project = TestProject(pkg_path)
 

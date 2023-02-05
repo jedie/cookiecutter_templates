@@ -1,3 +1,4 @@
+import fnmatch
 import re
 import shutil
 from pathlib import Path
@@ -55,19 +56,36 @@ def filesystem_template_var_syntax(path: Path) -> int:
         return rename_count
 
 
-def content_template_var_syntax(path: Path) -> int:
+def fnmatches(path, excludes):
+    for exclude in excludes:
+        if fnmatch.fnmatch(path.name, exclude):
+            return True
+    return False
+
+
+def content_template_var_syntax(path: Path, excludes=('*.md', '*.snapshot.*')) -> int:
     print(f'Fix Cookiecutter variable name syntax in file content of: {path}')
     git = Git(cwd=path, detect_root=True)
     git_root_path = git.cwd
     fixed_files = 0
     for path in git.ls_files(verbose=False):
+        if fnmatches(path, excludes):
+            continue
+
         assert_is_file(path)
         origin_content = path.read_text(encoding='UTF-8')
         buffer = []
-        for line in origin_content.splitlines(keepends=True):
+        skip_file = False
+        for line_number, line in enumerate(origin_content.splitlines(keepends=True)):
+            if line_number == 0 and 'no:vars_cleanup' in line:
+                skip_file = True
+                break
+
             if 'fmt: skip' not in line:
                 line = re.sub(r'{{(\S+?)}}', r'{{ \1 }}', line)  # fmt: skip
             buffer.append(line)
+        if skip_file:
+            continue
 
         new_content = ''.join(buffer)
         if origin_content != new_content:

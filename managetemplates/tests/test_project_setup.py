@@ -1,22 +1,16 @@
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
 import tomli
 from bx_py_utils.path import assert_is_dir, assert_is_file
-from bx_py_utils.test_utils.redirect import RedirectOut
+from manageprojects.test_utils.click_cli_utils import invoke_click, subprocess_cli
+from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_output
 
 from managetemplates import __version__
-from managetemplates.cli.cli_app import (
-    check_code_style,
-    fix_code_style,
-    fix_file_content,
-    fix_filesystem,
-    install,
-    publish,
-    update,
-)
+from managetemplates.cli.cli_app import cli
 from managetemplates.constants import PACKAGE_ROOT, REQ_DEV_TXT_PATH, REQ_TXT_PATH
 from managetemplates.tests.base import BaseTestCase
 from managetemplates.utilities.test_project_utils import Call, SubprocessCallMock
@@ -41,52 +35,54 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assert_in(f'managetemplates v{__version__}', output)
 
     def test_code_style(self):
-        with RedirectOut() as buffer:
-            try:
-                check_code_style(verbose=False)
-            except SystemExit as err:
-                if err.code == 0:
-                    self.assertEqual(buffer.stderr, '')
-                    self.assert_in_content(
-                        got=buffer.stdout,
-                        parts=(
-                            '.venv/bin/darker',
-                            '.venv/bin/flake8',
-                            'Code style: OK',
-                        ),
-                    )
-                    return  # Code style is ok -> Nothing to fix ;)
-            else:
-                raise AssertionError('No sys.exit() !')
+        cli_bin = PACKAGE_ROOT / 'cli.py'
+        assert_is_file(cli_bin)
+
+        try:
+            output = subprocess_cli(
+                cli_bin=cli_bin,
+                args=('check-code-style',),
+                exit_on_error=False,
+            )
+        except subprocess.CalledProcessError as err:
+            self.assert_in_content(  # darker was called?
+                got=err.stdout,
+                parts=('.venv/bin/darker',),
+            )
+        else:
+            if 'Code style: OK' in output:
+                self.assert_in_content(  # darker was called?
+                    got=output,
+                    parts=('.venv/bin/darker',),
+                )
+                return  # Nothing to fix -> OK
 
         # Try to "auto" fix code style:
 
-        with RedirectOut() as buffer:
-            try:
-                fix_code_style(verbose=False)
-            except SystemExit as err:
-                self.assertEqual(err.code, 0, 'Code style can not be fixed, see output above!')
-            else:
-                raise AssertionError('No sys.exit() !')
+        try:
+            output = subprocess_cli(
+                cli_bin=cli_bin,
+                args=('fix-code-style',),
+                exit_on_error=False,
+            )
+        except subprocess.CalledProcessError as err:
+            output = err.stdout
 
-        self.assertEqual(buffer.stderr, '')
-        self.assert_in_content(
-            got=buffer.stdout,
-            parts=(
-                '.venv/bin/darker',
-                'Code style fixed, OK.',
-            ),
+        self.assert_in_content(  # darker was called?
+            got=output,
+            parts=('.venv/bin/darker',),
         )
 
-        # Better safe than sorry: Just lint again:
+        # Check again and display the output:
+
         try:
-            check_code_style(verbose=False)
+            code_style.check(package_root=PACKAGE_ROOT)
         except SystemExit as err:
-            self.assertEqual(err.code, 0)
+            self.assertEqual(err.code, 0, 'Code style error, see output above!')
 
     def test_install(self):
         with SubprocessCallMock(without_kwargs=True) as call_mock:
-            install()
+            stdout = invoke_click(cli, 'install')
 
         self.assertEqual(
             call_mock.calls,
@@ -103,10 +99,14 @@ class ProjectSetupTestCase(BaseTestCase):
                 Call(args=([str(VENV_BIN_PATH / 'pip'), 'install', '-e', '.'],), kwargs=None),
             ],
         )
+        self.assert_in_content(
+            got=stdout,
+            parts=('pip install -e .',),
+        )
 
     def test_update(self):
         with SubprocessCallMock(without_kwargs=True) as call_mock:
-            update()
+            invoke_click(cli, 'update')
 
         package_path = PACKAGE_ROOT / 'piptools-python' / '{{ cookiecutter.package_name }}'
         assert_is_dir(package_path)
@@ -190,20 +190,15 @@ class ProjectSetupTestCase(BaseTestCase):
         )
 
     def test_publish(self):
-        origin_sys_argv = sys.argv[:]
-        try:
-            sys.argv = ['./cli.py', 'publish']
-            with SubprocessCallMock(without_kwargs=True) as call_mock:
-                publish()
-        finally:
-            sys.argv = origin_sys_argv
+        with SubprocessCallMock(without_kwargs=True) as call_mock:
+            stdout = invoke_click(cli, 'publish')
 
         git_bin = shutil.which('git')
         self.assertEqual(
             call_mock.calls,
             [
                 Call(
-                    args=([sys.executable, '-m', 'unittest', '--verbose', '--locals', '--buffer'],),
+                    args=([sys.executable, '-m', 'unittest', '--locals', '--buffer'],),
                     kwargs=None,
                 ),
                 Call(args=([sys.executable, '-m', 'build'],), kwargs=None),
@@ -225,15 +220,24 @@ class ProjectSetupTestCase(BaseTestCase):
                 Call(args=([git_bin, 'push', '--tags'],), kwargs=None),
             ],
         )
+        self.assert_in_content(
+            got=stdout,
+            parts=(
+                'check git tag',
+                'git push tag to server',
+            ),
+        )
 
     def test_filesystem_var_syntax(self):
-        try:
-            fix_filesystem()
-        except SystemExit as err:
-            self.assertEqual(err.code, 0)
+        stdout = invoke_click(cli, 'fix-filesystem')
+        self.assert_in_content(
+            got=stdout,
+            parts=('Nothing to rename, ok.',),
+        )
 
     def test_file_content_var_syntax(self):
-        try:
-            fix_file_content()
-        except SystemExit as err:
-            self.assertEqual(err.code, 0)
+        stdout = invoke_click(cli, 'fix-file-content')
+        self.assert_in_content(
+            got=stdout,
+            parts=('Nothing to fixed, ok.',),
+        )

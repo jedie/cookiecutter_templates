@@ -1,11 +1,12 @@
-from unittest import TestCase
-
 from bx_py_utils.auto_doc import assert_readme_block
 from bx_py_utils.path import assert_is_file
+from manageprojects.tests.base import BaseTestCase
 
 from managetemplates import constants
 from managetemplates.constants import PACKAGE_ROOT
 
+
+README_PATH = PACKAGE_ROOT / 'README.md'
 
 ADDITIONAL_TEMPLATE = '''
 Cookiecutter template tests are here: [%(tests_rel_path)s](https://github.com/jedie/cookiecutter_templates/blob/main/%(tests_rel_path)s)
@@ -21,6 +22,17 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 ./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory %(template_name)s ~/foobar/
 ```
 '''.strip()  # noqa:E501
+
+
+def assert_cli_help_in_readme(text_block: str, marker: str):
+    text_block = text_block.replace(constants.CLI_EPILOG, '')
+    text_block = f'```\n{text_block.strip()}\n```'
+    assert_readme_block(
+        readme_path=README_PATH,
+        text_block=text_block,
+        start_marker_line=f'[comment]: <> (✂✂✂ auto generated {marker} start ✂✂✂)',
+        end_marker_line=f'[comment]: <> (✂✂✂ auto generated {marker} end ✂✂✂)',
+    )
 
 
 def get_template_paths():
@@ -60,7 +72,7 @@ def build_readme_block(template_paths):
     return '\n\n'.join(parts)
 
 
-class ReadmeTestCase(TestCase):
+class ReadmeTestCase(BaseTestCase):
     def test_templates_doc(self):
         template_paths = sorted(get_template_paths())
         self.assertEqual(
