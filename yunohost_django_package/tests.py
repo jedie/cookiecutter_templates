@@ -1,3 +1,4 @@
+import logging
 import shutil
 from pathlib import Path
 
@@ -12,17 +13,25 @@ from managetemplates.utilities.test_project_utils import TestProject
 
 class YunohostDjangoPackageTemplateTestCase(BaseTestCase):
     def test_basic(self):
-        pkg_path: Path = run_cookiecutter(
-            template_name='yunohost_django_package',
-            final_name='django_example_ynh',  # {{ cookiecutter.ynh_app_pkg_name }} replaced!
-            # force_recreate=True
-            force_recreate=False,
-            extra_context=dict(
-                # Some projects test depends on the current upstream version
-                # So we have to set these version correct here:
-                upstream_version=django_example.__version__,
-                # We must use the correct Github urls:
-                upstream_url='https://github.com/jedie/django_example',
+        with self.assertLogs('cookiecutter', level=logging.DEBUG) as logs:
+            pkg_path: Path = run_cookiecutter(
+                template_name='yunohost_django_package',
+                final_name='django_example_ynh',  # {{ cookiecutter.ynh_app_pkg_name }} replaced!
+                # force_recreate=True
+                force_recreate=False,
+                extra_context=dict(
+                    # Some projects test depends on the current upstream version
+                    # So we have to set these version correct here:
+                    upstream_version=django_example.__version__,
+                    # We must use the correct Github urls:
+                    upstream_url='https://github.com/jedie/django_example',
+                ),
+            )
+        self.assert_in_content(
+            got='\n'.join(logs.output),
+            parts=(
+                'yunohost_django_package/cookiecutter.json',
+                'Writing contents to file',
             ),
         )
         test_project = TestProject(pkg_path)
