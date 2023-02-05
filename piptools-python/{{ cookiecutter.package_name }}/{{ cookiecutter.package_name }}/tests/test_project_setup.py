@@ -4,8 +4,8 @@ from unittest import TestCase
 import tomli
 import {{ cookiecutter.package_name }}
 from bx_py_utils.path import assert_is_file
-from {{cookiecutter.package_name}} import __version__
-from {{cookiecutter.package_name}}.cli.cli_app import check_code_style, fix_code_style
+from {{ cookiecutter.package_name }} import __version__
+from {{ cookiecutter.package_name }}.cli.cli_app import check_code_style, fix_code_style
 from bx_py_utils.test_utils.redirect import RedirectOut
 
 

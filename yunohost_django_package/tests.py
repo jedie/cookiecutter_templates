@@ -14,7 +14,7 @@ class YunohostDjangoPackageTemplateTestCase(BaseTestCase):
     def test_basic(self):
         pkg_path: Path = run_cookiecutter(
             template_name='yunohost_django_package',
-            final_name='django_example_ynh',  # {{cookiecutter.ynh_app_pkg_name}} replaced!
+            final_name='django_example_ynh',  # {{ cookiecutter.ynh_app_pkg_name }} replaced!
             # force_recreate=True
             force_recreate=False,
             extra_context=dict(

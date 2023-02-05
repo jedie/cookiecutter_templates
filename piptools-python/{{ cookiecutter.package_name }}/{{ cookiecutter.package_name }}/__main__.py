@@ -4,7 +4,7 @@
 """
 
 
-from {{cookiecutter.package_name}}.cli import cli_app
+from {{ cookiecutter.package_name }}.cli import cli_app
 
 
 def main():
