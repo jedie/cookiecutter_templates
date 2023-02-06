@@ -23,6 +23,8 @@ TEST_PATH = PACKAGE_ROOT / '.tests'
 ALL_TEMPLATES = (
     'pipenv-python',
     'piptools-python',
+    'poetry-django-app',
+    'poetry-django-project',
     'poetry-python',
     'yunohost_django_package',
 )
