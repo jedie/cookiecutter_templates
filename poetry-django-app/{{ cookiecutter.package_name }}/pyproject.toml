@@ -1,0 +1,134 @@
+[tool.poetry]
+name = '{{ cookiecutter.package_name }}'
+version = "{{ cookiecutter.package_version }}"
+description = '{{ cookiecutter.package_description }}'
+homepage = "https://github.com/john-doh/{{ cookiecutter.package_name }}"
+authors = [
+    "{{ cookiecutter.full_name }} <john-doh@example.tld>",
+]
+maintainers = [
+    "{{ cookiecutter.full_name }} <john-doh@example.tld>",
+]
+license = '{{ cookiecutter.license }}'
+readme='README.md'
+include = ['LICENSE', 'README.md']
+packages = [{ include = "{{ cookiecutter.package_name }}" }, { include = "{{ cookiecutter.package_name }}_tests" }]
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+    'Framework :: Django',
+    'Intended Audience :: Developers',
+]
+keywords=['django', 'utilities']
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/john-doh/{{ cookiecutter.package_name }}/issues"
+
+[tool.poetry.dependencies]
+python = '>=3.9,<4.0.0'
+django = '>=4.0,<4.2'
+
+[tool.poetry.dev-dependencies]
+bx_py_utils = '*'  # https://github.com/boxine/bx_py_utils
+bx_django_utils = '*'  # https://github.com/boxine/bx_django_utils
+tox = '>=4.4.4'  # https://github.com/tox-dev/tox
+coveralls = '*'  # https://github.com/TheKevJames/coveralls-python
+darker = '*'  # https://github.com/akaihola/darker
+isort = '*'  # https://github.com/pycqa/isort
+flake8 = '*'  # https://github.com/pycqa/flake8
+EditorConfig = '*'  # https://github.com/editorconfig/editorconfig-core-py
+safety = '*'  # https://github.com/pyupio/safety
+mypy = '*'  # https://github.com/python/mypy
+tomli = '*'  # https://github.com/hukkin/tomli
+twine = '*'  # https://github.com/pypa/twine
+poetry-publish = '*'  # https://github.com/jedie/poetry-publish
+django-debug-toolbar = '*'
+beautifulsoup4 = '*'
+lxml = '*'
+playwright = '*'  # https://playwright.dev/python/
+model-bakery = '*'  # https://github.com/model-bakers/model_bakery
+tblib = '*'  # https://github.com/ionelmc/python-tblib
+
+[tool.poetry.scripts]
+publish = "{{ cookiecutter.package_name }}_tests.test_project.publish:publish"
+
+
+[build-system]
+requires = ['poetry-core>=1.0.0']
+build-backend = 'poetry.core.masonry.api'
+
+
+[tool.darker]
+src = ['.']
+revision = "origin/main..."
+line_length = 119
+verbose = true
+skip_string_normalization = true
+diff = false
+check = false
+stdout = false
+isort = true
+lint = [
+    'flake8',
+]
+log_level = 'INFO'
+
+
+[tool.isort]
+# https://pycqa.github.io/isort/docs/configuration/config_files.html
+atomic=true
+profile='black'
+skip_glob=['.*', '*/htmlcov/*','*/migrations/*']
+known_first_party=['{{ cookiecutter.package_name }}']
+line_length=119
+lines_after_imports=2
+
+
+[tool.coverage.run]
+branch = true
+source_pkgs=['{{ cookiecutter.package_name }}']
+omit = ['.*', '*/tests/*','*/migrations/*']
+command_line = 'manage.py test --parallel --shuffle'
+
+[tool.coverage.report]
+skip_empty = true
+fail_under = 45
+
+
+[tool.tox]
+# https://tox.readthedocs.io/en/latest/example/basic.html#pyproject-toml-tox-legacy-ini
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+envlist = py{39,310,311}-django{4.0,4.1}
+skip_missing_interpreters = True
+
+[testenv]
+passenv = *
+deps =
+    django4.0: django>=4.0,<4.1
+    django4.1: django>=4.1,<4.2
+    bx_django_utils
+    model-bakery
+    playwright
+    beautifulsoup4
+    lxml
+    django-debug-toolbar
+    tblib
+    coverage[toml]
+commands =
+    python -m coverage run --rcfile=pyproject.toml manage.py test --parallel --shuffle
+"""
+
+
+[tool.mypy]
+warn_unused_configs = true
+ignore_missing_imports = true
+allow_redefinition = true  # https://github.com/python/mypy/issues/7165
+show_error_codes = true
+plugins = []
+exclude = ['.venv', 'tests', 'migrations']

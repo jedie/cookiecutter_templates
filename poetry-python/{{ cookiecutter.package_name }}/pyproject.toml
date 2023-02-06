@@ -24,7 +24,7 @@ rich = "*"  # https://github.com/Textualize/rich
 bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
 
 [tool.poetry.dev-dependencies]
-tox = "*"  # https://github.com/tox-dev/tox
+tox = ">=4.4.4"  # https://github.com/tox-dev/tox
 coveralls = "*"  # https://github.com/TheKevJames/coveralls-python
 darker = "*"  # https://github.com/akaihola/darker
 isort = "*"  # https://github.com/pycqa/isort
