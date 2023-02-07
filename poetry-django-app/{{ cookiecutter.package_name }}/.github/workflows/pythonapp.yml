@@ -1,5 +1,5 @@
-
-
+{# https://jinja.palletsprojects.com/en/latest/templates/#escaping #}
+{% raw %}
 name: tests
 
 on:
@@ -62,3 +62,4 @@ jobs:
     - name: 'Upload coverage report'
       run: bash <(curl -s https://codecov.io/bash)
 
+{% endraw %}
