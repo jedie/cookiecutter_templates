@@ -238,6 +238,7 @@ cli.add_command(check_code_style)
 
 
 @click.command()
+@click.argument('pkg_name')
 def reverse(pkg_name: str):
     """
     Reverse a /.tests/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/

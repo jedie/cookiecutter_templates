@@ -11,21 +11,22 @@ from managetemplates.utilities.cookiecutter_utils import run_cookiecutter
 from managetemplates.utilities.test_project_utils import TestProject
 
 
-class PoetryPythonTemplateTestCase(BaseTestCase):
+class PoetryDjangoReuseableAppTemplateTestCase(BaseTestCase):
     def test_basic(self):
         with self.assertLogs('cookiecutter', level=logging.DEBUG) as logs:
             pkg_path: Path = run_cookiecutter(
-                template_name='poetry-python',
-                final_name='your_cool_package',  # {{ cookiecutter.package_name }} replaced!
-                force_recreate=True
-                # force_recreate=False,
+                template_name='poetry-django-app',
+                final_name='your_reuseable_django_app',  # {{ cookiecutter.package_name }} replaced!
+                # force_recreate=True
+                force_recreate=False,
             )
+        logs = '\n'.join(logs.output)
         self.assert_in_content(
-            got='\n'.join(logs.output),
+            got=logs,
             parts=(
-                'poetry-python/cookiecutter.json',
+                'poetry-django-app/cookiecutter.json',
                 'Writing contents to file',
-
+                '/.tests/poetry-django-app/your_reuseable_django_app/',
             ),
         )
         test_project = TestProject(pkg_path)
@@ -41,14 +42,14 @@ class PoetryPythonTemplateTestCase(BaseTestCase):
         output = test_project.check_output('poetry', 'check')
         self.assertEqual(output, 'All set!\n')
 
-        if not Path(pkg_path / '.venv' / 'bin' / 'your_cool_package').is_file():
+        if not Path(pkg_path / '.venv' / 'bin' / 'your_cool_django_project').is_file():
             output = test_project.check_output('make', 'install')
             self.assert_in('Poetry found, ok.', output)
-            self.assert_in('Installing the current project: your_cool_package (0.0.1)', output)
+            self.assert_in('Installing the current project: your_reuseable_django_app (0.0.1)', output)
 
         assert_is_file(pkg_path / '.venv' / 'bin' / 'pip')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'python')
-        assert_is_file(pkg_path / '.venv' / 'bin' / 'your_cool_package')
+        assert_is_file(pkg_path / '.venv' / 'bin' / 'django-admin')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'darker')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'flake8')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'coverage')
@@ -56,6 +57,7 @@ class PoetryPythonTemplateTestCase(BaseTestCase):
 
         output = test_project.check_output('make', 'fix-code-style')
         try:
+            self.assert_in('poetry run darker', output)
             self.assert_in('poetry run black', output)
             self.assert_in('poetry run isort', output)
         except Exception:

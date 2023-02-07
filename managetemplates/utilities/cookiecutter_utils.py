@@ -35,6 +35,6 @@ def run_cookiecutter(
     pkg_path = Path(destination)
     assert_is_dir(pkg_path)
 
-    assert pkg_path == final_path
+    assert pkg_path == final_path, f'{pkg_path=} is not {final_path=}'
 
     return pkg_path

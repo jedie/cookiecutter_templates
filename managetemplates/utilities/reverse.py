@@ -1,11 +1,11 @@
 import json
 import shutil
 import sys
-import tempfile
 from pathlib import Path
 
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from manageprojects.cookiecutter_generator import create_cookiecutter_template
+from manageprojects.utilities.temp_path import TemporaryDirectory
 from rich import print  # noqa
 
 from managetemplates import constants
@@ -28,23 +28,6 @@ def resolve_test_path(test_path: Path) -> Path:
     return test_path
 
 
-def resolve_src_path(src_path: Path) -> Path:
-    if not src_path.is_dir():
-        print(f'ERROR: {src_path.name!r} is not an existing Cookiecutter template:')
-        print(f'{src_path!r} does not exists.')
-        sys.exit()
-
-    items = [item for item in src_path.iterdir() if item.is_dir()]
-    if len(items) != 1:
-        print(f'ERROR: {src_path} does not contains *one* directory: {items}')
-        sys.exit(1)
-
-    src_path = items[0]
-    print(f'Final destination: {src_path}')
-    assert_is_dir(src_path)
-    return src_path
-
-
 def get_cookiecutter_context(src_path: Path) -> dict:
     cookiecutter_json_path = src_path / 'cookiecutter.json'
     print(f'Use context from: {cookiecutter_json_path}')
@@ -62,11 +45,12 @@ def reverse_test_project(pkg_name: str) -> None:
     print(f'Reverse {test_path} to Cookiecutter template here: {src_path}')
 
     cookiecutter_context = get_cookiecutter_context(src_path)
+    assert cookiecutter_context, f'No cookiecutter context found here: {src_path}'
 
     test_path = resolve_test_path(test_path)
-    src_path = resolve_src_path(src_path)
+    src_path = src_path / '{{ cookiecutter.package_name }}'
 
-    with tempfile.TemporaryDirectory(prefix=f'{pkg_name}_') as temp_dir:
+    with TemporaryDirectory(prefix=f'{pkg_name}_', cleanup=True) as temp_dir:
         destination = Path(temp_dir) / pkg_name
 
         print('_' * 100)
@@ -87,6 +71,7 @@ def reverse_test_project(pkg_name: str) -> None:
             elif item.is_file():
                 dst_path = src_path / item.relative_to(destination)
                 print(item, '->', dst_path)
+                dst_path.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy(item, dst_path)
             else:
                 print(f'Ignore non-file: {item}')
