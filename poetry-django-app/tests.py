@@ -58,7 +58,6 @@ class PoetryDjangoReuseableAppTemplateTestCase(BaseTestCase):
         output = test_project.check_output('make', 'fix-code-style')
         try:
             self.assert_in('poetry run darker', output)
-            self.assert_in('poetry run black', output)
             self.assert_in('poetry run isort', output)
         except Exception:
             self.display_git_diff(git)

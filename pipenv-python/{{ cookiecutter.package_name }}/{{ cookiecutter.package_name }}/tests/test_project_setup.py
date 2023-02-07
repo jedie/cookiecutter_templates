@@ -7,7 +7,6 @@ from bx_py_utils.path import assert_is_file
 import {{ cookiecutter.package_name }}
 from {{ cookiecutter.package_name }} import __version__
 
-
 PACKAGE_ROOT = Path({{ cookiecutter.package_name }}.__file__).parent.parent
 
 
