@@ -1,5 +1,6 @@
 SHELL := /bin/bash
-MAX_LINE_LENGTH := 119
+
+all: help
 
 help:  ## List all commands
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z0-9 -_]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -10,15 +11,18 @@ install:  ## Install the project in a Python virtualenv
 	.venv/bin/pipenv install --dev
 
 update-requirements:  ## Update requirements
+	python3 -m venv .venv
+	.venv/bin/pip install -U pipenv
 	.venv/bin/pipenv update --dev
 
-lint:  ## Run code formatters and linter
-	.venv/bin/isort --check-only .
-	.venv/bin/flake8 .
+lint: ## Run code formatters and linter
+	.venv/bin/pipenv run darker --diff --check
+	.venv/bin/pipenv run isort --check-only .
+	.venv/bin/pipenv run flake8 .
 
-fix-code-style:  ## Fix code formatting
-	.venv/bin/black --verbose --safe --line-length=${MAX_LINE_LENGTH} --skip-string-normalization .
-	.venv/bin/isort .
+fix-code-style: ## Fix code formatting
+	.venv/bin/pipenv run darker
+	.venv/bin/pipenv run isort .
 
 tox-listenvs:  ## List all tox test environments
 	.venv/bin/tox --listenvs

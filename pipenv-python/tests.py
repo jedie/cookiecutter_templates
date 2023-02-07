@@ -52,8 +52,8 @@ class PipenvPythonTemplateTestCase(BaseTestCase):
 
         output = test_project.check_output('make', 'fix-code-style')
         try:
-            self.assert_in('.venv/bin/black ', output)
-            self.assert_in('.venv/bin/isort .', output)
+            self.assert_in('pipenv run darker', output)
+            self.assert_in('pipenv run isort', output)
         except Exception:
             self.display_git_diff(git)
             raise
