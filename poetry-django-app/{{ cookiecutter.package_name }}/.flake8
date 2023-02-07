@@ -1,3 +1,6 @@
+#
+# Move to pyproject.toml after: https://github.com/PyCQA/flake8/issues/234
+#
 [flake8]
 exclude = .*, migrations, dist, htmlcov
 ignore = E402, E731, W504
