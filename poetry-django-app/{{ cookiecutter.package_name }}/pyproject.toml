@@ -2,12 +2,12 @@
 name = '{{ cookiecutter.package_name }}'
 version = "{{ cookiecutter.package_version }}"
 description = '{{ cookiecutter.package_description }}'
-homepage = "https://github.com/john-doh/{{ cookiecutter.package_name }}"
+homepage = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.package_name }}"
 authors = [
-    "{{ cookiecutter.full_name }} <john-doh@example.tld>",
+    "{{ cookiecutter.full_name }} <{{ cookiecutter.author_email }}>",
 ]
 maintainers = [
-    "{{ cookiecutter.full_name }} <john-doh@example.tld>",
+    "{{ cookiecutter.full_name }} <{{ cookiecutter.author_email }}>",
 ]
 license = '{{ cookiecutter.license }}'
 readme='README.md'
@@ -26,7 +26,7 @@ classifiers = [
 keywords=['django', 'utilities']
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/john-doh/{{ cookiecutter.package_name }}/issues"
+"Bug Tracker" = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.package_name }}/issues"
 
 [tool.poetry.dependencies]
 python = '>=3.9,<4.0.0'
