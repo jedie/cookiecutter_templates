@@ -5,6 +5,9 @@ all: help
 help:  ## List all commands
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z0-9 -_]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
+install-base-req:  ## Install needed base packages via apt
+	sudo apt install python3-pip python3-venv
+
 install:  ## Install the project in a Python virtualenv
 	python3 -m venv .venv
 	.venv/bin/pip install -U pipenv
