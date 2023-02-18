@@ -25,8 +25,9 @@ dependencies = [
 [project.optional-dependencies]
 tests = [
     "coveralls",  # https://github.com/TheKevJames/coveralls-python
-    "darker",  # https://github.com/akaihola/darker
+    "darker>=1.7",  # https://github.com/akaihola/darker
     "isort",  # https://github.com/pycqa/isort
+    "flynt",  # https://github.com/ikamensh/flynt
     "flake8",  # https://github.com/pycqa/flake8
     "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
     "twine",  # https://github.com/pypa/twine
@@ -64,6 +65,7 @@ diff = false
 check = false
 stdout = false
 isort = true
+flynt = true
 lint = [
     "flake8",
 ]
