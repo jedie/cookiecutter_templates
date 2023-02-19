@@ -24,7 +24,7 @@ dependencies = [
 ]
 [project.optional-dependencies]
 tests = [
-    "coveralls",  # https://github.com/TheKevJames/coveralls-python
+    "coverage",  # https://github.com/nedbat/coveragepy
     "darker>=1.7",  # https://github.com/akaihola/darker
     "isort",  # https://github.com/pycqa/isort
     "flynt",  # https://github.com/ikamensh/flynt
