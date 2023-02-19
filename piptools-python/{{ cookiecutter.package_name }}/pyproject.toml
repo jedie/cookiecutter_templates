@@ -9,8 +9,9 @@ authors = [
 requires-python = ">=3.9,<4"
 dependencies = [
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
+    "click",  # https://github.com/pallets/click/
+    "rich-click",  # https://github.com/ewels/rich-click
     "rich",  # https://github.com/Textualize/rich
-    "typer[all]",  # https://github.com/tiangolo/typer
 ]
 [project.optional-dependencies]
 dev = [
@@ -19,9 +20,13 @@ dev = [
     "tox",  # https://github.com/tox-dev/tox
     "coveralls",  # https://github.com/TheKevJames/coveralls-python
     "darker>=1.7",  # https://github.com/akaihola/darker
+    "autopep8",  # https://github.com/hhatto/autopep8
+    "pyupgrade",  # https://github.com/asottile/pyupgrade
     "isort",  # https://github.com/pycqa/isort
     "flynt",  # https://github.com/ikamensh/flynt
     "flake8",  # https://github.com/pycqa/flake8
+    "pyflakes",  # https://github.com/PyCQA/pyflakes
+    "codespell",  # https://github.com/codespell-project/codespell
     "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
     "safety",  # https://github.com/pyupio/safety
     "mypy",  # https://github.com/python/mypy
@@ -54,6 +59,7 @@ src = ['.']
 revision = "origin/main..."
 line_length = 119
 verbose = true
+color = true
 skip_string_normalization = true
 diff = false
 check = false

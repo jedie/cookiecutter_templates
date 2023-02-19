@@ -1,18 +1,18 @@
 import logging
-import os
 import shutil
 import sys
 from pathlib import Path
-
-import rich
-import typer
+import rich_click as click
 from bx_py_utils.path import assert_is_file
 from manageprojects.git import Git
+from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_call
+from manageprojects.utilities.version_info import print_version
 from rich import print  # noqa
+from rich_click import RichGroup
 
 import {{ cookiecutter.package_name }}
-from {{ cookiecutter.package_name }} import __version__
+from {{ cookiecutter.package_name }} import __version__, constants
 
 
 logger = logging.getLogger(__name__)
@@ -21,41 +21,79 @@ logger = logging.getLogger(__name__)
 PACKAGE_ROOT = Path({{ cookiecutter.package_name }}.__file__).parent.parent
 assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 
-
-app = typer.Typer(
-    name='./cli.py',
-    epilog='Project Homepage: {{ cookiecutter.package_url }}',
+OPTION_ARGS_DEFAULT_TRUE = dict(is_flag=True, show_default=True, default=True)
+OPTION_ARGS_DEFAULT_FALSE = dict(is_flag=True, show_default=True, default=False)
+ARGUMENT_EXISTING_DIR = dict(
+    type=click.Path(exists=True, file_okay=False, dir_okay=True, readable=True, path_type=Path)
+)
+ARGUMENT_NOT_EXISTING_DIR = dict(
+    type=click.Path(exists=False, file_okay=False, dir_okay=True, readable=False, writable=True, path_type=Path)
+)
+ARGUMENT_EXISTING_FILE = dict(
+    type=click.Path(exists=True, file_okay=True, dir_okay=False, readable=True, path_type=Path)
 )
 
 
-@app.command()
+class ClickGroup(RichGroup):  # FIXME: How to set the "info_name" easier?
+    def make_context(self, info_name, *args, **kwargs):
+        info_name = './cli.py'
+        return super().make_context(info_name, *args, **kwargs)
+
+
+@click.group(
+    cls=ClickGroup,
+    epilog=constants.CLI_EPILOG,
+)
+def cli():
+    pass
+
+
+@click.command()
 def mypy(verbose: bool = True):
     """Run Mypy (configured in pyproject.toml)"""
     verbose_check_call('mypy', '.', cwd=PACKAGE_ROOT, verbose=verbose, exit_on_error=True)
 
 
-@app.command()
+cli.add_command(mypy)
+
+
+@click.command()
 def coverage(verbose: bool = True):
     """
     Run and show coverage.
     """
     verbose_check_call('coverage', 'run', verbose=verbose, exit_on_error=True)
-    verbose_check_call(
-        'coverage', 'report', '--fail-under=50', verbose=verbose, exit_on_error=True
-    )
+    verbose_check_call('coverage', 'report', '--fail-under=50', verbose=verbose, exit_on_error=True)
     verbose_check_call('coverage', 'json', verbose=verbose, exit_on_error=True)
 
 
-@app.command()
+cli.add_command(coverage)
+
+
+@click.command()
 def install():
     """
     Run pip-sync and install '{{ cookiecutter.package_name }}' via pip as editable.
     """
-    verbose_check_call('pip-sync', PACKAGE_ROOT / 'requirements' / 'develop.txt')
+    verbose_check_call('pip-sync', PACKAGE_ROOT / 'requirements.dev.txt')
     verbose_check_call('pip', 'install', '-e', '.')
 
 
-@app.command()
+cli.add_command(install)
+
+
+@click.command()
+def safety():
+    """
+    Run safety check against current requirements files
+    """
+    verbose_check_call('safety', 'check', '-r', 'requirements.dev.txt')
+
+
+cli.add_command(safety)
+
+
+@click.command()
 def update():
     """
     Update "requirements*.txt" dependencies files
@@ -93,25 +131,21 @@ def update():
         extra_env=extra_env,
     )
 
+    verbose_check_call('safety', 'check', '-r', 'requirements.dev.txt')
+
     # Install new dependencies in current .venv:
     verbose_check_call('pip-sync', 'requirements.dev.txt')
 
 
-@app.command()
-def version(no_color: bool = False):
-    """Print version and exit"""
-    if no_color:
-        rich.reconfigure(no_color=True)
-
-    print(f'{{ cookiecutter.package_name }} v{__version__}')
+cli.add_command(update)
 
 
-@app.command()
+@click.command()
 def publish():
     """
     Build and upload this project to PyPi
     """
-    test()  # Don't publish a broken state
+    _run_unittest_cli(verbose=False)  # Don't publish a broken state
 
     git = Git(cwd=PACKAGE_ROOT, detect_root=True)
 
@@ -142,96 +176,125 @@ def publish():
     git.push(tags=True)
 
 
-def _call_darker(*args):
-    # Work-a-round for:
-    #
-    #   File ".../site-packages/darker/linting.py", line 148, in _check_linter_output
-    #     with Popen(  # nosec
-    #   ...
-    #   File "/usr/lib/python3.10/subprocess.py", line 1845, in _execute_child
-    #     raise child_exception_type(errno_num, err_msg, err_filename)
-    # FileNotFoundError: [Errno 2] No such file or directory: 'flake8'
-    #
-    # Just add .venv/bin/ to PATH:
-    venv_path = Path(sys.executable).parent
-    assert_is_file(venv_path / 'flake8')
-    assert_is_file(venv_path / 'darker')
-    venv_path = str(venv_path)
-    if venv_path not in os.environ['PATH']:
-        extra_env = dict(PATH=venv_path + os.pathsep + os.environ['PATH'])
-    else:
-        extra_env = None
+cli.add_command(publish)
 
-    verbose_check_call(
-        'darker',
-        '--color',
-        *args,
-        cwd=PACKAGE_ROOT,
-        extra_env=extra_env,
-        exit_on_error=True,
+
+@click.command()
+@click.option('--color/--no-color', **OPTION_ARGS_DEFAULT_TRUE)
+@click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
+def fix_code_style(color: bool = True, verbose: bool = False):
+    """
+    Fix code style of all {{ cookiecutter.package_name }} source code files via darker
+    """
+    code_style.fix(package_root=PACKAGE_ROOT, color=color, verbose=verbose)
+
+
+cli.add_command(fix_code_style)
+
+
+@click.command()
+@click.option('--color/--no-color', **OPTION_ARGS_DEFAULT_TRUE)
+@click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
+def check_code_style(color: bool = True, verbose: bool = False):
+    """
+    Check code style by calling darker + flake8
+    """
+    code_style.check(package_root=PACKAGE_ROOT, color=color, verbose=verbose)
+
+
+cli.add_command(check_code_style)
+
+
+def _run_unittest_cli(extra_env=None, verbose=True):
+    """
+    Call the origin unittest CLI and pass all args to it.
+    """
+    if extra_env is None:
+        extra_env = dict()
+
+    extra_env.update(
+        dict(
+            PYTHONUNBUFFERED='1',
+            PYTHONWARNINGS='always',
+        )
     )
 
-
-@app.command()
-def fix_code_style(verbose: bool = False):
-    """
-    Fix code style via darker
-    """
-    if verbose:
-        args = ['--verbose']
-    else:
-        args = []
-
-    _call_darker(*args)
-    print('Code style fixed, OK.')
-    sys.exit(0)
-
-
-@app.command()
-def check_code_style(verbose: bool = False):
-    if verbose:
-        args = ['--verbose']
-    else:
-        args = []
-
-    _call_darker('--check', *args)
-
-    verbose_check_call(
-        'flake8',
-        *args,
-        cwd=PACKAGE_ROOT,
-        exit_on_error=True,
-    )
-    print('Code style: OK')
-    sys.exit(0)
-
-
-@app.command()  # Just add this command to help page
-def test():
-    """
-    Run unittests
-    """
     args = sys.argv[2:]
     if not args:
-        args = ('--verbose', '--locals', '--buffer')
-    # Use the CLI from unittest module and pass all args to it:
+        if verbose:
+            args = ('--verbose', '--locals', '--buffer')
+        else:
+            args = ('--locals', '--buffer')
+
     verbose_check_call(
         sys.executable,
         '-m',
         'unittest',
         *args,
         timeout=15 * 60,
-        extra_env=dict(
-            PYTHONUNBUFFERED='1',
-            PYTHONWARNINGS='always',
-        ),
+        extra_env=extra_env,
     )
 
 
+@click.command()  # Dummy command, to add "tests" into help page ;)
+def test():
+    """
+    Run unittests
+    """
+    _run_unittest_cli()
+    sys.exit(0)
+
+
+cli.add_command(test)
+
+
+@click.command()
+def update_test_snapshot_files():
+    """
+    Update all test snapshot files (by remove and recreate all snapshot files)
+    """
+
+    def iter_snapshot_files():
+        yield from PACKAGE_ROOT.rglob('*.snapshot.*')
+
+    removed_file_count = 0
+    for item in iter_snapshot_files():
+        item.unlink()
+        removed_file_count += 1
+    print(f'{removed_file_count} test snapshot files removed... run tests...')
+
+    # Just recreate them by running tests:
+    _run_unittest_cli(
+        extra_env=dict(
+            RAISE_SNAPSHOT_ERRORS='0',  # Recreate snapshot files without error
+        ),
+        verbose=False,
+    )
+
+    new_files = len(list(iter_snapshot_files()))
+    print(f'{new_files} test snapshot files created, ok.\n')
+
+
+cli.add_command(update_test_snapshot_files)
+
+
+@click.command()
+def version():
+    """Print version and exit"""
+    # Pseudo command, because the version always printed on every CLI call ;)
+    sys.exit(0)
+
+
+cli.add_command(version)
+
+
 def main():
+    print_version({{ cookiecutter.package_name }})
+
     if len(sys.argv) >= 2 and sys.argv[1] == 'test':
         # Just use the CLI from unittest with all available options and origin --help output ;)
-        return test()
+        _run_unittest_cli()
     else:
-        # Execute Typer App:
-        app()
+        # Execute Click CLI:
+        cli.name = './cli.py'
+        cli()

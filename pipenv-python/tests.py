@@ -50,7 +50,7 @@ class PipenvPythonTemplateTestCase(BaseTestCase):
         assert_is_file(pkg_path / '.venv' / 'bin' / 'coverage')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'twine')
 
-        output = test_project.check_output('make', 'fix-code-style')
+        output = test_project.check_output('make', 'fix-code-style', exit_on_error=True)
         try:
             self.assert_in('pipenv run darker', output)
             self.assert_in('pipenv run isort', output)
