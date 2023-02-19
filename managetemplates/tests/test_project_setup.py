@@ -6,14 +6,14 @@ from pathlib import Path
 import tomli
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from manageprojects.test_utils.click_cli_utils import invoke_click, subprocess_cli
+from manageprojects.test_utils.subprocess import SubprocessCallMock
 from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_output
 
 from managetemplates import __version__
 from managetemplates.cli.cli_app import cli
-from managetemplates.constants import PACKAGE_ROOT, REQ_DEV_TXT_PATH, REQ_TXT_PATH
+from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.tests.base import BaseTestCase
-from managetemplates.utilities.test_project_utils import Call, SubprocessCallMock
 
 
 VENV_BIN_PATH = Path(sys.executable).parent
@@ -81,22 +81,14 @@ class ProjectSetupTestCase(BaseTestCase):
             self.assertEqual(err.code, 0, 'Code style error, see output above!')
 
     def test_install(self):
-        with SubprocessCallMock(without_kwargs=True) as call_mock:
+        with SubprocessCallMock() as call_mock:
             stdout = invoke_click(cli, 'install')
 
         self.assertEqual(
-            call_mock.calls,
+            call_mock.get_popenargs(rstrip_path=PACKAGE_ROOT),
             [
-                Call(
-                    args=(
-                        [
-                            str(VENV_BIN_PATH / 'pip-sync'),
-                            str(PACKAGE_ROOT / 'managetemplates/requirements.dev.txt'),
-                        ],
-                    ),
-                    kwargs=None,
-                ),
-                Call(args=([str(VENV_BIN_PATH / 'pip'), 'install', '-e', '.'],), kwargs=None),
+                ['.../.venv/bin/pip-sync', '.../managetemplates/requirements.dev.txt'],
+                ['.../.venv/bin/pip', 'install', '-e', '.'],
             ],
         )
         self.assert_in_content(
@@ -105,7 +97,7 @@ class ProjectSetupTestCase(BaseTestCase):
         )
 
     def test_update(self):
-        with SubprocessCallMock(without_kwargs=True) as call_mock:
+        with SubprocessCallMock() as call_mock:
             invoke_click(cli, 'update')
 
         package_path = PACKAGE_ROOT / 'piptools-python' / '{{ cookiecutter.package_name }}'
@@ -118,106 +110,71 @@ class ProjectSetupTestCase(BaseTestCase):
         assert_is_file(req_dev_txt_path)
 
         self.assertEqual(
-            call_mock.calls,
+            call_mock.get_popenargs(rstrip_path=PACKAGE_ROOT),
             [
-                Call(
-                    args=(
-                        [
-                            str(VENV_BIN_PATH / 'pip-compile'),
-                            '--verbose',
-                            '--allow-unsafe',
-                            '--resolver=backtracking',
-                            '--upgrade',
-                            '--generate-hashes',
-                            'pyproject.toml',
-                            '--output-file',
-                            str(REQ_TXT_PATH),
-                        ],
-                    ),
-                    kwargs=None,
-                ),
-                Call(
-                    args=(
-                        [
-                            str(VENV_BIN_PATH / 'pip-compile'),
-                            '--verbose',
-                            '--allow-unsafe',
-                            '--resolver=backtracking',
-                            '--upgrade',
-                            '--generate-hashes',
-                            'pyproject.toml',
-                            '--extra=tests',
-                            '--output-file',
-                            str(REQ_DEV_TXT_PATH),
-                        ],
-                    ),
-                    kwargs=None,
-                ),
-                Call(
-                    args=(
-                        [
-                            str(VENV_BIN_PATH / 'pip-compile'),
-                            '--verbose',
-                            '--allow-unsafe',
-                            '--resolver=backtracking',
-                            '--upgrade',
-                            '--generate-hashes',
-                            'pyproject.toml',
-                            '--output-file',
-                            str(req_prod_txt_path),
-                        ],
-                    ),
-                    kwargs=None,
-                ),
-                Call(
-                    args=(
-                        [
-                            str(VENV_BIN_PATH / 'pip-compile'),
-                            '--verbose',
-                            '--allow-unsafe',
-                            '--resolver=backtracking',
-                            '--upgrade',
-                            '--generate-hashes',
-                            'pyproject.toml',
-                            '--extra=tests',
-                            '--output-file',
-                            str(req_dev_txt_path),
-                        ],
-                    ),
-                    kwargs=None,
-                ),
+                [
+                    '.../.venv/bin/pip-compile',
+                    '--verbose',
+                    '--allow-unsafe',
+                    '--resolver=backtracking',
+                    '--upgrade',
+                    '--generate-hashes',
+                    'pyproject.toml',
+                    '--output-file',
+                    '.../managetemplates/requirements.txt',
+                ],
+                [
+                    '.../.venv/bin/pip-compile',
+                    '--verbose',
+                    '--allow-unsafe',
+                    '--resolver=backtracking',
+                    '--upgrade',
+                    '--generate-hashes',
+                    'pyproject.toml',
+                    '--extra=tests',
+                    '--output-file',
+                    '.../managetemplates/requirements.dev.txt',
+                ],
+                [
+                    '.../.venv/bin/pip-compile',
+                    '--verbose',
+                    '--allow-unsafe',
+                    '--resolver=backtracking',
+                    '--upgrade',
+                    '--generate-hashes',
+                    'pyproject.toml',
+                    '--output-file',
+                    '.../piptools-python/{{ cookiecutter.package_name }}/requirements.txt',
+                ],
+                [
+                    '.../.venv/bin/pip-compile',
+                    '--verbose',
+                    '--allow-unsafe',
+                    '--resolver=backtracking',
+                    '--upgrade',
+                    '--generate-hashes',
+                    'pyproject.toml',
+                    '--extra=tests',
+                    '--output-file',
+                    '.../piptools-python/{{ cookiecutter.package_name }}/requirements.dev.txt',
+                ],
             ],
         )
 
     def test_publish(self):
-        with SubprocessCallMock(without_kwargs=True) as call_mock:
+        with SubprocessCallMock() as call_mock:
             stdout = invoke_click(cli, 'publish')
 
         git_bin = shutil.which('git')
         self.assertEqual(
-            call_mock.calls,
+            call_mock.get_popenargs(rstrip_path=PACKAGE_ROOT),
             [
-                Call(
-                    args=([sys.executable, '-m', 'unittest', '--locals', '--buffer'],),
-                    kwargs=None,
-                ),
-                Call(args=([sys.executable, '-m', 'build'],), kwargs=None),
-                Call(args=([str(VENV_BIN_PATH / 'twine'), 'check', 'dist/*'],), kwargs=None),
-                Call(args=([str(VENV_BIN_PATH / 'twine'), 'upload', 'dist/*'],), kwargs=None),
-                Call(
-                    args=(
-                        [
-                            git_bin,
-                            'tag',
-                            '-a',
-                            f'v{__version__}',
-                            '-m',
-                            f'publish version v{__version__}',
-                        ],
-                    ),
-                    kwargs=None,
-                ),
-                Call(args=([git_bin, 'push', '--tags'],), kwargs=None),
+                ['.../.venv/bin/python', '-m', 'unittest', '--locals', '--buffer'],
+                ['.../.venv/bin/python', '-m', 'build'],
+                ['.../.venv/bin/twine', 'check', 'dist/*'],
+                ['.../.venv/bin/twine', 'upload', 'dist/*'],
+                [git_bin, 'tag', '-a', f'v{__version__}', '-m', f'publish version v{__version__}'],
+                [git_bin, 'push', '--tags'],
             ],
         )
         self.assert_in_content(

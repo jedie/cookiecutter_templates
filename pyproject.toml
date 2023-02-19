@@ -6,11 +6,11 @@ readme = "README.md"
 authors = [
     {name = 'Jens Diemer', email = 'cookiecutter_templates@jensdiemer.de'}
 ]
-requires-python = ">=3.9,<4"
+requires-python = ">=3.10,<4"
 dependencies = [
     "pip-tools",  # https://github.com/jazzband/pip-tools/
     "cookiecutter",  # https://github.com/cookiecutter/cookiecutter
-    "manageprojects>=0.4.0rc2",  # https://github.com/jedie/manageprojects
+    "manageprojects>=0.8.0",  # https://github.com/jedie/manageprojects
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "click",  # https://github.com/pallets/click/
     "rich-click",  # https://github.com/ewels/rich-click
