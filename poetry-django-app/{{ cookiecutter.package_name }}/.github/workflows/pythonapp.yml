@@ -22,21 +22,19 @@ jobs:
         python-version: ["3.11", "3.10", "3.9"]
         django: ["4.1", "4.0"]
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: 'fetch main'
-      run: git fetch origin main
+    - name: Checkout
+      run: |
+        echo $GITHUB_REF $GITHUB_SHA
+        git clone --depth 1 https://github.com/$GITHUB_REPOSITORY.git .
+        git fetch origin $GITHUB_SHA:temporary-ci-branch
+        git checkout $GITHUB_SHA || (git fetch && git checkout $GITHUB_SHA)
+
     - name: 'Set up Python ${{ matrix.python-version }}'
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
+      # https://github.com/marketplace/actions/setup-python
       with:
         python-version: '${{ matrix.python-version }}'
-
-    - name: Setup Github Cache
-      uses: actions/cache@v3
-      with:
-        key: dot-cache-${{ matrix.python-version }}-${{ matrix.django }}
-        path: ~/.cache/
+        cache: 'poetry' # caching pip dependencies
 
     - name: 'Bootstrap Poetry'
       run: make install-poetry
