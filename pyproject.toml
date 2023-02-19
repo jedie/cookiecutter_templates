@@ -76,6 +76,7 @@ log_level = "INFO"
 # https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
 atomic=true
 profile='black'
+skip_glob=['.*', '*/htmlcov/*']
 known_first_party=['managetemplates']
 line_length=119
 lines_after_imports=2
@@ -92,6 +93,15 @@ skip_empty = true
 fail_under = 45
 
 
+[tool.mypy]
+warn_unused_configs = true
+ignore_missing_imports = true
+allow_redefinition = true  # https://github.com/python/mypy/issues/7165
+show_error_codes = true
+plugins = []
+exclude = ['.venv', 'tests']
+
+
 [manageprojects] # https://github.com/jedie/manageprojects
 initial_revision = "5b2334c"
 initial_date = 2022-11-19T22:40:01+01:00
@@ -99,6 +109,7 @@ cookiecutter_template = "https://github.com/jedie/cookiecutter_templates/"
 cookiecutter_directory = "piptools-python"
 applied_migrations = [
     "68124d4", # 2022-11-20T00:19:44+01:00
+    "7260de6", # 2023-02-19T12:16:21+01:00
 ]
 
 [manageprojects.cookiecutter_context.cookiecutter]
