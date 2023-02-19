@@ -9,6 +9,7 @@ tox = ">=4.4.4"  # https://github.com/tox-dev/tox
 coveralls = "*"  # https://github.com/TheKevJames/coveralls-python
 darker = "*"  # https://github.com/akaihola/darker
 isort = "*"  # https://github.com/pycqa/isort
+flynt = "*"  # https://github.com/ikamensh/flynt
 flake8 = "*"  # https://github.com/pycqa/flake8
 EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
 safety = "*"  # https://github.com/pyupio/safety

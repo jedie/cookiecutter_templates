@@ -57,7 +57,7 @@ class PiptoolsPythonTemplateTestCase(BaseTestCase):
         assert_is_file(pkg_path / '.venv' / 'bin' / 'your_cool_package')
 
         output = test_project.check_output(cli_bin, '--help')
-        self.assert_in('Usage: your_cool_package [OPTIONS] COMMAND [ARGS]...', output)
+        self.assert_in('Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...', output)
 
         output = test_project.check_output(cli_bin, 'check-code-style')
         self.assert_in('Code style: OK', output)
