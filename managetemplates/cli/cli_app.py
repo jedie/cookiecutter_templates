@@ -1,20 +1,20 @@
 # no:vars_cleanup
 
-
 import logging
 import shutil
 import sys
 from pathlib import Path
 
-import rich
 import rich_click as click
 from bx_py_utils.path import assert_is_dir
 from manageprojects.git import Git
 from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_call
+from manageprojects.utilities.version_info import print_version
 from rich import print  # noqa
 from rich_click import RichGroup
 
+import managetemplates
 from managetemplates import __version__, constants
 from managetemplates.utilities.reverse import reverse_test_project
 from managetemplates.utilities.template_var_syntax import content_template_var_syntax, filesystem_template_var_syntax
@@ -135,12 +135,10 @@ cli.add_command(update)
 
 
 @click.command()
-def version(no_color: bool = False):
+def version():
     """Print version and exit"""
-    if no_color:
-        rich.reconfigure(no_color=True)
-
-    print(f'managetemplates v{__version__}')
+    # Pseudo command, because the version always printed on every CLI call ;)
+    sys.exit(0)
 
 
 cli.add_command(version)
@@ -293,13 +291,12 @@ cli.add_command(test)
 
 
 def main():
+    print_version(managetemplates)
+
     if len(sys.argv) >= 2 and sys.argv[1] == 'test':
         # Just use the CLI from unittest with all available options and origin --help output ;)
         _run_unittest_cli()
     else:
         # Execute Click CLI:
-        # context = click.get_current_context()
-        # context.info_name='./cli.py'
         cli.name = './cli.py'
-        # print(cli.__dict__)
         cli()
