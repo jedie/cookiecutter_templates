@@ -145,7 +145,7 @@ def publish():
     """
     Build and upload this project to PyPi
     """
-    _run_unittest_cli(verbose=False)  # Don't publish a broken state
+    _run_unittest_cli(verbose=False, exit_after_run=False)  # Don't publish a broken state
 
     git = Git(cwd=PACKAGE_ROOT, detect_root=True)
 
@@ -205,7 +205,38 @@ def check_code_style(color: bool = True, verbose: bool = False):
 cli.add_command(check_code_style)
 
 
-def _run_unittest_cli(extra_env=None, verbose=True):
+@click.command()
+def update_test_snapshot_files():
+    """
+    Update all test snapshot files (by remove and recreate all snapshot files)
+    """
+
+    def iter_snapshot_files():
+        yield from PACKAGE_ROOT.rglob('*.snapshot.*')
+
+    removed_file_count = 0
+    for item in iter_snapshot_files():
+        item.unlink()
+        removed_file_count += 1
+    print(f'{removed_file_count} test snapshot files removed... run tests...')
+
+    # Just recreate them by running tests:
+    _run_unittest_cli(
+        extra_env=dict(
+            RAISE_SNAPSHOT_ERRORS='0',  # Recreate snapshot files without error
+        ),
+        verbose=False,
+        exit_after_run=False,
+    )
+
+    new_files = len(list(iter_snapshot_files()))
+    print(f'{new_files} test snapshot files created, ok.\n')
+
+
+cli.add_command(update_test_snapshot_files)
+
+
+def _run_unittest_cli(extra_env=None, verbose=True, exit_after_run=True):
     """
     Call the origin unittest CLI and pass all args to it.
     """
@@ -234,48 +265,35 @@ def _run_unittest_cli(extra_env=None, verbose=True):
         timeout=15 * 60,
         extra_env=extra_env,
     )
+    if exit_after_run:
+        sys.exit(0)
 
 
-@click.command()  # Dummy command, to add "tests" into help page ;)
+@click.command()  # Dummy command
 def test():
     """
     Run unittests
     """
     _run_unittest_cli()
-    sys.exit(0)
 
 
 cli.add_command(test)
 
 
-@click.command()
-def update_test_snapshot_files():
+def _run_tox():
+    verbose_check_call(sys.executable, '-m', 'tox', *sys.argv[2:])
+    sys.exit(0)
+
+
+@click.command()  # Dummy "tox" command
+def tox():
     """
-    Update all test snapshot files (by remove and recreate all snapshot files)
+    Run tox
     """
-
-    def iter_snapshot_files():
-        yield from PACKAGE_ROOT.rglob('*.snapshot.*')
-
-    removed_file_count = 0
-    for item in iter_snapshot_files():
-        item.unlink()
-        removed_file_count += 1
-    print(f'{removed_file_count} test snapshot files removed... run tests...')
-
-    # Just recreate them by running tests:
-    _run_unittest_cli(
-        extra_env=dict(
-            RAISE_SNAPSHOT_ERRORS='0',  # Recreate snapshot files without error
-        ),
-        verbose=False,
-    )
-
-    new_files = len(list(iter_snapshot_files()))
-    print(f'{new_files} test snapshot files created, ok.\n')
+    _run_tox()
 
 
-cli.add_command(update_test_snapshot_files)
+cli.add_command(tox)
 
 
 @click.command()
@@ -291,10 +309,14 @@ cli.add_command(version)
 def main():
     print_version({{ cookiecutter.package_name }})
 
-    if len(sys.argv) >= 2 and sys.argv[1] == 'test':
-        # Just use the CLI from unittest with all available options and origin --help output ;)
-        _run_unittest_cli()
-    else:
-        # Execute Click CLI:
-        cli.name = './cli.py'
-        cli()
+    if len(sys.argv) >= 2:
+        # Check if we just pass a command call
+        command = sys.argv[1]
+        if command == 'test':
+            _run_unittest_cli()
+        elif command == 'tox':
+            _run_tox()
+
+    # Execute Click CLI:
+    cli.name = './cli.py'
+    cli()

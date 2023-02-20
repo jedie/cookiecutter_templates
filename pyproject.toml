@@ -24,6 +24,7 @@ dependencies = [
 ]
 [project.optional-dependencies]
 tests = [
+    "tox",  # https://github.com/tox-dev/tox
     "coverage",  # https://github.com/nedbat/coveragepy
     "darker>=1.7",  # https://github.com/akaihola/darker
     "isort",  # https://github.com/pycqa/isort
@@ -101,6 +102,24 @@ allow_redefinition = true  # https://github.com/python/mypy/issues/7165
 show_error_codes = true
 plugins = []
 exclude = ['.venv', 'tests']
+
+
+[tool.tox]  # https://tox.wiki/en/latest/config.html#pyproject-toml
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+envlist = py{311,310,39}
+skip_missing_interpreters = True
+
+[testenv]
+passenv = *
+skip_install = true
+commands_pre =
+    pip install -U pip-tools
+    pip-sync managetemplates/requirements.dev.txt
+commands =
+    python -m coverage run
+"""
 
 
 [manageprojects] # https://github.com/jedie/manageprojects
