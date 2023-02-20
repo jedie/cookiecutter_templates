@@ -28,7 +28,10 @@ class PipenvPythonTemplateTestCase(BaseTestCase):
 
             ),
         )
-        test_project = TestProject(pkg_path)
+        test_project = TestProject(
+            pkg_path,
+            base_extra_env=dict(PIPENV_IGNORE_VIRTUALENVS='1'),
+        )
 
         git_path = pkg_path / '.git'
         if not git_path.is_dir():

@@ -6,28 +6,34 @@ from manageprojects.utilities.subprocess_utils import verbose_check_call, verbos
 
 
 class TestProject:
-    def __init__(self, pkg_path: Path):
+    def __init__(self, pkg_path: Path, base_extra_env: dict | None = None):
         assert_is_dir(pkg_path)
         self.pkg_path = pkg_path
+        self.base_extra_env = base_extra_env
+
+    def _build_env(self, *, extra_env: dict | None):
+        # env = dict(PATH=os.environ['PATH'])  # Use a clean environment
+        env = dict(os.environ)
+        if self.base_extra_env:
+            env.update(self.base_extra_env)
+        if extra_env:
+            env.update(extra_env)
+        return env
 
     def check_call(
         self,
         *popenargs,
         verbose: bool = True,
-        exit_on_error: bool = False,
+        exit_on_error: bool = True,
         extra_env: dict | None = None,
         **kwargs,
     ) -> str:
-        env = dict(os.environ)
-        if extra_env:
-            env.update(extra_env)
-
         return verbose_check_call(
             *popenargs,
             verbose=verbose,
             exit_on_error=exit_on_error,
             cwd=self.pkg_path,
-            env=env,
+            env=self._build_env(extra_env=extra_env),
             **kwargs,
         )
 
@@ -35,19 +41,15 @@ class TestProject:
         self,
         *popenargs,
         verbose: bool = True,
-        exit_on_error: bool = False,
+        exit_on_error: bool = True,
         extra_env: dict | None = None,
         **kwargs,
     ) -> str:
-        env = dict(PATH=os.environ['PATH'])  # Use a clean environment
-        if extra_env:
-            env.update(extra_env)
-
         return verbose_check_output(
             *popenargs,
             verbose=verbose,
             exit_on_error=exit_on_error,
             cwd=self.pkg_path,
-            env=env,
+            env=self._build_env(extra_env=extra_env),
             **kwargs,
         )
