@@ -12,8 +12,9 @@ class TestProject:
         self.base_extra_env = base_extra_env
 
     def _build_env(self, *, extra_env: dict | None):
-        # env = dict(PATH=os.environ['PATH'])  # Use a clean environment
-        env = dict(os.environ)
+        # Start with a "clean" environment.
+        # This will also disable colored output ;)
+        env = dict(PATH=os.environ['PATH'])
         if self.base_extra_env:
             env.update(self.base_extra_env)
         if extra_env:

@@ -48,6 +48,7 @@ class PiptoolsPythonTemplateTestCase(BaseTestCase):
 
         assert_is_file(pkg_path / '.venv' / 'bin' / 'pip')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'python')
+        assert_is_file(pkg_path / '.venv' / 'bin' / 'tox')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'pip-compile')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'pip-sync')
         assert_is_file(pkg_path / '.venv' / 'bin' / 'darker')
@@ -58,6 +59,17 @@ class PiptoolsPythonTemplateTestCase(BaseTestCase):
 
         output = test_project.check_output(cli_bin, '--help')
         self.assert_in('Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...', output)
+
+        output = test_project.check_output(cli_bin, 'tox', '--help')
+        self.assert_in('usage: tox [-h]', output)
+        self.assert_in('list environments', output)
+        self.assert_in('python -m tox --help', output)
+
+        output = test_project.check_output(cli_bin, 'tox', 'list')
+        self.assert_in('default environments:', output)
+        self.assert_in('py311', output)
+        self.assert_in('py310', output)
+        self.assert_in('python -m tox list', output)
 
         output = test_project.check_output(cli_bin, 'check-code-style')
         self.assert_in('Code style: OK', output)
