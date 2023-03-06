@@ -30,12 +30,16 @@ dev = [
     "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
     "safety",  # https://github.com/pyupio/safety
     "mypy",  # https://github.com/python/mypy
-    "tomli",  # https://github.com/hukkin/tomli
     "twine",  # https://github.com/pypa/twine
-    #
+
+    "tomli",  # https://github.com/hukkin/tomli
+    # tomli only needed for Python <3.11, but see bug:
+    # https://github.com/pypa/pip/issues/9644#issuecomment-1456583402
+    #"tomli;python_version<\"3.11\"",  # https://github.com/hukkin/tomli
+
     # Work-a-round for:
     # https://github.com/jazzband/pip-tools/issues/994#issuecomment-1321226661
-    "typing-extensions>=3.10",
+    "typing-extensions>=3.10;python_version<\"3.10\"",
 ]
 
 [project.urls]

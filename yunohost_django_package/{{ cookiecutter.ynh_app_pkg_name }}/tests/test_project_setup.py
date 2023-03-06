@@ -4,7 +4,11 @@ import shutil
 import subprocess
 from pathlib import Path
 
-import tomli
+try:
+    import tomllib  # New in Python 3.11
+except ImportError:
+    import tomli as tomllib
+
 from bx_django_utils.filename import clean_filename
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from django_tools.unittest_utils.project_setup import check_editor_config
@@ -33,7 +37,7 @@ def test_version():
         )
 
     pyproject_toml_path = Path(PACKAGE_ROOT, 'pyproject.toml')
-    pyproject_toml = tomli.loads(pyproject_toml_path.read_text(encoding='UTF-8'))
+    pyproject_toml = tomllib.loads(pyproject_toml_path.read_text(encoding='UTF-8'))
     pyproject_version = pyproject_toml['tool']['poetry']['version']
     assert pyproject_version.startswith(f'{__version__}+ynh'), (
         f'{pyproject_version!r} does not start with "{__version__}+ynh"'
