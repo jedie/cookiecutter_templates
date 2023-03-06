@@ -1,18 +1,17 @@
 import logging
-import shutil
 import sys
 from pathlib import Path
 import rich_click as click
 from bx_py_utils.path import assert_is_file
-from manageprojects.git import Git
 from manageprojects.utilities import code_style
+from manageprojects.utilities.publish import publish_package
 from manageprojects.utilities.subprocess_utils import verbose_check_call
 from manageprojects.utilities.version_info import print_version
 from rich import print  # noqa
 from rich_click import RichGroup
 
 import {{ cookiecutter.package_name }}
-from {{ cookiecutter.package_name }} import __version__, constants
+from {{ cookiecutter.package_name }} import constants
 
 
 logger = logging.getLogger(__name__)
@@ -98,10 +97,14 @@ def update():
     """
     Update "requirements*.txt" dependencies files
     """
+    bin_path = Path(sys.executable).parent
+
+    verbose_check_call(bin_path / 'pip', 'install', '-U', 'pip')
+    verbose_check_call(bin_path / 'pip', 'install', '-U', 'pip-tools')
+
     extra_env = dict(
         CUSTOM_COMPILE_COMMAND='./cli.py update',
     )
-    bin_path = Path(sys.executable).parent
 
     pip_compile_base = [
         bin_path / 'pip-compile',
@@ -147,33 +150,10 @@ def publish():
     """
     _run_unittest_cli(verbose=False, exit_after_run=False)  # Don't publish a broken state
 
-    git = Git(cwd=PACKAGE_ROOT, detect_root=True)
-
-    # TODO: Add the checks from:
-    #       https://github.com/jedie/poetry-publish/blob/main/poetry_publish/publish.py
-
-    dist_path = PACKAGE_ROOT / 'dist'
-    if dist_path.exists():
-        shutil.rmtree(dist_path)
-
-    verbose_check_call(sys.executable, '-m', 'build')
-    verbose_check_call('twine', 'check', 'dist/*')
-
-    git_tag = f'v{__version__}'
-    print('\ncheck git tag')
-    git_tags = git.tag_list()
-    if git_tag in git_tags:
-        print(f'\n *** ERROR: git tag {git_tag!r} already exists!')
-        print(git_tags)
-        sys.exit(3)
-    else:
-        print('OK')
-
-    verbose_check_call('twine', 'upload', 'dist/*')
-
-    git.tag(git_tag, message=f'publish version {git_tag}')
-    print('\ngit push tag to server')
-    git.push(tags=True)
+    publish_package(
+        module={{ cookiecutter.package_name }},
+        package_path=PACKAGE_ROOT,
+    )
 
 
 cli.add_command(publish)
