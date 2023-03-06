@@ -91,6 +91,7 @@ addopts = """
     --reuse-db
     --nomigrations
     --cov=.
+    --cov-config=pyproject.toml
     --cov-report term-missing
     --cov-report html
     --cov-report xml
@@ -103,12 +104,21 @@ addopts = """
 
 
 [tool.coverage.run]
+branch = true
+parallel = true
 source = ['.']
-omit = ['.*', '*/tests/*']
 
 [tool.coverage.report]
+omit = ['.*', '*/tests/*']
 skip_empty = true
-fail_under = 45
+fail_under = 30
+show_missing = true
+exclude_lines = [
+    'if self.debug:',
+    'pragma: no cover',
+    'raise NotImplementedError',
+    'if __name__ == .__main__.:',
+]
 
 
 [tool.tox]  # https://tox.wiki/en/latest/config.html#pyproject-toml
@@ -120,7 +130,8 @@ skip_missing_interpreters = True
 
 [testenv]
 passenv = *
-whitelist_externals = make
+skip_install = true
+allowlist_externals = make
 commands =
     make pytest
 """

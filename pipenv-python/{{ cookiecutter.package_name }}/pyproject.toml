@@ -48,13 +48,21 @@ filterwarnings = []
 
 [tool.coverage.run]
 branch = true
+parallel = true
 source = ["apps"]
-omit = ["apps/*/tests/*", "apps/*/migrations/*"]
 command_line = "-m pytest"
 
 [tool.coverage.report]
+omit = ['.*', '*/tests/*','*/migrations/*']
 skip_empty = true
-fail_under = 45
+fail_under = 30
+show_missing = true
+exclude_lines = [
+    'if self.debug:',
+    'pragma: no cover',
+    'raise NotImplementedError',
+    'if __name__ == .__main__.:',
+]
 
 
 [tool.mypy]

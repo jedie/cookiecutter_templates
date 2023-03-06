@@ -146,7 +146,7 @@ Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
 │ check-code-style            Check code style by calling darker + flake8                          │
-│ coverage                    Run and show coverage.                                               │
+│ coverage                    Run tests and show coverage.                                         │
 │ fix-code-style              Fix code style via darker                                            │
 │ fix-file-content            Unify cookiecutter variables in file content. e.g.: "{{foo}}" -> "{{ │
 │                             foo }}"                                                              │
