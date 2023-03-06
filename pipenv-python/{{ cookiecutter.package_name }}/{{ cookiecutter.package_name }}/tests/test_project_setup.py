@@ -1,7 +1,11 @@
 from pathlib import Path
 from unittest import TestCase
 
-import tomli
+try:
+    import tomllib  # New in Python 3.11
+except ImportError:
+    import tomli as tomllib
+
 from bx_py_utils.path import assert_is_file
 
 import {{ cookiecutter.package_name }}
@@ -17,7 +21,7 @@ class ProjectSetupTestCase(TestCase):
 
         self.assertIsNotNone(__version__)
 
-        pyproject_toml = tomli.loads(pyproject_toml_path.read_text(encoding='UTF-8'))
+        pyproject_toml = tomllib.loads(pyproject_toml_path.read_text(encoding='UTF-8'))
         pyproject_version = pyproject_toml['project']['version']
 
         self.assertEqual(__version__, pyproject_version)
