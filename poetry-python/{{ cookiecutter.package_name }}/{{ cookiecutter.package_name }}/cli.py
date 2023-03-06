@@ -114,7 +114,9 @@ def coverage():
     """
     coverage_bin = which('coverage')
     verbose_check_call(coverage_bin, 'run')
+    verbose_check_call(coverage_bin, 'combine', '--append')
     verbose_check_call(coverage_bin, 'report', '--fail-under=30')
+    verbose_check_call(coverage_bin, 'xml')
     verbose_check_call(coverage_bin, 'json')
 
 

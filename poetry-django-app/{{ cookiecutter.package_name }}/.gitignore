@@ -3,10 +3,6 @@
 !.editorconfig
 !.flake8
 !.gitignore
-!.isort.cfg
-!/.travis.yml
-!/.style.yapf
-!.coveralls.yml
 
 # from test projects:
 /{{ cookiecutter.package_name }}_tests/static/
@@ -30,5 +26,6 @@ sdist/
 .installed.cfg
 *.egg
 /publish.log
-coverage.xml
+/coverage.json
+/coverage.xml
 

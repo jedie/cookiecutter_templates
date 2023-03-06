@@ -52,7 +52,8 @@ def cli():
     default=False,
     help='Just list all packages (Copy&pasteable for github CI config)',
 )
-def coverage(package=None, list_packages: bool = False):
+@click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
+def coverage(package=None, list_packages: bool = False, verbose: bool = True):
     """
     Run tests and show coverage.
     """
@@ -79,7 +80,11 @@ def coverage(package=None, list_packages: bool = False):
     else:
         print('\n[green]Run all tests...')
 
-    verbose_check_call(*args, verbose=True, exit_on_error=True, timeout=15 * 60)
+    verbose_check_call(*args, verbose=verbose, exit_on_error=True, timeout=15 * 60)
+    verbose_check_call('coverage', 'combine', '--append', verbose=verbose, exit_on_error=True)
+    verbose_check_call('coverage', 'report', '--fail-under=35', verbose=verbose, exit_on_error=True)
+    verbose_check_call('coverage', 'xml', verbose=verbose, exit_on_error=True)
+    verbose_check_call('coverage', 'json', verbose=verbose, exit_on_error=True)
 
 
 cli.add_command(coverage)
