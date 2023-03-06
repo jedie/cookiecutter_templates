@@ -14,9 +14,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 2
       matrix:
         python-version: ["3.11", "3.10", "3.9"]
+    env:
+      PYTHONUNBUFFERED: 1
+      PYTHONWARNINGS: always
     steps:
     - name: Checkout
       run: |
