@@ -1,7 +1,7 @@
-import shutil
 import subprocess
 import sys
 from pathlib import Path
+from unittest.mock import patch
 
 import tomli
 from bx_py_utils.path import assert_is_dir, assert_is_file
@@ -10,7 +10,9 @@ from manageprojects.test_utils.subprocess import SubprocessCallMock
 from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_output
 
+import managetemplates
 from managetemplates import __version__
+from managetemplates.cli import cli_app
 from managetemplates.cli.cli_app import cli
 from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.tests.base import BaseTestCase
@@ -85,7 +87,7 @@ class ProjectSetupTestCase(BaseTestCase):
             stdout = invoke_click(cli, 'install')
 
         self.assertEqual(
-            call_mock.get_popenargs(rstrip_path=PACKAGE_ROOT),
+            call_mock.get_popenargs(rstrip_paths=(PACKAGE_ROOT,)),
             [
                 ['.../.venv/bin/pip-sync', '.../managetemplates/requirements.dev.txt'],
                 ['.../.venv/bin/pip', 'install', '-e', '.'],
@@ -110,8 +112,10 @@ class ProjectSetupTestCase(BaseTestCase):
         assert_is_file(req_dev_txt_path)
 
         self.assertEqual(
-            call_mock.get_popenargs(rstrip_path=PACKAGE_ROOT),
+            call_mock.get_popenargs(rstrip_paths=(PACKAGE_ROOT,)),
             [
+                ['.../.venv/bin/pip', 'install', '-U', 'pip'],
+                ['.../.venv/bin/pip', 'install', '-U', 'pip-tools'],
                 [
                     '.../.venv/bin/pip-compile',
                     '--verbose',
@@ -162,28 +166,12 @@ class ProjectSetupTestCase(BaseTestCase):
         )
 
     def test_publish(self):
-        with SubprocessCallMock() as call_mock:
+        with patch.object(cli_app, '_run_unittest_cli') as func1, patch.object(cli_app, 'publish_package') as func2:
             stdout = invoke_click(cli, 'publish')
 
-        git_bin = shutil.which('git')
-        self.assertEqual(
-            call_mock.get_popenargs(rstrip_path=PACKAGE_ROOT),
-            [
-                ['.../.venv/bin/python', '-m', 'unittest', '--locals', '--buffer'],
-                ['.../.venv/bin/python', '-m', 'build'],
-                ['.../.venv/bin/twine', 'check', 'dist/*'],
-                ['.../.venv/bin/twine', 'upload', 'dist/*'],
-                [git_bin, 'tag', '-a', f'v{__version__}', '-m', f'publish version v{__version__}'],
-                [git_bin, 'push', '--tags'],
-            ],
-        )
-        self.assert_in_content(
-            got=stdout,
-            parts=(
-                'check git tag',
-                'git push tag to server',
-            ),
-        )
+        func1.assert_called_once_with(verbose=False, exit_after_run=False)
+        func2.assert_called_once_with(module=managetemplates, package_path=PACKAGE_ROOT)
+        self.assertEqual(stdout, '')
 
     def test_filesystem_var_syntax(self):
         stdout = invoke_click(cli, 'fix-filesystem')
