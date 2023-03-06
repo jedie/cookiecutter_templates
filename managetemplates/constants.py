@@ -27,4 +27,9 @@ ALL_TEMPLATES = (
     'poetry-python',
     'yunohost_django_package',
 )
+
+ALL_PACKAGES = tuple(
+    entry.name for entry in sorted(PACKAGE_ROOT.iterdir()) if entry.is_dir() and Path(entry, '__init__.py').is_file()
+)
+
 CLI_EPILOG = 'Project Homepage: https://github.com/jedie/cookiecutter_templates'
