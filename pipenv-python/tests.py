@@ -64,4 +64,4 @@ class PipenvPythonTemplateTestCase(BaseTestCase):
         subprocess.check_call(['make', 'lint'], cwd=pkg_path)
 
         output = test_project.check_output('make', 'test')
-        self.assert_in('Ran 1 test', output)
+        self.assert_in('Ran 2 test', output)

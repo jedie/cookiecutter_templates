@@ -67,4 +67,4 @@ class PoetryPythonTemplateTestCase(BaseTestCase):
         output = test_project.check_output('make', 'tox')
         self.assert_in('poetry install', output)
         self.assert_in('make test', output)
-        self.assert_in('Ran 4 tests', output)
+        self.assert_in('Ran 5 tests', output)
