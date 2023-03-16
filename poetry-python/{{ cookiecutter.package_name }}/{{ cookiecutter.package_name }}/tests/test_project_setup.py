@@ -8,6 +8,7 @@ except ImportError:
     import tomli as tomllib
 
 from bx_py_utils.path import assert_is_dir, assert_is_file
+from packaging.version import Version
 
 import {{ cookiecutter.package_name }}
 from {{ cookiecutter.package_name }} import __version__
@@ -25,6 +26,9 @@ class ProjectSetupTestCase(TestCase):
         assert_is_file(pyproject_toml_path)
 
         self.assertIsNotNone(__version__)
+
+        version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
+        self.assertEqual(str(version), __version__)
 
         pyproject_toml = tomllib.loads(pyproject_toml_path.read_text(encoding='UTF-8'))
         pyproject_version = pyproject_toml['tool']['poetry']['version']

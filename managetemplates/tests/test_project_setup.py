@@ -4,16 +4,12 @@ from pathlib import Path
 from unittest.mock import patch
 
 
-try:
-    import tomllib  # New in Python 3.11
-except ImportError:
-    import tomli as tomllib
-
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from manageprojects.test_utils.click_cli_utils import invoke_click, subprocess_cli
 from manageprojects.test_utils.subprocess import SubprocessCallMock
 from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_output
+from packaging.version import Version
 
 import managetemplates
 from managetemplates import __version__
@@ -28,15 +24,10 @@ VENV_BIN_PATH = Path(sys.executable).parent
 
 class ProjectSetupTestCase(BaseTestCase):
     def test_version(self):
-        pyproject_toml_path = Path(PACKAGE_ROOT, 'pyproject.toml')
-        assert_is_file(pyproject_toml_path)
-
         self.assertIsNotNone(__version__)
 
-        pyproject_toml = tomllib.loads(pyproject_toml_path.read_text(encoding='UTF-8'))
-        pyproject_version = pyproject_toml['project']['version']
-
-        self.assertEqual(__version__, pyproject_version)
+        version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
+        self.assertEqual(str(version), __version__)
 
         output = verbose_check_output(PACKAGE_ROOT / 'cli.py', 'version')
         self.assert_in(f'managetemplates v{__version__}', output)
