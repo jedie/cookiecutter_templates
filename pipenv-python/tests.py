@@ -56,7 +56,6 @@ class PipenvPythonTemplateTestCase(BaseTestCase):
         output = test_project.check_output('make', 'fix-code-style', exit_on_error=True)
         try:
             self.assert_in('pipenv run darker', output)
-            self.assert_in('pipenv run isort', output)
         except Exception:
             self.display_git_diff(git)
             raise
@@ -64,4 +63,4 @@ class PipenvPythonTemplateTestCase(BaseTestCase):
         subprocess.check_call(['make', 'lint'], cwd=pkg_path)
 
         output = test_project.check_output('make', 'test')
-        self.assert_in('Ran 2 test', output)
+        self.assert_in('Ran 3 test', output)

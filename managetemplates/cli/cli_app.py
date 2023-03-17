@@ -96,7 +96,7 @@ def install():
     Run pip-sync and install 'managetemplates' via pip as editable.
     """
     verbose_check_call('pip-sync', constants.REQ_DEV_TXT_PATH)
-    verbose_check_call('pip', 'install', '-e', '.')
+    verbose_check_call('pip', 'install', '--no-deps', '-e', '.')
 
 
 cli.add_command(install)

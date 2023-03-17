@@ -1,6 +1,7 @@
 from pathlib import Path
 from unittest import TestCase
 
+from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from packaging.version import Version
 
 import {{ cookiecutter.package_name }}
@@ -15,3 +16,9 @@ class ProjectSetupTestCase(TestCase):
 
         version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
         self.assertEqual(str(version), __version__)
+
+    def test_check_editor_config(self):
+        check_editor_config(package_root=PACKAGE_ROOT)
+
+        max_line_length = get_py_max_line_length(package_root=PACKAGE_ROOT)
+        self.assertEqual(max_line_length, 119)

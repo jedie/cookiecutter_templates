@@ -11,7 +11,7 @@ class CliTestCase(BaseTestCase):
         self.assert_in_content(
             got=output,
             parts=(
-                'pip install -e .',
+                'pip install --no-deps -e .',
                 f'Successfully installed managetemplates-{__version__}',
             ),
         )

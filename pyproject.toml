@@ -93,6 +93,7 @@ lines_after_imports=2
 [tool.coverage.run]
 branch = true
 parallel = true
+concurrency = ["multiprocessing"]
 source = ['managetemplates']
 command_line = '-m unittest --verbose --locals --buffer'
 

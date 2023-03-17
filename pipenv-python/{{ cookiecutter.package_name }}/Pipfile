@@ -3,7 +3,8 @@
 
 [dev-packages]
 {{ cookiecutter.package_name }} = { path = ".", editable = true}
-pipenv="*"
+pipenv = "*"  # https://github.com/pypa/pipenv
+manageprojects = "*"  # https://github.com/jedie/manageprojects
 bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
 tox = ">=4.4.4"  # https://github.com/tox-dev/tox
 coverage= "*"  # https://github.com/nedbat/coveragepy

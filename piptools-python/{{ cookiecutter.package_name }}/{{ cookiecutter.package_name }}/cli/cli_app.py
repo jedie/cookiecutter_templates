@@ -79,7 +79,7 @@ def install():
     Run pip-sync and install '{{ cookiecutter.package_name }}' via pip as editable.
     """
     verbose_check_call('pip-sync', PACKAGE_ROOT / 'requirements.dev.txt')
-    verbose_check_call('pip', 'install', '-e', '.')
+    verbose_check_call('pip', 'install', '--no-deps', '-e', '.')
 
 
 cli.add_command(install)

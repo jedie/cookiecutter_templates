@@ -65,7 +65,13 @@ class PoetryDjangoReuseableAppTemplateTestCase(BaseTestCase):
 
         subprocess.check_call(['make', 'lint'], cwd=pkg_path)
 
+        # Run first "normal" tests, because tox has many more output and is slower ;)
+        output = test_project.check_output('make', 'test')
+        self.assert_in('./manage.sh test', output)
+        self.assert_in('Ran 5 tests in ', output)
+        self.assert_in('OK', output)
+
         output = test_project.check_output('make', 'tox')
-        self.assert_in('poetry install', output)
-        self.assert_in('make test', output)
-        self.assert_in('Ran 4 tests', output)
+        self.assert_in('poetry run tox', output)
+        self.assert_in('coverage run', output)
+        self.assert_in('congratulations :)', output)
