@@ -52,6 +52,7 @@ filterwarnings = []
 [tool.coverage.run]
 branch = true
 parallel = true
+concurrency = ["multiprocessing"]
 source = ["apps"]
 command_line = "-m pytest"
 

@@ -20,12 +20,10 @@ update-requirements:  ## Update requirements
 
 lint: ## Run code formatters and linter
 	.venv/bin/pipenv run darker --diff --check
-	.venv/bin/pipenv run isort --check-only .
 	.venv/bin/pipenv run flake8 .
 
 fix-code-style: ## Fix code formatting
 	.venv/bin/pipenv run darker
-	.venv/bin/pipenv run isort .
 
 tox-listenvs:  ## List all tox test environments
 	.venv/bin/tox --listenvs

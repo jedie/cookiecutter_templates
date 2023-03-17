@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from manageprojects.test_utils.click_cli_utils import invoke_click, subprocess_cli
+from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from manageprojects.test_utils.subprocess import SubprocessCallMock
 from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_output
@@ -86,12 +87,12 @@ class ProjectSetupTestCase(BaseTestCase):
             call_mock.get_popenargs(rstrip_paths=(PACKAGE_ROOT,)),
             [
                 ['.../.venv/bin/pip-sync', '.../managetemplates/requirements.dev.txt'],
-                ['.../.venv/bin/pip', 'install', '-e', '.'],
+                ['.../.venv/bin/pip', 'install', '--no-deps', '-e', '.'],
             ],
         )
         self.assert_in_content(
             got=stdout,
-            parts=('pip install -e .',),
+            parts=('pip install --no-deps -e .',),
         )
 
     def test_update(self):
@@ -182,3 +183,9 @@ class ProjectSetupTestCase(BaseTestCase):
             got=stdout,
             parts=('Nothing to fixed, ok.',),
         )
+
+    def test_check_editor_config(self):
+        check_editor_config(package_root=PACKAGE_ROOT)
+
+        max_line_length = get_py_max_line_length(package_root=PACKAGE_ROOT)
+        self.assertEqual(max_line_length, 119)

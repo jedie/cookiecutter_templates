@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from bx_py_utils.path import assert_is_file
 from manageprojects.test_utils.click_cli_utils import subprocess_cli
+from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from manageprojects.utilities import code_style
 from packaging.version import Version
 
@@ -59,3 +60,9 @@ class ProjectSetupTestCase(TestCase):
             code_style.check(package_root=PACKAGE_ROOT)
         except SystemExit as err:
             self.assertEqual(err.code, 0, 'Code style error, see output above!')
+
+    def test_check_editor_config(self):
+        check_editor_config(package_root=PACKAGE_ROOT)
+
+        max_line_length = get_py_max_line_length(package_root=PACKAGE_ROOT)
+        self.assertEqual(max_line_length, 119)

@@ -109,6 +109,7 @@ addopts = """
 [tool.coverage.run]
 branch = true
 parallel = true
+concurrency = ["multiprocessing"]
 source = ['.']
 
 [tool.coverage.report]

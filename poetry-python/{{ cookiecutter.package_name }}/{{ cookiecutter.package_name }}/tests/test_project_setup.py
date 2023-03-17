@@ -7,6 +7,7 @@ try:
 except ImportError:
     import tomli as tomllib
 
+from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from packaging.version import Version
 
@@ -59,3 +60,9 @@ class ProjectSetupTestCase(TestCase):
     def test_poetry_check(self):
         output = subprocess.check_output(['poetry', 'check'], cwd=PACKAGE_ROOT, text=True)
         self.assertEqual(output, 'All set!\n')
+
+    def test_check_editor_config(self):
+        check_editor_config(package_root=PACKAGE_ROOT)
+
+        max_line_length = get_py_max_line_length(package_root=PACKAGE_ROOT)
+        self.assertEqual(max_line_length, 119)
