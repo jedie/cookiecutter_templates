@@ -1,23 +1,26 @@
 [project]
 name = "{{ cookiecutter.package_name }}"
-version = "{{ cookiecutter.package_version }}"
+dynamic = ["version"]
 description = "{{ cookiecutter.package_description }}"
 readme = "README.md"
 authors = [
     {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
 ]
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["{{ cookiecutter.package_name }}*"]
 
 [project.scripts]
 {{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.__main__:main"
 
-
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["{{ cookiecutter.package_name }}*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "{{ cookiecutter.package_name }}.__version__"}
 
 
 [tool.darker]

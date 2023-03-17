@@ -1,6 +1,6 @@
 [project]
 name = "managetemplates"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Pseudo Python package to test the https://github.com/jedie/cookiecutter_templates cookiecutter templates"
 readme = "README.md"
 authors = [
@@ -52,6 +52,9 @@ managetemplates = "managetemplates.__main__:main"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["managetemplates*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "managetemplates.__version__"}
 
 [build-system]
 requires = ["setuptools>=61.0"]
