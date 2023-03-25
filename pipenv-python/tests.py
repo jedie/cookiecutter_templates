@@ -3,20 +3,20 @@ import subprocess
 from pathlib import Path
 
 from bx_py_utils.path import assert_is_file
-from manageprojects.git import Git
-from manageprojects.test_utils.git_utils import init_git
 
-from managetemplates.tests.base import BaseTestCase
+from managetemplates.tests.base import BaseTestCase, PackageTestMixin, assert_no_git_diff
 from managetemplates.utilities.cookiecutter_utils import run_cookiecutter
 from managetemplates.utilities.test_project_utils import TestProject
 
 
-class PipenvPythonTemplateTestCase(BaseTestCase):
+class PipenvPythonTemplateTestCase(PackageTestMixin, BaseTestCase):
+    template_name = 'pipenv-python'
+    pkg_name = 'your_cool_package'
+
     def test_basic(self):
         with self.assertLogs('cookiecutter', level=logging.DEBUG) as logs:
             pkg_path: Path = run_cookiecutter(
-                template_name='pipenv-python',
-                final_name='your_cool_package',  # {{ cookiecutter.package_name }} replaced!
+                template_name=self.template_name,
                 # force_recreate=True
                 force_recreate=False,
             )
@@ -33,13 +33,7 @@ class PipenvPythonTemplateTestCase(BaseTestCase):
             base_extra_env=dict(PIPENV_IGNORE_VIRTUALENVS='1'),
         )
 
-        git_path = pkg_path / '.git'
-        if not git_path.is_dir():
-            # Newly generated -> git init
-            git, git_hash = init_git(path=pkg_path)  # Helpful to display diffs, see below ;)
-        else:
-            # Reuse existing .git
-            git = Git(cwd=git_path)
+        git = self.init_git(pkg_path=pkg_path)
 
         if not Path(pkg_path / '.venv' / 'bin' / 'darker').exists():
             output = test_project.check_output('make', 'install')
@@ -64,3 +58,5 @@ class PipenvPythonTemplateTestCase(BaseTestCase):
 
         output = test_project.check_output('make', 'test')
         self.assert_in('Ran 3 test', output)
+
+        assert_no_git_diff(git=git)

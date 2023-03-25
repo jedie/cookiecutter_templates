@@ -5,7 +5,6 @@ import sys
 from pathlib import Path
 
 import rich_click as click
-from bx_py_utils.path import assert_is_dir
 from manageprojects.utilities import code_style
 from manageprojects.utilities.publish import publish_package
 from manageprojects.utilities.subprocess_utils import verbose_check_call
@@ -17,6 +16,7 @@ import managetemplates
 from managetemplates import constants
 from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.utilities.reverse import reverse_test_project
+from managetemplates.utilities.sync_cookiecutter_templates import cookiecutter_templates2generated
 from managetemplates.utilities.template_var_syntax import content_template_var_syntax, filesystem_template_var_syntax
 
 
@@ -103,7 +103,8 @@ cli.add_command(install)
 
 
 @click.command()
-def update():
+@click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
+def update(verbose: bool = False):
     """
     Update the development environment
     """
@@ -118,12 +119,13 @@ def update():
 
     pip_compile_base = [
         bin_path / 'pip-compile',
-        '--verbose',
         '--allow-unsafe',  # https://pip-tools.readthedocs.io/en/latest/#deprecations
         '--resolver=backtracking',  # https://pip-tools.readthedocs.io/en/latest/#deprecations
         '--upgrade',
         '--generate-hashes',
     ]
+    if verbose:
+        pip_compile_base.append('--verbose')
 
     ############################################################################
     # Update own dependencies:
@@ -148,51 +150,9 @@ def update():
 
     ############################################################################
     # Update 'managed-django-project' template:
-    #   managed-django-project/{{ cookiecutter.package_name }}/requirements*.txt
-
-    package_path = constants.PACKAGE_ROOT / 'managed-django-project' / '{{ cookiecutter.package_name }}'
-    assert_is_dir(package_path)
-
-    verbose_check_call(  # develop + production
-        *pip_compile_base,
-        'pyproject.toml',
-        '--output-file',
-        package_path / 'requirements.txt',
-        extra_env=extra_env,
-    )
-
-    verbose_check_call(  # production only
-        *pip_compile_base,
-        'pyproject.toml',
-        '--extra=tests',
-        '--output-file',
-        package_path / 'requirements.dev.txt',
-        extra_env=extra_env,
-    )
-
     ############################################################################
     # Update 'piptools-python' template:
     #   piptools-python/{{ cookiecutter.package_name }}/requirements*.txt
-
-    package_path = constants.PACKAGE_ROOT / 'piptools-python' / '{{ cookiecutter.package_name }}'
-    assert_is_dir(package_path)
-
-    verbose_check_call(  # develop + production
-        *pip_compile_base,
-        'pyproject.toml',
-        '--output-file',
-        package_path / 'requirements.txt',
-        extra_env=extra_env,
-    )
-
-    verbose_check_call(  # production only
-        *pip_compile_base,
-        'pyproject.toml',
-        '--extra=tests',
-        '--output-file',
-        package_path / 'requirements.dev.txt',
-        extra_env=extra_env,
-    )
 
 
 cli.add_command(update)
@@ -248,6 +208,17 @@ def fix_file_content():
 
 
 cli.add_command(fix_file_content)
+
+
+@click.command()
+def templates2generated():
+    """
+    Generate all cookiecutter templates
+    """
+    cookiecutter_templates2generated()
+
+
+cli.add_command(templates2generated)
 
 
 @click.command()

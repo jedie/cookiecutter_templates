@@ -2,20 +2,20 @@ import logging
 from pathlib import Path
 
 from bx_py_utils.path import assert_is_file
-from manageprojects.git import Git
-from manageprojects.test_utils.git_utils import init_git
 
-from managetemplates.tests.base import BaseTestCase
+from managetemplates.tests.base import BaseTestCase, PackageTestMixin, assert_no_git_diff
 from managetemplates.utilities.cookiecutter_utils import run_cookiecutter
 from managetemplates.utilities.test_project_utils import TestProject
 
 
-class ManagedDjangoProjectTemplateTestCase(BaseTestCase):
+class PiptoolsPythonTemplateTestCase(PackageTestMixin, BaseTestCase):
+    template_name = 'managed-django-project'
+    pkg_name = 'your_cool_package'
+
     def test_basic(self):
         with self.assertLogs('cookiecutter', level=logging.DEBUG) as logs:
             pkg_path: Path = run_cookiecutter(
-                template_name='managed-django-project',
-                final_name='your_cool_package',  # {{ cookiecutter.package_name }} replaced!
+                template_name=self.template_name,
                 # force_recreate=True
                 force_recreate=False,
             )
@@ -29,13 +29,7 @@ class ManagedDjangoProjectTemplateTestCase(BaseTestCase):
         )
         test_project = TestProject(pkg_path)
 
-        git_path = pkg_path / '.git'
-        if not git_path.is_dir():
-            # Newly generated -> git init
-            git, git_hash = init_git(path=pkg_path)  # Helpful to display diffs, see below ;)
-        else:
-            # Reuse existing .git
-            git = Git(cwd=git_path)
+        git = self.init_git(pkg_path=pkg_path)
 
         manage_bin = pkg_path / 'manage.py'
         self.assert_is_executeable(manage_bin)
@@ -72,4 +66,4 @@ class ManagedDjangoProjectTemplateTestCase(BaseTestCase):
 
         # The project unittests checks also the code style and tries to fix them,
         # in this case, we have a code difference:
-        self.assert_no_git_diff(git=git)
+        assert_no_git_diff(git=git)

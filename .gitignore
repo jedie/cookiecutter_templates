@@ -1,7 +1,8 @@
 .*
 *.egg-info
 __pycache__
-/dist/
+dist/
+build/
 /coverage.json
 /coverage.xml
 poetry.lock
@@ -9,3 +10,4 @@ poetry.lock
 !.github
 !.editorconfig
 !.gitignore
+!.gitkeep

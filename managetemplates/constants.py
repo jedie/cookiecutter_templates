@@ -18,7 +18,7 @@ REQ_DEV_TXT_PATH = PACKAGE_ROOT / 'managetemplates' / 'requirements.dev.txt'
 assert_is_file(REQ_DEV_TXT_PATH)
 
 # Path to checkout Cookiecutter template for running tests:
-TEST_PATH = PACKAGE_ROOT / '.tests'
+TEST_PATH = PACKAGE_ROOT / 'generated_templates'
 
 ALL_TEMPLATES = (
     'managed-django-project',

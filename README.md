@@ -180,6 +180,7 @@ Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...
 │ publish                     Build and upload this project to PyPi                                │
 │ reverse                     Reverse a /.tests/<pkg_name>/ back to Cookiecutter template in:      │
 │                             ./<pkg_name>/                                                        │
+│ templates2generated         Generate all cookiecutter templates                                  │
 │ test                        Run unittests                                                        │
 │ tox                         Run tox                                                              │
 │ update                      Update the development environment                                   │

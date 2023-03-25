@@ -1,21 +1,57 @@
 import os
+import shutil
 from collections.abc import Iterable
+from pathlib import Path
 from unittest import TestCase
 
-from bx_py_utils.path import assert_is_file
+from bx_py_utils.path import assert_is_dir, assert_is_file
 from manageprojects.git import Git
+from manageprojects.test_utils.git_utils import init_git
+
+from managetemplates.constants import ALL_TEMPLATES, PACKAGE_ROOT
+
+
+def assert_no_git_diff(git: Git):
+    output = git.git_verbose_output('diff')
+    if not output:
+        # Git diff is empty -> OK
+        return
+
+    raise AssertionError(f'Git diff:\n{"=" * 100}\n{output}\n{"=" * 100}\n')
+
+
+class PackageTestMixin:
+    template_name: str = None
+    pkg_name: str = None
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        super().setUpClass()
+        assert cls.template_name is not None
+        assert cls.template_name in ALL_TEMPLATES, f'Template name {cls.template_name!r} not in {ALL_TEMPLATES}'
+
+    def tearDown(self) -> None:
+        super().tearDown()
+
+        git_path = PACKAGE_ROOT / self.template_name / self.pkg_name / '.git'
+        if git_path.is_dir():
+            shutil.rmtree(git_path)
 
 
 class BaseTestCase(TestCase):
     maxDiff = None
 
-    def assert_no_git_diff(self, git: Git):
-        output = git.git_verbose_output('diff')
-        if not output:
-            # Git diff is empty -> OK
-            return
+    def init_git(self, pkg_path: Path) -> Git:
+        assert_is_dir(pkg_path)
+        git_path = pkg_path / '.git'
+        if not git_path.is_dir():
+            # Newly generated -> git init
+            git, git_hash = init_git(path=pkg_path)  # Helpful to display diffs, see below ;)
+        else:
+            # Reuse existing .git
+            git = Git(cwd=git_path)
 
-        raise AssertionError(f'Git diff:\n{"=" * 100}\n{output}\n{"=" * 100}\n')
+        return git
 
     def display_git_diff(self, git: Git):
         output = git.git_verbose_output('diff')

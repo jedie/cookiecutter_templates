@@ -1,0 +1,57 @@
+{
+	"name": "Django Example",
+	"id": "django_example_ynh",
+	"packaging_format": 1,
+	"description": {
+        "en": "A example YunoHost App"
+    },
+	"version": "0.0.1~ynh1",
+	"url": "https://github.com/YunoHost-Apps/django_example_ynh",
+    "upstream": {
+        "license": "GPL-3.0",
+        "website": "https://github.com/john-doh/django_example",
+        "admindoc": "https://github.com/john-doh/django_example",
+        "userdoc": "https://github.com/john-doh/django_example",
+        "code": "https://github.com/john-doh/django_example"
+    },
+	"license": "GPL-3.0-or-later",
+	"maintainer": {
+		"name": "John Doh",
+		"email": "john-doh@example.tld"
+	},
+	"previous_maintainers": [],
+	"requirements": {
+		"yunohost": ">=11"
+	},
+	"multi_instance": true,
+	"services": [
+		"nginx", "postgresql", "redis"
+	],
+	"arguments": {
+		"install" : [
+			{
+				"name": "domain",
+				"type": "domain"
+			},
+			{
+				"name": "path",
+				"type": "path",
+				"example": "/django_example",
+				"default": "/django_example"
+			},
+			{
+				"name": "admin",
+				"type": "user"
+			},
+			{
+				"name": "is_public",
+				"type": "boolean",
+				"help": {
+					"en": "Any YunoHost user and anonymous people from the web will be able to access the application",
+					"fr": "Tout utilisateur YunoHost et les personnes anonymes pourront accéder à l'application"
+				},
+				"default": false
+			}
+		]
+	}
+}
