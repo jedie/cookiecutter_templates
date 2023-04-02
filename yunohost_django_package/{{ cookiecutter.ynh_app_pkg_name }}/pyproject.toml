@@ -25,9 +25,6 @@ bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
 bx_django_utils = "*"  # https://github.com/boxine/bx_django_utils
 tox = ">=4.4.4"  # https://github.com/tox-dev/tox
 coverage= "*"  # https://github.com/nedbat/coveragepy
-darker = "*"  # https://github.com/akaihola/darker
-isort = "*"  # https://github.com/pycqa/isort
-flynt = "*"  # https://github.com/ikamensh/flynt
 flake8 = "*"  # https://github.com/pycqa/flake8
 EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
 safety = "*"  # https://github.com/pyupio/safety
@@ -40,6 +37,12 @@ pytest-django = "*"
 requests = "*"  # https://github.com/psf/requests
 packaging = "*"  # https://github.com/pypa/packagi
 beautifulsoup4 = "*"  # https://pypi.org/project/beautifulsoup4/
+
+# https://github.com/akaihola/darker
+# https://github.com/ikamensh/flynt
+# https://github.com/pycqa/isort
+# https://github.com/pygments/pygments
+darker = { version = "*", extras = ["flynt", "isort", "color"] }
 
 tomli = "*"  # https://github.com/hukkin/tomli
 # tomli only needed for Python <3.11, but see bug:
