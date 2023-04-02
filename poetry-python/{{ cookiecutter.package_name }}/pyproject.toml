@@ -38,7 +38,7 @@ poetry-publish = "*"  # https://github.com/jedie/poetry-publish
 # https://github.com/ikamensh/flynt
 # https://github.com/pycqa/isort
 # https://github.com/pygments/pygments
-darker = { version = "*", extras = ["flynt", "isort", "color"]
+darker = { version = "*", extras = ["flynt", "isort", "color"]}
 
 tomli = "*"  # https://github.com/hukkin/tomli
 # tomli only needed for Python <3.11, but see bug:
