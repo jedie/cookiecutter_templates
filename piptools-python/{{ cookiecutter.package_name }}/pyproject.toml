@@ -53,7 +53,7 @@ Source = "{{ cookiecutter.package_url }}"
 {{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.__main__:main"
 
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
