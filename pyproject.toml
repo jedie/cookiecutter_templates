@@ -60,7 +60,7 @@ include = ["managetemplates*"]
 version = {attr = "managetemplates.__version__"}
 
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
 build-backend = "setuptools.build_meta"
 
 
