@@ -24,7 +24,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         assert str(settings.FINALPATH).endswith('/local_test/opt_yunohost')
         assert str(settings.PUBLIC_PATH).endswith('/local_test/var_www')
-        assert str(settings.LOG_FILE).endswith('/local_test/var_log_{{ cookiecutter.ynh_app_pkg_name }}.log')
+        assert str(settings.LOG_FILE).endswith('/local_test/var_log_{{ cookiecutter.project_name }}.log')
 
         assert settings.ROOT_URLCONF == 'urls'
 

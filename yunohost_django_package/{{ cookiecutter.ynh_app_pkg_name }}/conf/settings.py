@@ -16,7 +16,7 @@ from django_yunohost_integration.secret_key import get_or_create_secret as __get
 
 
 # {{ cookiecutter.upstream_url }}
-from {{ cookiecutter.upstream_pkg_name }}.settings.prod import *  # noqa:F401,F403 isort:skip
+from {{ cookiecutter.upstream_pkg_project_name }}.settings.prod import *  # noqa:F401,F403 isort:skip
 
 
 from django_yunohost_integration.base_settings import LOGGING  # noqa:F401 isort:skip
@@ -54,18 +54,22 @@ YNH_SETUP_USER = 'setup_user.setup_project_user'
 
 SECRET_KEY = __get_or_create_secret(FINALPATH / 'secret.txt')  # /opt/yunohost/$app/secret.txt
 
-INSTALLED_APPS += [
-    'axes',  # https://github.com/jazzband/django-axes
-    'django_yunohost_integration.apps.YunohostIntegrationConfig',
-]
+
+if 'axes' not in INSTALLED_APPS:
+    INSTALLED_APPS.append('axes')  # https://github.com/jazzband/django-axes
+
+INSTALLED_APPS.append('django_yunohost_integration.apps.YunohostIntegrationConfig')
+
 
 MIDDLEWARE.insert(
     MIDDLEWARE.index('django.contrib.auth.middleware.AuthenticationMiddleware') + 1,
     # login a user via HTTP_REMOTE_USER header from SSOwat:
     'django_yunohost_integration.sso_auth.auth_middleware.SSOwatRemoteUserMiddleware',
 )
-# AxesMiddleware should be the last middleware:
-MIDDLEWARE.append('axes.middleware.AxesMiddleware')
+if 'axes.middleware.AxesMiddleware' not in MIDDLEWARE:
+    # AxesMiddleware should be the last middleware:
+    MIDDLEWARE.append('axes.middleware.AxesMiddleware')
+
 
 # Keep ModelBackend around for per-user permissions and superuser
 AUTHENTICATION_BACKENDS = (
@@ -129,7 +133,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': 'redis://127.0.0.1:6379/__REDIS_DB__',
-        # If redis is running on same host as PyInventory, you might
+        # If redis is running on same host as {{ cookiecutter.project_name }}, you might
         # want to use unix sockets instead:
         # 'LOCATION': 'unix:///var/run/redis/redis.sock?db=1',
         'OPTIONS': {
@@ -160,11 +164,12 @@ MEDIA_ROOT = str(PUBLIC_PATH / 'media')
 LOGGING['handlers']['log_file']['filename'] = str(LOG_FILE)
 
 # Example how to add logging to own app:
-LOGGING['loggers']['{{ cookiecutter.upstream_pkg_name }}'] = {
+LOGGING['loggers']['{{ cookiecutter.upstream_pkg_app_name }}'] = {
     'handlers': ['syslog', 'log_file', 'mail_admins'],
-    'level': 'INFO',
     'propagate': False,
 }
+for __logger_name in LOGGING['loggers'].keys():
+    LOGGING['loggers'][__logger_name]['level'] = 'DEBUG' if DEBUG else LOG_LEVEL
 
 # -----------------------------------------------------------------------------
 

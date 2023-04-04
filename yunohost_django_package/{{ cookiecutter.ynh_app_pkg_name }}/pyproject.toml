@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "{{ cookiecutter.ynh_app_pkg_name }}"
-version = "{{ cookiecutter.upstream_version }}+ynh{{ cookiecutter.ynh_version }}"
+version = "{{ cookiecutter.upstream_version }}+{{ cookiecutter.ynh_suffix_version }}"
 description = "{{ cookiecutter.package_description }}"
 authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.author_email }}>"]
 homepage = "{{ cookiecutter.ynh_app_url }}"
@@ -77,7 +77,7 @@ log_level = "INFO"
 atomic=true
 profile='black'
 skip_glob=[".*", "*/htmlcov/*","*/migrations/*","*/local_test/*"]
-known_first_party=['{{ cookiecutter.upstream_pkg_name }}']
+known_first_party=['{{ cookiecutter.upstream_pkg_app_name }}']
 line_length=119
 lines_after_imports=2
 

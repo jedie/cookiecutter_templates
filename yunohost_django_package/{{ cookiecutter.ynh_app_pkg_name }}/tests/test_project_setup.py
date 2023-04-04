@@ -4,6 +4,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
+
 try:
     import tomllib  # New in Python 3.11
 except ImportError:
@@ -14,7 +15,7 @@ from bx_py_utils.path import assert_is_dir, assert_is_file
 from django_tools.unittest_utils.project_setup import check_editor_config
 from django_yunohost_integration.test_utils import assert_project_version
 
-from {{ cookiecutter.upstream_pkg_name }} import __version__
+from {{ cookiecutter.upstream_pkg_app_name }} import __version__
 
 
 PACKAGE_ROOT = Path(__file__).parent.parent
@@ -39,9 +40,9 @@ def test_version():
     pyproject_toml_path = Path(PACKAGE_ROOT, 'pyproject.toml')
     pyproject_toml = tomllib.loads(pyproject_toml_path.read_text(encoding='UTF-8'))
     pyproject_version = pyproject_toml['tool']['poetry']['version']
-    assert pyproject_version.startswith(f'{__version__}+ynh'), (
-        f'{pyproject_version!r} does not start with "{__version__}+ynh"'
-    )
+    assert pyproject_version.startswith(
+        f'{__version__}+ynh'
+    ), f'{pyproject_version!r} does not start with "{__version__}+ynh"'
 
     # pyproject.toml needs a PEP 440 conform version and used "+ynh"
     # the YunoHost syntax is: "~ynh", just "convert this:

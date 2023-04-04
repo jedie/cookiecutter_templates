@@ -32,6 +32,10 @@ jobs:
         run: |
           git clone --depth=1 https://github.com/YunoHost/package_linter ~/package_linter
 
+      - name: 'Install requirements'
+        run: |
+          pip3 install toml
+
       - name: 'Run linter'
         run: |
           ~/package_linter/package_linter.py .
