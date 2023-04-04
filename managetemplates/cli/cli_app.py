@@ -147,6 +147,30 @@ def update():
     )
 
     ############################################################################
+    # Update 'managed-django-project' template:
+    #   managed-django-project/{{ cookiecutter.package_name }}/requirements*.txt
+
+    package_path = constants.PACKAGE_ROOT / 'managed-django-project' / '{{ cookiecutter.package_name }}'
+    assert_is_dir(package_path)
+
+    verbose_check_call(  # develop + production
+        *pip_compile_base,
+        'pyproject.toml',
+        '--output-file',
+        package_path / 'requirements.txt',
+        extra_env=extra_env,
+    )
+
+    verbose_check_call(  # production only
+        *pip_compile_base,
+        'pyproject.toml',
+        '--extra=tests',
+        '--output-file',
+        package_path / 'requirements.dev.txt',
+        extra_env=extra_env,
+    )
+
+    ############################################################################
     # Update 'piptools-python' template:
     #   piptools-python/{{ cookiecutter.package_name }}/requirements*.txt
 

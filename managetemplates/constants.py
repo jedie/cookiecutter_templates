@@ -21,6 +21,7 @@ assert_is_file(REQ_DEV_TXT_PATH)
 TEST_PATH = PACKAGE_ROOT / '.tests'
 
 ALL_TEMPLATES = (
+    'managed-django-project',
     'pipenv-python',
     'piptools-python',
     'poetry-django-app',
