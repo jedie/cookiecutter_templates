@@ -3,6 +3,8 @@ import os
 import shutil
 import subprocess
 from pathlib import Path
+from unittest import TestCase
+
 
 
 try:
@@ -140,3 +142,17 @@ def test_check_code_style():
             _call_make('lint')
         except subprocess.CalledProcessError as err:
             raise AssertionError(f'Linting error:\n{"-"*100}\n{err.stdout}\n{"-"*100}')
+
+
+class ConfigPanelTestCase(TestCase):
+    def test_config_panel_toml(self):
+        config_panel_path = PACKAGE_ROOT / 'config_panel.toml'
+        assert_is_file(config_panel_path)
+
+        cfg = tomllib.loads(config_panel_path.read_text(encoding='UTF-8'))
+
+        self.assertEqual(cfg['version'], '1.0')
+        self.assertEqual(
+            set(cfg['main']['config'].keys()),
+            {'name', 'default_from_email', 'admin_email', 'debug_enabled', 'log_level'},
+        )
