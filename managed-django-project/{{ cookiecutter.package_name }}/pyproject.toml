@@ -19,7 +19,7 @@ dependencies = [
 ]
 [project.optional-dependencies]
 dev = [
-    "manage_django_project>=0.1.0",  # https://github.com/{{ cookiecutter.github_username }}/manage_django_project
+    "manage_django_project>=0.3.0",  # https://github.com/{{ cookiecutter.github_username }}/manage_django_project
     "tblib",   # https://github.com/ionelmc/python-tblib
     "pip-tools",  # https://github.com/jazzband/pip-tools/
     "tox",  # https://github.com/tox-dev/tox
@@ -61,6 +61,16 @@ Source = "{{ cookiecutter.package_url }}"
 
 [project.scripts]
 {{ cookiecutter.package_name }}_project = "{{ cookiecutter.package_name }}_project.__main__:main"
+
+[manage_django_project]
+module_name="{{ cookiecutter.package_name }}_project"
+
+# Django settings used for all commands except test/coverage/tox:
+local_settings='{{ cookiecutter.package_name }}_project.settings.local'
+
+# Django settings used for test/coverage/tox commands:
+test_settings='{{ cookiecutter.package_name }}_project.settings.tests'
+
 
 [build-system]
 requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
@@ -137,7 +147,7 @@ commands_pre =
     pip-sync requirements.dev.txt
 commands =
     {envpython} -m coverage run --context='{envname}'
-    {envpython} -m coverage combine --append
+    {envpython} -m coverage combine --append --keep
     {envpython} -m coverage xml
     {envpython} -m coverage report
 """
