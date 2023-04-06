@@ -151,11 +151,9 @@ def update(verbose: bool = False):
         extra_env=extra_env,
     )
 
-    ############################################################################
-    # Update 'managed-django-project' template:
-    ############################################################################
-    # Update 'piptools-python' template:
-    #   piptools-python/{{ cookiecutter.package_name }}/requirements*.txt
+    print('\nHint: Update templates requirements too!')
+    print('Just call e.g.:')
+    print('.../cookiecutter_templates$ cli.py update-template-req')
 
 
 cli.add_command(update)
