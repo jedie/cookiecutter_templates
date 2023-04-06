@@ -1,3 +1,4 @@
+import logging
 import os
 import shutil
 from collections.abc import Iterable
@@ -9,6 +10,8 @@ from manageprojects.git import Git
 from manageprojects.test_utils.git_utils import init_git
 
 from managetemplates.constants import ALL_TEMPLATES
+from managetemplates.utilities.sync_cookiecutter_templates import cookiecutter_templates2generated
+from managetemplates.utilities.test_project_utils import TestProject
 
 
 class TempGitRepo:
@@ -50,17 +53,6 @@ class TempGitRepo:
             shutil.rmtree(self.git_path)
 
 
-class PackageTestMixin:
-    template_name: str = None
-    pkg_name: str = None
-
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
-        assert cls.template_name is not None
-        assert cls.template_name in ALL_TEMPLATES, f'Template name {cls.template_name!r} not in {ALL_TEMPLATES}'
-
-
 class BaseTestCase(TestCase):
     maxDiff = None
 
@@ -99,3 +91,33 @@ class BaseTestCase(TestCase):
         assert_is_file(file_path)
         if not os.access(file_path, os.F_OK | os.X_OK):
             raise AssertionError(f'File {file_path} is not executeable!')
+
+
+class PackageTestBase(BaseTestCase):
+    template_name: str = None
+    pkg_name: str = None
+    base_extra_env = None
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        super().setUpClass()
+        assert cls.template_name is not None
+        assert cls.template_name in ALL_TEMPLATES, f'Template name {cls.template_name!r} not in {ALL_TEMPLATES}'
+
+    def setUp(self) -> None:
+        super().setUp()
+        with self.assertLogs('cookiecutter', level=logging.DEBUG) as logs:
+            self.pkg_path = cookiecutter_templates2generated(
+                # force_recreate=True
+                force_recreate=False,
+                only_template=self.template_name,
+            )
+        self.assert_in_content(
+            got='\n'.join(logs.output),
+            parts=(
+                f'{self.template_name}/cookiecutter.json',
+                f'/{self.pkg_name}/',
+                'Writing contents to file',
+            ),
+        )
+        self.test_project = TestProject(self.pkg_path, base_extra_env=self.base_extra_env)

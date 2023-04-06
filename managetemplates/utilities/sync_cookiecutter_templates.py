@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 
+import django_example
 from bx_py_utils.path import assert_is_dir
 from manageprojects.utilities.subprocess_utils import verbose_check_call
 from rich import print
@@ -9,15 +10,31 @@ from managetemplates.constants import ALL_TEMPLATES, PACKAGE_ROOT, UPDATE_TEMPLA
 from managetemplates.utilities.cookiecutter_utils import run_cookiecutter
 
 
-def cookiecutter_templates2generated(force_recreate: bool = False) -> None:
+def cookiecutter_templates2generated(force_recreate: bool = False, only_template=None):
     for template_name in sorted(ALL_TEMPLATES):
+        if only_template and template_name != only_template:
+            continue
+
         print('_' * 100)
         print(template_name)
+
+        extra_context = {}
+        if template_name == 'yunohost_django_package':
+            extra_context = dict(
+                # Some projects test depends on the current upstream version
+                # So we have to set these version correct here:
+                upstream_version=django_example.__version__,
+            )
+
         pkg_path: Path = run_cookiecutter(
             template_name=template_name,
             force_recreate=force_recreate,
+            extra_context=extra_context,
         )
         print(pkg_path)
+
+        if only_template:
+            return pkg_path
 
 
 def update_cookiecutter_templates_requirements(verbose: bool = False):
