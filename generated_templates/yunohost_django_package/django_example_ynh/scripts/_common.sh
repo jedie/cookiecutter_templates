@@ -44,8 +44,11 @@ log_file="${log_path}/${app}.log"
 # COMMON VARIABLES
 #=================================================
 
-# dependencies used by the app
-pkg_dependencies="build-essential python3-dev python3-pip python3-venv git libpq-dev postgresql postgresql-contrib"
+# Needed base dependencies:
+pkg_dependencies="build-essential python3-dev python3-pip python3-venv git"
+
+# Postgres and Python's "psycopg2":
+pkg_dependencies="${pkg_dependencies} libpq-dev postgresql postgresql-contrib"
 
 #=================================================
 # Redis HELPERS

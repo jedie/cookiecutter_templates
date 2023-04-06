@@ -1,16 +1,15 @@
 {
 	"name": "Django Example",
-	"id": "django_example_ynh",
+	"id": "Django Example",
 	"packaging_format": 1,
 	"description": {
         "en": "A example YunoHost App"
     },
-	"version": "0.0.1~ynh1",
-	"url": "https://github.com/YunoHost-Apps/django_example_ynh",
+	"version": "0.2.0~ynh1",
+	"url": "https://github.com/john-doh/django_example",
     "upstream": {
         "license": "GPL-3.0",
-        "website": "https://github.com/john-doh/django_example",
-        "admindoc": "https://github.com/john-doh/django_example",
+        "admindoc": "https://github.com/YunoHost-Apps/django_example_ynh",
         "userdoc": "https://github.com/john-doh/django_example",
         "code": "https://github.com/john-doh/django_example"
     },
@@ -36,8 +35,8 @@
 			{
 				"name": "path",
 				"type": "path",
-				"example": "/django_example",
-				"default": "/django_example"
+				"example": "/Django Example",
+				"default": "/Django Example"
 			},
 			{
 				"name": "admin",

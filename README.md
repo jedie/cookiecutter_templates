@@ -184,6 +184,7 @@ Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...
 │ test                        Run unittests                                                        │
 │ tox                         Run tox                                                              │
 │ update                      Update the development environment                                   │
+│ update-template-req         Update requirements of all cookiecutter templates                    │
 │ update-test-snapshot-files  Update all test snapshot files (by remove and recreate all snapshot  │
 │                             files)                                                               │
 │ version                     Print version and exit                                               │

@@ -525,9 +525,9 @@ mdurl==0.1.2 \
     --hash=sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8 \
     --hash=sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba
     # via markdown-it-py
-model-bakery==1.10.3 \
-    --hash=sha256:2fef68b299dda34e3556cffbdf0db9f026f7afbc932e69719d1fc92d92093057 \
-    --hash=sha256:7b619e383343229c523d4f043aec25892c16e5aad4003eb350d571a7ad3ffc8f
+model-bakery==1.11.0 \
+    --hash=sha256:d38a72502979be20c9c5c2b1682faefde9da4eae935c028cc35832d484ea1039 \
+    --hash=sha256:d516d93315f66fc7f2cef0a85e1ca9e1ebb656cca5e383f17127f023b4bbdb8c
     # via your-cool-package (pyproject.toml)
 more-itertools==9.1.0 \
     --hash=sha256:cabaa341ad0389ea83c17a94566a53ae4c9d07349861ecb14dc6d0345cf9ac5d \
@@ -831,9 +831,9 @@ tomlkit==0.11.7 \
     --hash=sha256:5325463a7da2ef0c6bbfefb62a3dc883aebe679984709aee32a317907d0a8d3c \
     --hash=sha256:f392ef70ad87a672f02519f99967d28a4d3047133e2d1df936511465fbb3791d
     # via manageprojects
-tox==4.4.8 \
-    --hash=sha256:12fe562b8992ea63b1e92556b7e28600cd1b70c9e01ce08984f60ce2d32c243c \
-    --hash=sha256:524640254de8b0f03facbdc6b7c18a35700592e3ada0ede42f509b3504b745ff
+tox==4.4.11 \
+    --hash=sha256:6fa4dbd933d0e335b5392c81e9cd467630119b3669705dbad47814a93b6c9586 \
+    --hash=sha256:cd88e41aef9c71f0ba02b6d7939f102760b192b63458fbe04dbbaed82f7bf5f5
     # via your-cool-package (pyproject.toml)
 twine==4.0.2 \
     --hash=sha256:929bc3c280033347a00f847236564d1c52a3e61b1ac2516c97c48f3ceab756d8 \

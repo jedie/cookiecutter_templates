@@ -16,7 +16,10 @@ import managetemplates
 from managetemplates import constants
 from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.utilities.reverse import reverse_test_project
-from managetemplates.utilities.sync_cookiecutter_templates import cookiecutter_templates2generated
+from managetemplates.utilities.sync_cookiecutter_templates import (
+    cookiecutter_templates2generated,
+    update_cookiecutter_templates_requirements,
+)
 from managetemplates.utilities.template_var_syntax import content_template_var_syntax, filesystem_template_var_syntax
 
 
@@ -156,6 +159,18 @@ def update(verbose: bool = False):
 
 
 cli.add_command(update)
+
+
+@click.command()
+@click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
+def update_template_req(verbose: bool = False):
+    """
+    Update requirements of all cookiecutter templates
+    """
+    update_cookiecutter_templates_requirements(verbose)
+
+
+cli.add_command(update_template_req)
 
 
 @click.command()

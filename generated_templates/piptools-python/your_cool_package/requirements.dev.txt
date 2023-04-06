@@ -732,9 +732,9 @@ tomlkit==0.11.7 \
     --hash=sha256:5325463a7da2ef0c6bbfefb62a3dc883aebe679984709aee32a317907d0a8d3c \
     --hash=sha256:f392ef70ad87a672f02519f99967d28a4d3047133e2d1df936511465fbb3791d
     # via manageprojects
-tox==4.4.8 \
-    --hash=sha256:12fe562b8992ea63b1e92556b7e28600cd1b70c9e01ce08984f60ce2d32c243c \
-    --hash=sha256:524640254de8b0f03facbdc6b7c18a35700592e3ada0ede42f509b3504b745ff
+tox==4.4.11 \
+    --hash=sha256:6fa4dbd933d0e335b5392c81e9cd467630119b3669705dbad47814a93b6c9586 \
+    --hash=sha256:cd88e41aef9c71f0ba02b6d7939f102760b192b63458fbe04dbbaed82f7bf5f5
     # via your-cool-package (pyproject.toml)
 twine==4.0.2 \
     --hash=sha256:929bc3c280033347a00f847236564d1c52a3e61b1ac2516c97c48f3ceab756d8 \
