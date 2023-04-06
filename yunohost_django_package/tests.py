@@ -4,7 +4,7 @@ from pathlib import Path
 import django_example
 from bx_py_utils.path import assert_is_file
 
-from managetemplates.tests.base import BaseTestCase, PackageTestMixin, assert_no_git_diff
+from managetemplates.tests.base import BaseTestCase, PackageTestMixin, TempGitRepo
 from managetemplates.utilities.cookiecutter_utils import run_cookiecutter
 from managetemplates.utilities.test_project_utils import TestProject
 
@@ -34,40 +34,41 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestMixin, BaseTestCase):
         )
         test_project = TestProject(pkg_path)
 
-        git = self.init_git(pkg_path=pkg_path)
+        with TempGitRepo(path=pkg_path, fresh=True) as temp_git:
+            makefile_path = pkg_path / 'Makefile'
+            assert_is_file(makefile_path)
 
-        makefile_path = pkg_path / 'Makefile'
-        assert_is_file(makefile_path)
+            poetry_lock = pkg_path / 'poetry.lock'
+            req_txt = pkg_path / 'conf' / 'requirements.txt'
+            if not (poetry_lock.is_file() and req_txt.is_file()):
+                output = test_project.check_output('make', 'update')
+                self.assert_in('poetry install', output)
 
-        poetry_lock = pkg_path / 'poetry.lock'
-        req_txt = pkg_path / 'conf' / 'requirements.txt'
-        if not (poetry_lock.is_file() and req_txt.is_file()):
-            output = test_project.check_output('make', 'update')
-            self.assert_in('poetry install', output)
+            venv_path = pkg_path / '.venv'
+            if not venv_path.is_dir():
+                output = test_project.check_output('make', 'install')
+                self.assert_in('poetry install', output)
+                self.assert_in('Installing django-example', output)
+                self.assert_in('Installing django-yunohost-integration', output)
 
-        venv_path = pkg_path / '.venv'
-        if not venv_path.is_dir():
-            output = test_project.check_output('make', 'install')
-            self.assert_in('poetry install', output)
-            self.assert_in('Installing django-example', output)
-            self.assert_in('Installing django-yunohost-integration', output)
+            assert_is_file(venv_path / 'bin' / 'python')
+            assert_is_file(venv_path / 'bin' / 'pip')
+            assert_is_file(venv_path / 'bin' / 'django-admin')
+            assert_is_file(venv_path / 'bin' / 'darker')
+            assert_is_file(venv_path / 'bin' / 'black')
 
-        assert_is_file(venv_path / 'bin' / 'python')
-        assert_is_file(venv_path / 'bin' / 'pip')
-        assert_is_file(venv_path / 'bin' / 'django-admin')
-        assert_is_file(venv_path / 'bin' / 'darker')
-        assert_is_file(venv_path / 'bin' / 'black')
+            test_project.check_call(
+                'make',
+                'pytest',
+                extra_env=dict(
+                    # The project used snapshot tests,
+                    # because of very small differences,
+                    # they do not match :(
+                    RAISE_SNAPSHOT_ERRORS='false',  # Don't raise snapshot errors
+                    GITHUB_ACTION='1',  # Don't try to check the github upstream version
+                ),
+            )
 
-        test_project.check_call(
-            'make',
-            'pytest',
-            extra_env=dict(
-                # The project used snapshot tests,
-                # because of very small differences,
-                # they do not match :(
-                RAISE_SNAPSHOT_ERRORS='false',  # Don't raise snapshot errors
-                GITHUB_ACTION='1',  # Don't try to check the github upstream version
-            ),
-        )
-
-        assert_no_git_diff(git=git)
+            # The project unittests checks also the code style and tries to fix them,
+            # in this case, we have a code difference:
+            temp_git.assert_no_git_diff()

@@ -10,7 +10,7 @@ from managetemplates.utilities.cookiecutter_utils import run_cookiecutter
 
 
 def cookiecutter_templates2generated(force_recreate: bool = False) -> None:
-    for template_name in ALL_TEMPLATES:
+    for template_name in sorted(ALL_TEMPLATES):
         print('_' * 100)
         print(template_name)
         pkg_path: Path = run_cookiecutter(
@@ -21,7 +21,7 @@ def cookiecutter_templates2generated(force_recreate: bool = False) -> None:
 
 
 def update_cookiecutter_templates_requirements(verbose: bool = False):
-    for template_name in ALL_TEMPLATES:
+    for template_name in sorted(ALL_TEMPLATES):
         print('_' * 100)
         print(template_name)
 

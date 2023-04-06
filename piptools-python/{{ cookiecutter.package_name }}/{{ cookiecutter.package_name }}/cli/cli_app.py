@@ -146,6 +146,7 @@ def update():
 
 cli.add_command(update)
 
+
 @click.command()
 def publish():
     """

@@ -8,16 +8,44 @@ from bx_py_utils.path import assert_is_dir, assert_is_file
 from manageprojects.git import Git
 from manageprojects.test_utils.git_utils import init_git
 
-from managetemplates.constants import ALL_TEMPLATES, PACKAGE_ROOT
+from managetemplates.constants import ALL_TEMPLATES
 
 
-def assert_no_git_diff(git: Git):
-    output = git.git_verbose_output('diff')
-    if not output:
-        # Git diff is empty -> OK
-        return
+class TempGitRepo:
+    def __init__(self, path, fresh=False):
+        assert_is_dir(path)
+        self.path = path
+        self.git_path = path / '.git'
 
-    raise AssertionError(f'Git diff:\n{"=" * 100}\n{output}\n{"=" * 100}\n')
+        if fresh and self.git_path.is_dir():
+            shutil.rmtree(self.git_path)
+
+        self.git = None
+
+    def __enter__(self):
+        self.git, git_hash = init_git(path=self.path)
+        return self
+
+    def display_git_diff(self):
+        output = self.git.git_verbose_output('diff')
+        if not output:
+            print('Git diff is empty -> nothing changed!')
+        else:
+            print('=' * 100)
+            print(output)
+            print('=' * 100)
+
+    def assert_no_git_diff(self):
+        output = self.git.git_verbose_output('diff')
+        if not output:
+            # Git diff is empty -> OK
+            return
+
+        raise AssertionError(f'Git diff:\n{"=" * 100}\n{output}\n{"=" * 100}\n')
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.git_path.is_dir():
+            shutil.rmtree(self.git_path)
 
 
 class PackageTestMixin:
@@ -30,13 +58,6 @@ class PackageTestMixin:
         assert cls.template_name is not None
         assert cls.template_name in ALL_TEMPLATES, f'Template name {cls.template_name!r} not in {ALL_TEMPLATES}'
 
-    def tearDown(self) -> None:
-        super().tearDown()
-
-        git_path = PACKAGE_ROOT / self.template_name / self.pkg_name / '.git'
-        if git_path.is_dir():
-            shutil.rmtree(git_path)
-
 
 class BaseTestCase(TestCase):
     maxDiff = None
@@ -44,23 +65,14 @@ class BaseTestCase(TestCase):
     def init_git(self, pkg_path: Path) -> Git:
         assert_is_dir(pkg_path)
         git_path = pkg_path / '.git'
-        if not git_path.is_dir():
-            # Newly generated -> git init
-            git, git_hash = init_git(path=pkg_path)  # Helpful to display diffs, see below ;)
-        else:
-            # Reuse existing .git
-            git = Git(cwd=git_path)
+
+        if git_path.is_dir():
+            # Start tests always with a fresh git
+            shutil.rmtree(git_path)
+
+        git, git_hash = init_git(path=pkg_path)  # Helpful to display diffs, see below ;)
 
         return git
-
-    def display_git_diff(self, git: Git):
-        output = git.git_verbose_output('diff')
-        if not output:
-            print('Git diff is empty -> nothing changed!')
-        else:
-            print('=' * 100)
-            print(output)
-            print('=' * 100)
 
     def assert_in(self, member, container, msg=None):
         try:

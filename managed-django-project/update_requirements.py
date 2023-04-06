@@ -17,7 +17,7 @@ def main(verbose):
     pkg_path = PACKAGE_ROOT / 'generated_templates' / 'managed-django-project' / 'your_cool_package'
     assert_is_dir(pkg_path)
 
-    # verbose_check_call(sys.executable, 'manage.py', 'update_req', cwd=pkg_path, verbose=verbose)
+    verbose_check_call(sys.executable, 'manage.py', 'update_req', cwd=pkg_path, verbose=verbose)
 
     # Sync the requirements back to the cookiecutter template:
     print('_' * 100)
