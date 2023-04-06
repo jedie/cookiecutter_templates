@@ -34,7 +34,7 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestMixin, BaseTestCase):
         )
         test_project = TestProject(pkg_path)
 
-        with TempGitRepo(path=pkg_path, fresh=True) as temp_git:
+        with TempGitRepo(path=pkg_path, fresh=True, branch_name='master') as temp_git:
             makefile_path = pkg_path / 'Makefile'
             assert_is_file(makefile_path)
 

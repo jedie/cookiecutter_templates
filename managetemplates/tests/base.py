@@ -12,7 +12,7 @@ from managetemplates.constants import ALL_TEMPLATES
 
 
 class TempGitRepo:
-    def __init__(self, path, fresh=False):
+    def __init__(self, path, fresh=False, branch_name='main'):
         assert_is_dir(path)
         self.path = path
         self.git_path = path / '.git'
@@ -20,10 +20,12 @@ class TempGitRepo:
         if fresh and self.git_path.is_dir():
             shutil.rmtree(self.git_path)
 
+        self.branch_name = branch_name
+
         self.git = None
 
     def __enter__(self):
-        self.git, git_hash = init_git(path=self.path)
+        self.git, git_hash = init_git(path=self.path, branch_name=self.branch_name)
         return self
 
     def display_git_diff(self):
