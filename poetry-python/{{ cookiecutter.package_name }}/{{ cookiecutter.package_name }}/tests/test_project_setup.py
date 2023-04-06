@@ -2,13 +2,14 @@ import subprocess
 from pathlib import Path
 from unittest import TestCase
 
+
 try:
     import tomllib  # New in Python 3.11
 except ImportError:
     import tomli as tomllib
 
-from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from bx_py_utils.path import assert_is_dir, assert_is_file
+from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from packaging.version import Version
 
 import {{ cookiecutter.package_name }}

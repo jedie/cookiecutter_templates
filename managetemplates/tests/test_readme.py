@@ -43,7 +43,7 @@ def get_template_paths():
             continue
         if entry.name.startswith('.'):
             continue
-        if entry.name in ('managetemplates', 'managetemplates.egg-info'):
+        if entry.name in ('generated_templates', 'managetemplates', 'managetemplates.egg-info'):
             continue
         yield entry
 

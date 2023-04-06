@@ -4,6 +4,7 @@ from bx_py_utils.path import assert_is_dir, assert_is_file
 
 import managetemplates
 
+CLI_EPILOG = 'Project Homepage: https://github.com/jedie/cookiecutter_templates'
 
 PACKAGE_ROOT = Path(managetemplates.__file__).parent.parent
 assert_is_dir(PACKAGE_ROOT)
@@ -18,7 +19,7 @@ REQ_DEV_TXT_PATH = PACKAGE_ROOT / 'managetemplates' / 'requirements.dev.txt'
 assert_is_file(REQ_DEV_TXT_PATH)
 
 # Path to checkout Cookiecutter template for running tests:
-TEST_PATH = PACKAGE_ROOT / '.tests'
+TEST_PATH = PACKAGE_ROOT / 'generated_templates'
 
 ALL_TEMPLATES = (
     'managed-django-project',
@@ -33,4 +34,4 @@ ALL_PACKAGES = tuple(
     entry.name for entry in sorted(PACKAGE_ROOT.iterdir()) if entry.is_dir() and Path(entry, '__init__.py').is_file()
 )
 
-CLI_EPILOG = 'Project Homepage: https://github.com/jedie/cookiecutter_templates'
+UPDATE_TEMPLATE_REQ_FILENAME = 'update_requirements.py'

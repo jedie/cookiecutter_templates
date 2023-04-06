@@ -123,6 +123,7 @@ STATIC_ROOT = str(__Path(BASE_PATH, 'static'))
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(__Path(BASE_PATH, 'media'))
 
+
 # _____________________________________________________________________________
 # Cache Backend
 
@@ -132,20 +133,6 @@ CACHES = {
         'LOCATION': 'unique-snowflake',
     }
 }
-
-# _____________________________________________________________________________
-# django-processinfo
-
-from django_processinfo import app_settings as PROCESSINFO  # noqa
-
-
-PROCESSINFO.ADD_INFO = False  # Don't add info in HTML page
-
-# _____________________________________________________________________________
-# Django-dbbackup
-
-DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
-DBBACKUP_STORAGE_OPTIONS = {'location': str(__Path(BASE_PATH, 'backups'))}
 
 
 # _____________________________________________________________________________

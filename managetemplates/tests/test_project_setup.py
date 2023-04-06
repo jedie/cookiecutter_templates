@@ -3,11 +3,10 @@ import sys
 from pathlib import Path
 from unittest.mock import patch
 
-
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from manageprojects.test_utils.click_cli_utils import invoke_click, subprocess_cli
 from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
-from manageprojects.test_utils.subprocess import SubprocessCallMock
+from manageprojects.test_utils.subprocess import SubprocessCallMock as SubprocessCallMockOrigin
 from manageprojects.utilities import code_style
 from manageprojects.utilities.subprocess_utils import verbose_check_output
 from packaging.version import Version
@@ -21,6 +20,54 @@ from managetemplates.tests.base import BaseTestCase
 
 
 VENV_BIN_PATH = Path(sys.executable).parent
+
+
+class SubprocessCallMock(SubprocessCallMockOrigin):
+    # TODO: Move back to manageprojects!
+    def rstrip_paths(self, path, rstrip_paths):
+        if rstrip_paths:
+            if isinstance(path, Path):
+                path = str(path)
+            for rstrip_path in rstrip_paths:
+                if path.startswith(rstrip_path):
+                    path = f'...{path.removeprefix(rstrip_path)}'
+        return path
+
+    def get_popenargs(self, rstrip_paths: tuple | None = None, with_cwd: bool = False) -> list:
+        if rstrip_paths:
+            rstrip_paths = [str(item) for item in rstrip_paths if item]  # e.g.: Path -> str
+
+        result = []
+        for call in self.calls:
+            if rstrip_paths:
+                temp = []
+
+                if with_cwd and (cwd := call.kwargs.get('cwd')):
+                    prog = call.popenargs[0]
+
+                    try:
+                        prog = Path(prog).absolute()
+                        prog = prog.relative_to(Path(cwd).absolute())
+                    except ValueError as err:
+                        print(err)
+                        # e.g.: {arg} is not in the subpath of {cwd}
+                        pass
+
+                    prog = self.rstrip_paths(prog, rstrip_paths)
+                    cwd = self.rstrip_paths(cwd, rstrip_paths)
+                    arg = f'{cwd}$ {prog}'
+                    call.popenargs[0] = arg
+
+                for arg in call.popenargs:
+                    arg = self.rstrip_paths(arg, rstrip_paths)
+                    temp.append(arg)
+
+                result.append(temp)
+
+            else:
+                result.append(call.popenargs)
+
+        return result
 
 
 class ProjectSetupTestCase(BaseTestCase):
@@ -115,7 +162,6 @@ class ProjectSetupTestCase(BaseTestCase):
                 ['.../.venv/bin/pip', 'install', '-U', 'pip-tools'],
                 [
                     '.../.venv/bin/pip-compile',
-                    '--verbose',
                     '--allow-unsafe',
                     '--resolver=backtracking',
                     '--upgrade',
@@ -126,7 +172,6 @@ class ProjectSetupTestCase(BaseTestCase):
                 ],
                 [
                     '.../.venv/bin/pip-compile',
-                    '--verbose',
                     '--allow-unsafe',
                     '--resolver=backtracking',
                     '--upgrade',
@@ -136,52 +181,22 @@ class ProjectSetupTestCase(BaseTestCase):
                     '--output-file',
                     '.../managetemplates/requirements.dev.txt',
                 ],
-                [
-                    '.../.venv/bin/pip-compile',
-                    '--verbose',
-                    '--allow-unsafe',
-                    '--resolver=backtracking',
-                    '--upgrade',
-                    '--generate-hashes',
-                    'pyproject.toml',
-                    '--output-file',
-                    '.../managed-django-project/{{ cookiecutter.package_name ' '}}/requirements.txt',
-                ],
-                [
-                    '.../.venv/bin/pip-compile',
-                    '--verbose',
-                    '--allow-unsafe',
-                    '--resolver=backtracking',
-                    '--upgrade',
-                    '--generate-hashes',
-                    'pyproject.toml',
-                    '--extra=tests',
-                    '--output-file',
-                    '.../managed-django-project/{{ cookiecutter.package_name ' '}}/requirements.dev.txt',
-                ],
-                [
-                    '.../.venv/bin/pip-compile',
-                    '--verbose',
-                    '--allow-unsafe',
-                    '--resolver=backtracking',
-                    '--upgrade',
-                    '--generate-hashes',
-                    'pyproject.toml',
-                    '--output-file',
-                    '.../piptools-python/{{ cookiecutter.package_name }}/requirements.txt',
-                ],
-                [
-                    '.../.venv/bin/pip-compile',
-                    '--verbose',
-                    '--allow-unsafe',
-                    '--resolver=backtracking',
-                    '--upgrade',
-                    '--generate-hashes',
-                    'pyproject.toml',
-                    '--extra=tests',
-                    '--output-file',
-                    '.../piptools-python/{{ cookiecutter.package_name }}/requirements.dev.txt',
-                ],
+            ],
+        )
+
+    def test_update_template_req(self):
+        with SubprocessCallMock() as call_mock:
+            invoke_click(cli, 'update-template-req')
+
+        self.assertEqual(
+            call_mock.get_popenargs(rstrip_paths=(PACKAGE_ROOT,), with_cwd=True),
+            [
+                ['.../managed-django-project$ .../.venv/bin/python', 'update_requirements.py'],
+                ['.../pipenv-python$ .../.venv/bin/python', 'update_requirements.py'],
+                ['.../piptools-python$ .../.venv/bin/python', 'update_requirements.py'],
+                ['.../poetry-django-app$ .../.venv/bin/python', 'update_requirements.py'],
+                ['.../poetry-python$ .../.venv/bin/python', 'update_requirements.py'],
+                ['.../yunohost_django_package$ .../.venv/bin/python', 'update_requirements.py'],
             ],
         )
 

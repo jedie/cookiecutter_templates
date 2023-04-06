@@ -1,9 +1,6 @@
 import os
 
-from bx_django_utils.test_utils.html_assertion import (
-    HtmlAssertionMixin,
-    assert_html_response_snapshot,
-)
+from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin, assert_html_response_snapshot
 from django.conf import settings
 from django.test.testcases import TestCase
 from django.urls.base import reverse

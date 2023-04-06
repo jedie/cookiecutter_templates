@@ -3,6 +3,7 @@
 !.editorconfig
 !.flake8
 !.gitignore
+!.gitkeep
 
 # from test projects:
 /{{ cookiecutter.package_name }}_tests/static/
