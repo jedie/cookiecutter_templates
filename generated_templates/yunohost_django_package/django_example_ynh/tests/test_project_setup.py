@@ -5,6 +5,7 @@ import subprocess
 from pathlib import Path
 from unittest import TestCase
 
+
 try:
     import tomllib  # New in Python 3.11
 except ImportError:
