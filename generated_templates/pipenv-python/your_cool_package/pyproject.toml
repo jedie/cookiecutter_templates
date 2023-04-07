@@ -2,6 +2,7 @@
 name = "your_cool_package"
 dynamic = ["version"]
 description = "A minimal Python package"
+license = {text = "GPL-3.0-or-later"}
 readme = "README.md"
 authors = [
     {name = 'John Doh', email = 'john-doh@example.tld'}
