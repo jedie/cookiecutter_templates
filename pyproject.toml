@@ -2,6 +2,7 @@
 name = "managetemplates"
 dynamic = ["version"]
 description = "Pseudo Python package to test the https://github.com/jedie/cookiecutter_templates cookiecutter templates"
+license = {text = "GPL-3.0-or-later"}
 readme = "README.md"
 authors = [
     {name = 'Jens Diemer', email = 'cookiecutter_templates@jensdiemer.de'}
