@@ -46,18 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'axes',  # https://github.com/jazzband/django-axes
     #
     '{{ cookiecutter.package_name }}.apps.AppConfig',
 ]
 
 ROOT_URLCONF = '{{ cookiecutter.package_name }}_project.urls'
 WSGI_APPLICATION = '{{ cookiecutter.package_name }}_project.wsgi.application'
-SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
-    'axes.backends.AxesBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -70,7 +66,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'axes.middleware.AxesMiddleware',  # AxesMiddleware should be the last middleware
 ]
 
 __TEMPLATE_DIR = __Path(BASE_PATH, '{{ cookiecutter.package_name }}_project', 'templates')
@@ -170,7 +165,6 @@ LOGGING = {
     'loggers': {
         '': {'handlers': ['console'], 'level': 'DEBUG', 'propagate': False},
         'django': {'handlers': ['console'], 'level': 'INFO', 'propagate': False},
-        'axes': {'handlers': ['console'], 'level': 'WARNING', 'propagate': False},
         '{{ cookiecutter.package_name }}': {'handlers': ['console'], 'level': 'DEBUG', 'propagate': False},
     },
 }
