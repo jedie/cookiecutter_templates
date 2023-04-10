@@ -6,12 +6,12 @@
         "en": "A example YunoHost App"
     },
 	"version": "0.2.0~ynh1",
-	"url": "https://github.com/john-doh/django_example",
+	"url": "https://github.com/jedie/django_example",
     "upstream": {
         "license": "GPL-3.0",
         "admindoc": "https://github.com/YunoHost-Apps/django_example_ynh",
-        "userdoc": "https://github.com/john-doh/django_example",
-        "code": "https://github.com/john-doh/django_example"
+        "userdoc": "https://github.com/jedie/django_example",
+        "code": "https://github.com/jedie/django_example"
     },
 	"license": "GPL-3.0-or-later",
 	"maintainer": {

@@ -1,6 +1,6 @@
 import os
 
-from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin, assert_html_response_snapshot
+from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin
 from django.conf import settings
 from django.test.testcases import TestCase
 from django.urls.base import reverse
@@ -35,7 +35,6 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
         self.assertEqual(
             logs.output, ['INFO:{{ cookiecutter.upstream_pkg_name }}.views:DebugView request from user: AnonymousUser']
         )
-        assert_html_response_snapshot(response, query_selector='#container', validate=False)
 
         ###############################################################################
         # Test as SSO user

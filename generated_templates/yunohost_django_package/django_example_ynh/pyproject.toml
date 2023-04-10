@@ -8,12 +8,12 @@ license = "GPL-3.0-or-later"
 readme = 'README.md'
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/john-doh/django_example/issues"
+"Bug Tracker" = "https://github.com/jedie/django_example/issues"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0.0"  # Stay with 3.9 until YunoHost used >=Debian 11 (Bullseye)
 #
-django_example = ">=0.2.0"  # https://github.com/john-doh/django_example
+django_example = ">=0.2.0"  # https://github.com/jedie/django_example
 #
 # extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
 # see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
