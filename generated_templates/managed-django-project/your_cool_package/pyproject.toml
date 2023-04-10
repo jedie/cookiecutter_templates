@@ -1,5 +1,5 @@
 [project]
-name = "your_cool_package"
+name = "your-cool-package"
 dynamic = ["version"]
 description = "A minimal Python package"
 license = {text = "GPL-3.0-or-later"}

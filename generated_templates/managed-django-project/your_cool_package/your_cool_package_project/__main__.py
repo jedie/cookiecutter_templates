@@ -1,5 +1,5 @@
 """
-    Allow your_cool_package to be executable
+    Allow your-cool-package to be executable
     through `python -m your_cool_package`.
 """
 from manage_django_project.manage import execute_django_from_command_line

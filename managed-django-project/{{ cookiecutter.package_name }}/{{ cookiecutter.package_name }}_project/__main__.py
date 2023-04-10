@@ -1,5 +1,5 @@
 """
-    Allow {{ cookiecutter.package_name }} to be executable
+    Allow {{ cookiecutter.project_name }} to be executable
     through `python -m {{ cookiecutter.package_name }}`.
 """
 from manage_django_project.manage import execute_django_from_command_line
