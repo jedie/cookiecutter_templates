@@ -14,7 +14,7 @@ from rich_click import RichGroup
 
 import managetemplates
 from managetemplates import constants
-from managetemplates.constants import PACKAGE_ROOT
+from managetemplates.constants import ALL_TEMPLATES, PACKAGE_ROOT
 from managetemplates.utilities.reverse import reverse_test_project
 from managetemplates.utilities.sync_cookiecutter_templates import (
     cookiecutter_templates2generated,
@@ -263,12 +263,20 @@ cli.add_command(check_code_style)
 
 
 @click.command()
-@click.argument('pkg_name')
-def reverse(pkg_name: str):
+@click.option('--template-name', type=click.Choice(constants.ALL_PACKAGES, case_sensitive=False), required=False)
+def reverse(template_name: str | None):
     """
-    Reverse a /.tests/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/
+    Reverse a /generated_templates/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/
+
+    Note: The reversed cookiecutter template files cannot be accepted 1-to-1.
     """
-    reverse_test_project(pkg_name=pkg_name)
+    for pkg_name in sorted(ALL_TEMPLATES):
+        if template_name and template_name != pkg_name:
+            continue
+
+        print('_' * 100)
+        print(pkg_name)
+        reverse_test_project(pkg_name=pkg_name)
 
 
 cli.add_command(reverse)

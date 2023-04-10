@@ -1,1 +1,1 @@
-CLI_EPILOG = 'Project Homepage: https://github.com/john-doh/{{ cookiecutter.package_name }}'
+CLI_EPILOG = 'Project Homepage: {{ cookiecutter.package_url }}'
