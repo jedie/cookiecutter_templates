@@ -41,7 +41,7 @@ class AdminLoggedinTests(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                f"<title>Site administration | your_cool_package v{__version__}</title>",
+                f"<title>Site administration | your-cool-package v{__version__}</title>",
                 "<h1>Site administration</h1>",
                 "<strong>staff_test_user</strong>",
                 "<p>You don’t have permission to view or edit anything.</p>",

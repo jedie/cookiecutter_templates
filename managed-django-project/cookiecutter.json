@@ -3,7 +3,8 @@
     "github_username": "{{ cookiecutter.full_name.lower()|replace(' ', '-') }}",
     "author_email": "{{ cookiecutter.github_username }}@example.tld",
 
-    "package_name": "your_cool_package",
+    "project_name": "your-cool-package",
+    "package_name": "{{ cookiecutter.project_name.lower()|replace('-', '_') }}",
     "package_version": "0.0.1",
     "package_description": "A minimal Python package",
     "package_url": "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.package_name }}",

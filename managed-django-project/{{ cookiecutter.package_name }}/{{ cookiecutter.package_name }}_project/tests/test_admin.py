@@ -41,7 +41,7 @@ class AdminLoggedinTests(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                f"<title>Site administration | {{ cookiecutter.package_name }} v{__version__}</title>",
+                f"<title>Site administration | {{ cookiecutter.project_name }} v{__version__}</title>",
                 "<h1>Site administration</h1>",
                 "<strong>staff_test_user</strong>",
                 "<p>You don’t have permission to view or edit anything.</p>",

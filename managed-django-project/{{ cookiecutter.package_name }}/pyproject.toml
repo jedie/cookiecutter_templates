@@ -1,5 +1,5 @@
 [project]
-name = "{{ cookiecutter.package_name }}"
+name = "{{ cookiecutter.project_name }}"
 dynamic = ["version"]
 description = "{{ cookiecutter.package_description }}"
 license = {text = "{{ cookiecutter.license }}"}

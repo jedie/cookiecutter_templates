@@ -1,5 +1,5 @@
 """
-    "{{ cookiecutter.package_name }}
+    "{{ cookiecutter.project_name }}
     {{ cookiecutter.package_description }}
 """
 
