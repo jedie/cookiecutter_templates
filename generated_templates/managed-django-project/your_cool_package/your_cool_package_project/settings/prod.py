@@ -46,18 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'axes',  # https://github.com/jazzband/django-axes
     #
     'your_cool_package.apps.AppConfig',
 ]
 
 ROOT_URLCONF = 'your_cool_package_project.urls'
 WSGI_APPLICATION = 'your_cool_package_project.wsgi.application'
-SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
-    'axes.backends.AxesBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -70,7 +66,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'axes.middleware.AxesMiddleware',  # AxesMiddleware should be the last middleware
 ]
 
 __TEMPLATE_DIR = __Path(BASE_PATH, 'your_cool_package_project', 'templates')
@@ -170,7 +165,6 @@ LOGGING = {
     'loggers': {
         '': {'handlers': ['console'], 'level': 'DEBUG', 'propagate': False},
         'django': {'handlers': ['console'], 'level': 'INFO', 'propagate': False},
-        'axes': {'handlers': ['console'], 'level': 'WARNING', 'propagate': False},
         'your_cool_package': {'handlers': ['console'], 'level': 'DEBUG', 'propagate': False},
     },
 }
