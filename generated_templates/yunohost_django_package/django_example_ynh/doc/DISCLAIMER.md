@@ -47,7 +47,7 @@ To check the effective settings, run this:
 ## Links
 
  * Report a bug about this package: https://github.com/YunoHost-Apps/django_example_ynh
- * Report a bug about Django Example itself: https://github.com/john-doh/django_example
+ * Report a bug about Django Example itself: https://github.com/jedie/django_example
  * YunoHost website: https://yunohost.org/
 
 ---
