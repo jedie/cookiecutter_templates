@@ -266,7 +266,9 @@ cli.add_command(check_code_style)
 @click.option('--template-name', type=click.Choice(constants.ALL_PACKAGES, case_sensitive=False), required=False)
 def reverse(template_name: str | None):
     """
-    Reverse a /.tests/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/
+    Reverse a /generated_templates/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/
+
+    Note: The reversed cookiecutter template files cannot be accepted 1-to-1.
     """
     for pkg_name in sorted(ALL_TEMPLATES):
         if template_name and template_name != pkg_name:

@@ -1,9 +1,9 @@
-import json
 import shutil
-import sys
 from pathlib import Path
 
-from bx_py_utils.path import assert_is_dir, assert_is_file
+from bx_py_utils.path import assert_is_file
+from cookiecutter.generate import generate_context
+from cookiecutter.prompt import prompt_for_config
 from manageprojects.cookiecutter_generator import create_cookiecutter_template
 from manageprojects.utilities.temp_path import TemporaryDirectory
 from rich import print  # noqa
@@ -11,44 +11,33 @@ from rich import print  # noqa
 from managetemplates import constants
 
 
-def resolve_test_path(test_path: Path) -> Path:
-    if not test_path.is_dir():
-        print(f'ERROR: Package {test_path.name!r} not found here: {test_path}')
-        print('(Hint: Run tests first to create all packages!)')
-        sys.exit(1)
-
-    items = list(test_path.iterdir())
-    if len(items) != 1:
-        print(f'ERROR: {test_path} does not contains *one* directory: {items}')
-        sys.exit(1)
-
-    test_path = items[0]
-    print(f'Use source files from: {test_path}')
-    assert_is_dir(test_path)
-    return test_path
-
-
 def get_cookiecutter_context(src_path: Path) -> dict:
     cookiecutter_json_path = src_path / 'cookiecutter.json'
     print(f'Use context from: {cookiecutter_json_path}')
     assert_is_file(cookiecutter_json_path)
-    cookiecutter_json = cookiecutter_json_path.read_text(encoding='UTF-8')
-    context = json.loads(cookiecutter_json)
-    cookiecutter_context = {'cookiecutter': context}
-    return cookiecutter_context
+
+    context = generate_context(
+        context_file=cookiecutter_json_path,
+        default_context=None,
+        extra_context=None,
+    )
+
+    # This will "resolve" all templates in context values:
+    context = prompt_for_config(context, no_input=True)
+
+    cookiecutter_context = {f'cookiecutter.{key}': value for key, value in context.items()}
+
+    return dict(cookiecutter_context)
 
 
 def reverse_test_project(pkg_name: str) -> None:
-    test_path = constants.PACKAGE_ROOT / '.tests' / pkg_name
+    test_path = constants.TEST_PATH / pkg_name
     src_path = constants.PACKAGE_ROOT / pkg_name
 
     print(f'Reverse {test_path} to Cookiecutter template here: {src_path}')
 
     cookiecutter_context = get_cookiecutter_context(src_path)
     assert cookiecutter_context, f'No cookiecutter context found here: {src_path}'
-
-    test_path = resolve_test_path(test_path)
-    src_path = src_path / '{{ cookiecutter.package_name }}'
 
     with TemporaryDirectory(prefix=f'{pkg_name}_', cleanup=True) as temp_dir:
         destination = Path(temp_dir) / pkg_name
