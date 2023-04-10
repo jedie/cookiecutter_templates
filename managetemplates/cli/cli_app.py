@@ -224,11 +224,13 @@ cli.add_command(fix_file_content)
 
 
 @click.command()
-def templates2generated():
+@click.option('--force-recreate/--no-force-recreate', **OPTION_ARGS_DEFAULT_TRUE)
+@click.option('--template-name', type=click.Choice(constants.ALL_PACKAGES, case_sensitive=False), required=False)
+def templates2generated(force_recreate: bool, template_name: str | None):
     """
     Generate all cookiecutter templates
     """
-    cookiecutter_templates2generated()
+    cookiecutter_templates2generated(force_recreate=force_recreate, only_template=template_name)
 
 
 cli.add_command(templates2generated)

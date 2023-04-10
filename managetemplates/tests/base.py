@@ -18,16 +18,17 @@ class TempGitRepo:
     def __init__(self, path, fresh=False, branch_name='main'):
         assert_is_dir(path)
         self.path = path
+        self.fresh = fresh
         self.git_path = path / '.git'
-
-        if fresh and self.git_path.is_dir():
-            shutil.rmtree(self.git_path)
 
         self.branch_name = branch_name
 
         self.git = None
 
     def __enter__(self):
+        if self.fresh and self.git_path.is_dir():
+            shutil.rmtree(self.git_path)
+
         self.git, git_hash = init_git(path=self.path, branch_name=self.branch_name)
         return self
 
