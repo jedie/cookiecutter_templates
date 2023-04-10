@@ -77,7 +77,7 @@ log_level = "INFO"
 atomic=true
 profile='black'
 skip_glob=[".*", "*/htmlcov/*","*/migrations/*","*/local_test/*"]
-known_first_party=['{{ cookiecutter.upstream_pkg_app_name }}']
+known_first_party=['{{ cookiecutter.upstream_pkg_name }}']
 line_length=119
 lines_after_imports=2
 

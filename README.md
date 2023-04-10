@@ -178,8 +178,8 @@ Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...
 │                             "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"                 │
 │ install                     Run pip-sync and install 'managetemplates' via pip as editable.      │
 │ publish                     Build and upload this project to PyPi                                │
-│ reverse                     Reverse a /.tests/<pkg_name>/ back to Cookiecutter template in:      │
-│                             ./<pkg_name>/                                                        │
+│ reverse                     Reverse a /generated_templates/<pkg_name>/ back to Cookiecutter      │
+│                             template in: ./<pkg_name>/                                           │
 │ templates2generated         Generate all cookiecutter templates                                  │
 │ test                        Run unittests                                                        │
 │ tox                         Run tox                                                              │
