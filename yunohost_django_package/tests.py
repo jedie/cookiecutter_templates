@@ -1,5 +1,9 @@
+import json
+
+import django_example
 from bx_py_utils.path import assert_is_file
 
+from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.tests.base import PackageTestBase, TempGitRepo
 
 
@@ -8,6 +12,19 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestBase):
     pkg_name = 'django_example_ynh'
 
     def test_basic(self):
+        # The project used https://github.com/jedie/django_example
+        # That is a real package on PyPi:
+        # https://pypi.org/project/django-example/
+        #
+        # We have to use the real PyPi Version:
+        cookiecutter_json_path = PACKAGE_ROOT / 'yunohost_django_package' / 'cookiecutter.json'
+        assert_is_file(cookiecutter_json_path)
+        raw_context = json.loads(cookiecutter_json_path.read_text(encoding='UTF-8'))
+        if raw_context['upstream_version'] != django_example.__version__:
+            raw_context['upstream_version'] = django_example.__version__
+            content = json.dumps(raw_context, ensure_ascii=False, indent=4)
+            cookiecutter_json_path.write_text(content, encoding='UTF-8')
+
         with TempGitRepo(path=self.pkg_path, fresh=True, branch_name='master') as temp_git:
             makefile_path = self.pkg_path / 'Makefile'
             assert_is_file(makefile_path)
