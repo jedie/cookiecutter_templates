@@ -62,30 +62,30 @@ Try 'main' branch, e.g.:
 ```bash
 sudo yunohost app install https://github.com/YunoHost-Apps/django_example_ynh/tree/master --debug
 or
-sudo yunohost app upgrade Django Example -u https://github.com/YunoHost-Apps/django_example_ynh/tree/master --debug
+sudo yunohost app upgrade django_example -u https://github.com/YunoHost-Apps/django_example_ynh/tree/master --debug
 ```
 
 Try 'testing' branch, e.g.:
 ```bash
 sudo yunohost app install https://github.com/YunoHost-Apps/django_example_ynh/tree/testing --debug
 or
-sudo yunohost app upgrade Django Example -u https://github.com/YunoHost-Apps/django_example_ynh/tree/testing --debug
+sudo yunohost app upgrade django_example -u https://github.com/YunoHost-Apps/django_example_ynh/tree/testing --debug
 ```
 
 To remove call e.g.:
 ```bash
-sudo yunohost app remove Django Example
+sudo yunohost app remove django_example
 ```
 
 Backup / remove / restore cycle, e.g.:
 ```bash
-yunohost backup create --apps Django Example
+yunohost backup create --apps django_example
 yunohost backup list
 archives:
-  - Django Example-pre-upgrade1
+  - django_example-pre-upgrade1
   - 20201223-163434
-yunohost app remove Django Example
-yunohost backup restore 20201223-163434 --apps Django Example
+yunohost app remove django_example
+yunohost backup restore 20201223-163434 --apps django_example
 ```
 
 Debug installation, e.g.:
@@ -99,15 +99,15 @@ drwxr-xr-x 7 root root 8 Dec  8 08:40 static
 
 root@yunohost:~# ls -la /opt/yunohost/django_example/
 total 58
-drwxr-xr-x 5 Django Example Django Example   11 Dec  8 08:39 .
+drwxr-xr-x 5 django_example django_example   11 Dec  8 08:39 .
 drwxr-xr-x 3 root        root           3 Dec  8 08:36 ..
--rw-r--r-- 1 Django Example Django Example  460 Dec  8 08:39 gunicorn.conf.py
--rw-r--r-- 1 Django Example Django Example    0 Dec  8 08:39 local_settings.py
--rwxr-xr-x 1 Django Example Django Example  274 Dec  8 08:39 manage.py
--rw-r--r-- 1 Django Example Django Example  171 Dec  8 08:39 secret.txt
-drwxr-xr-x 6 Django Example Django Example    6 Dec  8 08:37 venv
--rw-r--r-- 1 Django Example Django Example  115 Dec  8 08:39 wsgi.py
--rw-r--r-- 1 Django Example Django Example 4737 Dec  8 08:39 settings.py
+-rw-r--r-- 1 django_example django_example  460 Dec  8 08:39 gunicorn.conf.py
+-rw-r--r-- 1 django_example django_example    0 Dec  8 08:39 local_settings.py
+-rwxr-xr-x 1 django_example django_example  274 Dec  8 08:39 manage.py
+-rw-r--r-- 1 django_example django_example  171 Dec  8 08:39 secret.txt
+drwxr-xr-x 6 django_example django_example    6 Dec  8 08:37 venv
+-rw-r--r-- 1 django_example django_example  115 Dec  8 08:39 wsgi.py
+-rw-r--r-- 1 django_example django_example 4737 Dec  8 08:39 settings.py
 
 root@yunohost:~# cd /opt/yunohost/django_example/
 root@yunohost:/opt/yunohost/django_example# source venv/bin/activate
@@ -135,12 +135,12 @@ and urls made for YunoHost installation.
 e.g.:
 ```bash
 ~$ git clone https://github.com/YunoHost-Apps/django_example_ynh.git
-~$ cd Django Example_ynh/
+~$ cd django_example_ynh/
 ~/django_example_ynh$ make
 install-poetry         install or update poetry
 install                install Django Example via poetry
 update                 update the sources and installation
-local-test             Run local_test.py to run Django Example_ynh locally
+local-test             Run local_test.py to run django_example_ynh locally
 ~/django_example_ynh$ make install-poetry
 ~/django_example_ynh$ make install
 ~/django_example_ynh$ make local-test
