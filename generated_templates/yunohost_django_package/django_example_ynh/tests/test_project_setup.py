@@ -35,7 +35,7 @@ def test_version():
         # Github has a rate-limiting... So don't fetch the API if we run as GitHub action
         assert_project_version(
             current_version=__version__,
-            github_project_url='https://github.com/jedie/django_example',
+            github_project_url='https://github.com/john-doh/django_example',
         )
 
     pyproject_toml_path = Path(PACKAGE_ROOT, 'pyproject.toml')

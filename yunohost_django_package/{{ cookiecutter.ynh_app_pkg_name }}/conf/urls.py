@@ -26,4 +26,4 @@ if settings.PATH_URL:
 else:
     # Installed to domain root, without a path prefix
     # Just use the default project urls.py
-    from {{ cookiecutter.upstream_pkg_project_name }}.urls import urlpatterns  # noqa
+    from {{ cookiecutter.upstream_pkg_name }}.urls import urlpatterns  # noqa

@@ -1,33 +1,33 @@
 ## Settings and upgrades
 
 Almost everything related to {{ cookiecutter.project_name }}'s configuration is handled in a `"../conf/settings.py"` file.
-You can edit the file `/opt/yunohost/{{ cookiecutter.project_name }}/local_settings.py` to enable or disable features.
+You can edit the file `/opt/yunohost/{{ cookiecutter.upstream_pkg_name }}/local_settings.py` to enable or disable features.
 
 Test sending emails:
 
 ```bash
 ssh admin@yourdomain.tld
-root@yunohost:~# cd /opt/yunohost/{{ cookiecutter.project_name }}/
-root@yunohost:/opt/yunohost/{{ cookiecutter.project_name }}# source venv/bin/activate
-(venv) root@yunohost:/opt/yunohost/{{ cookiecutter.project_name }}# ./manage.py sendtestemail --admins
+root@yunohost:~# cd /opt/yunohost/{{ cookiecutter.upstream_pkg_name }}/
+root@yunohost:/opt/yunohost/{{ cookiecutter.upstream_pkg_name }}# source venv/bin/activate
+(venv) root@yunohost:/opt/yunohost/{{ cookiecutter.upstream_pkg_name }}# ./manage.py sendtestemail --admins
 ```
 
 Background info: Error mails are send to all [settings.ADMINS](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-ADMINS). By default the YunoHost admin is inserted here.
 To check current ADMINS run:
 
 ```bash
-(venv) root@yunohost:/opt/yunohost/{{ cookiecutter.project_name }}# ./manage.py sendtestemail --admins
+(venv) root@yunohost:/opt/yunohost/{{ cookiecutter.upstream_pkg_name }}# ./manage.py sendtestemail --admins
 ```
 
 If you prefere to send error emails to a extrnal email address, just do something like this:
 
 ```bash
-echo "ADMINS = (('Your Name', 'example@domain.tld'),)" >> /opt/yunohost/{{ cookiecutter.project_name }}/local_settings.py
+echo "ADMINS = (('Your Name', 'example@domain.tld'),)" >> /opt/yunohost/{{ cookiecutter.upstream_pkg_name }}/local_settings.py
 ```
 
 To check the effective settings, run this:
 ```bash
-(venv) root@yunohost:/opt/yunohost/{{ cookiecutter.project_name }}# ./manage.py diffsettings
+(venv) root@yunohost:/opt/yunohost/{{ cookiecutter.upstream_pkg_name }}# ./manage.py diffsettings
 ```
 
 
@@ -90,14 +90,14 @@ yunohost backup restore 20201223-163434 --apps {{ cookiecutter.project_name }}
 
 Debug installation, e.g.:
 ```bash
-root@yunohost:~# ls -la /var/www/{{ cookiecutter.project_name }}/
+root@yunohost:~# ls -la /var/www/{{ cookiecutter.upstream_pkg_name }}/
 total 18
 drwxr-xr-x 4 root root 4 Dec  8 08:36 .
 drwxr-xr-x 6 root root 6 Dec  8 08:36 ..
 drwxr-xr-x 2 root root 2 Dec  8 08:36 media
 drwxr-xr-x 7 root root 8 Dec  8 08:40 static
 
-root@yunohost:~# ls -la /opt/yunohost/{{ cookiecutter.project_name }}/
+root@yunohost:~# ls -la /opt/yunohost/{{ cookiecutter.upstream_pkg_name }}/
 total 58
 drwxr-xr-x 5 {{ cookiecutter.project_name }} {{ cookiecutter.project_name }}   11 Dec  8 08:39 .
 drwxr-xr-x 3 root        root           3 Dec  8 08:36 ..
@@ -109,17 +109,17 @@ drwxr-xr-x 6 {{ cookiecutter.project_name }} {{ cookiecutter.project_name }}    
 -rw-r--r-- 1 {{ cookiecutter.project_name }} {{ cookiecutter.project_name }}  115 Dec  8 08:39 wsgi.py
 -rw-r--r-- 1 {{ cookiecutter.project_name }} {{ cookiecutter.project_name }} 4737 Dec  8 08:39 settings.py
 
-root@yunohost:~# cd /opt/yunohost/{{ cookiecutter.project_name }}/
-root@yunohost:/opt/yunohost/{{ cookiecutter.project_name }}# source venv/bin/activate
-(venv) root@yunohost:/opt/yunohost/{{ cookiecutter.project_name }}# ./manage.py check
+root@yunohost:~# cd /opt/yunohost/{{ cookiecutter.upstream_pkg_name }}/
+root@yunohost:/opt/yunohost/{{ cookiecutter.upstream_pkg_name }}# source venv/bin/activate
+(venv) root@yunohost:/opt/yunohost/{{ cookiecutter.upstream_pkg_name }}# ./manage.py check
 {{ cookiecutter.project_name }} v0.8.2 (Django v2.2.17)
 DJANGO_SETTINGS_MODULE='settings'
-PROJECT_PATH:/opt/yunohost/{{ cookiecutter.project_name }}/venv/lib/python3.7/site-packages
-BASE_PATH:/opt/yunohost/{{ cookiecutter.project_name }}
+PROJECT_PATH:/opt/yunohost/{{ cookiecutter.upstream_pkg_name }}/venv/lib/python3.7/site-packages
+BASE_PATH:/opt/yunohost/{{ cookiecutter.upstream_pkg_name }}
 System check identified no issues (0 silenced).
 
-root@yunohost:~# tail -f /var/log/{{ cookiecutter.project_name }}/{{ cookiecutter.project_name }}.log
-root@yunohost:~# cat /etc/systemd/system/{{ cookiecutter.project_name }}.service
+root@yunohost:~# tail -f /var/log/{{ cookiecutter.upstream_pkg_name }}/{{ cookiecutter.upstream_pkg_name }}.log
+root@yunohost:~# cat /etc/systemd/system/{{ cookiecutter.upstream_pkg_name }}.service
 
 root@yunohost:~# systemctl reload-or-restart {{ cookiecutter.project_name }}
 root@yunohost:~# systemctl status {{ cookiecutter.project_name }}
@@ -136,14 +136,14 @@ e.g.:
 ```bash
 ~$ git clone {{ cookiecutter.ynh_app_url }}.git
 ~$ cd {{ cookiecutter.project_name }}_ynh/
-~/{{ cookiecutter.project_name }}_ynh$ make
+~/{{ cookiecutter.upstream_pkg_name }}_ynh$ make
 install-poetry         install or update poetry
 install                install {{ cookiecutter.project_name }} via poetry
 update                 update the sources and installation
 local-test             Run local_test.py to run {{ cookiecutter.project_name }}_ynh locally
-~/{{ cookiecutter.project_name }}_ynh$ make install-poetry
-~/{{ cookiecutter.project_name }}_ynh$ make install
-~/{{ cookiecutter.project_name }}_ynh$ make local-test
+~/{{ cookiecutter.upstream_pkg_name }}_ynh$ make install-poetry
+~/{{ cookiecutter.upstream_pkg_name }}_ynh$ make install
+~/{{ cookiecutter.upstream_pkg_name }}_ynh$ make local-test
 ```
 
 Notes:

@@ -16,7 +16,7 @@ from django_yunohost_integration.secret_key import get_or_create_secret as __get
 
 
 # {{ cookiecutter.upstream_url }}
-from {{ cookiecutter.upstream_pkg_project_name }}.settings.prod import *  # noqa:F401,F403 isort:skip
+from {{ cookiecutter.upstream_pkg_name }}.settings.prod import *  # noqa:F401,F403 isort:skip
 
 
 from django_yunohost_integration.base_settings import LOGGING  # noqa:F401 isort:skip

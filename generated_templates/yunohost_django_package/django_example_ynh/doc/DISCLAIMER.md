@@ -1,33 +1,33 @@
 ## Settings and upgrades
 
 Almost everything related to Django Example's configuration is handled in a `"../conf/settings.py"` file.
-You can edit the file `/opt/yunohost/Django Example/local_settings.py` to enable or disable features.
+You can edit the file `/opt/yunohost/django_example/local_settings.py` to enable or disable features.
 
 Test sending emails:
 
 ```bash
 ssh admin@yourdomain.tld
-root@yunohost:~# cd /opt/yunohost/Django Example/
-root@yunohost:/opt/yunohost/Django Example# source venv/bin/activate
-(venv) root@yunohost:/opt/yunohost/Django Example# ./manage.py sendtestemail --admins
+root@yunohost:~# cd /opt/yunohost/django_example/
+root@yunohost:/opt/yunohost/django_example# source venv/bin/activate
+(venv) root@yunohost:/opt/yunohost/django_example# ./manage.py sendtestemail --admins
 ```
 
 Background info: Error mails are send to all [settings.ADMINS](https://docs.djangoproject.com/en/2.2/ref/settings/#std:setting-ADMINS). By default the YunoHost admin is inserted here.
 To check current ADMINS run:
 
 ```bash
-(venv) root@yunohost:/opt/yunohost/Django Example# ./manage.py sendtestemail --admins
+(venv) root@yunohost:/opt/yunohost/django_example# ./manage.py sendtestemail --admins
 ```
 
 If you prefere to send error emails to a extrnal email address, just do something like this:
 
 ```bash
-echo "ADMINS = (('Your Name', 'example@domain.tld'),)" >> /opt/yunohost/Django Example/local_settings.py
+echo "ADMINS = (('Your Name', 'example@domain.tld'),)" >> /opt/yunohost/django_example/local_settings.py
 ```
 
 To check the effective settings, run this:
 ```bash
-(venv) root@yunohost:/opt/yunohost/Django Example# ./manage.py diffsettings
+(venv) root@yunohost:/opt/yunohost/django_example# ./manage.py diffsettings
 ```
 
 
@@ -47,7 +47,7 @@ To check the effective settings, run this:
 ## Links
 
  * Report a bug about this package: https://github.com/YunoHost-Apps/django_example_ynh
- * Report a bug about Django Example itself: https://github.com/jedie/django_example
+ * Report a bug about Django Example itself: https://github.com/john-doh/django_example
  * YunoHost website: https://yunohost.org/
 
 ---
@@ -90,14 +90,14 @@ yunohost backup restore 20201223-163434 --apps Django Example
 
 Debug installation, e.g.:
 ```bash
-root@yunohost:~# ls -la /var/www/Django Example/
+root@yunohost:~# ls -la /var/www/django_example/
 total 18
 drwxr-xr-x 4 root root 4 Dec  8 08:36 .
 drwxr-xr-x 6 root root 6 Dec  8 08:36 ..
 drwxr-xr-x 2 root root 2 Dec  8 08:36 media
 drwxr-xr-x 7 root root 8 Dec  8 08:40 static
 
-root@yunohost:~# ls -la /opt/yunohost/Django Example/
+root@yunohost:~# ls -la /opt/yunohost/django_example/
 total 58
 drwxr-xr-x 5 Django Example Django Example   11 Dec  8 08:39 .
 drwxr-xr-x 3 root        root           3 Dec  8 08:36 ..
@@ -109,17 +109,17 @@ drwxr-xr-x 6 Django Example Django Example    6 Dec  8 08:37 venv
 -rw-r--r-- 1 Django Example Django Example  115 Dec  8 08:39 wsgi.py
 -rw-r--r-- 1 Django Example Django Example 4737 Dec  8 08:39 settings.py
 
-root@yunohost:~# cd /opt/yunohost/Django Example/
-root@yunohost:/opt/yunohost/Django Example# source venv/bin/activate
-(venv) root@yunohost:/opt/yunohost/Django Example# ./manage.py check
+root@yunohost:~# cd /opt/yunohost/django_example/
+root@yunohost:/opt/yunohost/django_example# source venv/bin/activate
+(venv) root@yunohost:/opt/yunohost/django_example# ./manage.py check
 Django Example v0.8.2 (Django v2.2.17)
 DJANGO_SETTINGS_MODULE='settings'
-PROJECT_PATH:/opt/yunohost/Django Example/venv/lib/python3.7/site-packages
-BASE_PATH:/opt/yunohost/Django Example
+PROJECT_PATH:/opt/yunohost/django_example/venv/lib/python3.7/site-packages
+BASE_PATH:/opt/yunohost/django_example
 System check identified no issues (0 silenced).
 
-root@yunohost:~# tail -f /var/log/Django Example/Django Example.log
-root@yunohost:~# cat /etc/systemd/system/Django Example.service
+root@yunohost:~# tail -f /var/log/django_example/django_example.log
+root@yunohost:~# cat /etc/systemd/system/django_example.service
 
 root@yunohost:~# systemctl reload-or-restart Django Example
 root@yunohost:~# systemctl status Django Example
@@ -136,14 +136,14 @@ e.g.:
 ```bash
 ~$ git clone https://github.com/YunoHost-Apps/django_example_ynh.git
 ~$ cd Django Example_ynh/
-~/Django Example_ynh$ make
+~/django_example_ynh$ make
 install-poetry         install or update poetry
 install                install Django Example via poetry
 update                 update the sources and installation
 local-test             Run local_test.py to run Django Example_ynh locally
-~/Django Example_ynh$ make install-poetry
-~/Django Example_ynh$ make install
-~/Django Example_ynh$ make local-test
+~/django_example_ynh$ make install-poetry
+~/django_example_ynh$ make install
+~/django_example_ynh$ make local-test
 ```
 
 Notes:
