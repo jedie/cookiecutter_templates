@@ -5,8 +5,6 @@ from django.conf import settings
 from django.test.testcases import TestCase
 from django.urls.base import reverse
 
-from django_example import __version__
-
 
 class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
     def test_urls(self):
@@ -25,7 +23,6 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                f'<h2>YunoHost Django Example Project v{__version__}</h2>',
                 '<li><a href="/app_path/admin/">Django Admin</a></li>',
                 '<p>Log in to see more information</p>',
                 '<tr><td>User:</td><td>AnonymousUser</td></tr>',
@@ -52,7 +49,6 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                f'<h2>YunoHost Django Example Project v{__version__}</h2>',
                 '<li><a href="/app_path/admin/">Django Admin</a></li>',
                 '<tr><td>User:</td><td>test</td></tr>',
                 f'<tr><td>Process ID:</td><td>{os.getpid()}</td></tr>',

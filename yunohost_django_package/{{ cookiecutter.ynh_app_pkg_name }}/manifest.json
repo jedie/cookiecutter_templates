@@ -1,6 +1,6 @@
 {
 	"name": "{{ cookiecutter.project_name }}",
-	"id": "{{ cookiecutter.project_name }}",
+	"id": "{{ cookiecutter.project_id }}",
 	"packaging_format": 1,
 	"description": {
         "en": "{{ cookiecutter.package_description }}"
@@ -35,8 +35,8 @@
 			{
 				"name": "path",
 				"type": "path",
-				"example": "/{{ cookiecutter.project_name }}",
-				"default": "/{{ cookiecutter.project_name }}"
+				"example": "/{{ cookiecutter.upstream_pkg_name }}",
+				"default": "/{{ cookiecutter.upstream_pkg_name }}"
 			},
 			{
 				"name": "admin",
