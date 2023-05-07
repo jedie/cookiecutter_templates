@@ -51,7 +51,8 @@ Documentation = "https://github.com/john-doh/your_cool_package"
 Source = "https://github.com/john-doh/your_cool_package"
 
 [project.scripts]
-your_cool_package = "your_cool_package.__main__:main"
+your_cool_package_app = "your_cool_package.__main__:main"
+your_cool_package_dev = "your_cool_package.cli.dev:main"
 
 [build-system]
 requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]

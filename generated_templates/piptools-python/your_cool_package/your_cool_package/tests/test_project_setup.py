@@ -24,13 +24,19 @@ class ProjectSetupTestCase(TestCase):
         output = subprocess.check_output([cli_bin, 'version'], text=True)
         self.assertIn(f'your_cool_package v{__version__}', output)
 
+        dev_cli_bin = PACKAGE_ROOT / 'dev-cli.py'
+        assert_is_file(dev_cli_bin)
+
+        output = subprocess.check_output([dev_cli_bin, 'version'], text=True)
+        self.assertIn(f'your_cool_package v{__version__}', output)
+
     def test_code_style(self):
-        cli_bin = PACKAGE_ROOT / 'cli.py'
-        assert_is_file(cli_bin)
+        dev_cli_bin = PACKAGE_ROOT / 'dev-cli.py'
+        assert_is_file(dev_cli_bin)
 
         try:
             output = subprocess_cli(
-                cli_bin=cli_bin,
+                cli_bin=dev_cli_bin,
                 args=('check-code-style',),
                 exit_on_error=False,
             )
@@ -45,7 +51,7 @@ class ProjectSetupTestCase(TestCase):
 
         try:
             output = subprocess_cli(
-                cli_bin=cli_bin,
+                cli_bin=dev_cli_bin,
                 args=('fix-code-style',),
                 exit_on_error=False,
             )

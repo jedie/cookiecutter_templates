@@ -51,7 +51,8 @@ Documentation = "{{ cookiecutter.package_url }}"
 Source = "{{ cookiecutter.package_url }}"
 
 [project.scripts]
-{{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.__main__:main"
+{{ cookiecutter.package_name }}_app = "{{ cookiecutter.package_name }}.__main__:main"
+{{ cookiecutter.package_name }}_dev = "{{ cookiecutter.package_name }}.cli.dev:main"
 
 [build-system]
 requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
