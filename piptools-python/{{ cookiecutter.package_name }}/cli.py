@@ -45,22 +45,22 @@ else:
     FILE_EXT = ''
 
 BASE_PATH = Path(__file__).parent
-VENV_PATH = BASE_PATH / '.venv'
+VENV_PATH = BASE_PATH / '.venv-app'
 BIN_PATH = VENV_PATH / BIN_NAME
 PYTHON_PATH = BIN_PATH / f'python{FILE_EXT}'
 PIP_PATH = BIN_PATH / f'pip{FILE_EXT}'
 PIP_SYNC_PATH = BIN_PATH / f'pip-sync{FILE_EXT}'
 
-DEP_LOCK_PATH = BASE_PATH / 'requirements.dev.txt'
+DEP_LOCK_PATH = BASE_PATH / 'requirements.txt'
 DEP_HASH_PATH = VENV_PATH / '.dep_hash'
 
 # script file defined in pyproject.toml as [console_scripts]
 # (Under Windows: ".exe" not added!)
-PROJECT_SHELL_SCRIPT = BIN_PATH / '{{ cookiecutter.package_name }}'
+PROJECT_SHELL_SCRIPT = BIN_PATH / '{{ cookiecutter.package_name }}_app'
 
 
 def get_dep_hash():
-    """Get SHA512 hash from poetry.lock content."""
+    """Get SHA512 hash from lock file content."""
     return hashlib.sha512(DEP_LOCK_PATH.read_bytes()).hexdigest()
 
 
