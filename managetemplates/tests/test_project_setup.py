@@ -8,13 +8,11 @@ from manageprojects.test_utils.click_cli_utils import invoke_click, subprocess_c
 from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from manageprojects.test_utils.subprocess import SubprocessCallMock as SubprocessCallMockOrigin
 from manageprojects.utilities import code_style
-from manageprojects.utilities.subprocess_utils import verbose_check_output
 from packaging.version import Version
 
-import managetemplates
 from managetemplates import __version__
-from managetemplates.cli import cli_app
 from managetemplates.cli.cli_app import cli
+from managetemplates.cli.dev import cli as dev_cli
 from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.tests.base import BaseTestCase
 
@@ -51,7 +49,6 @@ class SubprocessCallMock(SubprocessCallMockOrigin):
                     except ValueError as err:
                         print(err)
                         # e.g.: {arg} is not in the subpath of {cwd}
-                        pass
 
                     prog = self.rstrip_paths(prog, rstrip_paths)
                     cwd = self.rstrip_paths(cwd, rstrip_paths)
@@ -77,47 +74,47 @@ class ProjectSetupTestCase(BaseTestCase):
         version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
         self.assertEqual(str(version), __version__)
 
-        output = verbose_check_output(PACKAGE_ROOT / 'cli.py', 'version')
-        self.assert_in(f'managetemplates v{__version__}', output)
-
-    def test_code_style(self):
         cli_bin = PACKAGE_ROOT / 'cli.py'
         assert_is_file(cli_bin)
 
+        output = subprocess.check_output([cli_bin, 'version'], text=True)
+        self.assertIn(f'managetemplates v{__version__}', output)
+
+        dev_cli_bin = PACKAGE_ROOT / 'dev-cli.py'
+        assert_is_file(dev_cli_bin)
+
+        output = subprocess.check_output([dev_cli_bin, 'version'], text=True)
+        self.assertIn(f'managetemplates v{__version__}', output)
+
+    def test_code_style(self):
+        dev_cli_bin = PACKAGE_ROOT / 'dev-cli.py'
+        assert_is_file(dev_cli_bin)
+
         try:
             output = subprocess_cli(
-                cli_bin=cli_bin,
+                cli_bin=dev_cli_bin,
                 args=('check-code-style',),
                 exit_on_error=False,
             )
         except subprocess.CalledProcessError as err:
-            self.assert_in_content(  # darker was called?
-                got=err.stdout,
-                parts=('.venv/bin/darker',),
-            )
+            self.assertIn('.venv/bin/darker', err.stdout)  # darker was called?
         else:
             if 'Code style: OK' in output:
-                self.assert_in_content(  # darker was called?
-                    got=output,
-                    parts=('.venv/bin/darker',),
-                )
+                self.assertIn('.venv/bin/darker', output)  # darker was called?
                 return  # Nothing to fix -> OK
 
         # Try to "auto" fix code style:
 
         try:
             output = subprocess_cli(
-                cli_bin=cli_bin,
+                cli_bin=dev_cli_bin,
                 args=('fix-code-style',),
                 exit_on_error=False,
             )
         except subprocess.CalledProcessError as err:
             output = err.stdout
 
-        self.assert_in_content(  # darker was called?
-            got=output,
-            parts=('.venv/bin/darker',),
-        )
+        self.assertIn('.venv/bin/darker', output)  # darker was called?
 
         # Check again and display the output:
 
@@ -128,12 +125,12 @@ class ProjectSetupTestCase(BaseTestCase):
 
     def test_install(self):
         with SubprocessCallMock() as call_mock:
-            stdout = invoke_click(cli, 'install')
+            stdout = invoke_click(dev_cli, 'install')
 
         self.assertEqual(
             call_mock.get_popenargs(rstrip_paths=(PACKAGE_ROOT,)),
             [
-                ['.../.venv/bin/pip-sync', '.../managetemplates/requirements.dev.txt'],
+                ['.../.venv/bin/pip-sync', '.../requirements.dev.txt'],
                 ['.../.venv/bin/pip', 'install', '--no-deps', '-e', '.'],
             ],
         )
@@ -144,7 +141,7 @@ class ProjectSetupTestCase(BaseTestCase):
 
     def test_update(self):
         with SubprocessCallMock() as call_mock:
-            invoke_click(cli, 'update')
+            invoke_click(dev_cli, 'update')
 
         package_path = PACKAGE_ROOT / 'piptools-python' / '{{ cookiecutter.package_name }}'
         assert_is_dir(package_path)
@@ -162,25 +159,29 @@ class ProjectSetupTestCase(BaseTestCase):
                 ['.../.venv/bin/pip', 'install', '-U', 'pip-tools'],
                 [
                     '.../.venv/bin/pip-compile',
+                    '--verbose',
                     '--allow-unsafe',
                     '--resolver=backtracking',
                     '--upgrade',
                     '--generate-hashes',
                     'pyproject.toml',
                     '--output-file',
-                    '.../managetemplates/requirements.txt',
+                    'requirements.txt',
                 ],
                 [
                     '.../.venv/bin/pip-compile',
+                    '--verbose',
                     '--allow-unsafe',
                     '--resolver=backtracking',
                     '--upgrade',
                     '--generate-hashes',
                     'pyproject.toml',
-                    '--extra=tests',
+                    '--extra=dev',
                     '--output-file',
-                    '.../managetemplates/requirements.dev.txt',
+                    'requirements.dev.txt',
                 ],
+                ['.../.venv/bin/safety', 'check', '-r', 'requirements.dev.txt'],
+                ['.../.venv/bin/pip-sync', 'requirements.dev.txt'],
             ],
         )
 
@@ -201,11 +202,13 @@ class ProjectSetupTestCase(BaseTestCase):
         )
 
     def test_publish(self):
-        with patch.object(cli_app, '_run_unittest_cli') as func1, patch.object(cli_app, 'publish_package') as func2:
-            stdout = invoke_click(cli, 'publish')
+        with patch('managetemplates.cli.dev._run_unittest_cli') as func1, patch(
+            'managetemplates.cli.dev.publish_package'
+        ) as func2:
+            stdout = invoke_click(dev_cli, 'publish')
 
-        func1.assert_called_once_with(verbose=False, exit_after_run=False)
-        func2.assert_called_once_with(module=managetemplates, package_path=PACKAGE_ROOT)
+        func1.assert_called_once()
+        func2.assert_called_once()
         self.assertEqual(stdout, '')
 
     def test_filesystem_var_syntax(self):

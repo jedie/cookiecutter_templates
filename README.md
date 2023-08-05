@@ -169,25 +169,15 @@ Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...
 │ --help      Show this message and exit.                                                          │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
-│ check-code-style            Check code style by calling darker + flake8                          │
-│ coverage                    Run tests and show coverage.                                         │
-│ fix-code-style              Fix code style via darker                                            │
-│ fix-file-content            Unify cookiecutter variables in file content. e.g.: "{{foo}}" -> "{{ │
-│                             foo }}"                                                              │
-│ fix-filesystem              Unify cookiecutter variables in the file/directory paths. e.g.:      │
-│                             "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"                 │
-│ install                     Run pip-sync and install 'managetemplates' via pip as editable.      │
-│ publish                     Build and upload this project to PyPi                                │
-│ reverse                     Reverse a /generated_templates/<pkg_name>/ back to Cookiecutter      │
-│                             template in: ./<pkg_name>/                                           │
-│ templates2generated         Generate all cookiecutter templates                                  │
-│ test                        Run unittests                                                        │
-│ tox                         Run tox                                                              │
-│ update                      Update the development environment                                   │
-│ update-template-req         Update requirements of all cookiecutter templates                    │
-│ update-test-snapshot-files  Update all test snapshot files (by remove and recreate all snapshot  │
-│                             files)                                                               │
-│ version                     Print version and exit                                               │
+│ fix-file-content     Unify cookiecutter variables in file content. e.g.: "{{foo}}" -> "{{ foo    │
+│                      }}"                                                                         │
+│ fix-filesystem       Unify cookiecutter variables in the file/directory paths. e.g.:             │
+│                      "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"                        │
+│ reverse              Reverse a /generated_templates/<pkg_name>/ back to Cookiecutter template    │
+│                      in: ./<pkg_name>/                                                           │
+│ templates2generated  Generate all cookiecutter templates                                         │
+│ update-template-req  Update requirements of all cookiecutter templates                           │
+│ version              Print version and exit                                                      │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated main help end ✂✂✂)

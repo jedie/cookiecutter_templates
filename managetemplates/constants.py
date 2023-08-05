@@ -11,11 +11,11 @@ assert_is_dir(PACKAGE_ROOT)
 assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 
 # Only "prod" dependencies:
-REQ_TXT_PATH = PACKAGE_ROOT / 'managetemplates' / 'requirements.txt'
+REQ_TXT_PATH = PACKAGE_ROOT / 'requirements.txt'
 assert_is_file(REQ_TXT_PATH)
 
 # dependencies + "dev"-optional-dependencies:
-REQ_DEV_TXT_PATH = PACKAGE_ROOT / 'managetemplates' / 'requirements.dev.txt'
+REQ_DEV_TXT_PATH = PACKAGE_ROOT / 'requirements.dev.txt'
 assert_is_file(REQ_DEV_TXT_PATH)
 
 # Path to checkout Cookiecutter template for running tests:

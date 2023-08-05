@@ -9,28 +9,27 @@ authors = [
 ]
 requires-python = ">=3.10,<4"
 dependencies = [
-    "pip-tools",  # https://github.com/jazzband/pip-tools/
-    "cookiecutter",  # https://github.com/cookiecutter/cookiecutter
-    "manageprojects>=0.8.0",  # https://github.com/jedie/manageprojects
+    "manageprojects",  # https://github.com/jedie/manageprojects
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "click",  # https://github.com/pallets/click/
     "rich-click",  # https://github.com/ewels/rich-click
     "rich",  # https://github.com/Textualize/rich
-
-    "tomli",  # https://github.com/hukkin/tomli
-    #
-    # tomli only needed for Python <3.11, but see pip bug:
-    # https://github.com/pypa/pip/issues/9644 / https://github.com/jazzband/pip-tools/issues/1866
-    #'tomli;python_version<"3.11"',  # https://github.com/hukkin/tomli
+    "django_example",  # Only to get the current version of this package ;)
 ]
 [project.optional-dependencies]
-tests = [
+dev = [
+    "pip-tools",  # https://github.com/jazzband/pip-tools/
     "tox",  # https://github.com/tox-dev/tox
     "coverage",  # https://github.com/nedbat/coveragepy
+    "autopep8",  # https://github.com/hhatto/autopep8
+    "pyupgrade",  # https://github.com/asottile/pyupgrade
     "flake8",  # https://github.com/pycqa/flake8
+    "pyflakes",  # https://github.com/PyCQA/pyflakes
+    "codespell",  # https://github.com/codespell-project/codespell
     "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
+    "safety",  # https://github.com/pyupio/safety
+    "mypy",  # https://github.com/python/mypy
     "twine",  # https://github.com/pypa/twine
-    "django_example",  # Only to get the current version of this package ;)
 
     # https://github.com/akaihola/darker
     # https://github.com/ikamensh/flynt
@@ -38,9 +37,11 @@ tests = [
     # https://github.com/pygments/pygments
     "darker[flynt, isort, color]",
 
-    # pdoc is not directly used, but needed because of:
-    # https://github.com/boxine/bx_py_utils/issues/157
-    "pdoc",
+    "tomli",  # https://github.com/hukkin/tomli
+    #
+    # tomli only needed for Python <3.11, but see pip bug:
+    # https://github.com/pypa/pip/issues/9644 / https://github.com/jazzband/pip-tools/issues/1866
+    #'tomli;python_version<"3.11"',  # https://github.com/hukkin/tomli
 ]
 
 [project.urls]
@@ -48,7 +49,12 @@ Documentation = "https://github.com/jedie/cookiecutter_templates"
 Source = "https://github.com/jedie/cookiecutter_templates"
 
 [project.scripts]
-managetemplates = "managetemplates.__main__:main"
+managetemplates_app = "managetemplates.__main__:main"
+managetemplates_dev = "managetemplates.cli.dev:main"
+
+[build-system]
+requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
+build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -56,10 +62,6 @@ include = ["managetemplates*"]
 
 [tool.setuptools.dynamic]
 version = {attr = "managetemplates.__version__"}
-
-[build-system]
-requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
-build-backend = "setuptools.build_meta"
 
 
 [tool.darker]
@@ -111,15 +113,6 @@ exclude_lines = [
 ]
 
 
-[tool.mypy]
-warn_unused_configs = true
-ignore_missing_imports = true
-allow_redefinition = true  # https://github.com/python/mypy/issues/7165
-show_error_codes = true
-plugins = []
-exclude = ['.venv', 'tests']
-
-
 [tool.tox]  # https://tox.wiki/en/latest/config.html#pyproject-toml
 legacy_tox_ini = """
 [tox]
@@ -132,13 +125,22 @@ passenv = *
 skip_install = true
 commands_pre =
     pip install -U pip-tools
-    pip-sync managetemplates/requirements.dev.txt
+    pip-sync requirements.dev.txt
 commands =
     {envpython} -m coverage run --context='{envname}'
     {envpython} -m coverage combine --append
     {envpython} -m coverage xml
     {envpython} -m coverage report
 """
+
+
+[tool.mypy]
+warn_unused_configs = true
+ignore_missing_imports = true
+allow_redefinition = true  # https://github.com/python/mypy/issues/7165
+show_error_codes = true
+plugins = []
+exclude = ['.venv', 'tests']
 
 
 [manageprojects] # https://github.com/jedie/manageprojects
@@ -149,6 +151,7 @@ cookiecutter_directory = "piptools-python"
 applied_migrations = [
     "68124d4", # 2022-11-20T00:19:44+01:00
     "7260de6", # 2023-02-19T12:16:21+01:00
+    "41345e2", # 2023-08-05T20:53:10+02:00
 ]
 
 [manageprojects.cookiecutter_context.cookiecutter]

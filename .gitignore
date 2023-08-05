@@ -9,5 +9,6 @@ poetry.lock
 
 !.github
 !.editorconfig
+!.flake8
 !.gitignore
 !.gitkeep
