@@ -8,9 +8,7 @@ manageprojects = "*"  # https://github.com/jedie/manageprojects
 bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
 tox = ">=4.4.4"  # https://github.com/tox-dev/tox
 coverage= "*"  # https://github.com/nedbat/coveragepy
-darker = "*"  # https://github.com/akaihola/darker
-isort = "*"  # https://github.com/pycqa/isort
-flynt = "*"  # https://github.com/ikamensh/flynt
+"darker[flynt, isort, color]" = "*"  # https://github.com/akaihola/darker
 flake8 = "*"  # https://github.com/pycqa/flake8
 EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
 safety = "*"  # https://github.com/pyupio/safety

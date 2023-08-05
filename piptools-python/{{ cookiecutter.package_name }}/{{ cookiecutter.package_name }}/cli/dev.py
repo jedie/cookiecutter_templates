@@ -168,7 +168,7 @@ def publish():
     publish_package(
         module={{ cookiecutter.package_name }},
         package_path=PACKAGE_ROOT,
-        distribution_name='{{ cookiecutter.package_name }}-connect',
+        distribution_name='{{ cookiecutter.package_name }}',
     )
 
 

@@ -41,13 +41,27 @@ jobs:
       run: |
         curl -sSL https://install.python-poetry.org | python3 -
 
-    - name: 'Bootstrap'
+    - name: 'Bootstrap app venv'
+      # The first CLI call will create the .venv
       run: |
         ./cli.py version
 
+    - name: 'app CLI help'
+      run: |
+        ./cli.py --help
+
+    - name: 'Bootstrap dev venv'
+      # The first CLI call will create the .venv
+      run: |
+        ./dev-cli.py version
+
+    - name: 'dev CLI help'
+      run: |
+        ./dev-cli.py --help
+
     - name: 'Run ${{ matrix.package }} tests with Python v${{ matrix.python-version }}'
       run: |
-        ./cli.py coverage ${{ matrix.package }}
+        ./dev-cli.py coverage ${{ matrix.package }}
 
     - name: 'Upload coverage report'
       uses: codecov/codecov-action@v3

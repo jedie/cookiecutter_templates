@@ -14,14 +14,14 @@ from manageprojects.utilities.version_info import print_version
 from rich import print  # noqa; noqa
 from rich_click import RichGroup
 
-import your_cool_package
-from your_cool_package import constants
+import managetemplates
+from managetemplates import constants
 
 
 logger = logging.getLogger(__name__)
 
 
-PACKAGE_ROOT = Path(your_cool_package.__file__).parent.parent
+PACKAGE_ROOT = Path(managetemplates.__file__).parent.parent
 assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 
 OPTION_ARGS_DEFAULT_TRUE = dict(is_flag=True, show_default=True, default=True)
@@ -69,14 +69,47 @@ cli.add_command(mypy)
 
 
 @click.command()
+@click.argument('package', type=click.Choice(constants.ALL_PACKAGES, case_sensitive=False), required=False)
+@click.option(
+    '--list',
+    '-l',
+    'list_packages',
+    is_flag=True,
+    show_default=True,
+    default=False,
+    help='Just list all packages (Copy&pasteable for github CI config)',
+)
 @click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
-def coverage(verbose: bool = True):
+def coverage(package=None, list_packages: bool = False, verbose: bool = True):
     """
-    Run and show coverage.
+    Run tests and show coverage.
     """
-    verbose_check_call('coverage', 'run', verbose=verbose, exit_on_error=True)
+    if list_packages:
+        print('Here the cureent package list, for github CI config matrix:')
+        print(f'package: {list(constants.ALL_PACKAGES)}')
+        sys.exit(0)
+
+    args = [
+        'coverage',
+        'run',
+    ]
+    if package:
+        print(f'\n[green]Run only tests from [yellow bold]{package}')
+        args += [
+            '-m',
+            'unittest',
+            '--verbose',
+            '--locals',
+            '--buffer',
+            '-k',
+            package,
+        ]
+    else:
+        print('\n[green]Run all tests...')
+
+    verbose_check_call(*args, verbose=verbose, exit_on_error=True, timeout=15 * 60)
     verbose_check_call('coverage', 'combine', '--append', verbose=verbose, exit_on_error=True)
-    verbose_check_call('coverage', 'report', '--fail-under=30', verbose=verbose, exit_on_error=True)
+    verbose_check_call('coverage', 'report', '--fail-under=35', verbose=verbose, exit_on_error=True)
     verbose_check_call('coverage', 'xml', verbose=verbose, exit_on_error=True)
     verbose_check_call('coverage', 'json', verbose=verbose, exit_on_error=True)
 
@@ -87,7 +120,7 @@ cli.add_command(coverage)
 @click.command()
 def install():
     """
-    Run pip-sync and install 'your_cool_package' via pip as editable.
+    Run pip-sync and install 'managetemplates' via pip as editable.
     """
     verbose_check_call('pip-sync', PACKAGE_ROOT / 'requirements.dev.txt')
     verbose_check_call('pip', 'install', '--no-deps', '-e', '.')
@@ -166,9 +199,9 @@ def publish():
     _run_unittest_cli(verbose=False, exit_after_run=False)  # Don't publish a broken state
 
     publish_package(
-        module=your_cool_package,
+        module=managetemplates,
         package_path=PACKAGE_ROOT,
-        distribution_name='your_cool_package',
+        distribution_name='managetemplates',
     )
 
 
@@ -180,7 +213,7 @@ cli.add_command(publish)
 @click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
 def fix_code_style(color: bool = True, verbose: bool = False):
     """
-    Fix code style of all your_cool_package source code files via darker
+    Fix code style of all managetemplates source code files via darker
     """
     code_style.fix(package_root=PACKAGE_ROOT, color=color, verbose=verbose)
 
@@ -303,7 +336,7 @@ cli.add_command(version)
 
 
 def main():
-    print_version(your_cool_package)
+    print_version(managetemplates)
 
     if len(sys.argv) >= 2:
         # Check if we just pass a command call

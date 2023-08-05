@@ -4,10 +4,10 @@ from manageprojects.tests.base import BaseTestCase
 from managetemplates import __version__, constants
 
 
-class CliTestCase(BaseTestCase):
+class DevCliTestCase(BaseTestCase):
 
     def test_install(self):
-        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'cli.py', args=('install',))
+        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('install',))
         self.assert_in_content(
             got=output,
             parts=(
@@ -17,7 +17,7 @@ class CliTestCase(BaseTestCase):
         )
 
     def test_pass_tox_command(self):
-        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'cli.py', args=('tox', '--help'))
+        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('tox', '--help'))
         self.assert_in_content(
             got=output,
             parts=(
@@ -25,7 +25,7 @@ class CliTestCase(BaseTestCase):
                 'list environments',
             ),
         )
-        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'cli.py', args=('tox', 'list'))
+        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('tox', 'list'))
         self.assert_in_content(
             got=output,
             parts=(
@@ -36,7 +36,7 @@ class CliTestCase(BaseTestCase):
         )
 
     def test_pass_unittest_command(self):
-        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'cli.py', args=('test', '--help'))
+        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('test', '--help'))
         self.assert_in_content(
             got=output,
             parts=(
