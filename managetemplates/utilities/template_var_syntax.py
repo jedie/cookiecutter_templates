@@ -4,7 +4,7 @@ import shutil
 from pathlib import Path
 
 from bx_py_utils.path import assert_is_file
-from manageprojects.git import Git
+from cli_base.cli_tools.git import Git
 from manageprojects.utilities.temp_path import TemporaryDirectory
 
 

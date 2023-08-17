@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 import rich_click as click
-from manageprojects.utilities.version_info import print_version
+from cli_base.cli_tools.version_info import print_version
 from rich import print  # noqa
 from rich_click import RichGroup
 

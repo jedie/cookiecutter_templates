@@ -10,13 +10,13 @@ bx-py-utils==85 \
     # via
     #   cli-base-utilities
     #   your-cool-package (pyproject.toml)
-cli-base-utilities==0.2.0 \
-    --hash=sha256:4fb89f4980c45eeeae69c7d745ddf7449740d42a072a42dd2c46ae1519ad7128 \
-    --hash=sha256:5edd26c07063ab031e30712c80fd3b8a2b9dffe33143ebd25cb1bc932a55488e
+cli-base-utilities==0.3.0 \
+    --hash=sha256:1a59a0a61d853b4d3f4944e7494af139bccb3cca4e7766e94f452c2f131a1d59 \
+    --hash=sha256:ca73cf149e5fd10312d450d9919a1ed87222c7bdd6479e94ab670ece4d91e8ba
     # via your-cool-package (pyproject.toml)
-click==8.1.6 \
-    --hash=sha256:48ee849951919527a045bfe3bf7baa8a959c423134e1a5b98c05c20ba75a1cbd \
-    --hash=sha256:fa244bb30b3b5ee2cae3da8f55c9e5e0c0e86093306301fb418eb9dc40fbded5
+click==8.1.7 \
+    --hash=sha256:ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28 \
+    --hash=sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de
     # via
     #   cli-base-utilities
     #   rich-click
