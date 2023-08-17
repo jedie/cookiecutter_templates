@@ -3,7 +3,7 @@ from pathlib import Path
 
 import django_example
 from bx_py_utils.path import assert_is_dir
-from manageprojects.utilities.subprocess_utils import verbose_check_call
+from cli_base.cli_tools.subprocess_utils import verbose_check_call
 from rich import print
 
 from managetemplates.constants import ALL_TEMPLATES, PACKAGE_ROOT, UPDATE_TEMPLATE_REQ_FILENAME
