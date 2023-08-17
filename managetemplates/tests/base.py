@@ -6,8 +6,8 @@ from pathlib import Path
 from unittest import TestCase
 
 from bx_py_utils.path import assert_is_dir, assert_is_file
-from manageprojects.git import Git
-from manageprojects.test_utils.git_utils import init_git
+from cli_base.cli_tools.git import Git
+from cli_base.cli_tools.test_utils.git_utils import init_git
 
 from managetemplates.constants import ALL_TEMPLATES
 from managetemplates.utilities.sync_cookiecutter_templates import cookiecutter_templates2generated
