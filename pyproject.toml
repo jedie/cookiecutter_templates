@@ -9,6 +9,7 @@ authors = [
 ]
 requires-python = ">=3.10,<4"
 dependencies = [
+    "cli-base-utilities",  # https://github.com/jedie/cli-base-utilities
     "manageprojects",  # https://github.com/jedie/manageprojects
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "click",  # https://github.com/pallets/click/

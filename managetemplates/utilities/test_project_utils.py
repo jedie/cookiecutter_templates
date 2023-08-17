@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 from bx_py_utils.path import assert_is_dir
-from manageprojects.utilities.subprocess_utils import verbose_check_call, verbose_check_output
+from cli_base.cli_tools.subprocess_utils import verbose_check_call, verbose_check_output
 
 
 class TestProject:

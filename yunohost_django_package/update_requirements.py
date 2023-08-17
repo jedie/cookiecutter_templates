@@ -5,7 +5,7 @@
         .../cookiecutter_templates$ cli.py update-template-req
 """
 from bx_py_utils.path import assert_is_dir
-from manageprojects.utilities.subprocess_utils import verbose_check_call
+from cli_base.cli_tools.subprocess_utils import verbose_check_call
 
 from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.utilities.verbose_copy import verbose_copy2

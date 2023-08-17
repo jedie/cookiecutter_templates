@@ -34,9 +34,9 @@ django-axes==6.1.0 \
     --hash=sha256:a7d509dc76e67440839522a182dc63ecafc3bac3af9de6f263d2bcec1154e50e \
     --hash=sha256:e3d44d4ec64ba6d470ef01b6c4b53b6b3747de96821f7c0ef96c64bffa9f6f74
     # via your-cool-package (pyproject.toml)
-django-debug-toolbar==4.1.0 \
-    --hash=sha256:a0b532ef5d52544fd745d1dcfc0557fa75f6f0d1962a8298bd568427ef2fa436 \
-    --hash=sha256:f57882e335593cb8e74c2bda9f1116bbb9ca8fc0d81b50a75ace0f83de5173c7
+django-debug-toolbar==4.2.0 \
+    --hash=sha256:af99128c06e8e794479e65ab62cc6c7d1e74e1c19beb44dcbf9bad7a9c017327 \
+    --hash=sha256:bc7fdaafafcdedefcc67a4a5ad9dac96efd6e41db15bc74d402a54a2ba4854dc
     # via your-cool-package (pyproject.toml)
 gunicorn==21.2.0 \
     --hash=sha256:3213aa5e8c24949e792bcacfc176fef362e7aac80b76c56f6b5122bf350722f0 \
@@ -62,7 +62,7 @@ typing-extensions==4.7.1 \
     # via asgiref
 
 # The following packages are considered to be unsafe in a requirements file:
-setuptools==68.0.0 \
-    --hash=sha256:11e52c67415a381d10d6b462ced9cfb97066179f0e871399e006c4ab101fc85f \
-    --hash=sha256:baf1fdb41c6da4cd2eae722e135500da913332ab3f2f5c7d33af9b492acb5235
+setuptools==68.1.0 \
+    --hash=sha256:d59c97e7b774979a5ccb96388efc9eb65518004537e85d52e81eaee89ab6dd91 \
+    --hash=sha256:e13e1b0bc760e9b0127eda042845999b2f913e12437046e663b833aa96d89715
     # via django-axes
