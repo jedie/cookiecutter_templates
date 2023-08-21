@@ -18,10 +18,16 @@ def main(verbose):
     verbose_check_call('make', 'update', cwd=pkg_path, verbose=verbose)
 
     # Sync the requirements back to the cookiecutter template:
+    template_path = PACKAGE_ROOT / 'yunohost_django_package' / '{{ cookiecutter.ynh_app_pkg_name }}'
     print('_' * 100)
     verbose_copy2(
         src=pkg_path / 'poetry.lock',
-        dst=PACKAGE_ROOT / 'yunohost_django_package' / '{{ cookiecutter.ynh_app_pkg_name }}' / 'poetry.lock',
+        dst=template_path / 'poetry.lock',
+    )
+    print('_' * 100)
+    verbose_copy2(
+        src=pkg_path / 'conf' / 'requirements.txt',
+        dst=template_path / 'conf' / 'requirements.txt',
     )
 
 

@@ -50,8 +50,8 @@ def test_version():
     manifest_version = pyproject_version.replace('+', '~')
 
     assert_file_contains_string(
-        file_path=Path(PACKAGE_ROOT, 'manifest.json'),
-        string=f'"version": "{manifest_version}"',
+        file_path=Path(PACKAGE_ROOT, 'manifest.toml'),
+        string=f'version = "{manifest_version}"',
     )
 
 

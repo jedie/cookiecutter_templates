@@ -3,9 +3,7 @@
 __pycache__
 dist/
 build/
-/coverage.json
-/coverage.xml
-poetry.lock
+/coverage.*
 
 !.github
 !.editorconfig

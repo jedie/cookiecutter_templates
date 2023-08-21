@@ -22,15 +22,15 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         assert settings.PATH_URL == 'app_path'
 
-        assert str(settings.FINALPATH).endswith('/local_test/opt_yunohost')
-        assert str(settings.PUBLIC_PATH).endswith('/local_test/var_www')
-        assert str(settings.LOG_FILE).endswith('/local_test/var_log_{{ cookiecutter.upstream_pkg_name }}.log')
+        assert str(settings.DATA_DIR_PATH).endswith('/local_test/opt_yunohost')
+        assert str(settings.INSTALL_DIR_PATH).endswith('/local_test/var_www')
+        assert str(settings.LOG_FILE_PATH).endswith('/local_test/var_log_{{ cookiecutter.upstream_pkg_name }}.log')
 
         assert settings.ROOT_URLCONF == 'urls'
 
     def test_config_panel_settings(self):
         # config_panel.toml settings, set via tests.conftest.pytest_configure():
-        assert settings.DEBUG_ENABLED == '0' and settings.DEBUG is False
+        assert settings.DEBUG_ENABLED == 'NO' and settings.DEBUG is False
         assert settings.LOG_LEVEL == 'INFO'
         assert settings.ADMIN_EMAIL == 'foo-bar@test.tld'
         assert settings.DEFAULT_FROM_EMAIL == 'django_app@test.tld'
