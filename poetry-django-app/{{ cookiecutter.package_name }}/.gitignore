@@ -27,6 +27,5 @@ sdist/
 .installed.cfg
 *.egg
 /publish.log
-/coverage.json
-/coverage.xml
+/coverage.*
 
