@@ -1,6 +1,6 @@
-from pathlib import Path
 import os
 import unittest.util
+from pathlib import Path
 
 import your_reuseable_django_app
 
