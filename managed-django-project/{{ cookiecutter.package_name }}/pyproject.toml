@@ -64,6 +64,7 @@ Source = "{{ cookiecutter.package_url }}"
 
 
 [project.scripts]
+# Must be set in ./manage.py and PROJECT_SHELL_SCRIPT:
 {{ cookiecutter.package_name }}_project = "{{ cookiecutter.package_name }}_project.__main__:main"
 
 [manage_django_project]
