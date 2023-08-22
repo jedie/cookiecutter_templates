@@ -122,14 +122,14 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{39,310,311}-django{4.0,4.1}
+envlist = py{311,310,39}-django{4.2,4.1}
 skip_missing_interpreters = True
 
 [testenv]
 passenv = *
 deps =
-    django4.0: django>=4.0,<4.1
     django4.1: django>=4.1,<4.2
+    django4.2: django>=4.2,<4.3
     manageprojects
     bx_django_utils
     model-bakery

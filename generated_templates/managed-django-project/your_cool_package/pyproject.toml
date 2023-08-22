@@ -64,6 +64,7 @@ Source = "https://github.com/john-doh/your_cool_package"
 
 
 [project.scripts]
+# Must be set in ./manage.py and PROJECT_SHELL_SCRIPT:
 your_cool_package_project = "your_cool_package_project.__main__:main"
 
 [manage_django_project]
