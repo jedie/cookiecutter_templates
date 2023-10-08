@@ -141,7 +141,7 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{311,310,39}-django{42,41,32}
+envlist = py{312,311,310,39}-django{42,41,32}
 skip_missing_interpreters = True
 
 [testenv]
