@@ -1,7 +1,7 @@
 # https://yunohost.org/en/packaging_manifest
 packaging_format = 2
 
-id = "{{ cookiecutter.upstream_pkg_name }}"
+id = "{{ cookiecutter.project_id }}"
 name = "{{ cookiecutter.project_name }}"
 description.en = "{{ cookiecutter.package_description }}"
 
