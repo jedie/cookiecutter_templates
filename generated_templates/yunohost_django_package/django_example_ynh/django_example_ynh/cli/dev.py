@@ -7,16 +7,15 @@ from pathlib import Path
 
 import rich_click as click
 from bx_py_utils.path import assert_is_file
+from cli_base.cli_tools.subprocess_utils import verbose_check_call
+from cli_base.cli_tools.version_info import print_version
 from django_yunohost_integration.local_test import create_local_test
 from manageprojects.utilities import code_style
 from manageprojects.utilities.publish import publish_package
-from cli_base.cli_tools.subprocess_utils import verbose_check_call
-from cli_base.cli_tools.version_info import print_version
 from rich import print  # noqa; noqa
 from rich_click import RichGroup
 
 import django_example_ynh
-from django_example_ynh import constants
 
 
 logger = logging.getLogger(__name__)
@@ -53,7 +52,7 @@ class ClickGroup(RichGroup):  # FIXME: How to set the "info_name" easier?
 
 @click.group(
     cls=ClickGroup,
-    epilog=constants.CLI_EPILOG,
+    epilog='Project Homepage: https://github.com/YunoHost-Apps/django_example_ynh',
 )
 def cli():
     pass
@@ -337,12 +336,7 @@ def diffsettings():
         },
     )
     app_path = destination / 'opt_yunohost'
-    verbose_check_call(
-        sys.executable,
-        app_path / 'manage.py',
-        'diffsettings',
-        cwd=app_path
-    )
+    verbose_check_call(sys.executable, app_path / 'manage.py', 'diffsettings', cwd=app_path)
 
 
 cli.add_command(diffsettings)
@@ -353,10 +347,7 @@ def pytest():
     """
     Run tests via "pytest"
     """
-    verbose_check_call(
-        sys.executable, '-m', 'pytest', *sys.argv[2:], cwd=PACKAGE_ROOT
-
-    )
+    verbose_check_call(sys.executable, '-m', 'pytest', *sys.argv[2:], cwd=PACKAGE_ROOT)
 
 
 cli.add_command(pytest)

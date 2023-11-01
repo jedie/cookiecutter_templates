@@ -16,7 +16,6 @@ from rich import print  # noqa; noqa
 from rich_click import RichGroup
 
 import {{ cookiecutter.ynh_app_pkg_name }}
-from {{ cookiecutter.ynh_app_pkg_name }} import constants
 
 
 logger = logging.getLogger(__name__)
@@ -53,7 +52,7 @@ class ClickGroup(RichGroup):  # FIXME: How to set the "info_name" easier?
 
 @click.group(
     cls=ClickGroup,
-    epilog=constants.CLI_EPILOG,
+    epilog='Project Homepage: {{ cookiecutter.ynh_app_url }}',
 )
 def cli():
     pass

@@ -8,7 +8,7 @@ from manageprojects.utilities import code_style
 from packaging.version import Version
 
 from {{ cookiecutter.ynh_app_pkg_name }} import __version__
-from {{ cookiecutter.ynh_app_pkg_name }}.cli.cli_app import PACKAGE_ROOT
+from {{ cookiecutter.ynh_app_pkg_name }}.cli.dev import PACKAGE_ROOT
 
 
 class ProjectSetupTestCase(TestCase):
@@ -17,12 +17,6 @@ class ProjectSetupTestCase(TestCase):
 
         version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
         self.assertEqual(str(version), __version__)
-
-        cli_bin = PACKAGE_ROOT / 'cli.py'
-        assert_is_file(cli_bin)
-
-        output = subprocess.check_output([cli_bin, 'version'], text=True)
-        self.assertIn(f'{{ cookiecutter.ynh_app_pkg_name }} v{__version__}', output)
 
         dev_cli_bin = PACKAGE_ROOT / 'dev-cli.py'
         assert_is_file(dev_cli_bin)

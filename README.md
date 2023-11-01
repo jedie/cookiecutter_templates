@@ -129,7 +129,7 @@ This CookieCutter template is useful to build a [YunoHost App](https://github.co
 
 * Contains all YunoHost scripts for install, backup, restore etc. action
 * Used [django_yunohost_integration](https://github.com/YunoHost-Apps/django_yunohost_integration)
-* Requirement management with [Poetry](https://python-poetry.org/)
+* Requirement management with [pip-tools](https://github.com/jazzband/pip-tools)
 * `Makefile` helper
 * used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
 * Project unittest with Django integration tests
