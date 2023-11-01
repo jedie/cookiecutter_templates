@@ -28,4 +28,4 @@ sdist/
 *.egg
 /publish.log
 /coverage.*
-
+*.orig
