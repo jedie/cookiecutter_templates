@@ -26,22 +26,16 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestBase):
             cookiecutter_json_path.write_text(content, encoding='UTF-8')
 
         with TempGitRepo(path=self.pkg_path, fresh=True, branch_name='master') as temp_git:
-            makefile_path = self.pkg_path / 'Makefile'
-            assert_is_file(makefile_path)
+            dev_cli_path = self.pkg_path / 'dev-cli.py'
+            assert_is_file(dev_cli_path)
 
-            poetry_lock = self.pkg_path / 'poetry.lock'
             req_txt = self.pkg_path / 'conf' / 'requirements.txt'
-            if not (poetry_lock.is_file() and req_txt.is_file()):
-                output = self.test_project.check_output('make', 'update')
-                self.assert_in('poetry install', output)
+            assert_is_file(req_txt)
+
+            output = self.test_project.check_output('python', 'dev-cli.py')
+            self.assertIn('Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...', output)
 
             venv_path = self.pkg_path / '.venv'
-            if not venv_path.is_dir():
-                output = self.test_project.check_output('make', 'install')
-                self.assert_in('poetry install', output)
-                self.assert_in('Installing django-example', output)
-                self.assert_in('Installing django-yunohost-integration', output)
-
             assert_is_file(venv_path / 'bin' / 'python')
             assert_is_file(venv_path / 'bin' / 'pip')
             assert_is_file(venv_path / 'bin' / 'django-admin')
@@ -49,7 +43,8 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestBase):
             assert_is_file(venv_path / 'bin' / 'black')
 
             self.test_project.check_call(
-                'make',
+                'python',
+                'dev-cli.py',
                 'pytest',
                 extra_env=dict(
                     # The project used snapshot tests,
