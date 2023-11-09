@@ -1,7 +1,10 @@
+from unittest.mock import patch
+
 from axes.models import AccessLog
 from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin, assert_html_response_snapshot
 from django.conf import LazySettings, settings
 from django.contrib.auth.models import User
+from django.template.defaulttags import CsrfTokenNode
 from django.test import override_settings
 from django.test.testcases import TestCase
 from django.urls.base import reverse
@@ -24,7 +27,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         assert str(settings.DATA_DIR_PATH).endswith('/local_test/opt_yunohost')
         assert str(settings.INSTALL_DIR_PATH).endswith('/local_test/var_www')
-        assert str(settings.LOG_FILE_PATH).endswith('/local_test/var_log_{{ cookiecutter.upstream_pkg_name }}.log')
+        assert str(settings.LOG_FILE_PATH).endswith('/local_test/var_log_{{ cookiecutter.project_id }}.log')
 
         assert settings.ROOT_URLCONF == 'urls'
 
@@ -61,13 +64,14 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         self.client.cookies['SSOwAuthUser'] = 'test'
 
-        response = self.client.get(
-            path='/app_path/admin/',
-            HTTP_REMOTE_USER='test',
-            HTTP_AUTH_USER='test',
-            HTTP_AUTHORIZATION='basic dGVzdDp0ZXN0MTIz',
-            secure=True,
-        )
+        with patch.object(CsrfTokenNode, 'render', return_value='MockedCsrfTokenNode'):
+            response = self.client.get(
+                path='/app_path/admin/',
+                HTTP_REMOTE_USER='test',
+                HTTP_AUTH_USER='test',
+                HTTP_AUTHORIZATION='basic dGVzdDp0ZXN0MTIz',
+                secure=True,
+            )
 
         assert User.objects.count() == 1
         user = User.objects.first()
