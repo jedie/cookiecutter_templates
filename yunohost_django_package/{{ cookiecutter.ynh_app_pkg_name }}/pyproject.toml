@@ -137,6 +137,7 @@ source = ['.']
 # TODO: pytest -> Django unitests:
 #command_line = '-m unittest --verbose --locals --buffer'
 command_line = '-m pytest'
+disable_warnings = ["couldnt-parse"]
 
 [tool.coverage.report]
 omit = ['.*', '*/tests/*']
