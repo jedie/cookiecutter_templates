@@ -1,7 +1,10 @@
+from unittest.mock import patch
+
 from axes.models import AccessLog
-from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin
+from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin, assert_html_response_snapshot
 from django.conf import LazySettings, settings
 from django.contrib.auth.models import User
+from django.template.defaulttags import CsrfTokenNode
 from django.test import override_settings
 from django.test.testcases import TestCase
 from django.urls.base import reverse
@@ -61,13 +64,14 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         self.client.cookies['SSOwAuthUser'] = 'test'
 
-        response = self.client.get(
-            path='/app_path/admin/',
-            HTTP_REMOTE_USER='test',
-            HTTP_AUTH_USER='test',
-            HTTP_AUTHORIZATION='basic dGVzdDp0ZXN0MTIz',
-            secure=True,
-        )
+        with patch.object(CsrfTokenNode, 'render', return_value='MockedCsrfTokenNode'):
+            response = self.client.get(
+                path='/app_path/admin/',
+                HTTP_REMOTE_USER='test',
+                HTTP_AUTH_USER='test',
+                HTTP_AUTHORIZATION='basic dGVzdDp0ZXN0MTIz',
+                secure=True,
+            )
 
         assert User.objects.count() == 1
         user = User.objects.first()
@@ -83,6 +87,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
                 '<strong>test</strong>',
             ),
         )
+        assert_html_response_snapshot(response, query_selector='#container', validate=False)
 
     def test_wrong_auth_user(self):
         assert User.objects.count() == 0

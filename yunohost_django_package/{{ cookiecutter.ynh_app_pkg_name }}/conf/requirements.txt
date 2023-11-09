@@ -8,13 +8,17 @@ asgiref==3.7.2 \
     --hash=sha256:89b2ef2247e3b562a16eef663bc0e2e703ec6468e2fa8a5cd61cd449786d4f6e \
     --hash=sha256:9e0ce3aa93a819ba5b45120216b23878cf6e8525eb3848653452b4192b92afed
     # via django
+async-timeout==4.0.3 \
+    --hash=sha256:4640d96be84d82d02ed59ea2b7105a0f7b33abe8703703cd0ab0bf87c427522f \
+    --hash=sha256:7405140ff1230c310e51dc27b3145b9092d659ce68ff733fb0cefe3ee42be028
+    # via django-example-ynh (pyproject.toml)
 bleach==6.1.0 \
     --hash=sha256:0a31f1837963c41d46bbf1331b8778e1308ea0791db03cc4e7357b97cf42a8fe \
     --hash=sha256:3225f354cfc436b9789c66c4ee030194bee0568fbf9cbdad3bc8b5c26c5f12b6
     # via django-tools
-bx-django-utils==66 \
-    --hash=sha256:99a5454284841d7059160d2f03c9c062d8def6c4936bf9a4ffa1fd728dbda08c \
-    --hash=sha256:a56f45644dc8f1cfd793bb5c939fcad1b483afbd04192b810f933b10058cd4cc
+bx-django-utils==67 \
+    --hash=sha256:8740fdaf98ed68a8ddb3af025d9b4f87c99101405898ddca86810b0c384b215a \
+    --hash=sha256:aca0ae5c91a62e4f594172b8c43468c701516f99ae50d99412d5299ba375df03
     # via django-example
 bx-py-utils==88 \
     --hash=sha256:32fbc7e9ff3dfb0a817c80fb1d165ec559643dab59c0be549e646acbf8223b75 \
@@ -50,7 +54,7 @@ django-axes==6.1.1 \
     --hash=sha256:29c48ff5f09046afd5e9a16e96d3bbb79f6c11c59f0a7bbd732559e60d0aa9fa \
     --hash=sha256:cd1bc4f7becc8e9243eb4090dffa258d7d7125ca0ce3153b6ffc920bccbf2c3f
     # via django-yunohost-integration
-django-example=={{ cookiecutter.upstream_version }} \
+django-example==0.2.0 \
     --hash=sha256:2bcaeed97868e8be5c4d7d6a745b054f6983c931d5cefb763e6ff25807f15793 \
     --hash=sha256:469beaa9e4f3e5d0ee98f043ee533f0f01fafef128391ac9f4ca9d9f35290da0
     # via django-example-ynh (pyproject.toml)
@@ -191,9 +195,9 @@ sqlparse==0.4.4 \
     --hash=sha256:5430a4fe2ac7d0f93e66f1efc6e1338a41884b7ddf2a350cedd20ccc4d9d28f3 \
     --hash=sha256:d446183e84b8349fa3061f0fe7f06ca94ba65b426946ffebe6e3e8295332420c
     # via django
-tomlkit==0.12.1 \
-    --hash=sha256:38e1ff8edb991273ec9f6181244a6a391ac30e9f5098e7535640ea6be97a7c86 \
-    --hash=sha256:712cbd236609acc6a3e2e97253dfc52d4c2082982a88f61b640ecf0817eab899
+tomlkit==0.12.2 \
+    --hash=sha256:df32fab589a81f0d7dc525a4267b6d7a64ee99619cbd1eeb0fae32c1dd426977 \
+    --hash=sha256:eeea7ac7563faeab0a1ed8fe12c2e5a51c61f933f2502f7e9db0241a65163ad0
     # via cli-base-utilities
 typing-extensions==4.8.0 \
     --hash=sha256:8f92fc8806f9a6b641eaa5318da32b44d401efaac0f6678c9bc448ba3605faa0 \

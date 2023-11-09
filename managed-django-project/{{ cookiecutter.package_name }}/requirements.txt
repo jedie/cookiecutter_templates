@@ -8,9 +8,9 @@ asgiref==3.7.2 \
     --hash=sha256:89b2ef2247e3b562a16eef663bc0e2e703ec6468e2fa8a5cd61cd449786d4f6e \
     --hash=sha256:9e0ce3aa93a819ba5b45120216b23878cf6e8525eb3848653452b4192b92afed
     # via django
-bx-django-utils==66 \
-    --hash=sha256:99a5454284841d7059160d2f03c9c062d8def6c4936bf9a4ffa1fd728dbda08c \
-    --hash=sha256:a56f45644dc8f1cfd793bb5c939fcad1b483afbd04192b810f933b10058cd4cc
+bx-django-utils==67 \
+    --hash=sha256:8740fdaf98ed68a8ddb3af025d9b4f87c99101405898ddca86810b0c384b215a \
+    --hash=sha256:aca0ae5c91a62e4f594172b8c43468c701516f99ae50d99412d5299ba375df03
     # via your-cool-package (pyproject.toml)
 bx-py-utils==88 \
     --hash=sha256:32fbc7e9ff3dfb0a817c80fb1d165ec559643dab59c0be549e646acbf8223b75 \
