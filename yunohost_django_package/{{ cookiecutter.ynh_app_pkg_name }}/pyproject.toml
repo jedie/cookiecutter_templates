@@ -75,7 +75,8 @@ version = {attr = "{{ cookiecutter.ynh_app_pkg_name }}.__version__"}
 
 [tool.darker]
 src = ['.']
-revision = "origin/main..."
+# YunoHost apps still use "master" istead of "main", isn't it?
+revision = "origin/master..."
 line_length = 119
 verbose = true
 color = true
@@ -95,10 +96,37 @@ log_level = "INFO"
 # https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
 atomic=true
 profile='black'
-skip_glob=['.*', '*/htmlcov/*']
-known_first_party=['{{ cookiecutter.ynh_app_pkg_name }}']
+skip_glob=[".*", "*/htmlcov/*","*/migrations/*","*/local_test/*"]
+known_first_party=['{{ cookiecutter.upstream_pkg_name }}', '{{ cookiecutter.ynh_app_pkg_name }}']
 line_length=119
 lines_after_imports=2
+
+
+[tool.pytest.ini_options]
+# https://docs.pytest.org/en/latest/customize.html#pyproject-toml
+minversion = "6.0"
+norecursedirs = ".* .git __pycache__ conf local_test coverage* dist htmlcov"
+# sometimes helpfull "addopts" arguments:
+#    -vv
+#    --verbose
+#    --capture=no
+#    --trace-config
+#    --full-trace
+#    -p no:warnings
+addopts = """
+    --reuse-db
+    --nomigrations
+    --cov=.
+    --cov-config=pyproject.toml
+    --cov-report term-missing
+    --cov-report html
+    --cov-report xml
+    --no-cov-on-fail
+    --showlocals
+    --doctest-modules
+    --failed-first
+    --new-first
+"""
 
 
 [tool.coverage.run]
