@@ -28,12 +28,6 @@ def assert_file_contains_string(file_path, string):
 
 
 def test_version():
-    if 'GITHUB_ACTION' not in os.environ:
-        # Github has a rate-limiting... So don't fetch the API if we run as GitHub action
-        assert_project_version(
-            current_version=__version__,
-            github_project_url='https://github.com/john-doh/django_example',
-        )
 
     assert '+ynh' in __version__, f'{__version__!r} does not contain "+ynh"'
 
@@ -45,6 +39,13 @@ def test_version():
         file_path=Path(PACKAGE_ROOT, 'manifest.toml'),
         string=f'version = "{manifest_version}"',
     )
+
+    if 'GITHUB_ACTION' not in os.environ:
+        # Github has a rate-limiting... So don't fetch the API if we run as GitHub action
+        assert_project_version(
+            current_version=inventory_version,
+            github_project_url='https://github.com/john-doh/django_example',
+        )
 
 
 def test_screenshot_filenames():

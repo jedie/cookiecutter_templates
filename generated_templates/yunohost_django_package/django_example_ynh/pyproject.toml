@@ -16,6 +16,10 @@ dependencies = [
     "django_yunohost_integration[ynh]>=0.6.0",  # https://github.com/YunoHost-Apps/django_yunohost_integration
     #
     "cli-base-utilities>=0.4.4",  # https://github.com/jedie/cli-base-utilities
+    #
+    # indirect depencies, added because we didn't create the requirements.txt with Python <3.11
+    # See: https://github.com/jazzband/pip-tools/issues/1326
+    "async-timeout",  # needed by redis for python<=3.11.2
 ]
 [project.optional-dependencies]
 dev = [
@@ -46,11 +50,12 @@ dev = [
     # https://github.com/pygments/pygments
     "darker[flynt, isort, color]",
 
-    "tomli",  # https://github.com/hukkin/tomli
-    #
-    # tomli only needed for Python <3.11, but see pip bug:
+    # indirect depencies added because of bug:
     # https://github.com/pypa/pip/issues/9644 / https://github.com/jazzband/pip-tools/issues/1866
-    #'tomli;python_version<"3.11"',  # https://github.com/hukkin/tomli
+    # to avoid errors like:
+    # In --require-hashes mode, all requirements must have their versions pinned with ==. These do not: ...
+    "tomli",  # Only needed for Python <3.11
+    "exceptiongroup", # needed by pytest
 ]
 
 [project.urls]
@@ -75,7 +80,8 @@ version = {attr = "django_example_ynh.__version__"}
 
 [tool.darker]
 src = ['.']
-revision = "origin/main..."
+# YunoHost apps still use "master" istead of "main", isn't it?
+revision = "origin/master..."
 line_length = 119
 verbose = true
 color = true
@@ -95,10 +101,37 @@ log_level = "INFO"
 # https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
 atomic=true
 profile='black'
-skip_glob=['.*', '*/htmlcov/*']
-known_first_party=['django_example_ynh']
+skip_glob=[".*", "*/htmlcov/*","*/migrations/*","*/local_test/*"]
+known_first_party=['django_example', 'django_example_ynh']
 line_length=119
 lines_after_imports=2
+
+
+[tool.pytest.ini_options]
+# https://docs.pytest.org/en/latest/customize.html#pyproject-toml
+minversion = "6.0"
+norecursedirs = ".* .git __pycache__ conf local_test coverage* dist htmlcov"
+# sometimes helpfull "addopts" arguments:
+#    -vv
+#    --verbose
+#    --capture=no
+#    --trace-config
+#    --full-trace
+#    -p no:warnings
+addopts = """
+    --reuse-db
+    --nomigrations
+    --cov=.
+    --cov-config=pyproject.toml
+    --cov-report term-missing
+    --cov-report html
+    --cov-report xml
+    --no-cov-on-fail
+    --showlocals
+    --doctest-modules
+    --failed-first
+    --new-first
+"""
 
 
 [tool.coverage.run]
@@ -109,6 +142,7 @@ source = ['.']
 # TODO: pytest -> Django unitests:
 #command_line = '-m unittest --verbose --locals --buffer'
 command_line = '-m pytest'
+disable_warnings = ["couldnt-parse"]
 
 [tool.coverage.report]
 omit = ['.*', '*/tests/*']

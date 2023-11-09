@@ -1,5 +1,5 @@
 from axes.models import AccessLog
-from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin
+from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin, assert_html_response_snapshot
 from django.conf import LazySettings, settings
 from django.contrib.auth.models import User
 from django.test import override_settings
@@ -83,6 +83,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
                 '<strong>test</strong>',
             ),
         )
+        assert_html_response_snapshot(response, query_selector='#container', validate=False)
 
     def test_wrong_auth_user(self):
         assert User.objects.count() == 0
