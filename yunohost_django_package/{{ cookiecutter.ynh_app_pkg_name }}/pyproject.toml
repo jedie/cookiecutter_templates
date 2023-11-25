@@ -24,7 +24,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "bx_django_utils",  # https://github.com/boxine/bx_django_utils
-    "beautifulsoup4",
+    "beautifulsoup4",  # https://pypi.org/project/beautifulsoup4/
     #
     # TODO: Remove "pytest" and use normal unittests ;)
     "pytest",

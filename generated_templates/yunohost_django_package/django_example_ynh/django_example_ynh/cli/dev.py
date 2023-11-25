@@ -340,7 +340,7 @@ def diffsettings():
         sys.executable,
         app_path / 'manage.py',
         'diffsettings',
-        cwd=app_path
+        cwd=app_path,
     )
 
 
