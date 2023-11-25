@@ -6,7 +6,8 @@
 
 A example YunoHost App
 
-[![Integration level](https://dash.yunohost.org/integration/django_example_ynh.svg)](https://dash.yunohost.org/appci/app/django_example_ynh) ![](https://ci-apps.yunohost.org/ci/badges/django_example_ynh.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/django_example_ynh.maintain.svg)
+[![Working status](https://ci-apps.yunohost.org/ci/badges/django_example_ynh.status.svg)](https://dash.yunohost.org/appci/app/django_example_ynh)
+[![Integration level](https://dash.yunohost.org/integration/django_example_ynh.svg)](https://ci-apps.yunohost.org/ci/apps/django_example_ynh/latestjob)
 [![Install django_example_ynh with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django_example_ynh)
 
 

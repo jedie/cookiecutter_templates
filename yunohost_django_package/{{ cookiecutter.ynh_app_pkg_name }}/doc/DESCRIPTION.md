@@ -6,7 +6,8 @@
 
 {{ cookiecutter.package_description }}
 
-[![Integration level](https://dash.yunohost.org/integration/{{ cookiecutter.ynh_app_pkg_name }}.svg)](https://dash.yunohost.org/appci/app/{{ cookiecutter.ynh_app_pkg_name }}) ![](https://ci-apps.yunohost.org/ci/badges/{{ cookiecutter.ynh_app_pkg_name }}.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/{{ cookiecutter.ynh_app_pkg_name }}.maintain.svg)
+[![Working status](https://ci-apps.yunohost.org/ci/badges/{{ cookiecutter.ynh_app_pkg_name }}.status.svg)](https://dash.yunohost.org/appci/app/{{ cookiecutter.ynh_app_pkg_name }})
+[![Integration level](https://dash.yunohost.org/integration/{{ cookiecutter.ynh_app_pkg_name }}.svg)](https://ci-apps.yunohost.org/ci/apps/{{ cookiecutter.ynh_app_pkg_name }}/latestjob)
 [![Install {{ cookiecutter.ynh_app_pkg_name }} with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app={{ cookiecutter.ynh_app_pkg_name }})
 
 
