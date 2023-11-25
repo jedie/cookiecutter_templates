@@ -13,10 +13,11 @@ maintainers = ["{{ cookiecutter.full_name }}"]
 [upstream]
 # https://yunohost.org/en/packaging_manifest#upstream-section
 license = "{{ cookiecutter.license }}"
-website = "{{ cookiecutter.ynh_app_url }}"
+# website = "{{ cookiecutter.ynh_app_url }}" # If the app has no proper website, just remove the 'website' key entirely
 admindoc = "{{ cookiecutter.ynh_app_url }}"
 userdoc = "{{ cookiecutter.upstream_url }}"
 code = "{{ cookiecutter.ynh_app_url }}"
+
 
 
 [integration]
@@ -31,7 +32,10 @@ ram.build = "50M" # **estimate** minimum ram requirement. e.g. 50M, 400M, 1G, ..
 ram.runtime = "50M" # **estimate** minimum ram requirement. e.g. 50M, 400M, 1G, ...
 
 
+
 [install]
+# https://yunohost.org/en/packaging_manifest#install-questions
+
     [install.domain]
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "domain"
