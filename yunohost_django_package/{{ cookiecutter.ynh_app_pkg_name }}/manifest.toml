@@ -67,9 +67,7 @@ ram.runtime = "50M" # **estimate** minimum ram requirement. e.g. 50M, 400M, 1G, 
 
     [install.debug_enabled] # __DEBUG_ENABLED__
     ask.en = "Should be never enabled in production!"
-    type = "select"
-    choices = ["YES", "NO"]
-    default = "NO"
+    type = "boolean"
 
     [install.log_level] # __LOG_LEVEL__
     ask.en = "Logging level"
