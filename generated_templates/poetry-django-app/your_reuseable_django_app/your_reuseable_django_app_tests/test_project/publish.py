@@ -4,8 +4,8 @@
 
 from pathlib import Path
 
-from cli_base.cli_tools.subprocess_utils import verbose_check_call
 from manageprojects.utilities.publish import publish_package
+from cli_base.cli_tools.subprocess_utils import verbose_check_call
 
 import your_reuseable_django_app
 

@@ -6,11 +6,6 @@
 
 A example YunoHost App
 
-[![Working status](https://ci-apps.yunohost.org/ci/badges/django_example_ynh.status.svg)](https://dash.yunohost.org/appci/app/django_example_ynh)
-[![Integration level](https://dash.yunohost.org/integration/django_example_ynh.svg)](https://ci-apps.yunohost.org/ci/apps/django_example_ynh/latestjob)
-[![Install django_example_ynh with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django_example_ynh)
-
-
 Pull requests welcome ;)
 
 This package for YunoHost used [django-yunohost-integration](https://github.com/YunoHost-Apps/django_yunohost_integration)
