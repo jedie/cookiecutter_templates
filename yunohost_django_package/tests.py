@@ -45,7 +45,7 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestBase):
             self.test_project.check_call(
                 'python',
                 'dev-cli.py',
-                'pytest',
+                'test',
                 extra_env=dict(
                     # The project used snapshot tests,
                     # because of very small differences,
