@@ -25,9 +25,11 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         assert settings.PATH_URL == 'app_path'
 
-        assert str(settings.DATA_DIR_PATH).endswith('/local_test/opt_yunohost')
-        assert str(settings.INSTALL_DIR_PATH).endswith('/local_test/var_www')
-        assert str(settings.LOG_FILE_PATH).endswith('/local_test/var_log_django_example.log')
+        assert str(settings.DATA_DIR_PATH).endswith('/local_test/opt_yunohost'), f'{settings.DATA_DIR_PATH=}'
+        assert str(settings.INSTALL_DIR_PATH).endswith('/local_test/var_www'), f'{settings.INSTALL_DIR_PATH=}'
+        assert str(settings.LOG_FILE_PATH).endswith(
+            '/local_test/var_log_django_example.log'
+        ), f'{settings.LOG_FILE_PATH=}'
 
         assert settings.ROOT_URLCONF == 'urls'
 
@@ -40,7 +42,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
     def test_auth(self):
         assert settings.PATH_URL == 'app_path'
-        assert reverse('admin:index') == '/app_path/admin/'
+        self.assertEqual(reverse('admin:index'), '/app_path/admin/')
 
         # SecurityMiddleware should redirects all non-HTTPS requests to HTTPS:
         assert settings.SECURE_SSL_REDIRECT is True

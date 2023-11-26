@@ -40,7 +40,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
     def test_auth(self):
         assert settings.PATH_URL == 'app_path'
-        assert reverse('admin:index') == '/app_path/admin/'
+        self.assertEqual(reverse('admin:index'), '/app_path/admin/')
 
         # SecurityMiddleware should redirects all non-HTTPS requests to HTTPS:
         assert settings.SECURE_SSL_REDIRECT is True
