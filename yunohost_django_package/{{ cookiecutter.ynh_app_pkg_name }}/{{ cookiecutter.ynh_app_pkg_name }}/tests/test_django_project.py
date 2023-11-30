@@ -25,9 +25,11 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         assert settings.PATH_URL == 'app_path'
 
-        assert str(settings.DATA_DIR_PATH).endswith('/local_test/opt_yunohost')
-        assert str(settings.INSTALL_DIR_PATH).endswith('/local_test/var_www')
-        assert str(settings.LOG_FILE_PATH).endswith('/local_test/var_log_{{ cookiecutter.project_id }}.log')
+        assert str(settings.DATA_DIR_PATH).endswith('/local_test/opt_yunohost'), f'{settings.DATA_DIR_PATH=}'
+        assert str(settings.INSTALL_DIR_PATH).endswith('/local_test/var_www'), f'{settings.INSTALL_DIR_PATH=}'
+        assert str(settings.LOG_FILE_PATH).endswith(
+            '/local_test/var_log_{{ cookiecutter.project_id }}.log'
+        ), f'{settings.LOG_FILE_PATH=}'
 
         assert settings.ROOT_URLCONF == 'urls'
 
