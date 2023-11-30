@@ -28,6 +28,7 @@ manageprojects = "*"  # https://github.com/jedie/manageprojects
 tox = ">=4.4.4"  # https://github.com/tox-dev/tox
 coverage= "*"  # https://github.com/nedbat/coveragepy
 flake8 = "*"  # https://github.com/pycqa/flake8
+flake8-bugbear = "*"  # https://github.com/PyCQA/flake8-bugbear
 EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
 safety = "*"  # https://github.com/pyupio/safety
 mypy = "*"  # https://github.com/python/mypy

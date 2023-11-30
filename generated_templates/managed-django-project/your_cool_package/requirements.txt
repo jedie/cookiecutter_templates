@@ -8,13 +8,13 @@ asgiref==3.7.2 \
     --hash=sha256:89b2ef2247e3b562a16eef663bc0e2e703ec6468e2fa8a5cd61cd449786d4f6e \
     --hash=sha256:9e0ce3aa93a819ba5b45120216b23878cf6e8525eb3848653452b4192b92afed
     # via django
-bx-django-utils==67 \
-    --hash=sha256:8740fdaf98ed68a8ddb3af025d9b4f87c99101405898ddca86810b0c384b215a \
-    --hash=sha256:aca0ae5c91a62e4f594172b8c43468c701516f99ae50d99412d5299ba375df03
+bx-django-utils==70 \
+    --hash=sha256:41c8bd54c0eab07ce914ec7bf3eca115324fba577b158a89d827b4312a4e6a98 \
+    --hash=sha256:dfc2db1ef019c51ea446687dff1602f75984f3bc410426d3c3ff34d2fab58f1a
     # via your-cool-package (pyproject.toml)
-bx-py-utils==88 \
-    --hash=sha256:32fbc7e9ff3dfb0a817c80fb1d165ec559643dab59c0be549e646acbf8223b75 \
-    --hash=sha256:3a6f4eeef6abcac834b2c1ea4c5211130fd930a064aa0baabddd7c2bd00e38ac
+bx-py-utils==89 \
+    --hash=sha256:179649df6b2541d241e23e2cf1ac314586717d8e60f57326fe5c9f110f3d602e \
+    --hash=sha256:68215036c448fd04baf989cd51a9523a9edb8239a7520c9177fb874d64914878
     # via
     #   bx-django-utils
     #   your-cool-package (pyproject.toml)
@@ -58,7 +58,7 @@ sqlparse==0.4.4 \
     #   django-debug-toolbar
 
 # The following packages are considered to be unsafe in a requirements file:
-setuptools==68.2.2 \
-    --hash=sha256:4ac1475276d2f1c48684874089fefcd83bd7162ddaafb81fac866ba0db282a87 \
-    --hash=sha256:b454a35605876da60632df1a60f736524eb73cc47bbc9f3f1ef1b644de74fd2a
+setuptools==69.0.2 \
+    --hash=sha256:1e8fdff6797d3865f37397be788a4e3cba233608e9b509382a2777d25ebde7f2 \
+    --hash=sha256:735896e78a4742605974de002ac60562d286fa8051a7e2299445e8e8fbb01aa6
     # via django-axes
