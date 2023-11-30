@@ -16,20 +16,20 @@ bleach==6.1.0 \
     --hash=sha256:0a31f1837963c41d46bbf1331b8778e1308ea0791db03cc4e7357b97cf42a8fe \
     --hash=sha256:3225f354cfc436b9789c66c4ee030194bee0568fbf9cbdad3bc8b5c26c5f12b6
     # via django-tools
-bx-django-utils==69 \
-    --hash=sha256:39e96b8ad47bcf36d6713e4e42c8d09deb21e413160dc2944f17b7d2e2244713 \
-    --hash=sha256:59b806aa36b50184f14bd0f7a61fb66c478fa231a44f92472360ce0cf1616013
+bx-django-utils==70 \
+    --hash=sha256:41c8bd54c0eab07ce914ec7bf3eca115324fba577b158a89d827b4312a4e6a98 \
+    --hash=sha256:dfc2db1ef019c51ea446687dff1602f75984f3bc410426d3c3ff34d2fab58f1a
     # via django-example
-bx-py-utils==88 \
-    --hash=sha256:32fbc7e9ff3dfb0a817c80fb1d165ec559643dab59c0be549e646acbf8223b75 \
-    --hash=sha256:3a6f4eeef6abcac834b2c1ea4c5211130fd930a064aa0baabddd7c2bd00e38ac
+bx-py-utils==89 \
+    --hash=sha256:179649df6b2541d241e23e2cf1ac314586717d8e60f57326fe5c9f110f3d602e \
+    --hash=sha256:68215036c448fd04baf989cd51a9523a9edb8239a7520c9177fb874d64914878
     # via
     #   bx-django-utils
     #   cli-base-utilities
     #   django-tools
-cli-base-utilities==0.4.4 \
-    --hash=sha256:110bef895fb7dfc29662f463ccedc4c985a880afbde2e6dea387d0d2f96f4985 \
-    --hash=sha256:72d4248776519a21c3448d6e348511ce6fe8c3742c154e158473236c8278fb1c
+cli-base-utilities==0.4.5 \
+    --hash=sha256:4669adbd114e47ee9ff185f4c83555438ff01daa4a026dfbbcbd999e26c9b039 \
+    --hash=sha256:789034deaf489d8f8126a9dd972d3bdc7fd6efcd519a600dc814dbf66d47bab9
     # via django-example-ynh (pyproject.toml)
 click==8.1.7 \
     --hash=sha256:ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28 \
