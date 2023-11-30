@@ -8,6 +8,8 @@ from pathlib import Path
 import rich_click as click
 from bx_py_utils.path import assert_is_file
 from rich import print  # noqa
+from rich.console import Console
+from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
 
 import {{ cookiecutter.package_name }}
@@ -66,6 +68,14 @@ cli.add_command(version)
 
 def main():
     print(f'[bold][green]{{ cookiecutter.package_name }}[/green] v[cyan]{__version__}')
+
+    console = Console()
+    rich_traceback_install(
+        width=console.size.width,  # full terminal width
+        show_locals=True,
+        suppress=[click],
+        max_frames=2,
+    )
 
     # Execute Click CLI:
     cli.name = './cli.py'
