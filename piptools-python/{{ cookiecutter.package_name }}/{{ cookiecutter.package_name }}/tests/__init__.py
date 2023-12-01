@@ -3,9 +3,8 @@ import unittest.util
 from pathlib import Path
 
 from bx_py_utils.test_utils.deny_requests import deny_any_real_request
-from rich import print  # noqa
-
 from cli_base.cli_tools.verbosity import MAX_LOG_LEVEL, setup_logging
+from rich import print  # noqa
 
 
 def pre_configure_tests() -> None:

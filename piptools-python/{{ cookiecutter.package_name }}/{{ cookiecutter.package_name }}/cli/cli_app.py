@@ -13,7 +13,7 @@ from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
 
 import {{ cookiecutter.package_name }}
-from {{ cookiecutter.package_name }} import constants, __version__
+from {{ cookiecutter.package_name }} import __version__, constants
 
 
 logger = logging.getLogger(__name__)
