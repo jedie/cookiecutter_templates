@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import subprocess
-import sys
 from pathlib import Path
 from unittest.mock import patch
 
@@ -15,11 +14,11 @@ from packaging.version import Version
 from managetemplates import __version__
 from managetemplates.cli.cli_app import cli
 from managetemplates.cli.dev import cli as dev_cli
-from managetemplates.constants import PACKAGE_ROOT
+from managetemplates.constants import PACKAGE_ROOT, PY_BIN_PATH
 from managetemplates.tests.base import BaseTestCase
 
 
-VENV_BIN_PATH = Path(sys.executable).parent
+RSTRIP_PATHS = (PY_BIN_PATH.parent, PACKAGE_ROOT)
 
 
 class SubprocessCallMock(SubprocessCallMockOrigin):
@@ -130,10 +129,10 @@ class ProjectSetupTestCase(BaseTestCase):
             stdout = invoke_click(dev_cli, 'install')
 
         self.assertEqual(
-            call_mock.get_popenargs(rstrip_paths=(PACKAGE_ROOT,)),
+            call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS),
             [
-                ['.../.venv/bin/pip-sync', '.../requirements.dev.txt'],
-                ['.../.venv/bin/pip', 'install', '--no-deps', '-e', '.'],
+                ['.../bin/pip-sync', '.../requirements.dev.txt'],
+                ['.../bin/pip', 'install', '--no-deps', '-e', '.'],
             ],
         )
         self.assert_in_content(
@@ -155,12 +154,12 @@ class ProjectSetupTestCase(BaseTestCase):
         assert_is_file(req_dev_txt_path)
 
         self.assertEqual(
-            call_mock.get_popenargs(rstrip_paths=(PACKAGE_ROOT,)),
+            call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS),
             [
-                ['.../.venv/bin/pip', 'install', '-U', 'pip'],
-                ['.../.venv/bin/pip', 'install', '-U', 'pip-tools'],
+                ['.../bin/pip', 'install', '-U', 'pip'],
+                ['.../bin/pip', 'install', '-U', 'pip-tools'],
                 [
-                    '.../.venv/bin/pip-compile',
+                    '.../bin/pip-compile',
                     '--verbose',
                     '--allow-unsafe',
                     '--resolver=backtracking',
@@ -171,7 +170,7 @@ class ProjectSetupTestCase(BaseTestCase):
                     'requirements.txt',
                 ],
                 [
-                    '.../.venv/bin/pip-compile',
+                    '.../bin/pip-compile',
                     '--verbose',
                     '--allow-unsafe',
                     '--resolver=backtracking',
@@ -182,8 +181,8 @@ class ProjectSetupTestCase(BaseTestCase):
                     '--output-file',
                     'requirements.dev.txt',
                 ],
-                ['.../.venv/bin/safety', 'check', '-r', 'requirements.dev.txt'],
-                ['.../.venv/bin/pip-sync', 'requirements.dev.txt'],
+                ['.../bin/safety', 'check', '-r', 'requirements.dev.txt'],
+                ['.../bin/pip-sync', 'requirements.dev.txt'],
             ],
         )
 
@@ -192,14 +191,14 @@ class ProjectSetupTestCase(BaseTestCase):
             invoke_click(cli, 'update-template-req')
 
         self.assertEqual(
-            call_mock.get_popenargs(rstrip_paths=(PACKAGE_ROOT,), with_cwd=True),
+            call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS, with_cwd=True),
             [
-                ['.../managed-django-project$ .../.venv/bin/python', 'update_requirements.py'],
-                ['.../pipenv-python$ .../.venv/bin/python', 'update_requirements.py'],
-                ['.../piptools-python$ .../.venv/bin/python', 'update_requirements.py'],
-                ['.../poetry-django-app$ .../.venv/bin/python', 'update_requirements.py'],
-                ['.../poetry-python$ .../.venv/bin/python', 'update_requirements.py'],
-                ['.../yunohost_django_package$ .../.venv/bin/python', 'update_requirements.py'],
+                ['.../managed-django-project$ .../bin/python', 'update_requirements.py'],
+                ['.../pipenv-python$ .../bin/python', 'update_requirements.py'],
+                ['.../piptools-python$ .../bin/python', 'update_requirements.py'],
+                ['.../poetry-django-app$ .../bin/python', 'update_requirements.py'],
+                ['.../poetry-python$ .../bin/python', 'update_requirements.py'],
+                ['.../yunohost_django_package$ .../bin/python', 'update_requirements.py'],
             ],
         )
 

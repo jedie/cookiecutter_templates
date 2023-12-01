@@ -1,8 +1,10 @@
+import sys
 from pathlib import Path
 
 from bx_py_utils.path import assert_is_dir, assert_is_file
 
 import managetemplates
+
 
 CLI_EPILOG = 'Project Homepage: https://github.com/jedie/cookiecutter_templates'
 
@@ -35,3 +37,6 @@ ALL_PACKAGES = tuple(
 )
 
 UPDATE_TEMPLATE_REQ_FILENAME = 'update_requirements.py'
+
+
+PY_BIN_PATH = Path(sys.executable).parent
