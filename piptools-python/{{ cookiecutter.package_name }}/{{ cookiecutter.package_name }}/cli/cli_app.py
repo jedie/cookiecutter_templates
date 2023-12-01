@@ -7,13 +7,14 @@ from pathlib import Path
 
 import rich_click as click
 from bx_py_utils.path import assert_is_file
+from cli_base.cli_tools.version_info import print_version
 from rich import print  # noqa
 from rich.console import Console
 from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
 
 import {{ cookiecutter.package_name }}
-from {{ cookiecutter.package_name }} import __version__, constants
+from {{ cookiecutter.package_name }} import constants
 
 
 logger = logging.getLogger(__name__)
@@ -67,7 +68,7 @@ cli.add_command(version)
 
 
 def main():
-    print(f'[bold][green]{{ cookiecutter.package_name }}[/green] v[cyan]{__version__}')
+    print_version({{ cookiecutter.package_name }})
 
     console = Console()
     rich_traceback_install(

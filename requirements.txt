@@ -163,9 +163,9 @@ charset-normalizer==3.3.2 \
     --hash=sha256:fd1abc0d89e30cc4e02e4064dc67fcc51bd941eb395c502aac3ec19fab46b519 \
     --hash=sha256:ff8fa367d09b717b2a17a052544193ad76cd49979c805768879cb63d9ca50561
     # via requests
-cli-base-utilities==0.4.4 \
-    --hash=sha256:110bef895fb7dfc29662f463ccedc4c985a880afbde2e6dea387d0d2f96f4985 \
-    --hash=sha256:72d4248776519a21c3448d6e348511ce6fe8c3742c154e158473236c8278fb1c
+cli-base-utilities==0.6.0 \
+    --hash=sha256:c3e0efafca519f7f79a1aff67d099987d849f1c3d795c4e605b6b9be49537712 \
+    --hash=sha256:e403c6e584508aa69cc093b7a325127f6ef9835624e4fde7f104e941314645a9
     # via
     #   manageprojects
     #   managetemplates (pyproject.toml)
@@ -229,9 +229,9 @@ jinja2==3.1.2 \
     --hash=sha256:31351a702a408a9e7595a8fc6150fc3f43bb6bf7e319770cbc0db9df9437e852 \
     --hash=sha256:6088930bfe239f0e6710546ab9c19c9ef35e29792895fed6e6e31a023a182a61
     # via cookiecutter
-manageprojects==0.15.4 \
-    --hash=sha256:0a6660bbff415f5455a59b6518701ff566c5e87e40bcebaf5724d695c6dad25c \
-    --hash=sha256:abe4a5e1cd665a9b04626c620aa9ccfb237b5cb968100610d1a910a5605f3e3d
+manageprojects==0.16.0 \
+    --hash=sha256:97de7b291926b417c991762ed6b2d9945d25875db132113ca1dc56295e7acedd \
+    --hash=sha256:e2f2d308cdf62beea4b70997694dc034007c8189bcbc3da1c9089faeb5b34a7b
     # via managetemplates (pyproject.toml)
 markdown-it-py==3.0.0 \
     --hash=sha256:355216845c60bd96232cd8d8c40e8f9765cc86f46880e43a8fd22dc1a1a8cab1 \
