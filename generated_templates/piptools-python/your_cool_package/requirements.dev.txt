@@ -220,9 +220,9 @@ charset-normalizer==3.3.2 \
     --hash=sha256:fd1abc0d89e30cc4e02e4064dc67fcc51bd941eb395c502aac3ec19fab46b519 \
     --hash=sha256:ff8fa367d09b717b2a17a052544193ad76cd49979c805768879cb63d9ca50561
     # via requests
-cli-base-utilities==0.4.5 \
-    --hash=sha256:4669adbd114e47ee9ff185f4c83555438ff01daa4a026dfbbcbd999e26c9b039 \
-    --hash=sha256:789034deaf489d8f8126a9dd972d3bdc7fd6efcd519a600dc814dbf66d47bab9
+cli-base-utilities==0.5.0 \
+    --hash=sha256:366caa000bb0908914bc09e7b9cc2b6921bcf51e0aa2a91ae36cd5e092d774d8 \
+    --hash=sha256:67eec2c61b00ed9f376ca364e6ef85d65db6c0908cf530d7015483ef2902f27e
     # via
     #   manageprojects
     #   your-cool-package (pyproject.toml)
@@ -371,7 +371,9 @@ flake8==6.1.0 \
 flake8-bugbear==23.11.28 \
     --hash=sha256:0ba6c44eaa0e4782da94c5c2607159a0e73569369246cd179cc143a0e16b78ba \
     --hash=sha256:8d0f351d954fd860851710cd8b5b28742b2339c0e58848b103418dd9cddb9aa4
-    # via manageprojects
+    # via
+    #   manageprojects
+    #   your-cool-package (pyproject.toml)
 flynt==0.77 \
     --hash=sha256:2863ac8ec19d6ec8d29e760546e6ced644baf6dff3c7cdc77e03abbd29b80f14 \
     --hash=sha256:2bd1b37043ad88a3f3c3c34a76fc0b64d24e5f03d36ea6b48cb69cc642bff17e
@@ -380,9 +382,9 @@ idna==3.6 \
     --hash=sha256:9ecdbbd083b06798ae1e86adcbfe8ab1479cf864e4ee30fe4e46a003d12491ca \
     --hash=sha256:c05567e9c24a6b9faaa835c4821bad0590fbb9d5779e7caa6e1cc4978e7eb24f
     # via requests
-importlib-metadata==6.8.0 \
-    --hash=sha256:3ebb78df84a805d7698245025b975d9d67053cd94c79245ba4b3eb694abe68bb \
-    --hash=sha256:dbace7892d8c0c4ac1ad096662232f831d4e64f4c4545bd53016a3e9d4654743
+importlib-metadata==6.9.0 \
+    --hash=sha256:1c8dc6839ddc9771412596926f24cb5a553bbd40624ee2c7e55e531542bed3b8 \
+    --hash=sha256:e8acb523c335a91822674e149b46c0399ec4d328c4d1f6e49c273da5ff0201b9
     # via
     #   keyring
     #   twine
@@ -830,9 +832,9 @@ urllib3==2.1.0 \
     # via
     #   requests
     #   twine
-virtualenv==20.24.7 \
-    --hash=sha256:69050ffb42419c91f6c1284a7b24e0475d793447e35929b488bf6a0aade39353 \
-    --hash=sha256:a18b3fd0314ca59a2e9f4b556819ed07183b3e9a3702ecfe213f593d44f7b3fd
+virtualenv==20.25.0 \
+    --hash=sha256:4238949c5ffe6876362d9c0180fc6c3a824a7b12b80604eeb8085f2ed7460de3 \
+    --hash=sha256:bf51c0d9c7dd63ea8e44086fa1e4fb1093a31e963b86959257378aef020e1f1b
     # via tox
 wheel==0.42.0 \
     --hash=sha256:177f9c9b0d45c47873b619f5b650346d632cdc35fb5e4d25058e09c9e581433d \

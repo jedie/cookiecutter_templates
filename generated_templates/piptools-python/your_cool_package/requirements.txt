@@ -10,9 +10,9 @@ bx-py-utils==89 \
     # via
     #   cli-base-utilities
     #   your-cool-package (pyproject.toml)
-cli-base-utilities==0.4.5 \
-    --hash=sha256:4669adbd114e47ee9ff185f4c83555438ff01daa4a026dfbbcbd999e26c9b039 \
-    --hash=sha256:789034deaf489d8f8126a9dd972d3bdc7fd6efcd519a600dc814dbf66d47bab9
+cli-base-utilities==0.5.0 \
+    --hash=sha256:366caa000bb0908914bc09e7b9cc2b6921bcf51e0aa2a91ae36cd5e092d774d8 \
+    --hash=sha256:67eec2c61b00ed9f376ca364e6ef85d65db6c0908cf530d7015483ef2902f27e
     # via your-cool-package (pyproject.toml)
 click==8.1.7 \
     --hash=sha256:ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28 \
