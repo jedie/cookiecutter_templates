@@ -31,7 +31,7 @@ jobs:
       with:
         python-version: '${{ matrix.python-version }}'
         cache: 'pip' # caching pip dependencies
-        cache-dependency-path: '**/requirements.dev.txt'
+        cache-dependency-path: '**/requirements.*.txt'
 
     - name: 'Bootstrap app venv'
       # The first CLI call will create the .venv
