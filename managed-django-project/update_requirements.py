@@ -21,10 +21,10 @@ def main(verbose):
 
     # Sync the requirements back to the cookiecutter template:
     print('_' * 100)
-    for file_name in ('requirements.txt', 'requirements.dev.txt'):
+    for file_path in sorted(pkg_path.glob('requirements*.txt')):
         verbose_copy2(
-            src=pkg_path / file_name,
-            dst=PACKAGE_ROOT / 'managed-django-project' / '{{ cookiecutter.package_name }}' / file_name,
+            src=file_path,
+            dst=PACKAGE_ROOT / 'managed-django-project' / '{{ cookiecutter.package_name }}' / file_path.name,
         )
 
 
