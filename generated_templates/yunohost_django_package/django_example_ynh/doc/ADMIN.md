@@ -39,11 +39,9 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
 │ check-code-style            Check code style by calling darker + flake8                          │
-│ coverage                    Run and show coverage.                                               │
 │ diffsettings                Run "diffsettings" manage command against a "local_test" YunoHost    │
 │                             installation.                                                        │
-│ fix-code-style              Fix code style of all django_example_ynh source code files via       │
-│                             darker                                                               │
+│ fix-code-style              Fix code style of all your_cool_package source code files via darker │
 │ install                     Run pip-sync and install 'django_example_ynh' via pip as editable.   │
 │ local-test                  Build a "local_test" YunoHost installation and start the Django dev. │
 │                             server against it.                                                   │

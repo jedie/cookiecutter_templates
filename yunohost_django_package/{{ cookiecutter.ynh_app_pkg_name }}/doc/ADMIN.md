@@ -39,12 +39,10 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
 │ check-code-style            Check code style by calling darker + flake8                          │
-│ coverage                    Run and show coverage.                                               │
 │ diffsettings                Run "diffsettings" manage command against a "local_test" YunoHost    │
 │                             installation.                                                        │
-│ fix-code-style              Fix code style of all {{ cookiecutter.ynh_app_pkg_name }} source code files via       │
-│                             darker                                                               │
-│ install                     Run pip-sync and install '{{ cookiecutter.ynh_app_pkg_name }}' via pip as editable.   │
+│ fix-code-style              Fix code style of all your_cool_package source code files via darker │
+│ install                     Run pip-sync and install 'django_example_ynh' via pip as editable.   │
 │ local-test                  Build a "local_test" YunoHost installation and start the Django dev. │
 │                             server against it.                                                   │
 │ mypy                        Run Mypy (configured in pyproject.toml)                              │

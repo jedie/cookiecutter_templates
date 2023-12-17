@@ -1,10 +1,10 @@
 from pathlib import Path
 
 from bx_py_utils.auto_doc import assert_readme_block
+from {{ cookiecutter.ynh_app_pkg_name }}.cli.dev import PACKAGE_ROOT, cli
+from {{ cookiecutter.ynh_app_pkg_name }}.constants import CLI_EPILOG
 from manageprojects.test_utils.click_cli_utils import invoke_click
 from manageprojects.tests.base import BaseTestCase
-
-from {{ cookiecutter.ynh_app_pkg_name }}.cli.dev import CLI_EPILOG, PACKAGE_ROOT, cli
 
 
 def assert_cli_help_in_readme(text_block: str, marker: str, readme_path: Path):
