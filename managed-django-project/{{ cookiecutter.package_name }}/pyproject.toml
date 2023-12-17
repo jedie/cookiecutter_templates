@@ -56,8 +56,8 @@ dev = [
     "django-override-storage",  # https://github.com/danifus/django-override-storage
 ]
 django32=["django>=3.2,<3.3"]
-django41=["django>=4.1,<4.2"]
 django42=["django>=4.2,<4.3"]
+django50=["django>=5.0,<5.1"]
 
 [project.urls]
 Documentation = "{{ cookiecutter.package_url }}"
@@ -142,7 +142,7 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311,310,39}-django{42,41,32}
+envlist = py{312,311,310,39}-django{50,42,32}
 skip_missing_interpreters = True
 
 [testenv]
@@ -151,12 +151,12 @@ skip_install = true
 commands_pre =
     pip install -U pip-tools
     django32: pip-sync requirements.django32.txt
-    django41: pip-sync requirements.django41.txt
     django42: pip-sync requirements.django42.txt
+    django50: pip-sync requirements.django50.txt
 commands =
     django32: {envpython} -m coverage run --context='{envname}' -m {{ cookiecutter.package_name }}_project test --buffer
-    django41: {envpython} -m coverage run --context='{envname}' -m {{ cookiecutter.package_name }}_project test --buffer --shuffle --parallel
     django42: {envpython} -m coverage run --context='{envname}' -m {{ cookiecutter.package_name }}_project test --buffer --shuffle --parallel
+    django50: {envpython} -m coverage run --context='{envname}' -m {{ cookiecutter.package_name }}_project test --buffer --shuffle --parallel
 """
 
 
