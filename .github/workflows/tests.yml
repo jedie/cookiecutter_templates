@@ -16,9 +16,6 @@ jobs:
       matrix:
         python-version: ['3.12', '3.11', '3.10']
         package: ['managetemplates', 'pipenv-python', 'piptools-python', 'poetry-python', 'yunohost_django_package']
-    env:
-      PYTHONUNBUFFERED: 1
-      PYTHONWARNINGS: always
     steps:
     - name: Checkout
       run: |
@@ -60,6 +57,9 @@ jobs:
         ./dev-cli.py --help
 
     - name: 'Run ${{ matrix.package }} tests with Python v${{ matrix.python-version }}'
+      env:
+        PYTHONUNBUFFERED: 1
+        PYTHONWARNINGS: always
       run: |
         ./dev-cli.py coverage ${{ matrix.package }}
 

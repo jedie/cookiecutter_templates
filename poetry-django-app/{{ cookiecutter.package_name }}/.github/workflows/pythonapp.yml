@@ -19,9 +19,6 @@ jobs:
       matrix:
         python-version: ["3.12", "3.11", "3.10", "3.9"]
         django-version: ["4.2", "4.1"]
-    env:
-      PYTHONUNBUFFERED: 1
-      PYTHONWARNINGS: always
     steps:
     - name: Checkout
       run: |
@@ -57,7 +54,11 @@ jobs:
       run: make playwright-install
 
     - name: 'Run tests with Python ${{ matrix.python-version }} Django ${{ matrix.django-version }}'
-      run: poetry run tox -e $(echo py${{ matrix.python-version }}-django${{ matrix.django-version }} | tr -d .)
+      env:
+        PYTHONUNBUFFERED: 1
+        PYTHONWARNINGS: always
+      run: |
+        poetry run tox -e $(echo py${{ matrix.python-version }}-django${{ matrix.django-version }} | tr -d .)
 
     - name: 'Upload coverage report'
       run: bash <(curl -s https://codecov.io/bash)
