@@ -38,7 +38,7 @@ print(f'Use Database: {DATABASES["default"]["NAME"]!r}', file=__sys.stderr)
 
 # _____________________________________________________________________________
 
-if __os.environ.get('AUTOLOGIN') == '1':
+if __os.environ.get('AUTOLOGIN') != '0':
     # Auto login for dev. server:
     MIDDLEWARE = MIDDLEWARE.copy()
     MIDDLEWARE += ['django_tools.middlewares.local_auto_login.AlwaysLoggedInAsSuperUserMiddleware']
