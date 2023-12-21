@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import subprocess
 from pathlib import Path
 from unittest.mock import patch
@@ -13,8 +11,9 @@ from packaging.version import Version
 
 from managetemplates import __version__
 from managetemplates.cli.cli_app import cli
+from managetemplates.cli.dev import PACKAGE_ROOT
 from managetemplates.cli.dev import cli as dev_cli
-from managetemplates.constants import PACKAGE_ROOT, PY_BIN_PATH
+from managetemplates.constants import PY_BIN_PATH
 from managetemplates.tests.base import BaseTestCase
 
 
@@ -170,9 +169,10 @@ class ProjectSetupTestCase(BaseTestCase):
         )
 
     def test_publish(self):
-        with patch('managetemplates.cli.dev._run_unittest_cli') as func1, patch(
-            'managetemplates.cli.dev.publish_package'
-        ) as func2:
+        with (
+            patch('managetemplates.cli.dev.run_unittest_cli') as func1,
+            patch('managetemplates.cli.dev.publish_package') as func2,
+        ):
             stdout = invoke_click(dev_cli, 'publish')
 
         func1.assert_called_once()

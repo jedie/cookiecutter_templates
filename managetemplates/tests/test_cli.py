@@ -1,4 +1,4 @@
-from manageprojects.test_utils.click_cli_utils import subprocess_cli
+from cli_base.cli_tools.test_utils.rich_test_utils import NoColorRichClickCli
 from manageprojects.tests.base import BaseTestCase
 
 from managetemplates import __version__, constants
@@ -7,7 +7,8 @@ from managetemplates import __version__, constants
 class DevCliTestCase(BaseTestCase):
 
     def test_install(self):
-        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('install',))
+        with NoColorRichClickCli() as cm:
+            output = cm.invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('install',))
         self.assert_in_content(
             got=output,
             parts=(
@@ -17,7 +18,8 @@ class DevCliTestCase(BaseTestCase):
         )
 
     def test_pass_tox_command(self):
-        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('tox', '--help'))
+        with NoColorRichClickCli() as cm:
+            output = cm.invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('tox', '--help'))
         self.assert_in_content(
             got=output,
             parts=(
@@ -25,7 +27,8 @@ class DevCliTestCase(BaseTestCase):
                 'list environments',
             ),
         )
-        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('tox', 'list'))
+        with NoColorRichClickCli() as cm:
+            output = cm.invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('tox', 'list'))
         self.assert_in_content(
             got=output,
             parts=(
@@ -36,7 +39,8 @@ class DevCliTestCase(BaseTestCase):
         )
 
     def test_pass_unittest_command(self):
-        output = subprocess_cli(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('test', '--help'))
+        with NoColorRichClickCli() as cm:
+            output = cm.invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('test', '--help'))
         self.assert_in_content(
             got=output,
             parts=(

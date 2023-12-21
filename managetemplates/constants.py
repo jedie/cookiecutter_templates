@@ -1,16 +1,19 @@
 import sys
 from pathlib import Path
 
-from bx_py_utils.path import assert_is_dir, assert_is_file
+from bx_py_utils.path import assert_is_file
 
 import managetemplates
 
 
+BASE_PATH = Path(managetemplates.__file__).parent
+PACKAGE_ROOT = BASE_PATH.parent
+
+assert_is_file(PACKAGE_ROOT / 'pyproject.toml')  # Exists only in cloned git repo
+
+
 CLI_EPILOG = 'Project Homepage: https://github.com/jedie/cookiecutter_templates'
 
-PACKAGE_ROOT = Path(managetemplates.__file__).parent.parent
-assert_is_dir(PACKAGE_ROOT)
-assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 
 # Only "prod" dependencies:
 REQ_TXT_PATH = PACKAGE_ROOT / 'requirements.txt'
