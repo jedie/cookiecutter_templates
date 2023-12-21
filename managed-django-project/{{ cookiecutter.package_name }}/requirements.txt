@@ -11,17 +11,17 @@ asgiref==3.7.2 \
 bx-django-utils==70 \
     --hash=sha256:41c8bd54c0eab07ce914ec7bf3eca115324fba577b158a89d827b4312a4e6a98 \
     --hash=sha256:dfc2db1ef019c51ea446687dff1602f75984f3bc410426d3c3ff34d2fab58f1a
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 bx-py-utils==90 \
     --hash=sha256:2c15b3b7d8a8e4f0bc6815517fb732fb303ce6878c3e45bbd60633b2811bf0ea \
     --hash=sha256:bb8aa9bd59b6c733cc8fe65340a98bbff026bbc5aa3c3c01324f27d84b8c9302
     # via
     #   bx-django-utils
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 colorlog==6.8.0 \
     --hash=sha256:4ed23b05a1154294ac99f511fabe8c1d6d4364ec1f7fc989c7fb515ccc29d375 \
     --hash=sha256:fbb6fdf9d5685f2517f388fb29bb27d54e8654dd31f58bc2a3b217e967a95ca6
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 django==5.0 \
     --hash=sha256:3a9fd52b8dbeae335ddf4a9dfa6c6a0853a1122f1fb071a8d5eca979f73a05c8 \
     --hash=sha256:7d29e14dfbc19cb6a95a4bd669edbde11f5d4c6a71fdaa42c2d40b6846e807f7
@@ -29,19 +29,19 @@ django==5.0 \
     #   bx-django-utils
     #   django-axes
     #   django-debug-toolbar
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 django-axes==6.2.0 \
     --hash=sha256:4307b34d06b037469a3930ca68bf3f9e8a7791af9c0f6f5ce599c5ce26b93190 \
     --hash=sha256:d32626e46fc178498e3f1955fe3e0f77130450bc1e60f322be5aae11d72e990f
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 django-debug-toolbar==4.2.0 \
     --hash=sha256:af99128c06e8e794479e65ab62cc6c7d1e74e1c19beb44dcbf9bad7a9c017327 \
     --hash=sha256:bc7fdaafafcdedefcc67a4a5ad9dac96efd6e41db15bc74d402a54a2ba4854dc
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 gunicorn==21.2.0 \
     --hash=sha256:3213aa5e8c24949e792bcacfc176fef362e7aac80b76c56f6b5122bf350722f0 \
     --hash=sha256:88ec8bff1d634f98e61b9f65bc4bf3cd918a90806c6f5c48bc5603849ec81033
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 packaging==23.2 \
     --hash=sha256:048fb0e9405036518eaaf48a55953c750c11e1a1b68e0dd1a9d62ed0c092cfc5 \
     --hash=sha256:8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7
