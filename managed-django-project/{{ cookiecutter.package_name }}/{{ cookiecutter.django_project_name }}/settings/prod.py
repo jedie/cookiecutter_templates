@@ -13,7 +13,7 @@ from django.utils.translation import gettext_lazy as _
 # Build paths relative to the project root:
 BASE_PATH = __Path(__file__).parent.parent.parent
 print(f'BASE_PATH:{BASE_PATH}')
-assert __Path(BASE_PATH, '{{ cookiecutter.package_name }}_project').is_dir()
+assert __Path(BASE_PATH, '{{ cookiecutter.django_project_name }}').is_dir()
 
 ###############################################################################
 
@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     '{{ cookiecutter.package_name }}.apps.AppConfig',
 ]
 
-ROOT_URLCONF = '{{ cookiecutter.package_name }}_project.urls'
-WSGI_APPLICATION = '{{ cookiecutter.package_name }}_project.wsgi.application'
+ROOT_URLCONF = '{{ cookiecutter.django_project_name }}.urls'
+WSGI_APPLICATION = '{{ cookiecutter.django_project_name }}.wsgi.application'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -68,7 +68,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 ]
 
-__TEMPLATE_DIR = __Path(BASE_PATH, '{{ cookiecutter.package_name }}_project', 'templates')
+__TEMPLATE_DIR = __Path(BASE_PATH, '{{ cookiecutter.django_project_name }}', 'templates')
 assert __TEMPLATE_DIR.is_dir(), f'Directory not exists: {__TEMPLATE_DIR}'
 TEMPLATES = [
     {
