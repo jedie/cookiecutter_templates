@@ -17,7 +17,8 @@ dependencies = [
 ]
 [project.optional-dependencies]
 dev = [
-    "manageprojects>=0.16.0",  # https://github.com/jedie/manageprojects
+    "manageprojects",  # https://github.com/jedie/manageprojects
+    "urllib3", # for bx_py_utils.test_utils.deny_requests.deny_any_real_request() in tests
     "pip-tools",  # https://github.com/jazzband/pip-tools/
     "tox",  # https://github.com/tox-dev/tox
     "coverage",  # https://github.com/nedbat/coveragepy

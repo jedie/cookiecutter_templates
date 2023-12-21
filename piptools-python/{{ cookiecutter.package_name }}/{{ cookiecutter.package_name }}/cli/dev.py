@@ -19,13 +19,15 @@ from rich.console import Console
 from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
 from {{ cookiecutter.package_name }} import constants
+from {{ cookiecutter.package_name }}.constants import BASE_PATH
 
 
 logger = logging.getLogger(__name__)
 
 
-PACKAGE_ROOT = Path({{ cookiecutter.package_name }}.__file__).parent.parent
-assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
+PACKAGE_ROOT = BASE_PATH.parent
+assert_is_file(PACKAGE_ROOT / 'pyproject.toml')  # Exists only in cloned git repo
+
 
 OPTION_ARGS_DEFAULT_TRUE = dict(is_flag=True, show_default=True, default=True)
 OPTION_ARGS_DEFAULT_FALSE = dict(is_flag=True, show_default=True, default=False)

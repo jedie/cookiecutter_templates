@@ -6,7 +6,6 @@ import sys
 from pathlib import Path
 
 import rich_click as click
-from bx_py_utils.path import assert_is_file
 from cli_base.cli_tools.version_info import print_version
 from rich import print  # noqa
 from rich.console import Console
@@ -19,9 +18,6 @@ from {{ cookiecutter.package_name }} import constants
 
 logger = logging.getLogger(__name__)
 
-
-PACKAGE_ROOT = Path({{ cookiecutter.package_name }}.__file__).parent.parent
-assert_is_file(PACKAGE_ROOT / 'pyproject.toml')
 
 OPTION_ARGS_DEFAULT_TRUE = dict(is_flag=True, show_default=True, default=True)
 OPTION_ARGS_DEFAULT_FALSE = dict(is_flag=True, show_default=True, default=False)
