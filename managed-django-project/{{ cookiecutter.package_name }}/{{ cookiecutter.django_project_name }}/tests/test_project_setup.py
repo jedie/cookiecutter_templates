@@ -19,7 +19,7 @@ class ProjectSetupTestCase(TestCase):
         project_path = settings.BASE_PATH
         assert_is_dir(project_path)
         assert_is_dir(project_path / '{{ cookiecutter.package_name }}')
-        assert_is_dir(project_path / '{{ cookiecutter.package_name }}_project')
+        assert_is_dir(project_path / '{{ cookiecutter.django_project_name }}')
 
         self.assertEqual(project_path, BASE_PATH)
 
@@ -40,7 +40,7 @@ class ProjectSetupTestCase(TestCase):
         self.assertIs(cache.get(cache_key), None)
 
     def test_settings(self):
-        self.assertEqual(settings.SETTINGS_MODULE, '{{ cookiecutter.package_name }}_project.settings.tests')
+        self.assertEqual(settings.SETTINGS_MODULE, '{{ cookiecutter.django_project_name }}.settings.tests')
         middlewares = [entry.rsplit('.', 1)[-1] for entry in settings.MIDDLEWARE]
         assert 'AlwaysLoggedInAsSuperUserMiddleware' not in middlewares
         assert 'DebugToolbarMiddleware' not in middlewares
@@ -62,9 +62,9 @@ class ProjectSetupTestCase(TestCase):
         assert_is_file(manage_bin)
 
         output = subprocess.check_output([manage_bin, 'project_info'], text=True)
-        self.assertIn('{{ cookiecutter.package_name }}_project', output)
-        self.assertIn('{{ cookiecutter.package_name }}_project.settings.local', output)
-        self.assertIn('{{ cookiecutter.package_name }}_project.settings.tests', output)
+        self.assertIn('{{ cookiecutter.django_project_name }}', output)
+        self.assertIn('{{ cookiecutter.django_project_name }}.settings.local', output)
+        self.assertIn('{{ cookiecutter.django_project_name }}.settings.tests', output)
         self.assertIn(__version__, output)
 
         output = subprocess.check_output([manage_bin, 'check'], text=True)

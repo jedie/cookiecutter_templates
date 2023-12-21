@@ -57,7 +57,7 @@ DEP_HASH_PATH = VENV_PATH / '.dep_hash'
 
 # script file defined in pyproject.toml as [console_scripts]
 # (Under Windows: ".exe" not added!)
-PROJECT_SHELL_SCRIPT = BIN_PATH / '{{ cookiecutter.package_name }}_project'
+PROJECT_SHELL_SCRIPT = BIN_PATH / '{{ cookiecutter.django_project_name }}'
 
 
 def get_dep_hash():

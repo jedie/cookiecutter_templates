@@ -2,7 +2,7 @@
 """
     Settings used to run tests
 """
-from {{ cookiecutter.package_name }}_project.settings.prod import *  # noqa
+from {{ cookiecutter.django_project_name }}.settings.prod import *  # noqa
 
 
 # _____________________________________________________________________________
