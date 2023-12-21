@@ -7,7 +7,7 @@ from cli_base.cli_tools.code_style import assert_code_style
 from packaging.version import Version
 
 from {{ cookiecutter.package_name }} import __version__
-from {{ cookiecutter.package_name }}.cli.cli_app import PACKAGE_ROOT
+from {{ cookiecutter.package_name }}.cli.dev import PACKAGE_ROOT
 
 
 class ProjectSetupTestCase(TestCase):
