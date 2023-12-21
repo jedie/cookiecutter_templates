@@ -66,16 +66,16 @@ Source = "{{ cookiecutter.package_url }}"
 
 [project.scripts]
 # Must be set in ./manage.py and PROJECT_SHELL_SCRIPT:
-{{ cookiecutter.package_name }}_project = "{{ cookiecutter.package_name }}_project.__main__:main"
+{{ cookiecutter.django_project_name }} = "{{ cookiecutter.django_project_name }}.__main__:main"
 
 [manage_django_project]
-module_name="{{ cookiecutter.package_name }}_project"
+module_name="{{ cookiecutter.django_project_name }}"
 
 # Django settings used for all commands except test/coverage/tox:
-local_settings='{{ cookiecutter.package_name }}_project.settings.local'
+local_settings='{{ cookiecutter.django_project_name }}.settings.local'
 
 # Django settings used for test/coverage/tox commands:
-test_settings='{{ cookiecutter.package_name }}_project.settings.tests'
+test_settings='{{ cookiecutter.django_project_name }}.settings.tests'
 
 
 [build-system]
@@ -84,7 +84,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["{{ cookiecutter.package_name }}*", "{{ cookiecutter.package_name }}_project*"]
+include = ["{{ cookiecutter.package_name }}*", "{{ cookiecutter.django_project_name }}*"]
 
 [tool.setuptools.dynamic]
 version = {attr = "{{ cookiecutter.package_name }}.__version__"}
@@ -123,7 +123,7 @@ branch = true
 parallel = true
 concurrency = ["multiprocessing"]
 source = ['.']
-command_line = '-m {{ cookiecutter.package_name }}_project test --shuffle --parallel --buffer'
+command_line = '-m {{ cookiecutter.django_project_name }} test --shuffle --parallel --buffer'
 
 [tool.coverage.report]
 omit = ['.*', '*/tests/*', '*/migrations/*']
@@ -154,9 +154,9 @@ commands_pre =
     django42: pip-sync requirements.django42.txt
     django50: pip-sync requirements.django50.txt
 commands =
-    django32: {envpython} -m coverage run --context='{envname}' -m {{ cookiecutter.package_name }}_project test --buffer
-    django42: {envpython} -m coverage run --context='{envname}' -m {{ cookiecutter.package_name }}_project test --buffer --shuffle --parallel
-    django50: {envpython} -m coverage run --context='{envname}' -m {{ cookiecutter.package_name }}_project test --buffer --shuffle --parallel
+    django32: {envpython} -m coverage run --context='{envname}' -m {{ cookiecutter.django_project_name }} test --buffer
+    django42: {envpython} -m coverage run --context='{envname}' -m {{ cookiecutter.django_project_name }} test --buffer --shuffle --parallel
+    django50: {envpython} -m coverage run --context='{envname}' -m {{ cookiecutter.django_project_name }} test --buffer --shuffle --parallel
 """
 
 

@@ -118,7 +118,7 @@ autopep8==2.0.4 \
     --hash=sha256:2913064abd97b3419d1cc83ea71f042cb821f87e45b9c88cad5ad3c4ea87fe0c
     # via
     #   manageprojects
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 binaryornot==0.4.4 \
     --hash=sha256:359501dfc9d40632edc9fac890e19542db1a287bbcfa58175b66658392018061 \
     --hash=sha256:b8b71173c917bddcd2c16070412e369c3ed7f0528926f70cac18a6c97fd563e4
@@ -158,7 +158,7 @@ build==1.0.3 \
 bx-django-utils==70 \
     --hash=sha256:41c8bd54c0eab07ce914ec7bf3eca115324fba577b158a89d827b4312a4e6a98 \
     --hash=sha256:dfc2db1ef019c51ea446687dff1602f75984f3bc410426d3c3ff34d2fab58f1a
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 bx-py-utils==90 \
     --hash=sha256:2c15b3b7d8a8e4f0bc6815517fb732fb303ce6878c3e45bbd60633b2811bf0ea \
     --hash=sha256:bb8aa9bd59b6c733cc8fe65340a98bbff026bbc5aa3c3c01324f27d84b8c9302
@@ -167,7 +167,7 @@ bx-py-utils==90 \
     #   cli-base-utilities
     #   django-tools
     #   manage-django-project
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 cachetools==5.3.2 \
     --hash=sha256:086ee420196f7b2ab9ca2db2520aca326318b68fe5ba8bc4d49cca91add450f2 \
     --hash=sha256:861f35a13a451f94e301ce2bec7cac63e881232ccce7ed67fab9b5df4d3beaa1
@@ -354,7 +354,7 @@ codespell==2.2.6 \
     --hash=sha256:a8c65d8eb3faa03deabab6b3bbe798bea72e1799c7e9e955d57eca4096abcff9
     # via
     #   manageprojects
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 colorama==0.4.6 \
     --hash=sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44 \
     --hash=sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6
@@ -362,7 +362,7 @@ colorama==0.4.6 \
 colorlog==6.8.0 \
     --hash=sha256:4ed23b05a1154294ac99f511fabe8c1d6d4364ec1f7fc989c7fb515ccc29d375 \
     --hash=sha256:fbb6fdf9d5685f2517f388fb29bb27d54e8654dd31f58bc2a3b217e967a95ca6
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 cookiecutter==2.5.0 \
     --hash=sha256:8aa2f12ed11bc05628651e9dc4353a10571dd9908aaaaeec959a2b9ea465a5d2 \
     --hash=sha256:e61e9034748e3f41b8bd2c11f00d030784b48711c4d5c42363c50989a65331ec
@@ -420,7 +420,7 @@ coverage==7.3.3 \
     --hash=sha256:ff4800783d85bff132f2cc7d007426ec698cdce08c3062c8d501ad3f4ea3d16c \
     --hash=sha256:ffb0eacbadb705c0a6969b0adf468f126b064f3362411df95f6d4f31c40d31c1 \
     --hash=sha256:fff0b2f249ac642fd735f009b8363c2b46cf406d3caec00e4deeb79b5ff39b40
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 cryptography==41.0.7 \
     --hash=sha256:079b85658ea2f59c4f43b70f8119a52414cdb7be34da5d019a77bf96d473b960 \
     --hash=sha256:09616eeaef406f99046553b8a40fbf8b1e70795a91885ba4c96a70793de5504a \
@@ -451,7 +451,7 @@ darker[color,flynt,isort]==1.7.2 \
     --hash=sha256:ec9d130ab2a0f7fa49ab68a08fd231a5bec66147ecbbf94c92a1f33d97b5ef6f
     # via
     #   manageprojects
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 distlib==0.3.8 \
     --hash=sha256:034db59a0b96f8ca18035f36290806a9a6e6bd9d1ff91e45a7f172eb17e51784 \
     --hash=sha256:1530ea13e350031b6312d8580ddb6b27a104275a31106523b8f123787f494f64
@@ -467,19 +467,19 @@ django==5.0 \
     #   django-tools
     #   manage-django-project
     #   model-bakery
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 django-axes==6.2.0 \
     --hash=sha256:4307b34d06b037469a3930ca68bf3f9e8a7791af9c0f6f5ce599c5ce26b93190 \
     --hash=sha256:d32626e46fc178498e3f1955fe3e0f77130450bc1e60f322be5aae11d72e990f
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 django-debug-toolbar==4.2.0 \
     --hash=sha256:af99128c06e8e794479e65ab62cc6c7d1e74e1c19beb44dcbf9bad7a9c017327 \
     --hash=sha256:bc7fdaafafcdedefcc67a4a5ad9dac96efd6e41db15bc74d402a54a2ba4854dc
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 django-override-storage==0.3.2 \
     --hash=sha256:1f1a13274d66cc481b19d63c8bd43c94066824008bcdd26ec65d125b1ce8ec39 \
     --hash=sha256:995e1a42f056c9f9bc114077c11d67520ec7d8a752a59be62729e641562b133e
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 django-rich==1.8.0 \
     --hash=sha256:3016daddfa68428e633b9fd0f26245c7ab88a301bb6373d0423f5c328ec36673 \
     --hash=sha256:3121ff32c7c2098ada9dceacfb0fb942c88e7f3e846954cc23008f65af937e9f
@@ -501,7 +501,7 @@ editorconfig==0.12.3 \
     --hash=sha256:6b0851425aa875b08b16789ee0eeadbd4ab59666e9ebe728e526314c4a2e52c1
     # via
     #   manageprojects
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 filelock==3.13.1 \
     --hash=sha256:521f5f56c50f8426f5e03ad3b281b490a87ef15bc6c526f168290f0c7148d44e \
     --hash=sha256:57dbda9b35157b05fb3e58ee91448612eb674172fab98ee235ccb0b5bee19a1c
@@ -514,13 +514,13 @@ flake8==6.1.0 \
     # via
     #   flake8-bugbear
     #   manageprojects
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 flake8-bugbear==23.12.2 \
     --hash=sha256:32b2903e22331ae04885dae25756a32a8c666c85142e933f43512a70f342052a \
     --hash=sha256:83324bad4d90fee4bf64dd69c61aff94debf8073fbd807c8b6a36eec7a2f0719
     # via
     #   manageprojects
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 flynt==0.77 \
     --hash=sha256:2863ac8ec19d6ec8d29e760546e6ced644baf6dff3c7cdc77e03abbd29b80f14 \
     --hash=sha256:2bd1b37043ad88a3f3c3c34a76fc0b64d24e5f03d36ea6b48cb69cc642bff17e
@@ -609,7 +609,7 @@ frozenlist==1.4.1 \
 gunicorn==21.2.0 \
     --hash=sha256:3213aa5e8c24949e792bcacfc176fef362e7aac80b76c56f6b5122bf350722f0 \
     --hash=sha256:88ec8bff1d634f98e61b9f65bc4bf3cd918a90806c6f5c48bc5603849ec81033
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 icdiff==2.0.7 \
     --hash=sha256:f05d1b3623223dd1c70f7848da7d699de3d9a2550b902a8234d9026292fb5762 \
     --hash=sha256:f79a318891adbf59a45e3a7694f5e1f18c5407065264637072ac8363b759866f
@@ -651,7 +651,7 @@ keyring==24.3.0 \
 manage-django-project==0.6.4 \
     --hash=sha256:95378a244df846dd5486ef8081477b8fab011dcb9bca0427eebc8e7aa8bb75c5 \
     --hash=sha256:cc4b52154388f163a60f2c8301f0cf0680c00d0d8b18006409c2da110dbb75dd
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 manageprojects==0.16.2 \
     --hash=sha256:68f0846dcbc17ffedc0e45977b63e87650a10ba2a8d4dc1be0d7773a0b71def0 \
     --hash=sha256:e5cf2255e94988bb3851807f4ad0a60fd63c850f5751df8d2a59555b8913429b
@@ -733,7 +733,7 @@ mdurl==0.1.2 \
 model-bakery==1.17.0 \
     --hash=sha256:1d26f1a7043c46e6729145b964a7740bf8f6dddac16510fd18323a1492fba757 \
     --hash=sha256:fe808132cd966164600f0450cc05b3cfa50c6c062e00f739a861c5a4b9f236ca
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 more-itertools==10.1.0 \
     --hash=sha256:626c369fa0eb37bac0291bce8259b332fd59ac792fa5497b59837309cd5b114a \
     --hash=sha256:64e0735fcfdc6f3464ea133afe8ea4483b1c5fe3a3d69852e6503b43a0b222e6
@@ -846,7 +846,7 @@ mypy==1.7.1 \
     --hash=sha256:fcd2572dd4519e8a6642b733cd3a8cfc1ef94bafd0c1ceed9c94fe736cb65b6a
     # via
     #   manageprojects
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 mypy-extensions==1.0.0 \
     --hash=sha256:4392f6c0eb8a5668a69e23d168ffa70f0be9ccfd32b5cc2d26a34ae5b844552d \
     --hash=sha256:75dbf8955dc00442a438fc4d0666508a9a97b6bd41aa2f0ffe9d2f2725af0782
@@ -890,7 +890,7 @@ pathspec==0.12.1 \
 pip-tools==7.3.0 \
     --hash=sha256:8717693288720a8c6ebd07149c93ab0be1fced0b5191df9e9decd3263e20d85e \
     --hash=sha256:8e9c99127fe024c025b46a0b2d15c7bd47f18f33226cf7330d35493663fc1d1d
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 pkginfo==1.9.6 \
     --hash=sha256:4b7a555a6d5a22169fcc9cf7bfd78d296b0361adad412a346c1226849af5e546 \
     --hash=sha256:8fd5896e8718a4372f0ea9cc9d96f6417c9b986e23a4d116dda26b62cc29d046
@@ -927,7 +927,7 @@ pyflakes==3.1.0 \
     #   autoflake
     #   flake8
     #   manageprojects
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 pygments==2.17.2 \
     --hash=sha256:b27c2826c47d0f3219f29554824c30c5e8945175d888647acd804ddd04af846c \
     --hash=sha256:da46cec9fd2de5be3a8a784f434e4c4ab670b4ff54d605c4c2717e9d49c4c367
@@ -963,7 +963,7 @@ pyupgrade==3.15.0 \
     --hash=sha256:a7fde381060d7c224f55aef7a30fae5ac93bbc428367d27e70a603bc2acd4f00
     # via
     #   manageprojects
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 pyyaml==6.0.1 \
     --hash=sha256:04ac92ad1925b2cff1db0cfebffb6ffc43457495c9b3c39d3fcae417d7125dc5 \
     --hash=sha256:062582fca9fabdd2c8b54a3ef1c978d786e0f6b3a1510e0ac93ef59e0ddae2bc \
@@ -1032,7 +1032,7 @@ requests==2.31.0 \
 requests-mock==1.11.0 \
     --hash=sha256:ef10b572b489a5f28e09b708697208c4a3b2b89ef80a9f01584340ea357ec3c4 \
     --hash=sha256:f7fae383f228633f6bececebdab236c478ace2284d6292c6e7e2867b9ab74d15
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 requests-toolbelt==1.0.0 \
     --hash=sha256:7681a0a3d047012b5bdc0ee37d7f8f07ebe76ab08caeccfc3921ce23c88d5bc6 \
     --hash=sha256:cccfdd665f0a24fcf4726e690f65639d272bb0637b9b92dfd91a5568ccf6bd06
@@ -1116,7 +1116,7 @@ ruamel-yaml-clib==0.2.8 \
 safety==2.3.4 \
     --hash=sha256:6224dcd9b20986a2b2c5e7acfdfba6bca42bb11b2783b24ed04f32317e5167ea \
     --hash=sha256:b9e74e794e82f54d11f4091c5d820c4d2d81de9f953bf0b4f33ac8bc402ae72c
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 secretstorage==3.3.3 \
     --hash=sha256:2403533ef369eca6d2ba81718576c5e0f564d5cca1b58f73a8b23e7d4eeebd77 \
     --hash=sha256:f356e6628222568e3af06f2eba8df495efa13b3b63081dafd4f7d9a7b7bc9f99
@@ -1137,7 +1137,7 @@ sqlparse==0.4.4 \
 tblib==3.0.0 \
     --hash=sha256:80a6c77e59b55e83911e1e607c649836a69c103963c5f28a46cbeef44acf8129 \
     --hash=sha256:93622790a0a29e04f0346458face1e144dc4d32f493714c6c3dff82a4adb77e6
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 text-unidecode==1.3 \
     --hash=sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8 \
     --hash=sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93
@@ -1156,7 +1156,7 @@ tomli==2.0.1 \
     # via
     #   cli-base-utilities
     #   flynt
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 tomlkit==0.12.3 \
     --hash=sha256:75baf5012d06501f07bee5bf8e801b9f343e7aac5a92581f20f80ce632e6b5a4 \
     --hash=sha256:b0a645a9156dc7cb5d3a1f0d4bab66db287fcb8e0430bdd4664a095ea16414ba
@@ -1166,11 +1166,11 @@ tomlkit==0.12.3 \
 tox==4.11.4 \
     --hash=sha256:2adb83d68f27116812b69aa36676a8d6a52249cb0d173649de0e7d0c2e3e7229 \
     --hash=sha256:73a7240778fabf305aeb05ab8ea26e575e042ab5a18d71d0ed13e343a51d6ce1
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 twine==4.0.2 \
     --hash=sha256:929bc3c280033347a00f847236564d1c52a3e61b1ac2516c97c48f3ceab756d8 \
     --hash=sha256:9e102ef5fdd5a20661eb88fad46338806c3bd32cf1db729603fe3697b1bc83c8
-    # via your-cool-package (pyproject.toml)
+    # via {{ cookiecutter.project_name }} (pyproject.toml)
 types-python-dateutil==2.8.19.14 \
     --hash=sha256:1f4f10ac98bb8b16ade9dbee3518d9ace017821d94b057a425b069f834737f4b \
     --hash=sha256:f977b8de27787639986b4e28963263fd0e5158942b3ecef91b9335c130cb1ce9
@@ -1181,7 +1181,7 @@ typing-extensions==4.9.0 \
     # via
     #   mypy
     #   rich-click
-    #   your-cool-package (pyproject.toml)
+    #   {{ cookiecutter.project_name }} (pyproject.toml)
 urllib3==2.1.0 \
     --hash=sha256:55901e917a5896a349ff771be919f8bd99aff50b79fe58fec595eb37bbc56bb3 \
     --hash=sha256:df7aa8afb0148fa78488e7899b2c59b5f4ffcfa82e6c54ccb9dd37c1d7b52d54
