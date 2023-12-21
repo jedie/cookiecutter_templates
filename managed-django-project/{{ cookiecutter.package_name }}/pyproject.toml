@@ -7,7 +7,7 @@ readme = "README.md"
 authors = [
     {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
 ]
-requires-python = ">=3.9,<4" # Keep Python 3.9 until Yunohost contains a newer Python Version ;)
+requires-python = ">=3.10"
 dependencies = [
     "colorlog",  # https://github.com/borntyping/python-colorlog
     "gunicorn",  # https://github.com/benoimyproject.wsgitc/gunicorn
@@ -20,7 +20,7 @@ dependencies = [
 ]
 [project.optional-dependencies]
 dev = [
-    "manage_django_project>=0.6.4",  # https://github.com/{{ cookiecutter.github_username }}/manage_django_project
+    "manage_django_project",  # https://github.com/{{ cookiecutter.github_username }}/manage_django_project
     "tblib",   # https://github.com/ionelmc/python-tblib
     "pip-tools",  # https://github.com/jazzband/pip-tools/
     "tox",  # https://github.com/tox-dev/tox
@@ -142,7 +142,7 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311,310,39}-django{50,42,32}
+envlist = py{312,311,310}-django{50,42,32}
 skip_missing_interpreters = True
 
 [testenv]
