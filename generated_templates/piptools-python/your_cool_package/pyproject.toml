@@ -7,7 +7,7 @@ readme = "README.md"
 authors = [
     {name = 'John Doh', email = 'john-doh@example.tld'}
 ]
-requires-python = ">=3.9,<4"
+requires-python = ">=3.10"
 dependencies = [
     "cli-base-utilities>=0.6.0",  # https://github.com/jedie/cli-base-utilities
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
@@ -117,7 +117,7 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311,310,39}
+envlist = py{312,311,310}
 skip_missing_interpreters = True
 
 [testenv]
