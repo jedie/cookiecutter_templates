@@ -41,9 +41,10 @@ def get_template_paths():
     for entry in PACKAGE_ROOT.iterdir():
         if not entry.is_dir():
             continue
-        if entry.name.startswith('.'):
+        dir_name = entry.name
+        if dir_name.startswith('.'):
             continue
-        if entry.name in ('generated_templates', 'managetemplates', 'managetemplates.egg-info'):
+        if dir_name in ('dist', 'generated_templates', 'managetemplates', 'managetemplates.egg-info'):
             continue
         yield entry
 
