@@ -32,10 +32,6 @@ PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher',)
 
 # _____________________________________________________________________________
 
-# Skip download map via geotiler in {{ cookiecutter.package_name }}.gpx_tools.gpxpy2map.generate_map
-MAP_DOWNLOAD = False
-
-
 # All tests should use django-override-storage!
 # Set root to not existing path, so that wrong tests will fail:
 STATIC_ROOT = '/not/exists/static/'
