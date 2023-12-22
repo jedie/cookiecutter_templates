@@ -5,6 +5,9 @@
 from {{ cookiecutter.django_project_name }}.settings.prod import *  # noqa
 
 
+ALLOWED_HOSTS = ['testserver']
+
+
 # _____________________________________________________________________________
 # Manage Django Project
 

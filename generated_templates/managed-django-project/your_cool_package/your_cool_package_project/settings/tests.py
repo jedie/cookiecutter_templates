@@ -5,6 +5,9 @@
 from your_cool_package_project.settings.prod import *  # noqa
 
 
+ALLOWED_HOSTS = ['testserver']
+
+
 # _____________________________________________________________________________
 # Manage Django Project
 
