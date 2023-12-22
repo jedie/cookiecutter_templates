@@ -12,10 +12,6 @@ __pycache__
 !.gitignore
 !.gitkeep
 
-# for django-dbbackup
-/backups/
-!/backups/.gitkeep
-
 # from test projects:
 /static/
 /media/
