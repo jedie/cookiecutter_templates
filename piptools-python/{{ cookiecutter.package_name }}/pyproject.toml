@@ -7,7 +7,7 @@ readme = "README.md"
 authors = [
     {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 dependencies = [
     "cli-base-utilities>=0.6.0",  # https://github.com/jedie/cli-base-utilities
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
@@ -118,7 +118,7 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311,310}
+envlist = py{312,311,310,39}
 skip_missing_interpreters = True
 
 [testenv]
