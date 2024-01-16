@@ -18,8 +18,14 @@ from manageprojects.utilities.publish import publish_package
 from rich.console import Console
 from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
+from typeguard import install_import_hook
 from your_cool_package import constants
 from your_cool_package.constants import BASE_PATH
+
+
+# Check type annotations via typeguard in all tests.
+# Sadly we must activate this here and can't do this in ./tests/__init__.py
+install_import_hook(packages=('your_cool_package',))
 
 
 logger = logging.getLogger(__name__)
