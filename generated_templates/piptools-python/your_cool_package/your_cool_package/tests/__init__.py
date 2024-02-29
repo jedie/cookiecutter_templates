@@ -7,7 +7,6 @@ from cli_base.cli_tools.verbosity import MAX_LOG_LEVEL, setup_logging
 from rich import print  # noqa
 
 
-
 def pre_configure_tests() -> None:
     print(f'Configure unittests via "load_tests Protocol" from {Path(__file__).relative_to(Path.cwd())}')
 
