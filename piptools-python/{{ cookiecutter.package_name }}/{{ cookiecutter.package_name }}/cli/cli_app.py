@@ -53,14 +53,11 @@ def cli():
     pass
 
 
-@click.command()
+@cli.command()
 def version():
     """Print version and exit"""
     # Pseudo command, because the version always printed on every CLI call ;)
     sys.exit(0)
-
-
-cli.add_command(version)
 
 
 def main():
