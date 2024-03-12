@@ -43,3 +43,4 @@ UPDATE_TEMPLATE_REQ_FILENAME = 'update_requirements.py'
 
 
 PY_BIN_PATH = Path(sys.executable).parent
+BASE_PATH = Path(managetemplates.__file__).parent

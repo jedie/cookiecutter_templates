@@ -7,22 +7,21 @@ import sys
 
 import rich_click as click
 from bx_py_utils.path import assert_is_file
+from cli_base.autodiscover import import_all_files
+from cli_base.cli_tools.dev_tools import run_tox, run_unittest_cli
+from cli_base.cli_tools.version_info import print_version
 from rich.console import Console
 from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
 from typeguard import install_import_hook
 
-from cli_base.autodiscover import import_all_files
-from cli_base.cli_tools.dev_tools import run_coverage, run_tox, run_unittest_cli
-from cli_base.cli_tools.version_info import print_version
-
-import your_cool_package
-from your_cool_package import constants
+import managetemplates
+from managetemplates import constants
 
 
 # Check type annotations via typeguard in all tests.
 # Sadly we must activate this here and can't do this in ./tests/__init__.py
-install_import_hook(packages=('your_cool_package',))
+install_import_hook(packages=('managetemplates',))
 
 
 logger = logging.getLogger(__name__)
@@ -58,7 +57,7 @@ def version():
 
 
 def main():
-    print_version(your_cool_package)
+    print_version(managetemplates)
 
     console = Console()
     rich_traceback_install(
@@ -74,7 +73,6 @@ def main():
         command_map = {
             'test': run_unittest_cli,
             'tox': run_tox,
-            'coverage': run_coverage,
         }
         if real_func := command_map.get(command):
             real_func(argv=sys.argv, exit_after_run=True)
