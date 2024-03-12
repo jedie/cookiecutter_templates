@@ -4,11 +4,7 @@
 """
 
 
-from {{ cookiecutter.package_name }}.cli import cli_app
-
-
-def main():
-    cli_app.main()
+from {{ cookiecutter.package_name }}.cli_app import main
 
 
 if __name__ == '__main__':

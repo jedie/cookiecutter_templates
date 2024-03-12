@@ -52,13 +52,13 @@ class PiptoolsPythonTemplateTestCase(PackageTestBase):
             output = self.test_project.check_output(dev_cli_bin, 'tox', '--help')
             self.assert_in('usage: tox [-h]', output)
             self.assert_in('list environments', output)
-            self.assert_in('python -m tox --help', output)
+            self.assert_in(' -m tox --help', output)
 
             output = self.test_project.check_output(dev_cli_bin, 'tox', 'list')
             self.assert_in('default environments:', output)
             self.assert_in('py311', output)
             self.assert_in('py310', output)
-            self.assert_in('python -m tox list', output)
+            self.assert_in(' -m tox list', output)
 
             output = self.test_project.check_output(dev_cli_bin, 'check-code-style')
             self.assert_in('Code style: OK', output)

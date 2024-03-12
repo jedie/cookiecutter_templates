@@ -8,9 +8,9 @@ asgiref==3.7.2 \
     --hash=sha256:89b2ef2247e3b562a16eef663bc0e2e703ec6468e2fa8a5cd61cd449786d4f6e \
     --hash=sha256:9e0ce3aa93a819ba5b45120216b23878cf6e8525eb3848653452b4192b92afed
     # via django
-bx-django-utils==71 \
-    --hash=sha256:5bbd281d43267a0922d5a8827ac70b5884bffe74e037663e17ad6d3f8264428c \
-    --hash=sha256:8ace0ef3dbf3a7f3630d8b6d49852371512fdbd168636b96874ba6a09aaa89f5
+bx-django-utils==72 \
+    --hash=sha256:4cccc761ee5413eadad2b290ddfb51e0ed32609cb872c69835f88303c7a5ebe2 \
+    --hash=sha256:c0496775eaddf5d700e92a6611e36baaa177336135918cf50cce01e861bf969f
     # via your-cool-package (pyproject.toml)
 bx-py-utils==91 \
     --hash=sha256:d7b595ccafd1b06165d76086760864353b8f561db23398a383e0a49bbd0bcb7d \
@@ -22,17 +22,17 @@ colorlog==6.8.2 \
     --hash=sha256:3e3e079a41feb5a1b64f978b5ea4f46040a94f11f0e8bbb8261e3dbbeca64d44 \
     --hash=sha256:4dcbb62368e2800cb3c5abd348da7e53f6c362dda502ec27c560b2e58a66bd33
     # via your-cool-package (pyproject.toml)
-django==5.0.2 \
-    --hash=sha256:56ab63a105e8bb06ee67381d7b65fe6774f057e41a8bab06c8020c8882d8ecd4 \
-    --hash=sha256:b5bb1d11b2518a5f91372a282f24662f58f66749666b0a286ab057029f728080
+django==5.0.3 \
+    --hash=sha256:5c7d748ad113a81b2d44750ccc41edc14e933f56581683db548c9257e078cc83 \
+    --hash=sha256:5fb37580dcf4a262f9258c1f4373819aacca906431f505e4688e37f3a99195df
     # via
     #   bx-django-utils
     #   django-axes
     #   django-debug-toolbar
     #   your-cool-package (pyproject.toml)
-django-axes==6.3.0 \
-    --hash=sha256:86e2444ad024610e6cb8520e88f34a3b4cd042b1234c5c86ecb1d1629b841701 \
-    --hash=sha256:8e415193d7881a3e517734a5ebfde92a0b00a919a0777cbae52c7f0246b30ad1
+django-axes==6.4.0 \
+    --hash=sha256:70508d108abc19bcfdd3e9ef7c9d526a014029a8e2ba51f03a5a8348d6eca1b9 \
+    --hash=sha256:aff0e853ae9cddbdd9e8dc703b46915a9960012dab602552f61b43c0777bc731
     # via your-cool-package (pyproject.toml)
 django-debug-toolbar==4.3.0 \
     --hash=sha256:0b0dddee5ea29b9cb678593bc0d7a6d76b21d7799cb68e091a2148341a80f3c4 \
@@ -42,9 +42,9 @@ gunicorn==21.2.0 \
     --hash=sha256:3213aa5e8c24949e792bcacfc176fef362e7aac80b76c56f6b5122bf350722f0 \
     --hash=sha256:88ec8bff1d634f98e61b9f65bc4bf3cd918a90806c6f5c48bc5603849ec81033
     # via your-cool-package (pyproject.toml)
-packaging==23.2 \
-    --hash=sha256:048fb0e9405036518eaaf48a55953c750c11e1a1b68e0dd1a9d62ed0c092cfc5 \
-    --hash=sha256:8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7
+packaging==24.0 \
+    --hash=sha256:2ddfb553fdf02fb784c234c7ba6ccc288296ceabec964ad2eae3777778130bc5 \
+    --hash=sha256:eb82c5e3e56209074766e6885bb04b8c38a0c015d0a30036ebe7ece34c9989e9
     # via gunicorn
 python-stdnum==1.19 \
     --hash=sha256:133ec82f56390ea74c190569e98f2fb14b869808b1d54785708f22d0fead8b3f \
@@ -56,9 +56,3 @@ sqlparse==0.4.4 \
     # via
     #   django
     #   django-debug-toolbar
-
-# The following packages are considered to be unsafe in a requirements file:
-setuptools==69.1.1 \
-    --hash=sha256:02fa291a0471b3a18b2b2481ed902af520c69e8ae0919c13da936542754b4c56 \
-    --hash=sha256:5c0806c7d9af348e6dd3777b4f4dbb42c7ad85b190104837488eab9a7c945cf8
-    # via django-axes
