@@ -1,42 +1,24 @@
 """
     CLI for usage
 """
+
 import logging
 import sys
-from pathlib import Path
 
 import rich_click as click
-from cli_base.cli_tools.version_info import print_version
 from rich import print  # noqa
 from rich.console import Console
 from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
+
+from cli_base.autodiscover import import_all_files
+from cli_base.cli_tools.version_info import print_version
 
 import your_cool_package
 from your_cool_package import constants
 
 
 logger = logging.getLogger(__name__)
-
-
-OPTION_ARGS_DEFAULT_TRUE = dict(is_flag=True, show_default=True, default=True)
-OPTION_ARGS_DEFAULT_FALSE = dict(is_flag=True, show_default=True, default=False)
-ARGUMENT_EXISTING_DIR = dict(
-    type=click.Path(exists=True, file_okay=False, dir_okay=True, readable=True, path_type=Path)
-)
-ARGUMENT_NOT_EXISTING_DIR = dict(
-    type=click.Path(
-        exists=False,
-        file_okay=False,
-        dir_okay=True,
-        readable=False,
-        writable=True,
-        path_type=Path,
-    )
-)
-ARGUMENT_EXISTING_FILE = dict(
-    type=click.Path(exists=True, file_okay=True, dir_okay=False, readable=True, path_type=Path)
-)
 
 
 class ClickGroup(RichGroup):  # FIXME: How to set the "info_name" easier?
@@ -70,6 +52,9 @@ def main():
         suppress=[click],
         max_frames=2,
     )
+
+    # Register all click commands, just by import all files in this package:
+    import_all_files(package=__package__, init_file=__file__)
 
     # Execute Click CLI:
     cli.name = './cli.py'

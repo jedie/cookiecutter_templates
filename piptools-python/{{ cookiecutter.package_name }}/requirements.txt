@@ -13,18 +13,18 @@ bx-py-utils==91 \
     --hash=sha256:feb75b3b2cdadac5ca034a6b874490f7516d9bcf4980854a0d48703289c387c9
     # via
     #   cli-base-utilities
-    #   your_cool_package (pyproject.toml)
+    #   {{ cookiecutter.package_name }} (pyproject.toml)
 cli-base-utilities==0.8.0 \
     --hash=sha256:1009551eba81b33a0315c4fcfe3b6ef1633a99e303c9562dff39b824bff83ff0 \
     --hash=sha256:79628db9fc7ca01b5ab18c97c8fa5f3d8b96af9975c608f7fee9a44256edb2ab
-    # via your_cool_package (pyproject.toml)
+    # via {{ cookiecutter.package_name }} (pyproject.toml)
 click==8.1.7 \
     --hash=sha256:ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28 \
     --hash=sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de
     # via
     #   cli-base-utilities
     #   rich-click
-    #   your_cool_package (pyproject.toml)
+    #   {{ cookiecutter.package_name }} (pyproject.toml)
 markdown-it-py==3.0.0 \
     --hash=sha256:355216845c60bd96232cd8d8c40e8f9765cc86f46880e43a8fd22dc1a1a8cab1 \
     --hash=sha256:e3f60a94fa066dc52ec76661e37c851cb232d92f9886b15cb560aaada2df8feb
@@ -47,13 +47,13 @@ rich==13.7.1 \
     # via
     #   cli-base-utilities
     #   rich-click
-    #   your_cool_package (pyproject.toml)
+    #   {{ cookiecutter.package_name }} (pyproject.toml)
 rich-click==1.7.4 \
     --hash=sha256:7ce5de8e4dc0333aec946113529b3eeb349f2e5d2fafee96b9edf8ee36a01395 \
     --hash=sha256:e363655475c60fec5a3e16a1eb618118ed79e666c365a36006b107c17c93ac4e
     # via
     #   cli-base-utilities
-    #   your_cool_package (pyproject.toml)
+    #   {{ cookiecutter.package_name }} (pyproject.toml)
 tomli==2.0.1 \
     --hash=sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc \
     --hash=sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f

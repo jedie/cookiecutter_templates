@@ -7,7 +7,7 @@ from cli_base.cli_tools.code_style import assert_code_style
 from packaging.version import Version
 
 from your_cool_package import __version__
-from your_cool_package.cli.dev import PACKAGE_ROOT
+from your_cool_package.cli_dev import PACKAGE_ROOT
 
 
 class ProjectSetupTestCase(TestCase):
