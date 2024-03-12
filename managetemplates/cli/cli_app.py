@@ -3,6 +3,8 @@
 """
     CLI for usage
 """
+
+
 import logging
 import sys
 from pathlib import Path
@@ -62,7 +64,7 @@ def cli():
     pass
 
 
-@click.command()
+@cli.command()
 @click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
 def update_template_req(verbose: bool = False):
     """
@@ -71,20 +73,14 @@ def update_template_req(verbose: bool = False):
     update_cookiecutter_templates_requirements(verbose)
 
 
-cli.add_command(update_template_req)
-
-
-@click.command()
+@cli.command()
 def version():
     """Print version and exit"""
     # Pseudo command, because the version always printed on every CLI call ;)
     sys.exit(0)
 
 
-cli.add_command(version)
-
-
-@click.command()
+@cli.command()
 def fix_filesystem():
     """
     Unify cookiecutter variables in the file/directory paths.
@@ -94,10 +90,7 @@ def fix_filesystem():
     sys.exit(rename_count)
 
 
-cli.add_command(fix_filesystem)
-
-
-@click.command()
+@cli.command()
 def fix_file_content():
     """
     Unify cookiecutter variables in file content.
@@ -107,10 +100,7 @@ def fix_file_content():
     sys.exit(fixed_files)
 
 
-cli.add_command(fix_file_content)
-
-
-@click.command()
+@cli.command()
 @click.option('--force-recreate/--no-force-recreate', **OPTION_ARGS_DEFAULT_TRUE)
 @click.option('--template-name', type=click.Choice(constants.ALL_PACKAGES, case_sensitive=False), required=False)
 def templates2generated(force_recreate: bool, template_name: str | None):
@@ -120,10 +110,7 @@ def templates2generated(force_recreate: bool, template_name: str | None):
     cookiecutter_templates2generated(force_recreate=force_recreate, only_template=template_name)
 
 
-cli.add_command(templates2generated)
-
-
-@click.command()
+@cli.command()
 @click.option('--template-name', type=click.Choice(constants.ALL_PACKAGES, case_sensitive=False), required=False)
 def reverse(template_name: str | None):
     """
@@ -138,9 +125,6 @@ def reverse(template_name: str | None):
         print('_' * 100)
         print(pkg_name)
         reverse_test_project(pkg_name=pkg_name)
-
-
-cli.add_command(reverse)
 
 
 def main():

@@ -65,17 +65,14 @@ def cli():
     pass
 
 
-@click.command()
+@cli.command()
 @click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
 def mypy(verbosity: int):
     """Run Mypy (configured in pyproject.toml)"""
     verbose_check_call('mypy', '.', cwd=PACKAGE_ROOT, verbose=verbosity > 0, exit_on_error=True)
 
 
-cli.add_command(mypy)
-
-
-@click.command()
+@cli.command()
 def install():
     """
     Run pip-sync and install 'managetemplates' via pip as editable.
@@ -84,10 +81,7 @@ def install():
     verbose_check_call('pip', 'install', '--no-deps', '-e', '.')
 
 
-cli.add_command(install)
-
-
-@click.command()
+@cli.command()
 def safety():
     """
     Run safety check against current requirements files
@@ -95,10 +89,7 @@ def safety():
     verbose_check_call('safety', 'check', '-r', 'requirements.dev.txt')
 
 
-cli.add_command(safety)
-
-
-@click.command()
+@cli.command()
 def update():
     """
     Update "requirements*.txt" dependencies files
@@ -146,10 +137,7 @@ def update():
     verbose_check_call(bin_path / 'pip-sync', 'requirements.dev.txt')
 
 
-cli.add_command(update)
-
-
-@click.command()
+@cli.command()
 def publish():
     """
     Build and upload this project to PyPi
@@ -163,10 +151,7 @@ def publish():
     )
 
 
-cli.add_command(publish)
-
-
-@click.command()
+@cli.command()
 @click.option('--color/--no-color', **OPTION_ARGS_DEFAULT_TRUE)
 @click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
 def fix_code_style(color: bool, verbosity: int):
@@ -176,10 +161,7 @@ def fix_code_style(color: bool, verbosity: int):
     code_style.fix(package_root=PACKAGE_ROOT, darker_color=color, darker_verbose=verbosity > 0)
 
 
-cli.add_command(fix_code_style)
-
-
-@click.command()
+@cli.command()
 @click.option('--color/--no-color', **OPTION_ARGS_DEFAULT_TRUE)
 @click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
 def check_code_style(color: bool, verbosity: int):
@@ -189,10 +171,7 @@ def check_code_style(color: bool, verbosity: int):
     code_style.check(package_root=PACKAGE_ROOT, darker_color=color, darker_verbose=verbosity > 0)
 
 
-cli.add_command(check_code_style)
-
-
-@click.command()
+@cli.command()
 @click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
 def update_test_snapshot_files(verbosity: int):
     """
@@ -210,10 +189,7 @@ def update_test_snapshot_files(verbosity: int):
         )
 
 
-cli.add_command(update_test_snapshot_files)
-
-
-@click.command()  # Dummy command
+@cli.command()  # Dummy command
 def test():
     """
     Run unittests
@@ -221,10 +197,7 @@ def test():
     run_unittest_cli()
 
 
-cli.add_command(test)
-
-
-@click.command()
+@cli.command()
 @click.argument('package', type=click.Choice(constants.ALL_PACKAGES, case_sensitive=False), required=False)
 @click.option(
     '--list',
@@ -268,10 +241,7 @@ def coverage(package=None, list_packages: bool = False, verbosity: int = 0):
     run_coverage(argv=args, verbose=verbosity >= 1)
 
 
-cli.add_command(coverage)
-
-
-@click.command()  # Dummy "tox" command
+@cli.command()  # Dummy "tox" command
 def tox():
     """
     Run tox
@@ -279,17 +249,11 @@ def tox():
     run_tox()
 
 
-cli.add_command(tox)
-
-
-@click.command()
+@cli.command()
 def version():
     """Print version and exit"""
     # Pseudo command, because the version always printed on every CLI call ;)
     sys.exit(0)
-
-
-cli.add_command(version)
 
 
 def main():
