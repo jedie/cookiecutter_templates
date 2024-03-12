@@ -4,7 +4,7 @@ from manageprojects.test_utils.click_cli_utils import invoke_click
 from manageprojects.tests.base import BaseTestCase
 
 from managetemplates import constants
-from managetemplates.cli.cli_app import cli
+from managetemplates.cli_app import cli
 from managetemplates.constants import PACKAGE_ROOT
 
 

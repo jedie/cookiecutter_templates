@@ -6,16 +6,15 @@ import logging
 import sys
 
 import rich_click as click
+from cli_base.autodiscover import import_all_files
+from cli_base.cli_tools.version_info import print_version
 from rich import print  # noqa
 from rich.console import Console
 from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
 
-from cli_base.autodiscover import import_all_files
-from cli_base.cli_tools.version_info import print_version
-
-import {{ cookiecutter.package_name }}
-from {{ cookiecutter.package_name }} import constants
+import managetemplates
+from managetemplates import constants
 
 
 logger = logging.getLogger(__name__)
@@ -47,7 +46,7 @@ def version():
 
 
 def main():
-    print_version({{ cookiecutter.package_name }})
+    print_version(managetemplates)
 
     console = Console()
     rich_traceback_install(

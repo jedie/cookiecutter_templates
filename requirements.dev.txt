@@ -926,6 +926,10 @@ twine==5.0.0 \
     --hash=sha256:89b0cc7d370a4b66421cc6102f269aa910fe0f1861c124f573cf2ddedbc10cf4 \
     --hash=sha256:a262933de0b484c53408f9edae2e7821c1c45a3314ff2df9bdd343aa7ab8edc0
     # via managetemplates (pyproject.toml)
+typeguard==4.1.5 \
+    --hash=sha256:8923e55f8873caec136c892c3bed1f676eae7be57cdb94819281b3d3bc9c0953 \
+    --hash=sha256:ea0a113bbc111bcffc90789ebb215625c963411f7096a7e9062d4e4630c155fd
+    # via managetemplates (pyproject.toml)
 typer==0.9.0 \
     --hash=sha256:50922fd79aea2f4751a8e0408ff10d2662bd0c8bbfa84755a699f3bada2978b2 \
     --hash=sha256:5d96d986a21493606a358cae4461bd8cdf83cbf33a5aa950ae629ca3b51467ee
@@ -943,6 +947,7 @@ typing-extensions==4.10.0 \
     #   rich-click
     #   safety
     #   safety-schemas
+    #   typeguard
     #   typer
 urllib3==2.2.1 \
     --hash=sha256:450b20ec296a467077128bff42b73080516e71b56ff59a60a02bef2232c4fa9d \

@@ -44,9 +44,22 @@ class DevCliTestCase(BaseTestCase):
         self.assert_in_content(
             got=output,
             parts=(
-                'usage: python -m unittest [-h] ',
+                'usage: python',  # Works with "python" and "python3" ;)
+                ' -m unittest [-h] ',
                 '--failfast',
                 '--locals',
                 '--buffer',
+            ),
+        )
+
+    def test_coverage_help(self):
+        with NoColorRichClickCli() as cm:
+            output = cm.invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('coverage', '--help'))
+        self.assert_in_content(
+            got=output,
+            parts=(
+                '.venv/bin/managetemplates_dev coverage --help',
+                './dev-cli.py coverage',
+                ' --list ',
             ),
         )

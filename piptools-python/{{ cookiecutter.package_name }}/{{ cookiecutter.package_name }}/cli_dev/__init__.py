@@ -46,6 +46,10 @@ def cli():
     pass
 
 
+# Register all click commands, just by import all files in this package:
+import_all_files(package=__package__, init_file=__file__)
+
+
 @cli.command()
 def version():
     """Print version and exit"""
@@ -74,9 +78,6 @@ def main():
         }
         if real_func := command_map.get(command):
             real_func(argv=sys.argv, exit_after_run=True)
-
-    # Register all click commands, just by import all files in this package:
-    import_all_files(package=__package__, init_file=__file__)
 
     # Execute Click CLI:
     cli()

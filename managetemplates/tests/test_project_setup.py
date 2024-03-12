@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import subprocess
 from pathlib import Path
 from unittest.mock import patch
@@ -10,9 +12,10 @@ from manageprojects.test_utils.subprocess import SubprocessCallMock as Subproces
 from packaging.version import Version
 
 from managetemplates import __version__
-from managetemplates.cli.cli_app import cli
-from managetemplates.cli.dev import PACKAGE_ROOT
-from managetemplates.cli.dev import cli as dev_cli
+from managetemplates.cli_app import cli
+from managetemplates.cli_dev import PACKAGE_ROOT
+from managetemplates.cli_dev import cli as dev_cli
+from managetemplates.cli_dev import packaging
 from managetemplates.constants import PY_BIN_PATH
 from managetemplates.tests.base import BaseTestCase
 
@@ -33,7 +36,7 @@ class SubprocessCallMock(SubprocessCallMockOrigin):
 
     def get_popenargs(self, rstrip_paths: tuple | None = None, with_cwd: bool = False) -> list:
         if rstrip_paths:
-            rstrip_paths = [str(item) for item in rstrip_paths if item]  # e.g.: Path -> str
+            rstrip_paths: list = [str(item) for item in rstrip_paths if item]  # e.g.: Path -> str
 
         result = []
         for call in self.calls:
@@ -170,8 +173,8 @@ class ProjectSetupTestCase(BaseTestCase):
 
     def test_publish(self):
         with (
-            patch('managetemplates.cli.dev.run_unittest_cli') as func1,
-            patch('managetemplates.cli.dev.publish_package') as func2,
+            patch.object(packaging, 'run_unittest_cli') as func1,
+            patch.object(packaging, 'publish_package') as func2,
         ):
             stdout = invoke_click(dev_cli, 'publish')
 
