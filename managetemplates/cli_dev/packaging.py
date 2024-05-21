@@ -23,7 +23,14 @@ def safety():
     """
     Run safety check against current requirements files
     """
-    verbose_check_call('safety', 'check', '-r', 'requirements.dev.txt')
+    verbose_check_call(
+        'safety',
+        'check',
+        '-r',
+        'requirements.dev.txt',
+        '--ignore',
+        '67599',  # Ignore CVE-2018-20225: We do not use the `--extra-index-url` option
+    )
 
 
 @cli.command()
