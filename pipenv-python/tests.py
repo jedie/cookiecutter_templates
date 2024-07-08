@@ -36,7 +36,7 @@ class PipenvPythonTemplateTestCase(PackageTestBase):
             subprocess.check_call(['make', 'lint'], cwd=self.pkg_path)
 
             output = self.test_project.check_output('make', 'test')
-            self.assert_in('Ran 3 test', output)
+            self.assert_in('Ran 4 test', output)
 
             # The project unittests checks also the code style and tries to fix them,
             # in this case, we have a code difference:

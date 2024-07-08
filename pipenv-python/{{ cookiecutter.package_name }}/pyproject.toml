@@ -2,12 +2,18 @@
 name = "{{ cookiecutter.package_name }}"
 dynamic = ["version"]
 description = "{{ cookiecutter.package_description }}"
-license = {text = "{{ cookiecutter.license }}"}
-readme = "README.md"
 authors = [
     {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
 ]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+]
+license = {text = "{{ cookiecutter.license }}"}
+readme="README.md"
 
+[project.urls]
+Documentation = "{{ cookiecutter.package_url }}/"
+Source = "{{ cookiecutter.package_url }}/"
 
 [project.scripts]
 {{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.__main__:main"
@@ -51,12 +57,12 @@ filterwarnings = []
 [tool.coverage.run]
 branch = true
 parallel = true
+source = ['.']
 concurrency = ["multiprocessing"]
-source = ["apps"]
-command_line = "-m pytest"
+command_line = "-m unittest --locals --verbose"
 
 [tool.coverage.report]
-omit = ['.*', '*/tests/*','*/migrations/*']
+omit = ['.*', '*/tests/*']
 skip_empty = true
 fail_under = 30
 show_missing = true
@@ -66,6 +72,23 @@ exclude_lines = [
     'raise NotImplementedError',
     'if __name__ == .__main__.:',
 ]
+
+
+[tool.tox]  # https://tox.wiki/en/latest/config.html#pyproject-toml
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+envlist = py{312,311,310,39}
+skip_missing_interpreters = True
+
+[testenv]
+passenv = *
+allowlist_externals = make
+commands_pre =
+    make install
+commands =
+    make test
+"""
 
 
 [tool.mypy]

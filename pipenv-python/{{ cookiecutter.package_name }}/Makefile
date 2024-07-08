@@ -3,7 +3,7 @@ SHELL := /bin/bash
 all: help
 
 help:  ## List all commands
-	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z0-9 -_]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z0-9 -_]+:.*?## / {printf "\033[36m%-26s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 install-base-req:  ## Install needed base packages via apt
 	sudo apt install python3-pip python3-venv
@@ -35,3 +35,29 @@ tox:  ## Run tests via tox with all environments
 
 test: ## Run tests
 	.venv/bin/python -m unittest --verbose --locals
+
+coverage:  ## Run tests with coverage
+	.venv/bin/coverage run
+	.venv/bin/coverage combine --append
+	.venv/bin/coverage report
+	.venv/bin/coverage xml
+	.venv/bin/coverage json
+
+update-test-snapshot-files:   ## Update all snapshot files (by remove and recreate all snapshot files)
+	find . -type f -name '*.snapshot.*' -delete
+	RAISE_SNAPSHOT_ERRORS=0 .venv/bin/python -m unittest
+
+mypy:  ## Run mypy
+	.venv/bin/mypy .
+
+safety:  ## Run https://github.com/pyupio/safety
+	.venv/bin/safety check --full-report
+
+publish:  ## Release new version to PyPi
+	.venv/bin/pip install -e .
+	.venv/bin/pipenv run python {{ cookiecutter.package_name }}_tests/publish.py
+
+clean: ## Remove created files from the test project
+	git clean -dfX {{ cookiecutter.package_name }}_tests/
+
+.PHONY: help install lint fix publish test clean

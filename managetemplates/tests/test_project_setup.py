@@ -150,7 +150,7 @@ class ProjectSetupTestCase(BaseTestCase):
                     '--output-file',
                     'requirements.dev.txt',
                 ],
-                ['.../bin/safety', 'check', '-r', 'requirements.dev.txt'],
+                ['.../bin/safety', 'check', '-r', 'requirements.dev.txt', '--ignore', '70612'],
                 ['.../bin/pip-sync', 'requirements.dev.txt'],
             ],
         )
