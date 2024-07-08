@@ -18,19 +18,23 @@ def install():
     verbose_check_call('pip', 'install', '--no-deps', '-e', '.')
 
 
-@cli.command()
-def safety():
-    """
-    Run safety check against current requirements files
-    """
+def _call_safety():
     verbose_check_call(
         'safety',
         'check',
         '-r',
         'requirements.dev.txt',
         '--ignore',
-        '67599',  # Ignore CVE-2018-20225: We do not use the `--extra-index-url` option
+        '70612',  # Ignore CVE-2019-8341: Server Side Template Injection (SSTI)
     )
+
+
+@cli.command()
+def safety():
+    """
+    Run safety check against current requirements files
+    """
+    _call_safety()
 
 
 @cli.command()
@@ -75,7 +79,7 @@ def update():
         extra_env=extra_env,
     )
 
-    verbose_check_call(bin_path / 'safety', 'check', '-r', 'requirements.dev.txt')
+    _call_safety()
 
     # Install new dependencies in current .venv:
     verbose_check_call(bin_path / 'pip-sync', 'requirements.dev.txt')
