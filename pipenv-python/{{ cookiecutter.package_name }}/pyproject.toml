@@ -11,6 +11,34 @@ classifiers = [
 license = {text = "{{ cookiecutter.license }}"}
 readme="README.md"
 
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "manageprojects",  # https://github.com/jedie/manageprojects
+    "urllib3", # for bx_py_utils.test_utils.deny_requests.deny_any_real_request() in tests
+    "tox",  # https://github.com/tox-dev/tox
+    "coverage",  # https://github.com/nedbat/coveragepy
+    "autopep8",  # https://github.com/hhatto/autopep8
+    "pyupgrade",  # https://github.com/asottile/pyupgrade
+    "flake8",  # https://github.com/pycqa/flake8
+    "flake8-bugbear",  # https://github.com/PyCQA/flake8-bugbear
+    "pyflakes",  # https://github.com/PyCQA/pyflakes
+    "codespell",  # https://github.com/codespell-project/codespell
+    "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
+    "safety",  # https://github.com/pyupio/safety
+    "mypy",  # https://github.com/python/mypy
+    "twine",  # https://github.com/pypa/twine
+    "typeguard",  # https://github.com/agronholm/typeguard/
+
+    # https://github.com/akaihola/darker
+    # https://github.com/ikamensh/flynt
+    # https://github.com/pycqa/isort
+    # https://github.com/pygments/pygments
+    "darker[flynt, isort, color]",
+]
+
 [project.urls]
 Documentation = "{{ cookiecutter.package_url }}/"
 Source = "{{ cookiecutter.package_url }}/"
@@ -84,6 +112,8 @@ skip_missing_interpreters = True
 [testenv]
 passenv = *
 allowlist_externals = make
+deps =
+    .[dev]
 commands_pre =
     make install
 commands =

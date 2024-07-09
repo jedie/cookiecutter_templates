@@ -11,6 +11,34 @@ classifiers = [
 license = {text = "GPL-3.0-or-later"}
 readme="README.md"
 
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    'tox>=4.4.4',  # https://github.com/tox-dev/tox
+    'coverage',  # https://github.com/nedbat/coveragepy
+    'flake8',  # https://github.com/pycqa/flake8
+    'flake8-bugbear',  # https://github.com/PyCQA/flake8-bugbear
+    'manageprojects',  # https://github.com/john-doh/manageprojects
+    'twine',  # https://github.com/pypa/twine/
+    'beautifulsoup4',
+    'lxml',
+    'pdoc',  # https://pdoc.dev/
+    'tblib',  # https://github.com/ionelmc/python-tblib
+    'packaging',  # https://pypi.org/project/packaging/
+    'build',  # https://github.com/pypa/build
+    'EditorConfig',  # https://pypi.org/project/EditorConfig/
+
+    # https://github.com/akaihola/darker
+    # https://github.com/ikamensh/flynt
+    # https://github.com/pycqa/isort
+    # https://github.com/pygments/pygments
+    'darker[flynt, isort, color]',
+
+    'typeguard',  # https://github.com/agronholm/typeguard/
+]
+
 [project.urls]
 Documentation = "https://github.com/john-doh/your_cool_package/"
 Source = "https://github.com/john-doh/your_cool_package/"
@@ -84,6 +112,8 @@ skip_missing_interpreters = True
 [testenv]
 passenv = *
 allowlist_externals = make
+deps =
+    .[dev]
 commands_pre =
     make install
 commands =
