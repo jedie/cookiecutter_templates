@@ -85,7 +85,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                '<h1 id="site-name"><a href="/app_path/admin/">Django administration</a></h1>',
+                '<h1>Site administration</h1>',
                 '<strong>test</strong>',
             ),
         )

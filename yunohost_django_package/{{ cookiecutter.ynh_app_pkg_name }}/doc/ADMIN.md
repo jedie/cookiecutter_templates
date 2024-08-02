@@ -7,12 +7,12 @@ Test sending emails, e.g.:
 
 ```bash
 ssh admin@yourdomain.tld
-root@yunohost:~# /home/yunohost.app/{{ cookiecutter.upstream_pkg_name }}/manage.py sendtestemail --admins
+root@yunohost:~# /home/yunohost.app/{{ cookiecutter.project_id }}/manage.py sendtestemail --admins
 ```
 
 How to debug a django YunoHost app, take a look into:
 
-* https://github.com/YunoHost-Apps/{{ cookiecutter.ynh_app_pkg_name }}#developer-info
+* {{ cookiecutter.ynh_app_url }}#developer-info
 
 ## local test
 
@@ -42,12 +42,12 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 │ diffsettings                Run "diffsettings" manage command against a "local_test" YunoHost    │
 │                             installation.                                                        │
 │ fix-code-style              Fix code style of all your_cool_package source code files via darker │
-│ install                     Run pip-sync and install 'django_example_ynh' via pip as editable.   │
+│ install                     Run pip-sync and install '{{ cookiecutter.ynh_app_pkg_name }}' via pip as editable.   │
 │ local-test                  Build a "local_test" YunoHost installation and start the Django dev. │
 │                             server against it.                                                   │
 │ mypy                        Run Mypy (configured in pyproject.toml)                              │
+│ pip-audit                   Run pip-audit check against current requirements files               │
 │ publish                     Build and upload this project to PyPi                                │
-│ safety                      Run safety check against current requirements files                  │
 │ test                        Compile YunoHost files and run Django unittests                      │
 │ tox                         Run tox                                                              │
 │ update                      Update "requirements*.txt" dependencies files                        │

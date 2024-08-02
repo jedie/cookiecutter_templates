@@ -2,8 +2,11 @@ import sys
 from pathlib import Path
 
 import cli_base
+import click
 from cli_base.cli_tools.dev_tools import run_unittest_cli
 from cli_base.cli_tools.subprocess_utils import verbose_check_call
+from cli_base.cli_tools.verbosity import OPTION_KWARGS_VERBOSE
+from cli_base.run_pip_audit import run_pip_audit
 from manageprojects.utilities.publish import publish_package
 from {{ cookiecutter.package_name }}.cli_dev import PACKAGE_ROOT, cli
 
@@ -18,18 +21,12 @@ def install():
 
 
 @cli.command()
-def safety():
+@click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
+def pip_audit(verbosity: int):
     """
-    Run safety check against current requirements files
+    Run pip-audit check against current requirements files
     """
-    verbose_check_call(
-        'safety',
-        'check',
-        '-r',
-        'requirements.dev.txt',
-        '--ignore',
-        '67599',  # Ignore CVE-2018-20225: We do not use the `--extra-index-url` option
-    )
+    run_pip_audit(base_path=PACKAGE_ROOT, verbosity=verbosity)
 
 
 @cli.command()
@@ -74,7 +71,7 @@ def update():
         extra_env=extra_env,
     )
 
-    verbose_check_call(bin_path / 'safety', 'check', '-r', 'requirements.dev.txt')
+    run_pip_audit(base_path=PACKAGE_ROOT)
 
     # Install new dependencies in current .venv:
     verbose_check_call(bin_path / 'pip-sync', 'requirements.dev.txt')

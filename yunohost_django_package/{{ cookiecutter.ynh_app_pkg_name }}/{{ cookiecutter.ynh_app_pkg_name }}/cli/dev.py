@@ -14,6 +14,7 @@ from cli_base.cli_tools.subprocess_utils import verbose_check_call
 from cli_base.cli_tools.test_utils.snapshot import UpdateTestSnapshotFiles
 from cli_base.cli_tools.verbosity import OPTION_KWARGS_VERBOSE
 from cli_base.cli_tools.version_info import print_version
+from cli_base.run_pip_audit import run_pip_audit
 from django.core.management.commands.test import Command as DjangoTestCommand
 from {{ cookiecutter.ynh_app_pkg_name }} import constants
 from {{ cookiecutter.ynh_app_pkg_name }}.constants import PACKAGE_ROOT
@@ -80,18 +81,12 @@ def install():
 
 
 @cli.command()
-def safety():
+@click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
+def pip_audit(verbosity: int):
     """
-    Run safety check against current requirements files
+    Run pip-audit check against current requirements files
     """
-    verbose_check_call(
-        'safety',
-        'check',
-        '-r',
-        'requirements.dev.txt',
-        '--ignore',
-        '67599',  # Ignore CVE-2018-20225: We do not use the `--extra-index-url` option
-    )
+    run_pip_audit(base_path=PACKAGE_ROOT, verbosity=verbosity)
 
 
 @cli.command()
@@ -136,7 +131,7 @@ def update():
         extra_env=extra_env,
     )
 
-    verbose_check_call(bin_path / 'safety', 'check', '-r', 'requirements.dev.txt')
+    run_pip_audit(base_path=PACKAGE_ROOT)
 
     # Install new dependencies in current .venv:
     verbose_check_call(bin_path / 'pip-sync', 'requirements.dev.txt')
