@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.12", "3.11", "3.10", "3.9"]
+        python-version: ["3.12", "3.11"]
     steps:
     - name: Checkout
       run: |
@@ -44,7 +44,7 @@ jobs:
         make coverage
 
     - name: 'Upload coverage report'
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       # https://github.com/marketplace/actions/codecov
       with:
         fail_ci_if_error: false

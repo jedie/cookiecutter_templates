@@ -77,50 +77,6 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 ./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory piptools-python ~/foobar/
 ```
 
-## Poetry based reuseable Django app
-
-* Requirement management with [Poetry](https://python-poetry.org/)
-* Bootstrap via `Makefile`
-* Makefile with a simple "help" menu
-* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
-* Has basic unittest
-
-
-Cookiecutter template tests are here: [poetry-django-app/tests.py](https://github.com/jedie/cookiecutter_templates/blob/main/poetry-django-app/tests.py)
-
-
-Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
-```shell
-cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory poetry-django-app
-```
-
-Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
-```shell
-./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory poetry-django-app ~/foobar/
-```
-
-## Poetry based python package
-
-* Requirement management with [Poetry](https://python-poetry.org/)
-* Bootstrap via `Makefile`
-* [Typer](https://typer.tiangolo.com/) based CLI
-* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
-* Has basic unittest
-
-
-Cookiecutter template tests are here: [poetry-python/tests.py](https://github.com/jedie/cookiecutter_templates/blob/main/poetry-python/tests.py)
-
-
-Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
-```shell
-cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory poetry-python
-```
-
-Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
-```shell
-./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory poetry-python ~/foobar/
-```
-
 ## Base Django YunoHost app
 
 [YunoHost](https://yunohost.org) is a Open-Source, Debian based self-hosting solution.

@@ -19,11 +19,16 @@ logger = logging.getLogger(__name__)
 
 @cli.command()
 @click.option('--verbose/--no-verbose', **OPTION_ARGS_DEFAULT_FALSE)
-def update_template_req(verbose: bool = False):
+@click.option(
+    '--template-name',
+    type=click.Choice(constants.ALL_PACKAGES, case_sensitive=False),
+    required=False,
+)
+def update_template_req(verbose: bool, template_name: str | None):
     """
     Update requirements of all cookiecutter templates
     """
-    update_cookiecutter_templates_requirements(verbose)
+    update_cookiecutter_templates_requirements(verbose=verbose, only_template=template_name)
 
 
 @cli.command()
