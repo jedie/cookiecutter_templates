@@ -23,7 +23,9 @@ bleach==6.1.0 \
 bx-django-utils==79 \
     --hash=sha256:cb66087d4e9396281acf5a4394b749cff3062b66082d5726f6a8a342fdd35d0e \
     --hash=sha256:d50b10ace24b0b363574542faecf04a81029e2fec6d6e6525fe063ed06238e04
-    # via django-example
+    # via
+    #   django-example
+    #   django-tools
 bx-py-utils==98 \
     --hash=sha256:30fb49b0f0b21c9fbd544895480a1aa9da63f410572e4b46afbca792e64cec98 \
     --hash=sha256:ac8b193ff117420b77b43c043e50b195d6aa9ee7e72e22265ca699730b61f71f
@@ -44,7 +46,9 @@ click==8.1.7 \
 colorlog==6.8.2 \
     --hash=sha256:3e3e079a41feb5a1b64f978b5ea4f46040a94f11f0e8bbb8261e3dbbeca64d44 \
     --hash=sha256:4dcbb62368e2800cb3c5abd348da7e53f6c362dda502ec27c560b2e58a66bd33
-    # via django-yunohost-integration
+    # via
+    #   django-tools
+    #   django-yunohost-integration
 django==5.1 \
     --hash=sha256:848a5980e8efb76eea70872fb0e4bc5e371619c70fffbe48e3e1b50b2c09455d \
     --hash=sha256:d3b811bf5371a26def053d7ee42a9df1267ef7622323fe70a601936725aa4557
@@ -66,9 +70,9 @@ django-redis==5.4.0 \
     --hash=sha256:6a02abaa34b0fea8bf9b707d2c363ab6adc7409950b2db93602e6cb292818c42 \
     --hash=sha256:ebc88df7da810732e2af9987f7f426c96204bf89319df4c6da6ca9a2942edd5b
     # via django-yunohost-integration
-django-tools==0.54.0 \
-    --hash=sha256:5040a91282be9d1c9d379b0c65da50bcb3691bff03cee54fd4123ace238c3a43 \
-    --hash=sha256:a7b7bfa5b9c5a81966454d17dffb2403cee25a806c858ee0486a08798227598f
+django-tools==0.56.1 \
+    --hash=sha256:33e9a9e13ad7f6344ac19e7a3747ab5f19ac918030b45a61e7ab20bedb34987c \
+    --hash=sha256:d5941b7d735cdac8012d6c498a0ae0e607394236e7443a77df281cd1d7ffcfc3
     # via django-yunohost-integration
 django-yunohost-integration[ynh]==0.8.0 \
     --hash=sha256:20dfb25795f808770a5e264e7e796315127b732132f559083ed220121094a1b4 \
@@ -77,7 +81,9 @@ django-yunohost-integration[ynh]==0.8.0 \
 gunicorn==23.0.0 \
     --hash=sha256:ec400d38950de4dfd418cff8328b2c8faed0edb0d517d3394e457c317908ca4d \
     --hash=sha256:f014447a0101dc57e294f6c18ca6b40227a4c90e9bdb586042628030cba004ec
-    # via django-yunohost-integration
+    # via
+    #   django-tools
+    #   django-yunohost-integration
 icdiff==2.0.7 \
     --hash=sha256:f05d1b3623223dd1c70f7848da7d699de3d9a2550b902a8234d9026292fb5762 \
     --hash=sha256:f79a318891adbf59a45e3a7694f5e1f18c5407065264637072ac8363b759866f

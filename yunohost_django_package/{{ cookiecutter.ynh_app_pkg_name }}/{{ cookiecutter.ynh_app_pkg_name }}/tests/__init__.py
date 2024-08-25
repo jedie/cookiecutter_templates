@@ -4,12 +4,15 @@ import unittest.util
 from pathlib import Path
 
 import django
-import {{ cookiecutter.ynh_app_pkg_name }}
 from bx_py_utils.test_utils.deny_requests import deny_any_real_request
 from cli_base.cli_tools.verbosity import MAX_LOG_LEVEL, setup_logging
-from {{ cookiecutter.ynh_app_pkg_name }}.constants import PACKAGE_ROOT
 from django_yunohost_integration.local_test import CreateResults, create_local_test
 from rich import print  # noqa
+from typeguard import install_import_hook
+
+
+# Check type annotations via typeguard in all tests:
+install_import_hook(packages=('{{ cookiecutter.ynh_app_pkg_name }}',))
 
 
 def pre_configure_tests() -> None:
@@ -28,6 +31,10 @@ def pre_configure_tests() -> None:
 
 
 def setup_ynh_tests() -> None:
+    # Import after "install_import_hook" to check type annotations:
+    import {{ cookiecutter.ynh_app_pkg_name }}
+    from {{ cookiecutter.ynh_app_pkg_name }}.constants import PACKAGE_ROOT
+
     os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
     print('Compile YunoHost files...')
