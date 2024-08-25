@@ -18,14 +18,14 @@ packages = [{ include = "your_cool_package" }]
 
 
 [tool.poetry.dependencies]
-python = ">=3.9,<4.0.0"
+python = ">=3.11"
 typer = "*"  # https://github.com/tiangolo/typer
 rich = "*"  # https://github.com/Textualize/rich
 bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
 
 [tool.poetry.dev-dependencies]
 manageprojects = "*"  # https://github.com/jedie/manageprojects
-tox = ">=4.4.4"  # https://github.com/tox-dev/tox
+tox = "*"  # https://github.com/tox-dev/tox
 coverage= "*"  # https://github.com/nedbat/coveragepy
 flake8 = "*"  # https://github.com/pycqa/flake8
 flake8-bugbear = "*"  # https://github.com/PyCQA/flake8-bugbear
@@ -41,10 +41,6 @@ poetry-publish = "*"  # https://github.com/jedie/poetry-publish
 # https://github.com/pygments/pygments
 darker = { version = "*", extras = ["flynt", "isort", "color"]}
 
-tomli = "*"  # https://github.com/hukkin/tomli
-# tomli only needed for Python <3.11, but see bug:
-# https://github.com/pypa/pip/issues/9644#issuecomment-1456583402
-#tomli = {version = "*", markers = "python_version < \"3.11\""}  # https://github.com/hukkin/tomli
 
 [tool.poetry.scripts]
 your_cool_package = "your_cool_package.main:main"
@@ -106,7 +102,7 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311,310}
+envlist = py{312,311}
 skip_missing_interpreters = True
 
 [testenv]

@@ -16,10 +16,8 @@ packages = [{ include = "your_reuseable_django_app" }, { include = "your_reuseab
 classifiers = [
     'Development Status :: 5 - Production/Stable',
     'Topic :: Software Development :: Libraries :: Python Modules',
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
     'Framework :: Django',
     'Intended Audience :: Developers',
 ]
@@ -29,13 +27,13 @@ keywords=['django', 'utilities']
 "Bug Tracker" = "https://github.com/john-doh/your_reuseable_django_app/issues"
 
 [tool.poetry.dependencies]
-python = '>=3.9,<4.0.0'
-django = '>=4.0,<4.2'
+python = '>=3.11'
+django = '>=4.1'
 
 [tool.poetry.dev-dependencies]
 bx_py_utils = '*'  # https://github.com/boxine/bx_py_utils
 bx_django_utils = '*'  # https://github.com/boxine/bx_django_utils
-tox = '>=4.4.4'  # https://github.com/tox-dev/tox
+tox = '*'  # https://github.com/tox-dev/tox
 coverage= "*"  # https://github.com/nedbat/coveragepy
 EditorConfig = '*'  # https://github.com/editorconfig/editorconfig-core-py
 safety = '*'  # https://github.com/pyupio/safety
@@ -54,11 +52,6 @@ tblib = '*'  # https://github.com/ionelmc/python-tblib
 # https://github.com/pycqa/isort
 # https://github.com/pygments/pygments
 darker = { version = "*", extras = ["flynt", "isort", "color"] }
-
-tomli = "*"  # https://github.com/hukkin/tomli
-# tomli only needed for Python <3.11, but see bug:
-# https://github.com/pypa/pip/issues/9644#issuecomment-1456583402
-#tomli = {version = "*", markers = "python_version < \"3.11\""}  # https://github.com/hukkin/tomli
 
 
 [tool.poetry.scripts]
@@ -120,15 +113,15 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311,310}-django{50,42,32}
+envlist = py{312,311}-django{51,42,41}
 skip_missing_interpreters = True
 
 [testenv]
 passenv = *
 deps =
-    django32: django>=3.2,<3.3
+    django41: django>=4.1,<4.2
     django42: django>=4.2,<4.3
-    django50: django>=5.0,<5.1
+    django51: django>=5.1,<5.2
     manageprojects
     bx_django_utils
     model-bakery

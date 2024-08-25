@@ -34,7 +34,7 @@ class DevCliTestCase(BaseTestCase):
             parts=(
                 'default environments:',
                 'py311',
-                'py310',
+                'py312',
             ),
         )
 

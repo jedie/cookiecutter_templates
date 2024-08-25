@@ -5,7 +5,7 @@ export SKIP_TEST_MIGRATION = true
 all: help
 
 help: ## List all commands
-	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z0-9 -]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z0-9 -]+:.*?## / {printf "\033[36m%-26s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 check-poetry:
 	@if [[ "$(shell poetry --version 2>/dev/null)" == *"Poetry"* ]] ; \
