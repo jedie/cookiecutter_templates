@@ -1,18 +1,12 @@
-
-from {{ cookiecutter.ynh_app_pkg_name }}.cli.dev import PACKAGE_ROOT
-
-
-try:
-    import tomllib  # New in Python 3.11
-except ImportError:
-    import tomli as tomllib
+import tomllib
 
 from bx_django_utils.filename import clean_filename
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from django.test.testcases import TestCase
 from django_tools.unittest_utils.project_setup import check_editor_config
+from django_yunohost_integration.path_utils import get_project_root
+from {{ cookiecutter.upstream_pkg_app_name }} import __version__ as upstream_version
 
-from {{ cookiecutter.project_id }} import __version__ as upstream_version
 from {{ cookiecutter.ynh_app_pkg_name }} import __version__ as ynh_pkg_version
 
 
@@ -29,7 +23,7 @@ class ProjectSetupTestCase(TestCase):
     def setUpClass(cls):
         super().setUpClass()
 
-        manifest_path = PACKAGE_ROOT / 'manifest.toml'
+        manifest_path = get_project_root() / 'manifest.toml'
         assert_is_file(manifest_path)
 
         cls.manifest_cfg = tomllib.loads(manifest_path.read_text(encoding='UTF-8'))
@@ -49,7 +43,7 @@ class ProjectSetupTestCase(TestCase):
         """
         https://forum.yunohost.org/t/yunohost-bot-cant-handle-spaces-in-screenshots/19483
         """
-        screenshot_path = PACKAGE_ROOT / 'doc' / 'screenshots'
+        screenshot_path = get_project_root() / 'doc' / 'screenshots'
         assert_is_dir(screenshot_path)
         renamed = []
         for file_path in screenshot_path.iterdir():
@@ -64,7 +58,7 @@ class ProjectSetupTestCase(TestCase):
         assert not renamed, f'Bad screenshots file names found: {", ".join(renamed)}'
 
     def test_check_editor_config(self):
-        check_editor_config(package_root=PACKAGE_ROOT)
+        check_editor_config(package_root=get_project_root())
 
     def test_manifest_toml(self):
         self.assertEqual(self.manifest_cfg['packaging_format'], 2)

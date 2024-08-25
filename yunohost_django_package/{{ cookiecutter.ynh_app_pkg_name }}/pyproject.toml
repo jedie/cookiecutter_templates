@@ -7,26 +7,21 @@ readme = "README.md"
 authors = [
     {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
 ]
-requires-python = ">=3.9"  # Stay with 3.9 until YunoHost used >=Debian 11 (Bullseye)
+requires-python = ">=3.11"
 dependencies = [
     "{{ cookiecutter.project_id }}>={{ cookiecutter.upstream_version }}",  # https://github.com/jedie/{{ cookiecutter.project_id }}
     #
     # extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
     # see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
-    "django_yunohost_integration[ynh]>=0.6.0",  # https://github.com/YunoHost-Apps/django_yunohost_integration
+    "django_yunohost_integration[ynh]",  # https://github.com/YunoHost-Apps/django_yunohost_integration
     #
-    "cli-base-utilities>=0.4.4",  # https://github.com/jedie/cli-base-utilities
-    #
-    # indirect depencies, added because we didn't create the requirements.txt with Python <3.11
-    # See: https://github.com/jazzband/pip-tools/issues/1326
-    "async-timeout",  # needed by redis for python<=3.11.2
+    "cli-base-utilities",  # https://github.com/{{ cookiecutter.github_username }}/cli-base-utilities
 ]
 [project.optional-dependencies]
 dev = [
     "bx_django_utils",  # https://github.com/boxine/bx_django_utils
     "beautifulsoup4",  # https://pypi.org/project/beautifulsoup4/
-    "cli-base-utilities>=0.10.1",  # https://github.com/jedie/cli-base-utilities
-    "manageprojects>=0.15.0",  # https://github.com/jedie/manageprojects
+    "manageprojects",  # https://github.com/{{ cookiecutter.github_username }}/manageprojects
     "pip-tools",  # https://github.com/jazzband/pip-tools/
     "tblib",   # https://github.com/ionelmc/python-tblib
     "tox",  # https://github.com/tox-dev/tox

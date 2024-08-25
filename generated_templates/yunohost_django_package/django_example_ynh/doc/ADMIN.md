@@ -39,6 +39,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
 │ check-code-style            Check code style by calling darker + flake8                          │
+│ coverage                    Run tests and show coverage report.                                  │
 │ diffsettings                Run "diffsettings" manage command against a "local_test" YunoHost    │
 │                             installation.                                                        │
 │ fix-code-style              Fix code style of all your_cool_package source code files via darker │
