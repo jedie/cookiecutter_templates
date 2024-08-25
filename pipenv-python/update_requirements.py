@@ -20,7 +20,6 @@ def main(verbose):
     verbose_check_call('make', 'update-requirements', cwd=pkg_path, verbose=verbose)
 
     # Sync the requirements back to the cookiecutter template:
-    print('_'*100)
     verbose_copy2(
         src=pkg_path / 'Pipfile.lock',
         dst=PACKAGE_ROOT / 'pipenv-python' / '{{ cookiecutter.package_name }}' / 'Pipfile.lock',

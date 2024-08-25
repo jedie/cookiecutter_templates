@@ -21,12 +21,10 @@ def main(verbose):
 
     # Sync the requirements back to the cookiecutter template:
     template_path = PACKAGE_ROOT / 'yunohost_django_package' / '{{ cookiecutter.ynh_app_pkg_name }}'
-    print('_' * 100)
     verbose_copy2(
         src=pkg_path / 'requirements.dev.txt',
         dst=template_path / 'requirements.dev.txt',
     )
-    print('_' * 100)
     verbose_copy2(
         src=pkg_path / 'conf' / 'requirements.txt',
         dst=template_path / 'conf' / 'requirements.txt',

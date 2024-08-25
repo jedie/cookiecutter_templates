@@ -20,7 +20,6 @@ def main(verbose):
     verbose_check_call(sys.executable, 'manage.py', 'update_req', cwd=pkg_path, verbose=verbose)
 
     # Sync the requirements back to the cookiecutter template:
-    print('_' * 100)
     for file_path in sorted(pkg_path.glob('requirements*.txt')):
         verbose_copy2(
             src=file_path,

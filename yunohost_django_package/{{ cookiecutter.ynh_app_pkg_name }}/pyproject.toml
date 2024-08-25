@@ -48,11 +48,10 @@ dev = [
     # https://github.com/pygments/pygments
     "darker[flynt, isort, color]",
 
-    # indirect depencies added because of bug:
-    # https://github.com/pypa/pip/issues/9644 / https://github.com/jazzband/pip-tools/issues/1866
-    # to avoid errors like:
-    # In --require-hashes mode, all requirements must have their versions pinned with ==. These do not: ...
-    "tomli",  # Only needed for Python <3.11
+    # Work-a-round for: https://github.com/jazzband/pip-tools/issues/1866
+    # see also: https://github.com/jazzband/pip-tools/issues/994#issuecomment-1321226661
+    # backports.tarfile is needed for python <3.12
+    'backports.tarfile', # via jaraco-context -> keyring -> twine
 ]
 
 [project.urls]
