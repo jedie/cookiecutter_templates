@@ -30,7 +30,7 @@ class TestProject:
         exit_on_error: bool = True,
         extra_env: dict | None = None,
         **kwargs,
-    ) -> str:
+    ) -> int:
         return verbose_check_call(
             *popenargs,
             verbose=verbose,
