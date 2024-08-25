@@ -30,8 +30,6 @@ ALL_TEMPLATES = (
     'managed-django-project',
     'pipenv-python',
     'piptools-python',
-    'poetry-django-app',
-    'poetry-python',
     'yunohost_django_package',
 )
 

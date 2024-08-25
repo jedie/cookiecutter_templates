@@ -165,8 +165,6 @@ class ProjectSetupTestCase(BaseTestCase):
                 ['.../managed-django-project$ .../bin/python', 'update_requirements.py'],
                 ['.../pipenv-python$ .../bin/python', 'update_requirements.py'],
                 ['.../piptools-python$ .../bin/python', 'update_requirements.py'],
-                ['.../poetry-django-app$ .../bin/python', 'update_requirements.py'],
-                ['.../poetry-python$ .../bin/python', 'update_requirements.py'],
                 ['.../yunohost_django_package$ .../bin/python', 'update_requirements.py'],
             ],
         )
