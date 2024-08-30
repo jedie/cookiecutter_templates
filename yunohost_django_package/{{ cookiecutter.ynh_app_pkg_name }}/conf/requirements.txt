@@ -13,9 +13,7 @@ asgiref==3.8.1 \
 async-timeout==4.0.3 \
     --hash=sha256:4640d96be84d82d02ed59ea2b7105a0f7b33abe8703703cd0ab0bf87c427522f \
     --hash=sha256:7405140ff1230c310e51dc27b3145b9092d659ce68ff733fb0cefe3ee42be028
-    # via
-    #   cli-base-utilities
-    #   django_example_ynh (pyproject.toml)
+    # via cli-base-utilities
 bleach==6.1.0 \
     --hash=sha256:0a31f1837963c41d46bbf1331b8778e1308ea0791db03cc4e7357b97cf42a8fe \
     --hash=sha256:3225f354cfc436b9789c66c4ee030194bee0568fbf9cbdad3bc8b5c26c5f12b6
@@ -70,13 +68,13 @@ django-redis==5.4.0 \
     --hash=sha256:6a02abaa34b0fea8bf9b707d2c363ab6adc7409950b2db93602e6cb292818c42 \
     --hash=sha256:ebc88df7da810732e2af9987f7f426c96204bf89319df4c6da6ca9a2942edd5b
     # via django-yunohost-integration
-django-tools==0.56.1 \
-    --hash=sha256:33e9a9e13ad7f6344ac19e7a3747ab5f19ac918030b45a61e7ab20bedb34987c \
-    --hash=sha256:d5941b7d735cdac8012d6c498a0ae0e607394236e7443a77df281cd1d7ffcfc3
+django-tools==0.56.2 \
+    --hash=sha256:29c25be814d74cd9f554d7d45bc205f5570e5feaa4232cbd09cc913c46b20c07 \
+    --hash=sha256:88a192f2873f0411b99ee1aba04f2779133284cd18a5c78976e8e4605ba5d7f7
     # via django-yunohost-integration
-django-yunohost-integration[ynh]==0.8.0 \
-    --hash=sha256:20dfb25795f808770a5e264e7e796315127b732132f559083ed220121094a1b4 \
-    --hash=sha256:f295c19537f9a821b64b9b03d9394c7c12924a9e5f0b170973367749b2575531
+django-yunohost-integration[ynh]==0.8.1 \
+    --hash=sha256:236bc1e427162182ca5efbf773bbad642b20741e7bf42308134887f4b7c27ced \
+    --hash=sha256:ced40614ba57edb0d80482e6f4f63c614115184695d2f2aaa1aa02b2485b0529
     # via django_example_ynh (pyproject.toml)
 gunicorn==23.0.0 \
     --hash=sha256:ec400d38950de4dfd418cff8328b2c8faed0edb0d517d3394e457c317908ca4d \
@@ -237,9 +235,9 @@ redis==5.0.8 \
     --hash=sha256:0c5b10d387568dfe0698c6fad6615750c24170e548ca2deac10c649d463e9870 \
     --hash=sha256:56134ee08ea909106090934adc36f65c9bcbbaecea5b21ba704ba6fb561f8eb4
     # via django-redis
-rich==13.7.1 \
-    --hash=sha256:4edbae314f59eb482f54e9e30bf00d33350aaa94f4bfcd4e9e3110e64d0d7222 \
-    --hash=sha256:9be308cb1fe2f1f57d67ce99e95af38a1e2bc71ad9813b0e247cf7ffbcc3a432
+rich==13.8.0 \
+    --hash=sha256:2e85306a063b9492dffc86278197a60cbece75bcb766022f3436f567cae11bdc \
+    --hash=sha256:a5ac1f1cd448ade0d59cc3356f7db7a7ccda2c8cbae9c7a90c28ff463d3e91f4
     # via
     #   cli-base-utilities
     #   rich-click

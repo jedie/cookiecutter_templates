@@ -40,90 +40,25 @@ log_file="${log_path}/${app}.log"
 
 
 #==================================================================================
-# myynh_install_python() Borrowed from:
-# https://github.com/YunoHost-Apps/homeassistant_ynh/blob/master/scripts/_common.sh
-# Until we get a newer Python in YunoHost, see:
-# https://forum.yunohost.org/t/use-newer-python-than-3-9/22568
+# install_python.py downloads, builds and installs a Python interpreter, but:
+#
+# - only if the system Python is not the required major version
+# - only once (if the required major version is not already build and installed)
+#
+# Origin of this script is:
+#    https://github.com/jedie/manageprojects/blob/main/manageprojects/install_python.py
+# More info:
+#    https://github.com/jedie/manageprojects/blob/main/docs/install_python.md
+# See also:
+#    https://forum.yunohost.org/t/use-newer-python-than-3-9/22568
 #==================================================================================
-py_required_major=3.11
-py_required_version=$(curl -Ls https://www.python.org/ftp/python/ \
-						| grep '>'$py_required_major  | cut -d '/' -f 2 \
-						| cut -d '>' -f 2 | sort -rV | head -n 1) #3.11.8
+PY_REQUIRED_MAJOR=3.11
 
 myynh_install_python() {
-	# Declare an array to define the options of this helper.
-	local legacy_args=u
-	local -A args_array=( [p]=python= )
-	local python
-	# Manage arguments with getopts
-	ynh_handle_getopts_args "$@"
+    ynh_print_info --message="Install latest Python v${PY_REQUIRED_MAJOR}..."
 
-	# Check python version from APT
-	local py_apt_version=$(python3 --version | cut -d ' ' -f 2)
-
-	# Usefull variables
-	local python_major=${python%.*}
-
-	# Check existing built version of python in /usr/local/bin
-	if [ -e "/usr/local/bin/python$python_major" ]
-	then
-		local py_built_version=$(/usr/local/bin/python$python_major --version \
-			| cut -d ' ' -f 2)
-	else
-		local py_built_version=0
-	fi
-
-	# Compare version
-	if $(dpkg --compare-versions $py_apt_version ge $python)
-	then
-		# APT >= Required
-		ynh_print_info --message="Using provided python3..."
-
-		py_app_version="python3"
-
-	else
-		# Either python already built or to build
-		if $(dpkg --compare-versions $py_built_version ge $python)
-		then
-			# Built >= Required
-			py_app_version="/usr/local/bin/python${py_built_version%.*}"
-			ynh_print_info --message="Using already used python3 built version: $py_app_version"
-		else
-			# APT < Minimal & Actual < Minimal => Build & install Python into /usr/local/bin
-			ynh_print_info --message="Building $python (may take a while)..."
-
-			# Store current direcotry
-			local MY_DIR=$(pwd)
-
-			# Create a temp direcotry
-			tmpdir="$(mktemp --directory)"
-			cd "$tmpdir"
-
-			# Download
-			wget --output-document="Python-$python.tar.xz" \
-				"https://www.python.org/ftp/python/$python/Python-$python.tar.xz" 2>&1
-
-			# Extract
-			tar xf "Python-$python.tar.xz"
-
-			# Install
-			cd "Python-$python"
-			./configure --enable-optimizations
-			ynh_exec_warn_less make -j4
-			ynh_exec_warn_less make altinstall
-
-			# Go back to working directory
-			cd "$MY_DIR"
-
-			# Clean
-			ynh_secure_remove "$tmpdir"
-
-			# Set version
-			py_app_version="/usr/local/bin/python$python_major"
-		fi
-	fi
-	# Save python version in settings
-	ynh_app_setting_set --app=$app --key=python --value="$python"
+    ynh_exec_warn_less python3 "$data_dir/install_python.py" -vv ${PY_REQUIRED_MAJOR}
+	py_app_version=$(python3 "$data_dir/install_python.py" ${PY_REQUIRED_MAJOR})
 
 	# Print some version information:
 	ynh_print_info --message="Python version: $($py_app_version -VV)"
@@ -134,7 +69,7 @@ myynh_install_python() {
 
 myynh_setup_python_venv() {
     # Install Python if needed:
-    myynh_install_python --python="$py_required_version"
+    myynh_install_python
 
     # Create a virtualenv with python installed by myynh_install_python():
     # Skip pip because of: https://github.com/YunoHost/issues/issues/1960
@@ -150,7 +85,7 @@ myynh_setup_python_venv() {
         source "$data_dir/venv/bin/activate"
         set -o nounset
         set -x
-        ynh_exec_as $app $data_dir/venv/bin/pip3 install --upgrade pip wheel setuptools
+        ynh_exec_as $app $data_dir/venv/bin/pip3 install --upgrade pip
         ynh_exec_as $app $data_dir/venv/bin/pip3 install --no-deps -r "$data_dir/requirements.txt"
     )
 }

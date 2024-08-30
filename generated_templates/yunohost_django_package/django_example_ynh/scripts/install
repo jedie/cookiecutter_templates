@@ -68,6 +68,7 @@ ynh_use_logrotate --logfile="$log_file" --specific_user=$app
 # PYTHON VIRTUALENV
 #=================================================
 ynh_script_progression --message="Create and setup Python virtualenv..." --weight=45
+cp ../conf/install_python.py "$data_dir/install_python.py"
 cp ../conf/requirements.txt "$data_dir/requirements.txt"
 myynh_setup_python_venv
 
