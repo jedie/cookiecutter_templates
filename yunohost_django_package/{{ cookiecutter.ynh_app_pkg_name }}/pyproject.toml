@@ -9,19 +9,19 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "{{ cookiecutter.project_id }}>={{ cookiecutter.upstream_version }}",  # https://github.com/jedie/{{ cookiecutter.project_id }}
+    "{{ cookiecutter.upstream_pkg_name }}>={{ cookiecutter.upstream_version }}",  # {{ cookiecutter.upstream_url }}
     #
     # extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
     # see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
     "django_yunohost_integration[ynh]",  # https://github.com/YunoHost-Apps/django_yunohost_integration
     #
-    "cli-base-utilities",  # https://github.com/{{ cookiecutter.github_username }}/cli-base-utilities
+    "cli-base-utilities",  # https://github.com/jedie/cli-base-utilities
 ]
 [project.optional-dependencies]
 dev = [
     "bx_django_utils",  # https://github.com/boxine/bx_django_utils
     "beautifulsoup4",  # https://pypi.org/project/beautifulsoup4/
-    "manageprojects",  # https://github.com/{{ cookiecutter.github_username }}/manageprojects
+    "manageprojects>=0.18.0",  # https://github.com/jedie/manageprojects
     "pip-tools",  # https://github.com/jazzband/pip-tools/
     "tblib",   # https://github.com/ionelmc/python-tblib
     "tox",  # https://github.com/tox-dev/tox
@@ -35,8 +35,8 @@ dev = [
     "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
     "pip-audit",  # https://github.com/pypa/pip-audit
     "mypy",  # https://github.com/python/mypy
-    "twine",  # https://github.com/pypa/twine
     "typeguard",  # https://github.com/agronholm/typeguard/
+    "twine",  # https://github.com/pypa/twine
 
     # https://github.com/akaihola/darker
     # https://github.com/ikamensh/flynt
@@ -76,6 +76,7 @@ version = {attr = "{{ cookiecutter.ynh_app_pkg_name }}.__version__"}
 
 
 [tool.cli_base.pip_audit]
+# https://github.com/jedie/cli-base-utilities/blob/main/docs/pip_audit.md
 requirements=["requirements.dev.txt"]
 strict=true
 require_hashes=true

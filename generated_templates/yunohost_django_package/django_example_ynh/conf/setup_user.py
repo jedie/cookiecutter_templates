@@ -1,8 +1,9 @@
 def setup_project_user(user):
     """
-    All users used the Django admin, so we need to set the "staff" user flag.
+    Setup user for the project.
     Called from django_yunohost_integration.sso_auth
     """
     user.is_staff = True
+    user.is_superuser = True
     user.save()
     return user
