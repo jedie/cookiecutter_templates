@@ -7,12 +7,13 @@ readme = "README.md"
 authors = [
     {name = 'John Doh', email = 'john-doh@example.tld'}
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
+    "django",  # https://docs.djangoproject.com
+
     "colorlog",  # https://github.com/borntyping/python-colorlog
     "gunicorn",  # https://github.com/benoimyproject.wsgitc/gunicorn
 
-    "django",
     "django-debug-toolbar",  # http://django-debug-toolbar.readthedocs.io/en/stable/changes.html
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "bx_django_utils",  # https://github.com/boxine/bx_django_utils
@@ -20,6 +21,7 @@ dependencies = [
 ]
 [project.optional-dependencies]
 dev = [
+    "django-debug-toolbar",  # http://django-debug-toolbar.readthedocs.io/en/stable/changes.html
     "manage_django_project",  # https://github.com/john-doh/manage_django_project
     "tblib",   # https://github.com/ionelmc/python-tblib
     "pip-tools",  # https://github.com/jazzband/pip-tools/
@@ -36,6 +38,7 @@ dev = [
     "mypy",  # https://github.com/python/mypy
     "twine",  # https://github.com/pypa/twine
     "typeguard",  # https://github.com/agronholm/typeguard/
+    "pre-commit",  # https://github.com/pre-commit/pre-commit
 
     # https://github.com/akaihola/darker
     # https://github.com/ikamensh/flynt
@@ -52,9 +55,9 @@ dev = [
     # backports.tarfile is needed for python <3.12
     'backports.tarfile', # via jaraco-context -> keyring -> twine
 ]
-django32=["django>=3.2,<3.3"]
 django42=["django>=4.2,<4.3"]
 django50=["django>=5.0,<5.1"]
+django51=["django>=5.1,<5.2"]
 
 [project.urls]
 Documentation = "https://github.com/john-doh/your_cool_package"
@@ -75,6 +78,20 @@ local_settings='your_cool_package_project.settings.local'
 test_settings='your_cool_package_project.settings.tests'
 
 
+[tool.cli_base]
+version_module_name = "your_cool_package"  # Used by update_readme_history()
+
+
+[tool.cli_base.pip_audit]
+requirements=["requirements.dev.txt"]
+strict=true
+require_hashes=true
+ignore-vuln=[
+#    "CVE-2019-8341", # Jinja2: Side Template Injection (SSTI)
+]
+
+
+
 [build-system]
 requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
 build-backend = "setuptools.build_meta"
@@ -85,13 +102,6 @@ include = ["your_cool_package*", "your_cool_package_project*"]
 
 [tool.setuptools.dynamic]
 version = {attr = "your_cool_package.__version__"}
-
-
-[tool.cli_base.pip_audit]
-requirements=["requirements.dev.txt"]
-strict=true
-require_hashes=true
-ignore-vuln=[]
 
 
 [tool.darker]
@@ -120,7 +130,7 @@ line_length=119
 lines_after_imports=2
 
 
-[tool.coverage.run]
+[tool.coverage.run]  # https://coverage.readthedocs.io/en/latest/config.html#run
 branch = true
 parallel = true
 concurrency = ["multiprocessing"]
@@ -144,21 +154,22 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311}-django{51,42,41}
+envlist = py{312,311}-django{52,51,42}
 skip_missing_interpreters = True
 
 [testenv]
 passenv = *
 skip_install = true
 commands_pre =
+    pip install -U pip
     pip install -U pip-tools
-    django32: pip-sync requirements.django32.txt
     django42: pip-sync requirements.django42.txt
     django50: pip-sync requirements.django50.txt
+    django51: pip-sync requirements.django51.txt
 commands =
-    django32: {envpython} -m coverage run --context='{envname}' -m your_cool_package_project test --buffer
-    django42: {envpython} -m coverage run --context='{envname}' -m your_cool_package_project test --buffer --shuffle --parallel
-    django50: {envpython} -m coverage run --context='{envname}' -m your_cool_package_project test --buffer --shuffle --parallel
+    django42: {envpython} -m coverage run --context='{envname}'
+    django50: {envpython} -m coverage run --context='{envname}'
+    django51: {envpython} -m coverage run --context='{envname}'
 """
 
 
