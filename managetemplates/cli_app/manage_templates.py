@@ -61,6 +61,4 @@ def reverse(template_name: str | None):
         if template_name and template_name != pkg_name:
             continue
 
-        print('_' * 100)
-        print(pkg_name)
         reverse_test_project(pkg_name=pkg_name)

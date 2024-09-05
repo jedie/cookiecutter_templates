@@ -7,9 +7,9 @@ readme = "README.md"
 authors = [
     {name = 'Jens Diemer', email = 'cookiecutter_templates@jensdiemer.de'}
 ]
-requires-python = ">=3.10,<4"
+requires-python = ">=3.11"
 dependencies = [
-    "cli-base-utilities>=0.8.0",  # https://github.com/jedie/cli-base-utilities
+    "cli-base-utilities>=0.11.0",  # https://github.com/jedie/cli-base-utilities
     "manageprojects>=0.16.0",  # https://github.com/jedie/manageprojects
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "click",  # https://github.com/pallets/click/
