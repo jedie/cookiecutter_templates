@@ -2,15 +2,14 @@ import shutil
 from pathlib import Path
 
 from bx_py_utils.path import assert_is_dir, assert_is_file
+from cli_base.cli_tools.rich_utils import EncloseRuleContext
 from rich import print
-from rich.rule import Rule
 
 from managetemplates.constants import PACKAGE_ROOT
 
 
+@EncloseRuleContext('Copy file+meta:')
 def verbose_copy2(*, src: Path, dst: Path):
-    print(Rule(title='Copy file+meta:'))
-
     assert_is_file(src)
     assert_is_dir(dst.parent)
 
@@ -21,4 +20,3 @@ def verbose_copy2(*, src: Path, dst: Path):
         src=src,
         dst=dst,
     )
-    print(Rule())

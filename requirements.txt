@@ -64,9 +64,9 @@ bx-django-utils==79 \
     --hash=sha256:cb66087d4e9396281acf5a4394b749cff3062b66082d5726f6a8a342fdd35d0e \
     --hash=sha256:d50b10ace24b0b363574542faecf04a81029e2fec6d6e6525fe063ed06238e04
     # via django-example
-bx-py-utils==98 \
-    --hash=sha256:30fb49b0f0b21c9fbd544895480a1aa9da63f410572e4b46afbca792e64cec98 \
-    --hash=sha256:ac8b193ff117420b77b43c043e50b195d6aa9ee7e72e22265ca699730b61f71f
+bx-py-utils==101 \
+    --hash=sha256:2aa295cde55da99b77f5f2f8b5bf8c0bec7e0046511832989ecbb1a43183cf75 \
+    --hash=sha256:eece1f0b1e3c091d38f3013984056b05f43c6a0fd716489cf337d89df802ab59
     # via
     #   bx-django-utils
     #   cli-base-utilities
@@ -171,9 +171,9 @@ charset-normalizer==3.3.2 \
     --hash=sha256:fd1abc0d89e30cc4e02e4064dc67fcc51bd941eb395c502aac3ec19fab46b519 \
     --hash=sha256:ff8fa367d09b717b2a17a052544193ad76cd49979c805768879cb63d9ca50561
     # via requests
-cli-base-utilities==0.10.3 \
-    --hash=sha256:5c54cdd5e5122abf6a86aa6926b4b2dbc6632c113885692c8d95f531bb2b181b \
-    --hash=sha256:95b1119d9f4bb335974faf655e853f58bdd04af0bac99d22005b6fb79b9e4b14
+cli-base-utilities==0.11.0 \
+    --hash=sha256:2c674f3af4898f97d101f6687fb45e85a4b996b93fb9a155a29b4daaf302dc43 \
+    --hash=sha256:fc503f8df7e19653167ebd12551718aa0c114114b959f177be2092eab1ce1b11
     # via
     #   manageprojects
     #   managetemplates (pyproject.toml)
@@ -205,9 +205,9 @@ darkgraylib==1.2.1 \
     # via
     #   darker
     #   graylint
-django==5.1 \
-    --hash=sha256:848a5980e8efb76eea70872fb0e4bc5e371619c70fffbe48e3e1b50b2c09455d \
-    --hash=sha256:d3b811bf5371a26def053d7ee42a9df1267ef7622323fe70a601936725aa4557
+django==5.1.1 \
+    --hash=sha256:021ffb7fdab3d2d388bc8c7c2434eb9c1f6f4d09e6119010bbb1694dda286bc2 \
+    --hash=sha256:71603f27dac22a6533fb38d83072eea9ddb4017fead6f67f2562a40402d61c3f
     # via bx-django-utils
 django-example==0.2.0 \
     --hash=sha256:2bcaeed97868e8be5c4d7d6a745b054f6983c931d5cefb763e6ff25807f15793 \
