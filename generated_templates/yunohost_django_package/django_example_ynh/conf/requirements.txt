@@ -24,16 +24,16 @@ bx-django-utils==79 \
     # via
     #   django-example
     #   django-tools
-bx-py-utils==98 \
-    --hash=sha256:30fb49b0f0b21c9fbd544895480a1aa9da63f410572e4b46afbca792e64cec98 \
-    --hash=sha256:ac8b193ff117420b77b43c043e50b195d6aa9ee7e72e22265ca699730b61f71f
+bx-py-utils==101 \
+    --hash=sha256:2aa295cde55da99b77f5f2f8b5bf8c0bec7e0046511832989ecbb1a43183cf75 \
+    --hash=sha256:eece1f0b1e3c091d38f3013984056b05f43c6a0fd716489cf337d89df802ab59
     # via
     #   bx-django-utils
     #   cli-base-utilities
     #   django-tools
-cli-base-utilities==0.10.3 \
-    --hash=sha256:5c54cdd5e5122abf6a86aa6926b4b2dbc6632c113885692c8d95f531bb2b181b \
-    --hash=sha256:95b1119d9f4bb335974faf655e853f58bdd04af0bac99d22005b6fb79b9e4b14
+cli-base-utilities==0.11.0 \
+    --hash=sha256:2c674f3af4898f97d101f6687fb45e85a4b996b93fb9a155a29b4daaf302dc43 \
+    --hash=sha256:fc503f8df7e19653167ebd12551718aa0c114114b959f177be2092eab1ce1b11
     # via django_example_ynh (pyproject.toml)
 click==8.1.7 \
     --hash=sha256:ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28 \
@@ -47,9 +47,9 @@ colorlog==6.8.2 \
     # via
     #   django-tools
     #   django-yunohost-integration
-django==5.1 \
-    --hash=sha256:848a5980e8efb76eea70872fb0e4bc5e371619c70fffbe48e3e1b50b2c09455d \
-    --hash=sha256:d3b811bf5371a26def053d7ee42a9df1267ef7622323fe70a601936725aa4557
+django==5.1.1 \
+    --hash=sha256:021ffb7fdab3d2d388bc8c7c2434eb9c1f6f4d09e6119010bbb1694dda286bc2 \
+    --hash=sha256:71603f27dac22a6533fb38d83072eea9ddb4017fead6f67f2562a40402d61c3f
     # via
     #   bx-django-utils
     #   django-axes
