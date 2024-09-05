@@ -56,8 +56,8 @@ class PiptoolsPythonTemplateTestCase(PackageTestBase):
 
             output = self.test_project.check_output(dev_cli_bin, 'tox', 'list')
             self.assert_in('default environments:', output)
+            self.assert_in('py312', output)
             self.assert_in('py311', output)
-            self.assert_in('py310', output)
             self.assert_in(' -m tox list', output)
 
             output = self.test_project.check_output(dev_cli_bin, 'check-code-style')
