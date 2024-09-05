@@ -34,7 +34,7 @@ tox:  ## Run tests via tox with all environments
 	.venv/bin/tox
 
 test: ## Run tests
-	.venv/bin/python -m unittest --verbose --locals
+	.venv/bin/python3 -m unittest --verbose --locals
 
 coverage:  ## Run tests with coverage
 	.venv/bin/coverage run
@@ -45,7 +45,7 @@ coverage:  ## Run tests with coverage
 
 update-test-snapshot-files:   ## Update all snapshot files (by remove and recreate all snapshot files)
 	find . -type f -name '*.snapshot.*' -delete
-	RAISE_SNAPSHOT_ERRORS=0 .venv/bin/python -m unittest
+	RAISE_SNAPSHOT_ERRORS=0 .venv/bin/python3 -m unittest
 
 mypy:  ## Run mypy
 	.venv/bin/mypy .

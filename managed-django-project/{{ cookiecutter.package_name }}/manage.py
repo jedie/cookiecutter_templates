@@ -42,7 +42,7 @@ if sys.platform == 'win32':  # wtf
     BIN_NAME = 'Scripts'
     FILE_EXT = '.exe'
 else:
-    # Files under Linux/Mac and all other than Windows, e.g.: .../.venv/bin/python
+    # Files under Linux/Mac and all other than Windows, e.g.: .../.venv/bin/python3
     BIN_NAME = 'bin'
     FILE_EXT = ''
 
