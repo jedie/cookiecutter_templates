@@ -38,31 +38,21 @@ log_file="${log_path}/${app}.log"
 # HELPERS
 #=================================================
 
-
 #==================================================================================
-# install_python.py downloads, builds and installs a Python interpreter, but:
-#
-# - only if the system Python is not the required major version
-# - only once (if the required major version is not already build and installed)
-#
-# Origin of this script is:
-#    https://github.com/jedie/manageprojects/blob/main/manageprojects/install_python.py
-# More info:
-#    https://github.com/jedie/manageprojects/blob/main/docs/install_python.md
-# See also:
-#    https://forum.yunohost.org/t/use-newer-python-than-3-9/22568
+# Until we get a newer Python in YunoHost, see:
+# https://forum.yunohost.org/t/use-newer-python-than-3-9/22568
 #==================================================================================
 PY_REQUIRED_MAJOR=3.11
 
 myynh_install_python() {
-    ynh_print_info --message="Install latest Python v${PY_REQUIRED_MAJOR}..."
+    ynh_print_info "Install latest Python v${PY_REQUIRED_MAJOR}..."
 
-    ynh_exec_warn_less python3 "$data_dir/install_python.py" -vv ${PY_REQUIRED_MAJOR}
+    ynh_hide_warnings python3 "$data_dir/install_python.py" -vv ${PY_REQUIRED_MAJOR}
 	py_app_version=$(python3 "$data_dir/install_python.py" ${PY_REQUIRED_MAJOR})
 
 	# Print some version information:
-	ynh_print_info --message="Python version: $($py_app_version -VV)"
-	ynh_print_info --message="Pip version: $($py_app_version -m pip -V)"
+	ynh_print_info "Python version: $($py_app_version -VV)"
+	ynh_print_info "Pip version: $($py_app_version -m pip -V)"
 }
 #==================================================================================
 #==================================================================================
@@ -71,47 +61,36 @@ myynh_setup_python_venv() {
     # Install Python if needed:
     myynh_install_python
 
+    ynh_print_info "Create Python virtualenv for $app..."
+
     # Create a virtualenv with python installed by myynh_install_python():
     # Skip pip because of: https://github.com/YunoHost/issues/issues/1960
-    ynh_exec_as $app $py_app_version -m venv --clear --upgrade-deps "$data_dir/venv"
+    ynh_exec_as_app $py_app_version -m venv --clear --upgrade-deps "$data_dir/.venv"
 
 	# Print some version information:
-	ynh_print_info --message="venv Python version: $($data_dir/venv/bin/python3 -VV)"
-	ynh_print_info --message="venv Pip version: $($data_dir/venv/bin/python3 -m pip -V)"
+	ynh_print_info "venv Python version: $($data_dir/.venv/bin/python3 -VV)"
+	ynh_print_info "venv Pip version: $($data_dir/.venv/bin/python3 -m pip -V)"
 
-    # run source in a 'sub shell'
-    (
-        set +o nounset
-        source "$data_dir/venv/bin/activate"
-        set -o nounset
-        set -x
-        ynh_exec_as $app $data_dir/venv/bin/pip3 install --upgrade pip wheel setuptools
-        ynh_exec_as $app $data_dir/venv/bin/pip3 install --no-deps -r "$data_dir/requirements.txt"
-    )
+    ynh_print_info "Install $app dependencies in virtualenv..."
+    ynh_exec_as_app $data_dir/.venv/bin/pip3 install --upgrade pip wheel setuptools
+    ynh_exec_as_app $data_dir/.venv/bin/pip3 install --no-deps -r "$data_dir/requirements.txt"
 }
 
 myynh_setup_log_file() {
-    (
-        set -x
+    mkdir -p "$(dirname "$log_file")"
+    touch "$log_file"
 
-        mkdir -p "$(dirname "$log_file")"
-        touch "$log_file"
-
-        chown -c -R $app:$app "$log_path"
-        chmod -c o-rwx "$log_path"
-    )
+    chown -c -R $app:$app "$log_path"
+    chmod -c u+rwx,o-rwx "$log_path"
 }
 
 myynh_fix_file_permissions() {
-    (
-        set -x
+    # /var/www/$app/
+    # static files served by nginx, so use www-data group:
+    chown -c -R "$app:www-data" "$install_dir"
+    chmod -c u+rwx,g+rx,o-rwx "$install_dir"
 
-        # /var/www/$app/
-        chown -c -R "$app:www-data" "$install_dir"
-        chmod -c o-rwx "$install_dir"
-
-        # /home/yunohost.app/$app/
-        chown -c -R "$app:" "$data_dir"
-        chmod -c o-rwx "$data_dir"
-    )
+    # /home/yunohost.app/$app/
+    chown -c -R "$app:$app" "$data_dir"
+    chmod -c u+rwx,g+rwx,o-rwx "$data_dir"
 }
