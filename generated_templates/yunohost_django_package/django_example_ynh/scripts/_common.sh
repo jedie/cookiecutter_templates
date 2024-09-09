@@ -57,23 +57,32 @@ myynh_install_python() {
 #==================================================================================
 #==================================================================================
 
+myynh_create_venv() {
+    local venv_flag=$1
+
+    # Create a virtualenv with python installed by myynh_install_python():
+    ynh_exec_as_app $py_app_version -m venv $venv_flag --upgrade-deps "$data_dir/.venv"
+
+    # Print some version information:
+    ynh_print_info "venv Python version: $($data_dir/.venv/bin/python3 -VV)"
+    ynh_print_info "venv Pip version: $($data_dir/.venv/bin/python3 -m pip -V)"
+
+    ynh_print_info "Install $app dependencies in virtualenv..."
+    ynh_exec_as_app $data_dir/.venv/bin/pip3 install --upgrade pip pip-tools wheel setuptools
+    ynh_exec_as_app $data_dir/.venv/bin/pip-sync --no-config "$data_dir/requirements.txt"
+}
+
 myynh_setup_python_venv() {
     # Install Python if needed:
     myynh_install_python
 
     ynh_print_info "Create Python virtualenv for $app..."
 
-    # Create a virtualenv with python installed by myynh_install_python():
-    # Skip pip because of: https://github.com/YunoHost/issues/issues/1960
-    ynh_exec_as_app $py_app_version -m venv --clear --upgrade-deps "$data_dir/.venv"
-
-	# Print some version information:
-	ynh_print_info "venv Python version: $($data_dir/.venv/bin/python3 -VV)"
-	ynh_print_info "venv Pip version: $($data_dir/.venv/bin/python3 -m pip -V)"
-
-    ynh_print_info "Install $app dependencies in virtualenv..."
-    ynh_exec_as_app $data_dir/.venv/bin/pip3 install --upgrade pip wheel setuptools
-    ynh_exec_as_app $data_dir/.venv/bin/pip3 install --no-deps -r "$data_dir/requirements.txt"
+    # Try to reuse existing venv (call without --clear flag)
+    if ! myynh_create_venv ""; then
+        # If there was an error: Recreate the venv by call with --clear flag
+        myynh_create_venv "--clear"
+    fi
 }
 
 myynh_setup_log_file() {
