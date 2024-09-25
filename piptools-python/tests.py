@@ -64,7 +64,7 @@ class PiptoolsPythonTemplateTestCase(PackageTestBase):
             self.assert_in('Code style: OK', output)
 
             output = self.test_project.check_output(dev_cli_bin, 'test')
-            self.assert_in('Ran 4 tests', output)
+            self.assert_in('Ran 8 tests', output)
 
             # The project unittests checks also the code style and tries to fix them,
             # in this case, we have a code difference:

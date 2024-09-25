@@ -33,7 +33,7 @@ else:
         sys.exit(-1)
 
 
-assert sys.version_info >= (3, 9), f'Python version {sys.version_info} is too old!'
+assert sys.version_info >= (3, 11), f'Python version {sys.version_info} is too old!'
 
 
 if sys.platform == 'win32':  # wtf
@@ -104,6 +104,9 @@ def main(argv):
         # install project
         verbose_check_call(PIP_PATH, 'install', '--no-deps', '-e', '.')
         store_dep_hash()
+
+        # Activate git pre-commit hooks:
+        verbose_check_call(PYTHON_PATH, '-m', 'pre_commit', 'install')
 
     # Call our entry point CLI:
     try:

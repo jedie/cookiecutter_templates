@@ -11,10 +11,10 @@ async-timeout==4.0.3 \
     --hash=sha256:7405140ff1230c310e51dc27b3145b9092d659ce68ff733fb0cefe3ee42be028 \
     --hash=sha256:fd893e4cb1d9dff66d0e0576cc6376a23eacbbcd43b6607e4d3ecfae1ab15367
     # via cli-base-utilities
-bx-py-utils==102 \
-    --hash=sha256:367d2bde9c7f2bf750f55748d4832daaf9df73e753b5efb351ec1a3899cc5d80 \
-    --hash=sha256:6d131d40394b477de715169e80067a0ab4891c8f04afd33fbd7ca00e2faf21ae \
-    --hash=sha256:961a0abf31b512f72c1473a4d115096b0c5becd32d08338ac62adbf5b217b680
+bx-py-utils==104 \
+    --hash=sha256:508cfc1d0fa6c22298f697c4efaa913337847d488d8a53eeccfae9ee106123f6 \
+    --hash=sha256:77fddff99aaf2cb558ce2974ef66d0e7a4d48cca1cbb99e43eca0d8b77fa07fc \
+    --hash=sha256:c92ebc4fb122e3e3c228d984d0a1f5c3284c3da6aab1a1c753f7eb1f71bdab3a
     # via
     #   cli-base-utilities
     #   your_cool_package (pyproject.toml)

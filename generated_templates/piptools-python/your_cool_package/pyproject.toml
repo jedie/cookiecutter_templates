@@ -33,6 +33,7 @@ dev = [
     "pip-audit",  # https://github.com/pypa/pip-audit
     "mypy",  # https://github.com/python/mypy
     "twine",  # https://github.com/pypa/twine
+    "pre-commit",  # https://github.com/pre-commit/pre-commit
     "typeguard",  # https://github.com/agronholm/typeguard/
 
     # https://github.com/akaihola/darker
@@ -81,6 +82,10 @@ requirements=["requirements.dev.txt"]
 strict=true
 require_hashes=true
 ignore-vuln=[]
+
+
+[tool.cli_base]
+version_module_name = "your_cool_package"  # Used by "update-readme-history" git hook
 
 
 [tool.darker]
@@ -133,7 +138,7 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311}
+envlist = py{313,312,311}
 skip_missing_interpreters = True
 
 [testenv]
@@ -143,7 +148,7 @@ commands_pre =
     pip install -U pip-tools
     pip-sync requirements.dev.txt
 commands =
-    {envpython} -m coverage run --context='{envname}'
+    python3 -m coverage run --context='{envname}'
 """
 
 
