@@ -5,10 +5,9 @@ from manageprojects.tests.base import BaseTestCase
 
 from managetemplates import constants
 from managetemplates.cli_app import cli
-from managetemplates.constants import PACKAGE_ROOT
+from managetemplates.cli_dev import cli as dev_cli
+from managetemplates.constants import PACKAGE_ROOT, README_PATH
 
-
-README_PATH = PACKAGE_ROOT / 'README.md'
 
 ADDITIONAL_TEMPLATE = '''
 Cookiecutter template tests are here: [%(tests_rel_path)s](https://github.com/jedie/cookiecutter_templates/blob/main/%(tests_rel_path)s)
@@ -99,3 +98,16 @@ class ReadmeTestCase(BaseTestCase):
             ),
         )
         assert_cli_help_in_readme(text_block=stdout, marker='main help')
+
+    def test_dev_help(self):
+        stdout = invoke_click(dev_cli, '--help')
+        self.assert_in_content(
+            got=stdout,
+            parts=(
+                'Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...',
+                ' check-code-style ',
+                ' coverage ',
+                constants.CLI_EPILOG,
+            ),
+        )
+        assert_cli_help_in_readme(text_block=stdout, marker='dev help')

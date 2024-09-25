@@ -32,6 +32,7 @@ dev = [
     "pip-audit",  # https://github.com/pypa/pip-audit
     "mypy",  # https://github.com/python/mypy
     "twine",  # https://github.com/pypa/twine
+    "pre-commit",  # https://github.com/pre-commit/pre-commit
     "typeguard",  # https://github.com/agronholm/typeguard/
 
     # https://github.com/akaihola/darker
@@ -45,6 +46,15 @@ dev = [
     # backports.tarfile is needed for python <3.12
     'backports.tarfile', # via jaraco-context -> keyring -> twine
 ]
+
+[tool.pip-tools.compile]
+index-url="https://pypi.org/simple"
+extra-index-url=["https://www.piwheels.org/simple"] # Add hashes of piwheels packages, too!
+generate-hashes = true
+# https://pip-tools.readthedocs.io/en/stable/#deprecations
+allow-unsafe = true
+resolver="backtracking"
+strip-extras = true
 
 [project.urls]
 Documentation = "https://github.com/jedie/cookiecutter_templates"
@@ -71,6 +81,10 @@ requirements=["requirements.dev.txt"]
 strict=true
 require_hashes=true
 ignore-vuln=[]
+
+
+[tool.cli_base]
+version_module_name = "managetemplates"  # Used by "update-readme-history" git hook
 
 
 [tool.darker]
@@ -124,7 +138,7 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311}
+envlist = py{313,312,311}
 skip_missing_interpreters = True
 
 [testenv]
@@ -134,10 +148,7 @@ commands_pre =
     pip install -U pip-tools
     pip-sync requirements.dev.txt
 commands =
-    {envpython} -m coverage run --context='{envname}'
-    {envpython} -m coverage combine --append
-    {envpython} -m coverage xml
-    {envpython} -m coverage report
+    python3 -m coverage run --context='{envname}'
 """
 
 
@@ -161,6 +172,7 @@ applied_migrations = [
     "41345e2", # 2023-08-05T20:53:10+02:00
     "51d1d77", # 2023-12-21T20:58:37+01:00
     "cb3b71e", # 2024-03-12T08:19:30+01:00
+    "a968634", # 2024-09-25T22:03:22+02:00
 ]
 
 [manageprojects.cookiecutter_context.cookiecutter]
