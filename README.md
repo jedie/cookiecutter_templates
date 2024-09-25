@@ -185,6 +185,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.5.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.5.0)
+  * 2024-09-25 - Simplify: Use update_readme_history() from cli-base-utilities
   * 2024-09-25 - Bugfix github CI matrix: "3.13" is only available via RC... Skip it until release.
   * 2024-09-25 - Apply own project updates from own template ;)
   * 2024-09-25 - Bugfix "pre-commit" call
