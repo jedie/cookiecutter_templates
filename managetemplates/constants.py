@@ -7,10 +7,12 @@ import managetemplates
 
 
 BASE_PATH = Path(managetemplates.__file__).parent
-PACKAGE_ROOT = BASE_PATH.parent
 
+PACKAGE_ROOT = BASE_PATH.parent
 assert_is_file(PACKAGE_ROOT / 'pyproject.toml')  # Exists only in cloned git repo
 
+README_PATH = PACKAGE_ROOT / 'README.md'
+assert_is_file(README_PATH)
 
 CLI_EPILOG = 'Project Homepage: https://github.com/jedie/cookiecutter_templates'
 
@@ -41,4 +43,3 @@ UPDATE_TEMPLATE_REQ_FILENAME = 'update_requirements.py'
 
 
 PY_BIN_PATH = Path(sys.executable).parent
-BASE_PATH = Path(managetemplates.__file__).parent

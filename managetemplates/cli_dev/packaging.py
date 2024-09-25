@@ -1,7 +1,6 @@
 import sys
 from pathlib import Path
 
-import cli_base
 import click
 from cli_base.cli_tools.dev_tools import run_unittest_cli
 from cli_base.cli_tools.subprocess_utils import verbose_check_call
@@ -9,13 +8,14 @@ from cli_base.cli_tools.verbosity import OPTION_KWARGS_VERBOSE
 from cli_base.run_pip_audit import run_pip_audit
 from manageprojects.utilities.publish import publish_package
 
+import managetemplates
 from managetemplates.cli_dev import PACKAGE_ROOT, cli
 
 
 @cli.command()
 def install():
     """
-    Run pip-sync and install 'cli_base' via pip as editable.
+    Run pip-sync and install 'managetemplates' via pip as editable.
     """
     verbose_check_call('pip-sync', PACKAGE_ROOT / 'requirements.dev.txt')
     verbose_check_call('pip', 'install', '--no-deps', '-e', '.')
@@ -44,14 +44,7 @@ def update():
         CUSTOM_COMPILE_COMMAND='./dev-cli.py update',
     )
 
-    pip_compile_base = [
-        bin_path / 'pip-compile',
-        '--verbose',
-        '--allow-unsafe',  # https://pip-tools.readthedocs.io/en/latest/#deprecations
-        '--resolver=backtracking',  # https://pip-tools.readthedocs.io/en/latest/#deprecations
-        '--upgrade',
-        '--generate-hashes',
-    ]
+    pip_compile_base = [bin_path / 'pip-compile', '--verbose', '--upgrade']
 
     # Only "prod" dependencies:
     verbose_check_call(
@@ -77,6 +70,9 @@ def update():
     # Install new dependencies in current .venv:
     verbose_check_call(bin_path / 'pip-sync', 'requirements.dev.txt')
 
+    # Update git pre-commit hooks:
+    verbose_check_call(bin_path / 'pre-commit', 'autoupdate')
+
 
 @cli.command()
 def publish():
@@ -85,8 +81,4 @@ def publish():
     """
     run_unittest_cli(verbose=False, exit_after_run=False)  # Don't publish a broken state
 
-    publish_package(
-        module=cli_base,
-        package_path=PACKAGE_ROOT,
-        distribution_name='cli-base-utilities',
-    )
+    publish_package(module=managetemplates, package_path=PACKAGE_ROOT)
