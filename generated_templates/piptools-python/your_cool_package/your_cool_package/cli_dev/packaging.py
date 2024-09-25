@@ -71,7 +71,7 @@ def update():
     verbose_check_call(bin_path / 'pip-sync', 'requirements.dev.txt')
 
     # Update git pre-commit hooks:
-    verbose_check_call(bin_path / 'pre_commit', 'autoupdate')
+    verbose_check_call(bin_path / 'pre-commit', 'autoupdate')
 
 
 @cli.command()
