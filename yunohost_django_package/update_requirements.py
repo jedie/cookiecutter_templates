@@ -32,27 +32,33 @@ def main(verbose):
         dst=template_path / 'conf' / 'requirements.txt',
     )
 
-    # Special case: Update the "install_python.py" file:
-    try:
-        verbose_check_call(
-            sys.executable,
-            'dev-cli.py',
-            'test',
-            'django_example_ynh.tests.test_install_python.IncludeInstallPythonTestCase.test_install_python_is_up2date',
-            cwd=pkg_path,
-            verbose=verbose,
-            exit_on_error=False,
-        )
-    except subprocess.CalledProcessError:
-        # It's okay that the unittest failed,
-        # Then the "install_python.py" file is not up-to-date.
-        pass
-
-    # Always copy the file:
-    verbose_copy2(
-        src=pkg_path / 'conf' / 'install_python.py',
-        dst=template_path / 'conf' / 'install_python.py',
+    tests = (
+        'test_install_python.IncludeInstallPythonTestCase.test_install_python_is_up2date',
+        'test_setup_python.IncludeSetupPythonTestCase.test_setup_python_is_up2date',
     )
+    for test in tests:
+        # Special cases: Update the "install_python.py" and "setup_python.py" file:
+        try:
+            verbose_check_call(
+                sys.executable,
+                'dev-cli.py',
+                'test',
+                f'django_example_ynh.tests.{test}',
+                cwd=pkg_path,
+                verbose=verbose,
+                exit_on_error=False,
+            )
+        except subprocess.CalledProcessError:
+            # It's okay that the unittest failed,
+            # Then the "install_python.py"/"setup_python.py" file is not up-to-date.
+            pass
+
+    # Always copy the result:
+    for filename in ('install_python.py', 'setup_python.py'):
+        verbose_copy2(
+            src=pkg_path / 'conf' / filename,
+            dst=template_path / 'conf' / filename,
+        )
 
 
 if __name__ == '__main__':
