@@ -50,6 +50,15 @@ dev = [
     'backports.tarfile', # via jaraco-context -> keyring -> twine
 ]
 
+[tool.pip-tools.compile]
+index-url="https://pypi.org/simple"
+extra-index-url=["https://www.piwheels.org/simple"] # Add hashes of piwheels packages, too!
+generate-hashes = true
+# https://pip-tools.readthedocs.io/en/stable/#deprecations
+allow-unsafe = true
+resolver="backtracking"
+strip-extras = true
+
 [project.urls]
 Documentation = "https://github.com/YunoHost-Apps/django_example_ynh"
 Source = "https://github.com/YunoHost-Apps/django_example_ynh"
