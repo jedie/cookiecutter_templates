@@ -161,6 +161,7 @@ class ProjectSetupTestCase(BaseTestCase):
                 ['.../managed-django-project$ .../bin/python3', 'update_requirements.py'],
                 ['.../pipenv-python$ .../bin/python3', 'update_requirements.py'],
                 ['.../piptools-python$ .../bin/python3', 'update_requirements.py'],
+                ['.../uv-python$ .../bin/python3', 'update_requirements.py'],
                 ['.../yunohost_django_package$ .../bin/python3', 'update_requirements.py'],
             ],
         )

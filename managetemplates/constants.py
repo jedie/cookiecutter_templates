@@ -32,6 +32,7 @@ ALL_TEMPLATES = (
     'managed-django-project',
     'pipenv-python',
     'piptools-python',
+    'uv-python',
     'yunohost_django_package',
 )
 

@@ -77,6 +77,28 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 ./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory piptools-python ~/foobar/
 ```
 
+## uv based python package
+
+* Requirement management with [uv](https://github.com/astral-sh/uv)
+* [click](https://click.palletsprojects.com) based CLI for app and dev mode
+* Auto virtualenv bootstrap, just by calling the `cli.py` / `dev-cli.py`
+* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
+* Has basic unittest
+
+
+Cookiecutter template tests are here: [uv-python/tests.py](https://github.com/jedie/cookiecutter_templates/blob/main/uv-python/tests.py)
+
+
+Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
+```shell
+cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory uv-python
+```
+
+Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
+```shell
+./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory uv-python ~/foobar/
+```
+
 ## Base Django YunoHost app
 
 [YunoHost](https://yunohost.org) is a Open-Source, Debian based self-hosting solution.
@@ -185,6 +207,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.5.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.5.0)
+  * 2024-10-29 - Add "uv-python" template
   * 2024-09-26 - Move pip-compile settings into pyproject.toml + create pywheel hashes
   * 2024-09-26 - Add "setup Python" to YunoHost template
   * 2024-09-25 - Simplify: Use update_readme_history() from cli-base-utilities
