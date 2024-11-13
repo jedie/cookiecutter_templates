@@ -21,7 +21,7 @@ def install():
     Install requirements and 'your_cool_package' via pip as editable.
     """
     tools_executor = ToolsExecutor(cwd=PACKAGE_ROOT)
-    tools_executor.verbose_check_call('uv', 'sync', '--only-dev')
+    tools_executor.verbose_check_call('uv', 'sync')
     tools_executor.verbose_check_call('pip', 'install', '--no-deps', '-e', '.')
 
 
