@@ -22,6 +22,8 @@ dev = [
     "manageprojects",  # https://github.com/jedie/manageprojects
     "urllib3", # for bx_py_utils.test_utils.deny_requests.deny_any_real_request() in tests
     "uv",  # https://github.com/astral-sh/uv
+    "setuptools",  # https://github.com/pypa/setuptools
+    "build",  # https://github.com/pypa/build
     "tox",  # https://github.com/tox-dev/tox
     "tox-uv",  # https://github.com/tox-dev/tox-uv
     "coverage",  # https://github.com/nedbat/coveragepy
@@ -49,15 +51,6 @@ dev = [
     # backports.tarfile is needed for python <3.12
     'backports.tarfile', # via jaraco-context -> keyring -> twine
 ]
-
-[tool.pip-tools.compile]
-index-url="https://pypi.org/simple"
-extra-index-url=["https://www.piwheels.org/simple"] # Add hashes of piwheels packages, too!
-generate-hashes = true
-# https://pip-tools.readthedocs.io/en/stable/#deprecations
-allow-unsafe = true
-resolver="backtracking"
-strip-extras = true
 
 [project.urls]
 Documentation = "{{ cookiecutter.package_url }}"
@@ -141,11 +134,11 @@ isolated_build = true
 env_list = ["3.13", "3.12", "3.11"]
 skip_missing_interpreters = true
 
-[tool.tox.testenv]
+[tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
 with_dev = true
 commands = [
-    ["python3", "-m", "coverage", "run", "--context='{envname}'"]
+    ["python3", "-m", "coverage", "run", "--context", "'{envname}'"]
 ]
 
 

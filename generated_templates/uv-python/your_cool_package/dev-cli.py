@@ -99,7 +99,7 @@ def main(argv):
         verbose_check_call(PYTHON_PATH, '-m', 'pip', 'install', '-U', 'uv')
 
         # install requirements
-        verbose_check_call(UV_PATH, 'sync', '--frozen', '--only-dev')
+        verbose_check_call(UV_PATH, 'sync')
 
         # install project
         verbose_check_call(PIP_PATH, 'install', '--no-deps', '-e', '.')
