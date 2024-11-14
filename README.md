@@ -187,7 +187,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 │ check-code-style            Check code style by calling darker + flake8                          │
 │ coverage                    Run tests and show coverage.                                         │
 │ fix-code-style              Fix code style of all managetemplates source code files via darker   │
-│ install                     Run pip-sync and install 'managetemplates' via pip as editable.      │
+│ install                     Install requirements and 'managetemplates' via pip as editable.      │
 │ mypy                        Run Mypy (configured in pyproject.toml)                              │
 │ pip-audit                   Run pip-audit check against current requirements files               │
 │ publish                     Build and upload this project to PyPi                                │
@@ -207,6 +207,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.5.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.5.0)
+  * 2024-11-13 - Migrate to uv
   * 2024-11-13 - Bugfix uv-python
   * 2024-10-29 - Add "uv-python" template
   * 2024-09-26 - Move pip-compile settings into pyproject.toml + create pywheel hashes

@@ -17,14 +17,6 @@ assert_is_file(README_PATH)
 CLI_EPILOG = 'Project Homepage: https://github.com/jedie/cookiecutter_templates'
 
 
-# Only "prod" dependencies:
-REQ_TXT_PATH = PACKAGE_ROOT / 'requirements.txt'
-assert_is_file(REQ_TXT_PATH)
-
-# dependencies + "dev"-optional-dependencies:
-REQ_DEV_TXT_PATH = PACKAGE_ROOT / 'requirements.dev.txt'
-assert_is_file(REQ_DEV_TXT_PATH)
-
 # Path to checkout Cookiecutter template for running tests:
 TEST_PATH = PACKAGE_ROOT / 'generated_templates'
 

@@ -33,8 +33,8 @@ class DevCliTestCase(BaseTestCase):
             got=output,
             parts=(
                 'default environments:',
-                'py311',
-                'py312',
+                '3.13',
+                '3.12',
             ),
         )
 

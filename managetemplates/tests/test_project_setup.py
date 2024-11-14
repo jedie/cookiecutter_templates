@@ -101,7 +101,7 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assertEqual(
             call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS),
             [
-                ['.../bin/pip-sync', '.../requirements.dev.txt'],
+                ['.../bin/uv', 'sync'],
                 ['.../bin/pip', 'install', '--no-deps', '-e', '.'],
             ],
         )
@@ -111,7 +111,22 @@ class ProjectSetupTestCase(BaseTestCase):
         )
 
     def test_update(self):
-        with SubprocessCallMock() as call_mock:
+        class NamedTemporaryFileMock:
+            name = '/tmp/temp_requirements_MOCK.txt'
+
+            def __init__(self, **kwargs):
+                assert kwargs == {'prefix': 'temp_requirements_', 'suffix': '.txt'}, f'{kwargs=}'
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc_val, exc_tb):
+                assert exc_type is None, f'{exc_type=}'
+
+        with (
+            patch.object(packaging, 'NamedTemporaryFile', NamedTemporaryFileMock),
+            SubprocessCallMock() as call_mock,
+        ):
             invoke_click(dev_cli, 'update')
 
         package_path = PACKAGE_ROOT / 'piptools-python' / '{{ cookiecutter.package_name }}'
@@ -127,26 +142,26 @@ class ProjectSetupTestCase(BaseTestCase):
             call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS),
             [
                 ['.../bin/pip', 'install', '-U', 'pip'],
-                ['.../bin/pip', 'install', '-U', 'pip-tools'],
+                ['.../bin/pip', 'install', '-U', 'uv'],
+                ['.../bin/uv', 'lock', '--upgrade'],
                 [
-                    '.../bin/pip-compile',
-                    '--verbose',
-                    '--upgrade',
-                    'pyproject.toml',
-                    '--output-file',
-                    'requirements.txt',
+                    '.../bin/uv',
+                    'export',
+                    '--no-header',
+                    '--frozen',
+                    '--no-editable',
+                    '--no-emit-project',
+                    '-o',
+                    '/tmp/temp_requirements_MOCK.txt',
                 ],
                 [
-                    '.../bin/pip-compile',
-                    '--verbose',
-                    '--upgrade',
-                    'pyproject.toml',
-                    '--extra=dev',
-                    '--output-file',
-                    'requirements.dev.txt',
+                    '.../bin/pip-audit',
+                    '--strict',
+                    '--require-hashes',
+                    '-r',
+                    '/tmp/temp_requirements_MOCK.txt',
                 ],
-                ['.../bin/pip-audit', '-v', '--strict', '--require-hashes', '-r', 'requirements.dev.txt'],
-                ['.../bin/pip-sync', 'requirements.dev.txt'],
+                ['.../bin/uv', 'sync'],
                 ['.../bin/pre-commit', 'autoupdate'],
             ],
         )
