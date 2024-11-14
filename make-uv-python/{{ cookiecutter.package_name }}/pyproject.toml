@@ -1,29 +1,19 @@
 [project]
-name = "your_cool_package"
+name = "{{ cookiecutter.package_name }}"
 dynamic = ["version"]
-description = "A minimal Python package"
-license = {text = "GPL-3.0-or-later"}
+description = "{{ cookiecutter.package_description }}"
+license = {text = "{{ cookiecutter.license }}"}
 readme = "README.md"
 authors = [
-    {name = 'John Doh', email = 'john-doh@example.tld'}
+    {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
 ]
 requires-python = ">=3.11"
-dependencies = [
-    "cli-base-utilities>=0.8.0",  # https://github.com/jedie/cli-base-utilities
-    "bx_py_utils",  # https://github.com/boxine/bx_py_utils
-    "click",  # https://github.com/pallets/click/
-    "rich-click",  # https://github.com/ewels/rich-click
-    "rich",  # https://github.com/Textualize/rich
-]
-
+dependencies = []
 [dependency-groups]
 dev = [
-    "cli-base-utilities>=0.10.1",  # https://github.com/jedie/cli-base-utilities
     "manageprojects",  # https://github.com/jedie/manageprojects
     "urllib3", # for bx_py_utils.test_utils.deny_requests.deny_any_real_request() in tests
     "uv",  # https://github.com/astral-sh/uv
-    "setuptools",  # https://github.com/pypa/setuptools
-    "build",  # https://github.com/pypa/build
     "tox",  # https://github.com/tox-dev/tox
     "tox-uv",  # https://github.com/tox-dev/tox-uv
     "coverage",  # https://github.com/nedbat/coveragepy
@@ -37,7 +27,6 @@ dev = [
     "pip-audit",  # https://github.com/pypa/pip-audit
     "mypy",  # https://github.com/python/mypy
     "twine",  # https://github.com/pypa/twine
-    "pre-commit",  # https://github.com/pre-commit/pre-commit
     "typeguard",  # https://github.com/agronholm/typeguard/
 
     # https://github.com/akaihola/darker
@@ -53,12 +42,11 @@ dev = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/john-doh/your_cool_package"
-Source = "https://github.com/john-doh/your_cool_package"
+Documentation = "{{ cookiecutter.package_url }}/"
+Source = "{{ cookiecutter.package_url }}/"
 
 [project.scripts]
-your_cool_package_app = "your_cool_package.__main__:main"
-your_cool_package_dev = "your_cool_package.cli_dev:main"
+{{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.__main__:main"
 
 [build-system]
 requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
@@ -66,21 +54,10 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["your_cool_package*"]
+include = ["{{ cookiecutter.package_name }}*"]
 
 [tool.setuptools.dynamic]
-version = {attr = "your_cool_package.__version__"}
-
-
-[tool.cli_base.pip_audit]
-requirements=["requirements.dev.txt"]
-strict=true
-require_hashes=true
-ignore-vuln=[]
-
-
-[tool.cli_base]
-version_module_name = "your_cool_package"  # Used by "update-readme-history" git hook
+version = {attr = "{{ cookiecutter.package_name }}.__version__"}
 
 
 [tool.darker]
@@ -93,25 +70,24 @@ diff = false
 check = false
 stdout = false
 isort = true
+lint = []
 log_level = "INFO"
 
 
 [tool.isort]
-# https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
-atomic=true
-profile='black'
-skip_glob=['.*', '*/htmlcov/*']
-known_first_party=['your_cool_package']
-line_length=119
-lines_after_imports=2
+profile = "black"
+
+
+[tool.pytest.ini_options]
+filterwarnings = []
 
 
 [tool.coverage.run]
 branch = true
 parallel = true
-concurrency = ["multiprocessing"]
 source = ['.']
-command_line = '-m unittest --verbose --locals --buffer'
+concurrency = ["multiprocessing"]
+command_line = "-m unittest --locals --verbose"
 
 [tool.coverage.report]
 omit = ['.*', '*/tests/*']
