@@ -8,6 +8,28 @@ All Templates are tested via unittests!
 Patches welcome!
 
 [comment]: <> (✂✂✂ auto generated start ✂✂✂)
+## uv based python package with a Makefile
+
+* Requirement management with [uv](https://github.com/astral-sh/uv)
+* Makefile with a simple "help" menu
+* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
+* Base requirements are only: `python3-venv` and `python3-pip` (uv will ne installed via pip in `.venv`)
+* Has basic unittest
+
+
+Cookiecutter template tests are here: [make-uv-python/tests.py](https://github.com/jedie/cookiecutter_templates/blob/main/make-uv-python/tests.py)
+
+
+Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
+```shell
+cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory make-uv-python
+```
+
+Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
+```shell
+./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory make-uv-python ~/foobar/
+```
+
 ## Django Project
 
 * Requirement management with [pip-tools](https://github.com/jazzband/pip-tools):
@@ -83,6 +105,7 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 * [click](https://click.palletsprojects.com) based CLI for app and dev mode
 * Auto virtualenv bootstrap, just by calling the `cli.py` / `dev-cli.py`
 * used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
+* Base requirements are only: `python3-venv` and `python3-pip` (uv will ne installed via pip in `.venv`)
 * Has basic unittest
 
 
@@ -207,6 +230,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.5.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.5.0)
+  * 2024-11-14 - New template: "make-uv-python"
   * 2024-11-13 - Migrate to uv
   * 2024-11-13 - Bugfix uv-python
   * 2024-10-29 - Add "uv-python" template

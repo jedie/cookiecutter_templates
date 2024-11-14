@@ -173,6 +173,7 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assertEqual(
             call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS, with_cwd=True),
             [
+                ['.../make-uv-python$ .../bin/python3', 'update_requirements.py'],
                 ['.../managed-django-project$ .../bin/python3', 'update_requirements.py'],
                 ['.../pipenv-python$ .../bin/python3', 'update_requirements.py'],
                 ['.../piptools-python$ .../bin/python3', 'update_requirements.py'],

@@ -21,6 +21,7 @@ CLI_EPILOG = 'Project Homepage: https://github.com/jedie/cookiecutter_templates'
 TEST_PATH = PACKAGE_ROOT / 'generated_templates'
 
 ALL_TEMPLATES = (
+    'make-uv-python',
     'managed-django-project',
     'pipenv-python',
     'piptools-python',
