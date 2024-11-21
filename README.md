@@ -230,6 +230,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.5.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.5.0)
+  * 2024-11-21 - Replace click by tyro in uv-python
   * 2024-11-14 - New template: "make-uv-python"
   * 2024-11-13 - Migrate to uv
   * 2024-11-13 - Bugfix uv-python

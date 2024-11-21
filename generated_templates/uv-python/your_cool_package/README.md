@@ -12,15 +12,23 @@ A minimal Python package
 
 [comment]: <> (✂✂✂ auto generated main help start ✂✂✂)
 ```
-Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...
+usage: ./cli.py [-h] {update-readme-history,version}
 
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
-│ --help      Show this message and exit.                                                          │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
-│ update-readme-history      Update project history base on git commits/tags in README.md          │
-│ version                    Print version and exit                                                │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─ options ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ -h, --help        show this help message and exit                                                                  │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ {update-readme-history,version}                                                                                    │
+│     update-readme-history                                                                                          │
+│                   Update project history base on git commits/tags in README.md Will be exited with 1 if the        │
+│                   README.md was updated otherwise with 0.                                                          │
+│                                                                                                                    │
+│                   Also, callable via e.g.:                                                                         │
+│                       python -m cli_base update-readme-history -v                                                  │
+│     version       Print version and exit                                                                           │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated main help end ✂✂✂)
 
@@ -29,26 +37,33 @@ Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...
 
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```
-Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
+usage: ./dev-cli.py [-h]
+                    {check-code-style,coverage,fix-code-style,install,mypy,pip-audit,publish,test,tox,update,update-te
+st-snapshot-files,version}
 
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
-│ --help      Show this message and exit.                                                          │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
-│ check-code-style            Check code style by calling darker + flake8                          │
-│ coverage                    Run tests and show coverage report.                                  │
-│ fix-code-style              Fix code style of all your_cool_package source code files via darker │
-│ install                     Install requirements and 'your_cool_package' via pip as editable.    │
-│ mypy                        Run Mypy (configured in pyproject.toml)                              │
-│ pip-audit                   Run pip-audit check against current requirements files               │
-│ publish                     Build and upload this project to PyPi                                │
-│ test                        Run unittests                                                        │
-│ tox                         Run tox                                                              │
-│ update                      Update "requirements*.txt" dependencies files                        │
-│ update-test-snapshot-files  Update all test snapshot files (by remove and recreate all snapshot  │
-│                             files)                                                               │
-│ version                     Print version and exit                                               │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─ options ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ -h, --help        show this help message and exit                                                                  │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ {check-code-style,coverage,fix-code-style,install,mypy,pip-audit,publish,test,tox,update,update-test-snapshot-fil… │
+│     check-code-style                                                                                               │
+│                   Check code style by calling darker + flake8                                                      │
+│     coverage      Run tests and show coverage report.                                                              │
+│     fix-code-style                                                                                                 │
+│                   Fix code style of all your_cool_package source code files via darker                             │
+│     install       Install requirements and 'your_cool_package' via pip as editable.                                │
+│     mypy          Run Mypy (configured in pyproject.toml)                                                          │
+│     pip-audit     Run pip-audit check against current requirements files                                           │
+│     publish       Build and upload this project to PyPi                                                            │
+│     test          Run unittests                                                                                    │
+│     tox           Run tox                                                                                          │
+│     update        Update "requirements*.txt" dependencies files                                                    │
+│     update-test-snapshot-files                                                                                     │
+│                   Update all test snapshot files (by remove and recreate all snapshot files)                       │
+│     version       Print version and exit                                                                           │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated dev help end ✂✂✂)
 

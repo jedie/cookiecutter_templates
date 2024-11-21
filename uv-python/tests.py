@@ -24,7 +24,7 @@ class UvPythonTemplateTestCase(PackageTestBase):
             assert_is_file(self.pkg_path / '.venv-app' / 'bin' / 'your_cool_package_app')
 
             output = self.test_project.check_output(cli_bin, '--help')
-            self.assert_in('Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...', output)
+            self.assert_in('usage: ./cli.py [-h] {update-readme-history,version}', output)
 
             ############################################################################
             # Bootstrap by call the ./dev-cli.py
@@ -46,7 +46,8 @@ class UvPythonTemplateTestCase(PackageTestBase):
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'your_cool_package_dev')
 
             output = self.test_project.check_output(dev_cli_bin, '--help')
-            self.assert_in('Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...', output)
+            self.assert_in('usage: ./dev-cli.py [-h]', output)
+            self.assert_in('check-code-style,coverage,fix-code-style,', output)
 
             output = self.test_project.check_output(dev_cli_bin, 'tox', '--help')
             self.assert_in('usage: tox [-h]', output)
