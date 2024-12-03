@@ -32,12 +32,7 @@ def version():
 
 def main():
     print_version({{ cookiecutter.package_name }})
-
     rich_traceback_install()
-
-    # Work-a-round for: https://github.com/brentyi/tyro/issues/205
-    app._subcommands = {k.replace('_', '-'): v for k, v in app._subcommands.items()}
-
     app.cli(
         prog='./cli.py',
         description=constants.CLI_EPILOG,

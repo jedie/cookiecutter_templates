@@ -49,7 +49,6 @@ def version():
 
 def main():
     print_version({{ cookiecutter.package_name }})
-
     rich_traceback_install()
 
     if len(sys.argv) >= 2:
@@ -62,9 +61,6 @@ def main():
         }
         if real_func := command_map.get(command):
             real_func(argv=sys.argv, exit_after_run=True)
-
-    # Work-a-round for: https://github.com/brentyi/tyro/issues/205
-    app._subcommands = {k.replace('_', '-'): v for k, v in app._subcommands.items()}
 
     app.cli(
         prog='./dev-cli.py',

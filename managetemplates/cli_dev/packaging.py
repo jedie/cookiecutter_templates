@@ -1,11 +1,10 @@
 import logging
-from tempfile import NamedTemporaryFile
 
 import click
-from bx_py_utils.pyproject_toml import get_pyproject_config
 from cli_base.cli_tools.dev_tools import run_unittest_cli
 from cli_base.cli_tools.subprocess_utils import ToolsExecutor
 from cli_base.cli_tools.verbosity import OPTION_KWARGS_VERBOSE, setup_logging
+from cli_base.run_pip_audit import run_pip_audit
 from manageprojects.utilities.publish import publish_package
 
 import managetemplates
@@ -25,42 +24,6 @@ def install():
     tools_executor.verbose_check_call('pip', 'install', '--no-deps', '-e', '.')
 
 
-def run_pip_audit(verbosity: int):
-    tools_executor = ToolsExecutor(cwd=PACKAGE_ROOT)
-
-    with NamedTemporaryFile(prefix='temp_requirements_', suffix='.txt') as temp_file:
-        tools_executor.verbose_check_call(
-            'uv',
-            'export',
-            '--no-header',
-            '--frozen',
-            '--no-editable',
-            '--no-emit-project',
-            '-o',
-            temp_file.name,
-        )
-
-        config: dict = get_pyproject_config(
-            section=('tool', 'cli_base', 'pip_audit'),
-            base_path=PACKAGE_ROOT,
-        )
-        logger.debug('pip_audit config: %r', config)
-        assert isinstance(config, dict), f'Expected a dict: {config=}'
-
-        popenargs = ['pip-audit', '--strict', '--require-hashes']
-
-        if verbosity:
-            popenargs.append(f'-{"v" * verbosity}')
-
-        for vulnerability_id in config.get('ignore-vuln', []):
-            popenargs.extend(['--ignore-vuln', vulnerability_id])
-
-        popenargs.extend(['-r', temp_file.name])
-
-        logger.debug('pip_audit args: %s', popenargs)
-        tools_executor.verbose_check_call(*popenargs)
-
-
 @cli.command()
 @click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
 def pip_audit(verbosity: int):
@@ -68,7 +31,7 @@ def pip_audit(verbosity: int):
     Run pip-audit check against current requirements files
     """
     setup_logging(verbosity=verbosity)
-    run_pip_audit(verbosity=verbosity)
+    run_pip_audit(base_path=PACKAGE_ROOT, verbosity=verbosity)
 
 
 @cli.command()
@@ -85,7 +48,7 @@ def update(verbosity: int):
     tools_executor.verbose_check_call('pip', 'install', '-U', 'uv')
     tools_executor.verbose_check_call('uv', 'lock', '--upgrade')
 
-    run_pip_audit(verbosity=verbosity)
+    run_pip_audit(base_path=PACKAGE_ROOT, verbosity=verbosity)
 
     # Install new dependencies in current .venv:
     tools_executor.verbose_check_call('uv', 'sync')

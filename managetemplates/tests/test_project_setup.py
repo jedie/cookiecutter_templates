@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-import subprocess
+import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from cli_base.cli_tools.code_style import assert_code_style
 from cli_base.cli_tools.subprocess_utils import ToolsExecutor
+from cli_base.cli_tools.test_utils.rich_test_utils import invoke
 from manageprojects.test_utils.click_cli_utils import invoke_click
 from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from manageprojects.test_utils.subprocess import SubprocessCallMock as SubprocessCallMockOrigin
@@ -78,16 +79,10 @@ class ProjectSetupTestCase(BaseTestCase):
         version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
         self.assertEqual(str(version), __version__)
 
-        cli_bin = PACKAGE_ROOT / 'cli.py'
-        assert_is_file(cli_bin)
-
-        output = subprocess.check_output([cli_bin, 'version'], text=True)
+        output = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=('version',))
         self.assertIn(f'managetemplates v{__version__}', output)
 
-        dev_cli_bin = PACKAGE_ROOT / 'dev-cli.py'
-        assert_is_file(dev_cli_bin)
-
-        output = subprocess.check_output([dev_cli_bin, 'version'], text=True)
+        output = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=('version',))
         self.assertIn(f'managetemplates v{__version__}', output)
 
     def test_code_style(self):
@@ -115,7 +110,7 @@ class ProjectSetupTestCase(BaseTestCase):
             name = '/tmp/temp_requirements_MOCK.txt'
 
             def __init__(self, **kwargs):
-                assert kwargs == {'prefix': 'temp_requirements_', 'suffix': '.txt'}, f'{kwargs=}'
+                assert kwargs == {'prefix': 'requirements', 'suffix': '.txt'}, f'{kwargs=}'
 
             def __enter__(self):
                 return self
@@ -124,7 +119,7 @@ class ProjectSetupTestCase(BaseTestCase):
                 assert exc_type is None, f'{exc_type=}'
 
         with (
-            patch.object(packaging, 'NamedTemporaryFile', NamedTemporaryFileMock),
+            patch.object(tempfile, 'NamedTemporaryFile', NamedTemporaryFileMock),
             SubprocessCallMock() as call_mock,
         ):
             invoke_click(dev_cli, 'update')
@@ -158,6 +153,7 @@ class ProjectSetupTestCase(BaseTestCase):
                     '.../bin/pip-audit',
                     '--strict',
                     '--require-hashes',
+                    '--disable-pip',
                     '-r',
                     '/tmp/temp_requirements_MOCK.txt',
                 ],
