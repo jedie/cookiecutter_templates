@@ -19,11 +19,12 @@ def main(verbose):
 
     verbose_check_call(sys.executable, 'dev-cli.py', 'update', cwd=pkg_path, verbose=verbose)
 
-    # Sync the requirements back to the cookiecutter template:
-    verbose_copy2(
-        src=pkg_path / 'uv.lock',
-        dst=PACKAGE_ROOT / 'uv-python' / '{{ cookiecutter.package_name }}' / 'uv.lock',
-    )
+    # Sync back to the cookiecutter template:
+    for file_name in ('uv.lock', '.pre-commit-config.yaml'):
+        verbose_copy2(
+            src=pkg_path / file_name,
+            dst=PACKAGE_ROOT / 'uv-python' / '{{ cookiecutter.package_name }}' / file_name,
+        )
 
 
 if __name__ == '__main__':
