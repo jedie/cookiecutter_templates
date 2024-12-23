@@ -230,6 +230,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.5.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.5.0)
+  * 2024-12-23 - Update YunoHost template
   * 2024-12-03 - Use new cli_base
   * 2024-12-03 - Remove tyro work-a-round
   * 2024-11-21 - Replace click by tyro in uv-python
@@ -246,7 +247,6 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
   * 2024-09-25 - Updates for "piptools-python" template:
   * 2024-09-22 - Move pip-compile settings into pyproject.toml and add piwheels hashes
   * 2024-09-09 - Update YunoHost package: reuse existing venv and use pip-sync
-  * 2024-09-07 - Update YunoHost template
   * 2024-09-05 - update manage-django-project
   * 2024-09-05 - Update template requirements and some min. Python specification
   * 2024-09-05 - "bin/python" -> "bin/python3"
