@@ -166,6 +166,11 @@ MEDIA_ROOT = str(INSTALL_DIR_PATH / 'media')
 # Set log file to e.g.: /var/log/$app/$app.log
 LOGGING['handlers']['log_file']['filename'] = str(LOG_FILE_PATH)
 
+LOGGING['loggers']['django_yunohost_integration'] = { # TODO: Move to django_yunohost_integration base settings
+    'handlers': ['syslog', 'log_file', 'mail_admins'],
+    'propagate': False,
+}
+
 # Example how to add logging to own app:
 LOGGING['loggers']['django_example'] = {
     'handlers': ['syslog', 'log_file', 'mail_admins'],
