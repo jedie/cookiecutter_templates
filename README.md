@@ -230,6 +230,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.5.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.5.0)
+  * 2025-01-11 - set yunohost = ">=12"
   * 2024-12-23 - Update YunoHost template
   * 2024-12-03 - Use new cli_base
   * 2024-12-03 - Remove tyro work-a-round

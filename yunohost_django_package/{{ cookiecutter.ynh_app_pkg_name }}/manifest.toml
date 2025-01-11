@@ -19,7 +19,7 @@ code = "{{ cookiecutter.upstream_url }}"
 
 [integration]
 # https://yunohost.org/en/packaging_manifest#integration-section
-yunohost = ">=11.2"
+yunohost = ">=12"
 helpers_version = "2.1" # https://yunohost.org/en/packaging_apps_helpers_v2.1
 architectures = "all"
 multi_instance = true
