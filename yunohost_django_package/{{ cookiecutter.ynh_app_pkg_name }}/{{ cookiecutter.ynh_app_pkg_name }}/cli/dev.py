@@ -20,8 +20,6 @@ from django_yunohost_integration.local_test import create_local_test
 from django_yunohost_integration.path_utils import get_project_root
 from manageprojects.utilities.publish import publish_package
 from rich import print
-from rich.console import Console
-from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
 
 import {{ cookiecutter.ynh_app_pkg_name }}
@@ -281,14 +279,6 @@ def main():
         }
         if real_func := command_map.get(command):
             real_func(argv=sys.argv, exit_after_run=True)
-
-    console = Console()
-    rich_traceback_install(
-        width=console.size.width,  # full terminal width
-        show_locals=True,
-        suppress=[click],
-        max_frames=2,
-    )
 
     print('Execute Click CLI')
     cli()

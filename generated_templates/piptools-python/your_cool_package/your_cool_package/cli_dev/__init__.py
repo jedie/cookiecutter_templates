@@ -7,8 +7,6 @@ import sys
 
 import rich_click as click
 from bx_py_utils.path import assert_is_file
-from rich.console import Console
-from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
 from typeguard import install_import_hook
 
@@ -59,14 +57,6 @@ def version():
 
 def main():
     print_version(your_cool_package)
-
-    console = Console()
-    rich_traceback_install(
-        width=console.size.width,  # full terminal width
-        show_locals=True,
-        suppress=[click],
-        max_frames=2,
-    )
 
     if len(sys.argv) >= 2:
         # Check if we can just pass a command call to origin CLI:

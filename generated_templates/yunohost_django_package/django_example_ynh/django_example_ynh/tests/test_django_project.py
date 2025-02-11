@@ -1,6 +1,5 @@
 import os
 
-import django_example
 from axes.models import AccessLog
 from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin
 from django.conf import LazySettings, settings

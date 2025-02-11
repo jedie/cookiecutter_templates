@@ -99,7 +99,6 @@ src = ['.']
 revision = "origin/master..."
 line_length = 119
 color = true
-skip_string_normalization = true
 diff = false
 check = false
 stdout = false

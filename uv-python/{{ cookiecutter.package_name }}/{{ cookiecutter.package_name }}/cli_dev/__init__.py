@@ -9,7 +9,6 @@ import sys
 from bx_py_utils.path import assert_is_file
 from cli_base.autodiscover import import_all_files
 from cli_base.cli_tools.dev_tools import run_coverage, run_tox, run_unittest_cli
-from cli_base.cli_tools.rich_utils import rich_traceback_install
 from cli_base.cli_tools.version_info import print_version
 from typeguard import install_import_hook
 from tyro.extras import SubcommandApp
@@ -49,7 +48,6 @@ def version():
 
 def main():
     print_version({{ cookiecutter.package_name }})
-    rich_traceback_install()
 
     if len(sys.argv) >= 2:
         # Check if we can just pass a command call to origin CLI:

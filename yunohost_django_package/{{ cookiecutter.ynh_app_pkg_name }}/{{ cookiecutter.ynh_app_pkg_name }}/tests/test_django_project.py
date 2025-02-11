@@ -1,6 +1,5 @@
 import os
 
-import {{ cookiecutter.upstream_pkg_name }}
 from axes.models import AccessLog
 from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin
 from django.conf import LazySettings, settings
