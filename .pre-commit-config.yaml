@@ -1,7 +1,8 @@
 # pre-commit plugin configuration
 # See https://pre-commit.com for more information
 default_install_hook_types:
-  - pre-commit
+  - prepare-commit-msg
+  - post-commit
   - post-rewrite
   - pre-push
 

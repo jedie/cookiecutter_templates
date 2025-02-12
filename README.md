@@ -230,6 +230,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.5.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.5.0)
+  * 2025-02-12 - Update requirements
   * 2025-02-12 - Update managed-django-project template
   * 2025-01-11 - set yunohost = ">=12"
   * 2024-12-23 - Update YunoHost template
@@ -270,7 +271,6 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
   * 2024-05-21 - Ignore safety #67599
   * 2024-03-12 - Split CLI
   * 2024-03-12 - piptools-python: Split CLI into app/dev CLI packages
-  * 2024-03-12 - Update requirements
   * 2024-03-12 - Use @cli.command()
   * 2024-02-29 - update template requirements
   * 2024-02-29 - remove obsolete darker options + update requirements
