@@ -9,7 +9,7 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "cli-base-utilities>=0.8.0",  # https://github.com/jedie/cli-base-utilities
+    "cli-base-utilities>=0.17.0",  # https://github.com/jedie/cli-base-utilities
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "tyro",  # https://github.com/brentyi/tyro
     "rich",  # https://github.com/Textualize/rich
@@ -17,14 +17,11 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "cli-base-utilities>=0.10.1",  # https://github.com/jedie/cli-base-utilities
     "manageprojects",  # https://github.com/jedie/manageprojects
     "urllib3", # for bx_py_utils.test_utils.deny_requests.deny_any_real_request() in tests
     "uv",  # https://github.com/astral-sh/uv
     "setuptools",  # https://github.com/pypa/setuptools
-    "build",  # https://github.com/pypa/build
-    "tox",  # https://github.com/tox-dev/tox
-    "tox-uv",  # https://github.com/tox-dev/tox-uv
+    "nox",  # https://github.com/wntrblm/nox
     "coverage",  # https://github.com/nedbat/coveragepy
     "autopep8",  # https://github.com/hhatto/autopep8
     "pyupgrade",  # https://github.com/asottile/pyupgrade
@@ -44,11 +41,6 @@ dev = [
     # https://github.com/pycqa/isort
     # https://github.com/pygments/pygments
     "darker[flynt, isort, color]",
-
-    # Work-a-round for: https://github.com/jazzband/pip-tools/issues/1866
-    # see also: https://github.com/jazzband/pip-tools/issues/994#issuecomment-1321226661
-    # backports.tarfile is needed for python <3.12
-    'backports.tarfile', # via jaraco-context -> keyring -> twine
 ]
 
 [project.urls]
@@ -122,19 +114,6 @@ exclude_lines = [
     'pragma: no cover',
     'raise NotImplementedError',
     'if __name__ == .__main__.:',
-]
-
-
-[tool.tox]  # https://tox.wiki/en/latest/config.html#pyproject-toml
-isolated_build = true
-env_list = ["3.13", "3.12", "3.11"]
-skip_missing_interpreters = true
-
-[tool.tox.env_run_base]
-runner = "uv-venv-lock-runner"
-with_dev = true
-commands = [
-    ["python3", "-m", "coverage", "run", "--context", "'{envname}'"]
 ]
 
 

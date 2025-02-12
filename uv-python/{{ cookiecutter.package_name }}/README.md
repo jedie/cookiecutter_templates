@@ -38,7 +38,7 @@ usage: ./cli.py [-h] {update-readme-history,version}
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```
 usage: ./dev-cli.py [-h]
-                    {check-code-style,coverage,fix-code-style,install,mypy,pip-audit,publish,test,tox,update,update-te
+                    {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-te
 st-snapshot-files,version}
 
 
@@ -47,7 +47,7 @@ st-snapshot-files,version}
 │ -h, --help        show this help message and exit                                                                  │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ {check-code-style,coverage,fix-code-style,install,mypy,pip-audit,publish,test,tox,update,update-test-snapshot-fil… │
+│ {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-test-snapshot-fil… │
 │     check-code-style                                                                                               │
 │                   Check code style by calling darker + flake8                                                      │
 │     coverage      Run tests and show coverage report.                                                              │
@@ -55,10 +55,10 @@ st-snapshot-files,version}
 │                   Fix code style of all {{ cookiecutter.package_name }} source code files via darker                             │
 │     install       Install requirements and '{{ cookiecutter.package_name }}' via pip as editable.                                │
 │     mypy          Run Mypy (configured in pyproject.toml)                                                          │
+│     nox           Run nox                                                                                          │
 │     pip-audit     Run pip-audit check against current requirements files                                           │
 │     publish       Build and upload this project to PyPi                                                            │
 │     test          Run unittests                                                                                    │
-│     tox           Run tox                                                                                          │
 │     update        Update "requirements*.txt" dependencies files                                                    │
 │     update-test-snapshot-files                                                                                     │
 │                   Update all test snapshot files (by remove and recreate all snapshot files)                       │
