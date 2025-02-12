@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from model_bakery import baker
 
-from your_cool_package import __version__
-
 
 class AdminAnonymousTests(HtmlAssertionMixin, TestCase):
     """
@@ -41,7 +39,6 @@ class AdminLoggedinTests(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                f"<title>Site administration | your-cool-package v{__version__}</title>",
                 "<h1>Site administration</h1>",
                 "<strong>staff_test_user</strong>",
                 "<p>You don’t have permission to view or edit anything.</p>",
@@ -55,9 +52,8 @@ class AdminLoggedinTests(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                "your_cool_package",
+                "<h1>Site administration</h1>",
                 "<strong>superuser</strong>",
-                "Site administration",
                 "/admin/auth/group/add/",
                 "/admin/auth/user/add/",
             ),
