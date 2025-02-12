@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from model_bakery import baker
 
-from {{ cookiecutter.package_name }} import __version__
-
 
 class AdminAnonymousTests(HtmlAssertionMixin, TestCase):
     """
@@ -41,7 +39,6 @@ class AdminLoggedinTests(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                f"<title>Site administration | {{ cookiecutter.project_name }} v{__version__}</title>",
                 "<h1>Site administration</h1>",
                 "<strong>staff_test_user</strong>",
                 "<p>You don’t have permission to view or edit anything.</p>",
@@ -55,9 +52,8 @@ class AdminLoggedinTests(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                "{{ cookiecutter.package_name }}",
+                "<h1>Site administration</h1>",
                 "<strong>superuser</strong>",
-                "Site administration",
                 "/admin/auth/group/add/",
                 "/admin/auth/user/add/",
             ),

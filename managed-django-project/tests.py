@@ -21,9 +21,8 @@ class PiptoolsPythonTemplateTestCase(PackageTestBase):
 
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'pip')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'python')
-            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'tox')
-            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'pip-compile')
-            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'pip-sync')
+            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'nox')
+            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'uv')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'darker')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'flake8')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'coverage')
@@ -39,9 +38,8 @@ class PiptoolsPythonTemplateTestCase(PackageTestBase):
             output = self.test_project.check_output(manage_bin, 'code_style')
             self.assert_in('Code style: OK', output)
 
-            # TODO:
-            # output = test_project.check_output(manage_bin, 'test')
-            # self.assert_in('Ran 4 tests', output)
+            output = self.test_project.check_output(manage_bin, 'test')
+            self.assert_in('Ran 12 tests', output)
 
             # The project unittests checks also the code style and tries to fix them,
             # in this case, we have a code difference:

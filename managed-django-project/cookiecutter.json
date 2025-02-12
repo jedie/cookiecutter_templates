@@ -2,7 +2,6 @@
     "full_name": "John Doh",
     "github_username": "{{ cookiecutter.full_name.lower()|replace(' ', '-') }}",
     "author_email": "{{ cookiecutter.github_username }}@example.tld",
-
     "project_name": "your-cool-package",
     "package_name": "{{ cookiecutter.project_name.lower()|replace('-', '_') }}",
     "django_project_name": "{{ cookiecutter.package_name }}_project",

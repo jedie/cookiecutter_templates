@@ -20,11 +20,10 @@ def main(verbose):
     verbose_check_call(sys.executable, 'manage.py', 'update_req', cwd=pkg_path, verbose=verbose)
 
     # Sync the requirements back to the cookiecutter template:
-    for file_path in sorted(pkg_path.glob('requirements*.txt')):
-        verbose_copy2(
-            src=file_path,
-            dst=PACKAGE_ROOT / 'managed-django-project' / '{{ cookiecutter.package_name }}' / file_path.name,
-        )
+    verbose_copy2(
+        src=pkg_path / 'uv.lock',
+        dst=PACKAGE_ROOT / 'managed-django-project' / '{{ cookiecutter.package_name }}' / 'uv.lock',
+    )
 
 
 if __name__ == '__main__':
