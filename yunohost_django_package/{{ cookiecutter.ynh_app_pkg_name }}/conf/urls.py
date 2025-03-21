@@ -1,15 +1,14 @@
 """
-    urls.py
-    ~~~~~~~
+urls.py
+~~~~~~~
 
-    Look at real examples, here:
+Look at real examples, here:
 
-     * https://github.com/YunoHost-Apps/django-fritzconnection_ynh/blob/master/conf/urls.py
-     * https://github.com/YunoHost-Apps/django-for-runners_ynh/blob/testing/conf/urls.py
-     * https://github.com/YunoHost-Apps/pyinventory_ynh/blob/testing/conf/urls.py
+ * https://github.com/YunoHost-Apps/django-fritzconnection_ynh/blob/master/conf/urls.py
+ * https://github.com/YunoHost-Apps/django-for-runners_ynh/blob/testing/conf/urls.py
+ * https://github.com/YunoHost-Apps/pyinventory_ynh/blob/testing/conf/urls.py
 
 """
-
 
 from django.conf import settings
 from django.urls import include, path

@@ -38,6 +38,7 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestBase):
             venv_path = self.pkg_path / '.venv'
             assert_is_file(venv_path / 'bin' / 'python')
             assert_is_file(venv_path / 'bin' / 'pip')
+            assert_is_file(venv_path / 'bin' / 'uv')
             assert_is_file(venv_path / 'bin' / 'django-admin')
             assert_is_file(venv_path / 'bin' / 'darker')
             assert_is_file(venv_path / 'bin' / 'black')
