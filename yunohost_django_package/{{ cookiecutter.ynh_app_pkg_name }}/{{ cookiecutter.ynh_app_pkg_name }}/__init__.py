@@ -1,6 +1,6 @@
 """
-    {{ cookiecutter.ynh_app_pkg_name }}
-    {{ cookiecutter.package_description }}
+{{ cookiecutter.ynh_app_pkg_name }}
+{{ cookiecutter.package_description }}
 """
 
 # See https://packaging.python.org/en/latest/specifications/version-specifiers/

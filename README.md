@@ -229,7 +229,8 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
-* [v0.5.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.5.0)
+* [v0.6.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.6.0)
+  * 2025-03-21 - Yunohost template: Migrate "pip-tools" to "uv" and "click" to "tyro"
   * 2025-02-12 - uv-python: tox -> nox
   * 2025-02-12 - Update requirements
   * 2025-02-12 - Update managed-django-project template

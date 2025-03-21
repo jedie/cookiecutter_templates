@@ -1,6 +1,6 @@
 """
-    django_example_ynh
-    A example YunoHost App
+django_example_ynh
+A example YunoHost App
 """
 
 # See https://packaging.python.org/en/latest/specifications/version-specifiers/
