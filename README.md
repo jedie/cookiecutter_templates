@@ -230,6 +230,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.6.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.6.0)
+  * 2025-03-23 - Yunohost package: Bugfix upgrade script
   * 2025-03-23 - Bugfix double unitttest setup
   * 2025-03-23 - Remove unused imports
   * 2025-03-23 - Update pre-commit versions
