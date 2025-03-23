@@ -230,6 +230,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.6.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.6.0)
+  * 2025-03-23 - YunoHost app simplify/enhance logging
   * 2025-03-21 - Update template requirements
   * 2025-03-21 - update requirements
   * 2025-03-21 - Yunohost template: Migrate "pip-tools" to "uv" and "click" to "tyro"
