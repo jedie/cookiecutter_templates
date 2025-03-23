@@ -230,6 +230,13 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.6.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.6.0)
+  * 2025-03-23 - Remove unused imports
+  * 2025-03-23 - Update pre-commit versions
+  * 2025-03-23 - Remove warnings around cm.invoke() usage
+  * 2025-03-23 - Update test snapshot
+  * 2025-03-23 - Bugfix test call
+  * 2025-03-23 - Remove rich_traceback_install() (It seems to be not very helpfull)
+  * 2025-03-23 - YunoHost app simplify/enhance logging
   * 2025-03-21 - Update template requirements
   * 2025-03-21 - update requirements
   * 2025-03-21 - Yunohost template: Migrate "pip-tools" to "uv" and "click" to "tyro"

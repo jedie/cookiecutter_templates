@@ -32,8 +32,8 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestBase):
             req_txt = self.pkg_path / 'conf' / 'requirements.txt'
             assert_is_file(req_txt)
 
-            output = self.test_project.check_output('python', 'dev-cli.py')
-            self.assertIn('Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...', output)
+            output = self.test_project.check_output('python', 'dev-cli.py', '--help')
+            self.assertIn('usage: ./dev-cli.py [-h]', output)
 
             venv_path = self.pkg_path / '.venv'
             assert_is_file(venv_path / 'bin' / 'python')
