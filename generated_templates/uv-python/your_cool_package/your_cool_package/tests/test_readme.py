@@ -1,6 +1,6 @@
 from bx_py_utils.auto_doc import assert_readme_block
 from bx_py_utils.path import assert_is_file
-from cli_base.cli_tools.test_utils.rich_test_utils import NoColorRichClickCli
+from cli_base.cli_tools.test_utils.rich_test_utils import invoke, NoColorEnvRichClick
 from manageprojects.tests.base import BaseTestCase
 
 from your_cool_package import constants
@@ -24,8 +24,8 @@ def assert_cli_help_in_readme(text_block: str, marker: str):
 class ReadmeTestCase(BaseTestCase):
 
     def test_main_help(self):
-        with NoColorRichClickCli() as cm:
-            stdout = cm.invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['--help'], strip_line_prefix='usage: ')
+        with NoColorEnvRichClick():
+            stdout = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['--help'], strip_line_prefix='usage: ')
         self.assert_in_content(
             got=stdout,
             parts=(
@@ -37,8 +37,8 @@ class ReadmeTestCase(BaseTestCase):
         assert_cli_help_in_readme(text_block=stdout, marker='main help')
 
     def test_dev_help(self):
-        with NoColorRichClickCli() as cm:
-            stdout = cm.invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=['--help'], strip_line_prefix='usage: ')
+        with NoColorEnvRichClick():
+            stdout = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=['--help'], strip_line_prefix='usage: ')
         self.assert_in_content(
             got=stdout,
             parts=(
