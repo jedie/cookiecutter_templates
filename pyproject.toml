@@ -20,7 +20,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "uv",  # https://github.com/astral-sh/uv
-    "setuptools",  # https://github.com/pypa/setuptools
+    "hatchling",  # https://github.com/pypa/hatch/tree/master/backend
     "build",  # https://github.com/pypa/build
     "tox",  # https://github.com/tox-dev/tox
     "tox-uv",  # https://github.com/tox-dev/tox-uv
@@ -58,16 +58,16 @@ Source = "https://github.com/jedie/cookiecutter_templates"
 managetemplates_app = "managetemplates.__main__:main"
 managetemplates_dev = "managetemplates.cli_dev:main"
 
+
 [build-system]
-requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["managetemplates*"]
+[tool.hatch.build.targets.wheel]
+packages = ["managetemplates"]
 
-[tool.setuptools.dynamic]
-version = {attr = "managetemplates.__version__"}
+[tool.hatch.version]
+path = "managetemplates/__init__.py"
 
 
 [tool.cli_base.pip_audit]
