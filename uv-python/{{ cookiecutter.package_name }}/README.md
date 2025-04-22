@@ -12,23 +12,17 @@
 
 [comment]: <> (✂✂✂ auto generated main help start ✂✂✂)
 ```
-usage: ./cli.py [-h] {update-readme-history,version}
+usage: ./cli.py [-h] {version}
 
 
 
-╭─ options ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ -h, --help        show this help message and exit                                                                  │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ {update-readme-history,version}                                                                                    │
-│     update-readme-history                                                                                          │
-│                   Update project history base on git commits/tags in README.md Will be exited with 1 if the        │
-│                   README.md was updated otherwise with 0.                                                          │
-│                                                                                                                    │
-│                   Also, callable via e.g.:                                                                         │
-│                       python -m cli_base update-readme-history -v                                                  │
-│     version       Print version and exit                                                                           │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ options ─────────────────────────────────────────╮
+│ -h, --help        show this help message and exit │
+╰───────────────────────────────────────────────────╯
+╭─ subcommands ─────────────────────────────────────╮
+│ {version}                                         │
+│     version       Print version and exit          │
+╰───────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated main help end ✂✂✂)
 
@@ -38,8 +32,8 @@ usage: ./cli.py [-h] {update-readme-history,version}
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```
 usage: ./dev-cli.py [-h]
-                    {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-te
-st-snapshot-files,version}
+                    {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-re
+adme-history,update-test-snapshot-files,version}
 
 
 
@@ -47,7 +41,8 @@ st-snapshot-files,version}
 │ -h, --help        show this help message and exit                                                                  │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-test-snapshot-fil… │
+│ {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-readme-history,upd │
+│ ate-test-snapshot-files,version}                                                                                   │
 │     check-code-style                                                                                               │
 │                   Check code style by calling darker + flake8                                                      │
 │     coverage      Run tests and show coverage report.                                                              │
@@ -60,6 +55,12 @@ st-snapshot-files,version}
 │     publish       Build and upload this project to PyPi                                                            │
 │     test          Run unittests                                                                                    │
 │     update        Update "requirements*.txt" dependencies files                                                    │
+│     update-readme-history                                                                                          │
+│                   Update project history base on git commits/tags in README.md Will be exited with 1 if the        │
+│                   README.md was updated otherwise with 0.                                                          │
+│                                                                                                                    │
+│                   Also, callable via e.g.:                                                                         │
+│                       python -m cli_base update-readme-history -v                                                  │
 │     update-test-snapshot-files                                                                                     │
 │                   Update all test snapshot files (by remove and recreate all snapshot files)                       │
 │     version       Print version and exit                                                                           │
