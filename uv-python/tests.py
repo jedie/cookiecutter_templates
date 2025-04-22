@@ -24,7 +24,7 @@ class UvPythonTemplateTestCase(PackageTestBase):
             assert_is_file(self.pkg_path / '.venv-app' / 'bin' / 'your_cool_package_app')
 
             output = self.test_project.check_output(cli_bin, '--help')
-            self.assert_in('usage: ./cli.py [-h] {update-readme-history,version}', output)
+            self.assert_in('usage: ./cli.py [-h] {version}', output)
 
             ############################################################################
             # Bootstrap by call the ./dev-cli.py
@@ -47,7 +47,10 @@ class UvPythonTemplateTestCase(PackageTestBase):
 
             output = self.test_project.check_output(dev_cli_bin, '--help')
             self.assert_in('usage: ./dev-cli.py [-h]', output)
-            self.assert_in('check-code-style,coverage,fix-code-style,', output)
+            self.assert_in('check-code-style', output)
+            self.assert_in('coverage', output)
+            self.assert_in('fix-code-style', output)
+            self.assert_in('update-readme-history', output)
 
             output = self.test_project.check_output(dev_cli_bin, 'nox', '--help')
             self.assert_in('usage: nox [-h]', output)
@@ -62,7 +65,13 @@ class UvPythonTemplateTestCase(PackageTestBase):
             output = self.test_project.check_output(dev_cli_bin, 'check-code-style')
             self.assert_in('Code style: OK', output)
 
-            output = self.test_project.check_output(dev_cli_bin, 'test')
+            output = self.test_project.check_output(
+                dev_cli_bin,
+                'test',
+                extra_env=dict(
+                    GITHUB_ACTION='1',  # Disable README history test ;)
+                ),
+            )
             self.assert_in('Ran 8 tests', output)
 
             # The project unittests checks also the code style and tries to fix them,
