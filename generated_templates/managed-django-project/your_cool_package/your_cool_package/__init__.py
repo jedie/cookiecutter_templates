@@ -1,5 +1,5 @@
 """
-    "your-cool-package
+    your-cool-package
     A minimal Python package
 """
 

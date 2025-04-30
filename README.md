@@ -230,6 +230,7 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.7.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.7.0)
+  * 2025-05-01 - managed-django-project: replace setuptools with hatchling
   * 2025-04-22 - bugfix hatch packages list
   * 2025-04-22 - replace setuptools with hatchling
   * 2025-04-22 - uv-python: Move readme command into dev-app
