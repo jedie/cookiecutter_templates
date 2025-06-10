@@ -30,11 +30,8 @@ fix-code-style: ## Fix code formatting
 	.venv/bin/darker
 	.venv/bin/flake8 .
 
-tox-listenvs:  ## List all tox test environments
-	.venv/bin/tox --listenvs
-
-tox:  ## Run tests via tox with all environments
-	.venv/bin/tox
+nox:  ## Run tests via nox with all environments
+	.venv/bin/nox
 
 test: ## Run tests
 	.venv/bin/python3 -m unittest --verbose --locals

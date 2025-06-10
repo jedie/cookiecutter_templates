@@ -14,8 +14,7 @@ dev = [
     "manageprojects",  # https://github.com/jedie/manageprojects
     "urllib3", # for bx_py_utils.test_utils.deny_requests.deny_any_real_request() in tests
     "uv",  # https://github.com/astral-sh/uv
-    "tox",  # https://github.com/tox-dev/tox
-    "tox-uv",  # https://github.com/tox-dev/tox-uv
+    "nox",  # https://github.com/wntrblm/nox
     "coverage",  # https://github.com/nedbat/coveragepy
     "autopep8",  # https://github.com/hhatto/autopep8
     "pyupgrade",  # https://github.com/asottile/pyupgrade
@@ -34,11 +33,6 @@ dev = [
     # https://github.com/pycqa/isort
     # https://github.com/pygments/pygments
     "darker[flynt, isort, color]",
-
-    # Work-a-round for: https://github.com/jazzband/pip-tools/issues/1866
-    # see also: https://github.com/jazzband/pip-tools/issues/994#issuecomment-1321226661
-    # backports.tarfile is needed for python <3.12
-    'backports.tarfile', # via jaraco-context -> keyring -> twine
 ]
 
 [project.urls]
@@ -48,16 +42,16 @@ Source = "https://github.com/john-doh/your_cool_package/"
 [project.scripts]
 your_cool_package = "your_cool_package.__main__:main"
 
+
 [build-system]
-requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["your_cool_package*"]
+[tool.hatch.build.targets.wheel]
+packages = ["your_cool_package"]
 
-[tool.setuptools.dynamic]
-version = {attr = "your_cool_package.__version__"}
+[tool.hatch.version]
+path = "your_cool_package/__init__.py"
 
 
 [tool.darker]
@@ -70,16 +64,11 @@ diff = false
 check = false
 stdout = false
 isort = true
-lint = []
 log_level = "INFO"
 
 
 [tool.isort]
 profile = "black"
-
-
-[tool.pytest.ini_options]
-filterwarnings = []
 
 
 [tool.coverage.run]
@@ -99,19 +88,6 @@ exclude_lines = [
     'pragma: no cover',
     'raise NotImplementedError',
     'if __name__ == .__main__.:',
-]
-
-
-[tool.tox]  # https://tox.wiki/en/latest/config.html#pyproject-toml
-isolated_build = true
-env_list = ["3.13", "3.12", "3.11"]
-skip_missing_interpreters = true
-
-[tool.tox.env_run_base]
-runner = "uv-venv-lock-runner"
-with_dev = true
-commands = [
-    ["python3", "-m", "coverage", "run", "--context", "'{envname}'"]
 ]
 
 
