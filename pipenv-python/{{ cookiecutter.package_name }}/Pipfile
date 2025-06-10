@@ -1,5 +1,0 @@
-[packages]
-{{ cookiecutter.package_name }} = {path = ".", editable = true}
-
-[dev-packages]
-{{ cookiecutter.package_name }} = {path = ".", editable = true, extras = ["dev"]}
