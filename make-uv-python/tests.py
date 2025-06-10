@@ -20,6 +20,7 @@ class MakeUvPythonTemplateTestCase(PackageTestBase):
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'pip')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'python')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'uv')
+            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'nox')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'darker')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'flake8')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'coverage')
