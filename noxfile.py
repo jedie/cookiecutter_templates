@@ -2,7 +2,7 @@ import nox
 from nox.sessions import Session
 
 
-PYTHON_VERSIONS = ['3.13', '3.12', '3.11']
+PYTHON_VERSIONS = ('3.13', '3.12', '3.11')
 
 
 @nox.session(python=PYTHON_VERSIONS)
@@ -22,4 +22,4 @@ def tests(session: Session):
 @nox.session
 def lint(session: Session):
     session.install('flake8', 'flake8-bugbear')
-    session.run('flake8', 'manage_django_project')
+    session.run('flake8', 'managetemplates')

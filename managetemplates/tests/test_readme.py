@@ -1,12 +1,10 @@
 from bx_py_utils.auto_doc import assert_readme_block
 from bx_py_utils.path import assert_is_file
-from manageprojects.test_utils.click_cli_utils import invoke_click
+from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRichClick, invoke
 from manageprojects.tests.base import BaseTestCase
 
 from managetemplates import constants
-from managetemplates.cli_app import cli
-from managetemplates.cli_dev import cli as dev_cli
-from managetemplates.constants import PACKAGE_ROOT, README_PATH
+from managetemplates.constants import PACKAGE_ROOT
 
 
 ADDITIONAL_TEMPLATE = '''

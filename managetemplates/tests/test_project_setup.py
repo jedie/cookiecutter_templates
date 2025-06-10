@@ -7,17 +7,14 @@ from unittest.mock import patch
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from cli_base.cli_tools.code_style import assert_code_style
 from cli_base.cli_tools.subprocess_utils import ToolsExecutor
-from cli_base.cli_tools.test_utils.rich_test_utils import invoke
-from manageprojects.test_utils.click_cli_utils import invoke_click
+from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRichClick, invoke
 from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
-from manageprojects.test_utils.subprocess import SubprocessCallMock as SubprocessCallMockOrigin
+from manageprojects.test_utils.subprocess import SimpleRunReturnCallback, \
+    SubprocessCallMock as SubprocessCallMockOrigin
 from packaging.version import Version
 
 from managetemplates import __version__
-from managetemplates.cli_app import cli
-from managetemplates.cli_dev import PACKAGE_ROOT
-from managetemplates.cli_dev import cli as dev_cli
-from managetemplates.cli_dev import packaging
+from managetemplates.cli_dev import PACKAGE_ROOT, packaging
 from managetemplates.constants import PY_BIN_PATH
 from managetemplates.tests.base import BaseTestCase
 
@@ -79,25 +76,21 @@ class ProjectSetupTestCase(BaseTestCase):
         version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
         self.assertEqual(str(version), __version__)
 
-        cli_bin = PACKAGE_ROOT / 'cli.py'
-        assert_is_file(cli_bin)
+        with NoColorEnvRichClick():
+            stdout = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['version'])
+        self.assertIn(f'managetemplates v{__version__}', stdout)
 
-        output = subprocess.check_output([cli_bin, 'version'], text=True)
-        self.assertIn(f'managetemplates v{__version__}', output)
-
-        dev_cli_bin = PACKAGE_ROOT / 'dev-cli.py'
-        assert_is_file(dev_cli_bin)
-
-        output = subprocess.check_output([dev_cli_bin, 'version'], text=True)
-        self.assertIn(f'managetemplates v{__version__}', output)
+        with NoColorEnvRichClick():
+            stdout = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=['version'])
+        self.assertIn(f'managetemplates v{__version__}', stdout)
 
     def test_code_style(self):
         return_code = assert_code_style(package_root=PACKAGE_ROOT)
         self.assertEqual(return_code, 0, 'Code style error, see output above!')
 
     def test_install(self):
-        with SubprocessCallMock() as call_mock:
-            stdout = invoke_click(dev_cli, 'install')
+        with SubprocessCallMock(return_callback=SimpleRunReturnCallback(stdout='mocked output')) as call_mock:
+            stdout = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=['install'])
 
         self.assertEqual(
             call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS),
@@ -128,7 +121,7 @@ class ProjectSetupTestCase(BaseTestCase):
             patch.object(tempfile, 'NamedTemporaryFile', NamedTemporaryFileMock),
             SubprocessCallMock() as call_mock,
         ):
-            invoke_click(dev_cli, 'update')
+            invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=['update'])
 
         package_path = PACKAGE_ROOT / 'piptools-python' / '{{ cookiecutter.package_name }}'
         assert_is_dir(package_path)
@@ -170,7 +163,7 @@ class ProjectSetupTestCase(BaseTestCase):
 
     def test_update_template_req(self):
         with SubprocessCallMock() as call_mock:
-            invoke_click(cli, 'update-template-req')
+            invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['update-template-req'])
 
         self.assertEqual(
             call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS, with_cwd=True),
@@ -189,21 +182,21 @@ class ProjectSetupTestCase(BaseTestCase):
             patch.object(packaging, 'run_unittest_cli') as func1,
             patch.object(packaging, 'publish_package') as func2,
         ):
-            stdout = invoke_click(dev_cli, 'publish')
+            stdout = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=['publish'])
 
         func1.assert_called_once()
         func2.assert_called_once()
         self.assertEqual(stdout, '')
 
     def test_filesystem_var_syntax(self):
-        stdout = invoke_click(cli, 'fix-filesystem')
+        stdout = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['fix-filesystem'])
         self.assert_in_content(
             got=stdout,
             parts=('Nothing to rename, ok.',),
         )
 
     def test_file_content_var_syntax(self):
-        stdout = invoke_click(cli, 'fix-file-content')
+        stdout = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['fix-file-content'])
         self.assert_in_content(
             got=stdout,
             parts=('Nothing to fixed, ok.',),
