@@ -79,10 +79,16 @@ class ProjectSetupTestCase(BaseTestCase):
         version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
         self.assertEqual(str(version), __version__)
 
-        output = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=('version',))
+        cli_bin = PACKAGE_ROOT / 'cli.py'
+        assert_is_file(cli_bin)
+
+        output = subprocess.check_output([cli_bin, 'version'], text=True)
         self.assertIn(f'managetemplates v{__version__}', output)
 
-        output = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=('version',))
+        dev_cli_bin = PACKAGE_ROOT / 'dev-cli.py'
+        assert_is_file(dev_cli_bin)
+
+        output = subprocess.check_output([dev_cli_bin, 'version'], text=True)
         self.assertIn(f'managetemplates v{__version__}', output)
 
     def test_code_style(self):

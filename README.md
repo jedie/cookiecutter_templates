@@ -184,7 +184,8 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
-* [v0.7.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.7.0)
+* [v0.8.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.8.0)
+  * 2025-06-10 - Update managetemplates e.g.: click -> tyro
   * 2025-06-10 - Cleanup README
   * 2025-06-10 - Update requirements
   * 2025-06-10 - Remove pipenv and piptools templates

@@ -26,6 +26,9 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 
 
 def assert_cli_help_in_readme(text_block: str, marker: str):
+    README_PATH = PACKAGE_ROOT / 'README.md'
+    assert_is_file(README_PATH)
+
     text_block = text_block.replace(constants.CLI_EPILOG, '')
     text_block = f'```\n{text_block.strip()}\n```'
     assert_readme_block(
@@ -86,27 +89,30 @@ class ReadmeTestCase(BaseTestCase):
         assert_readme_block(readme_path=PACKAGE_ROOT / 'README.md', text_block=readme_block)
 
     def test_main_help(self):
-        stdout = invoke_click(cli, '--help')
+        with NoColorEnvRichClick():
+            stdout = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['--help'], strip_line_prefix='usage: ')
         self.assert_in_content(
             got=stdout,
             parts=(
-                'Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...',
                 'fix-file-content',
                 'fix-filesystem',
                 'reverse',
+                'usage: ./cli.py [-h]',
                 constants.CLI_EPILOG,
             ),
         )
         assert_cli_help_in_readme(text_block=stdout, marker='main help')
 
     def test_dev_help(self):
-        stdout = invoke_click(dev_cli, '--help')
+        with NoColorEnvRichClick():
+            stdout = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=['--help'], strip_line_prefix='usage: ')
         self.assert_in_content(
             got=stdout,
             parts=(
-                'Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...',
+                'usage: ./dev-cli.py [-h]',
                 ' check-code-style ',
                 ' coverage ',
+                ' update-readme-history ',
                 constants.CLI_EPILOG,
             ),
         )
