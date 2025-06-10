@@ -230,8 +230,8 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.7.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.7.0)
-  * 2025-06-10 - Remove pipenv and piptools templates
   * 2025-06-10 - Update requirements
+  * 2025-06-10 - Remove pipenv and piptools templates
   * 2025-06-10 - split PHONY
   * 2025-06-10 - make-uv-python: tox -> nox + setuptools -> hatchling
   * 2025-06-02 - manage-django-project: Bugfix coverage run and DB transaction errors in tests
