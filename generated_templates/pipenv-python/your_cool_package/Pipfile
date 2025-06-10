@@ -1,5 +1,0 @@
-[packages]
-your_cool_package = {path = ".", editable = true}
-
-[dev-packages]
-your_cool_package = {path = ".", editable = true, extras = ["dev"]}

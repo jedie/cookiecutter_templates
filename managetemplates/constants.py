@@ -23,8 +23,6 @@ TEST_PATH = PACKAGE_ROOT / 'generated_templates'
 ALL_TEMPLATES = (
     'make-uv-python',
     'managed-django-project',
-    'pipenv-python',
-    'piptools-python',
     'uv-python',
     'yunohost_django_package',
 )

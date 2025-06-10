@@ -54,51 +54,6 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 ./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory managed-django-project ~/foobar/
 ```
 
-## pipenv based python package
-
-* Requirement management with [pipenv](https://pipenv.pypa.io)
-* Makefile with a simple "help" menu
-* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
-* Has basic unittest
-
-
-Cookiecutter template tests are here: [pipenv-python/tests.py](https://github.com/jedie/cookiecutter_templates/blob/main/pipenv-python/tests.py)
-
-
-Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
-```shell
-cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory pipenv-python
-```
-
-Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
-```shell
-./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory pipenv-python ~/foobar/
-```
-
-## pip-tools based python package
-
-* Requirement management with [pip-tools](https://github.com/jazzband/pip-tools):
-  * Used `pip-compile` to freeze/pin requirements with hashes
-  * Used `pip-sync` to install all needed packages
-* [click](https://click.palletsprojects.com) based CLI for app and dev mode
-* Auto virtualenv bootstrap, just by calling the `cli.py` / `dev-cli.py`
-* used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
-* Has basic unittest
-
-
-Cookiecutter template tests are here: [piptools-python/tests.py](https://github.com/jedie/cookiecutter_templates/blob/main/piptools-python/tests.py)
-
-
-Use with vanilla [cookiecutter](https://github.com/cookiecutter/cookiecutter), e.g.:
-```shell
-cookiecutter https://github.com/jedie/cookiecutter_templates/ --directory piptools-python
-```
-
-Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
-```shell
-./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory piptools-python ~/foobar/
-```
-
 ## uv based python package
 
 * Requirement management with [uv](https://github.com/astral-sh/uv)
@@ -230,9 +185,11 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.7.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.7.0)
+  * 2025-06-10 - Cleanup README
+  * 2025-06-10 - Update requirements
+  * 2025-06-10 - Remove pipenv and piptools templates
   * 2025-06-10 - split PHONY
   * 2025-06-10 - make-uv-python: tox -> nox + setuptools -> hatchling
-  * 2025-06-02 - Update requirements
   * 2025-06-02 - manage-django-project: Bugfix coverage run and DB transaction errors in tests
   * 2025-05-01 - managed-django-project: replace setuptools with hatchling
   * 2025-04-22 - bugfix hatch packages list
