@@ -204,6 +204,7 @@ adme-history,update-test-snapshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.8.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.8.0)
+  * 2025-08-05 - less test output
   * 2025-08-05 - Update managetemplates e.g.: click -> tyro
   * 2025-08-05 - update precommit in manage-django-project
   * 2025-08-05 - Update make-uv-python requirements
