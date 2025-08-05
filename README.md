@@ -185,6 +185,8 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.7.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.7.0)
+  * 2025-08-05 - Update nox in Django projects and use: DJANGO_VERSIONS = ['5.2', '5.1', '4.2']
+  * 2025-08-05 - Bugfix nox config to install the correct Django version
   * 2025-06-10 - Cleanup README
   * 2025-06-10 - Update requirements
   * 2025-06-10 - Remove pipenv and piptools templates
