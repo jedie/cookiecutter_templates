@@ -1,29 +1,29 @@
 import sys
+from typing import Annotated
 
-import rich_click as click
-from cli_base.cli_tools.dev_tools import run_coverage, run_tox, run_unittest_cli
+import tyro
+from cli_base.cli_tools.dev_tools import run_coverage, run_nox, run_unittest_cli
 from cli_base.cli_tools.subprocess_utils import verbose_check_call
 from cli_base.cli_tools.test_utils.snapshot import UpdateTestSnapshotFiles
-from cli_base.cli_tools.verbosity import OPTION_KWARGS_VERBOSE, setup_logging
+from cli_base.cli_tools.verbosity import setup_logging
+from cli_base.tyro_commands import TyroVerbosityArgType
 
 from managetemplates import constants
-from managetemplates.cli_dev import PACKAGE_ROOT, cli
+from managetemplates.cli_dev import PACKAGE_ROOT, app
+from managetemplates.cli_dev.annotations import TyroOptionalTemplateNameArgType
 
 
-@cli.command()
-@click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
-def mypy(verbosity: int):
+@app.command
+def mypy(verbosity: TyroVerbosityArgType):
     """Run Mypy (configured in pyproject.toml)"""
     verbose_check_call('mypy', '.', cwd=PACKAGE_ROOT, verbose=verbosity > 0, exit_on_error=True)
 
 
-@cli.command()
-@click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
-def update_test_snapshot_files(verbosity: int):
+@app.command
+def update_test_snapshot_files(verbosity: TyroVerbosityArgType):
     """
     Update all test snapshot files (by remove and recreate all snapshot files)
     """
-
     with UpdateTestSnapshotFiles(root_path=PACKAGE_ROOT, verbose=verbosity > 0):
         # Just recreate them by running tests:
         run_unittest_cli(
@@ -35,7 +35,7 @@ def update_test_snapshot_files(verbosity: int):
         )
 
 
-@cli.command()  # Dummy command
+@app.command  # Dummy command
 def test():
     """
     Run unittests
@@ -43,19 +43,22 @@ def test():
     run_unittest_cli()
 
 
-@cli.command()
-@click.argument('package', type=click.Choice(constants.ALL_PACKAGES, case_sensitive=False), required=False)
-@click.option(
-    '--list',
-    '-l',
-    'list_packages',
-    is_flag=True,
-    show_default=True,
-    default=False,
-    help='Just list all packages (Copy&pasteable for github CI config)',
-)
-@click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
-def coverage(package=None, list_packages: bool = False, verbosity: int = 0):
+TyroListPackagesArgType = Annotated[
+    bool,
+    tyro.conf.arg(
+        default=False,
+        aliases=['-l', '--list'],
+        help='Just list all packages (Copy&pasteable for github CI config)',
+    ),
+]
+
+
+@app.command
+def coverage(
+    verbosity: TyroVerbosityArgType,
+    list_packages: TyroListPackagesArgType,
+    template_name: TyroOptionalTemplateNameArgType,
+):
     """
     Run tests and show coverage.
     """
@@ -66,8 +69,8 @@ def coverage(package=None, list_packages: bool = False, verbosity: int = 0):
         print(f'package: {list(constants.ALL_PACKAGES)}')
         sys.exit(0)
 
-    if package:
-        print(f'\n[green]Run only tests from [yellow bold]{package}')
+    if template_name:
+        print(f'\n[green]Run only tests from [yellow bold]{template_name}')
         args = [
             './dev-cli.py',
             'coverage',
@@ -78,7 +81,7 @@ def coverage(package=None, list_packages: bool = False, verbosity: int = 0):
             '--locals',
             '--buffer',
             '-k',
-            package,
+            template_name,
         ]
     else:
         args = sys.argv
@@ -87,9 +90,9 @@ def coverage(package=None, list_packages: bool = False, verbosity: int = 0):
     run_coverage(argv=args, verbose=verbosity >= 1)
 
 
-@cli.command()  # Dummy "tox" command
-def tox():
+@app.command  # Dummy "nox" command
+def nox():
     """
-    Run tox
+    Run nox
     """
-    run_tox()
+    run_nox()

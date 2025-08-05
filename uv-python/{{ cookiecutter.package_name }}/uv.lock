@@ -252,7 +252,7 @@ wheels = [
 
 [[package]]
 name = "cli-base-utilities"
-version = "0.20.0"
+version = "0.21.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "bx-py-utils" },
@@ -263,9 +263,9 @@ dependencies = [
     { name = "tomlkit" },
     { name = "tyro" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0f/54/aa5660af76393c44762b8e8b833030919fb542f71d533db006c17c56fa0e/cli_base_utilities-0.20.0.tar.gz", hash = "sha256:86038d9e1fd45b9be1e24bce95523120e3296c99ed7ea52cf2685d79b2e01ee4", size = 125946, upload-time = "2025-08-04T09:52:38.386Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/11/1d/24951c2e15ae075c50247a99e10c043288602a0f0840402bcb4448254523/cli_base_utilities-0.21.1.tar.gz", hash = "sha256:d11e0a1b1d782163a3058c2dd0021079292644ad4ec219e44bc7507d4e2a53cb", size = 126851, upload-time = "2025-08-05T18:38:13.018Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ce/14/7d3670b4deedd2aed8c1168daffe33b34955760264c8ec5a678116388a2c/cli_base_utilities-0.20.0-py3-none-any.whl", hash = "sha256:4eade709afebb328c7d195d92c99efc3384dd5f03484dc40df146b9da6861a97", size = 84986, upload-time = "2025-08-04T09:52:36.621Z" },
+    { url = "https://files.pythonhosted.org/packages/7c/e5/76a2e8fbd66184f1a00de22c0499849fdd1d85c9c9759eeee67fde104938/cli_base_utilities-0.21.1-py3-none-any.whl", hash = "sha256:5a03022d683b5a05f4d442c4be697e7c4a14660d5ebe885b960a32282fd74960", size = 86413, upload-time = "2025-08-05T18:38:11.805Z" },
 ]
 
 [[package]]

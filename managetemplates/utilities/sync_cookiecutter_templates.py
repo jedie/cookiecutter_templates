@@ -5,6 +5,7 @@ import django_example
 from bx_py_utils.path import assert_is_dir
 from cli_base.cli_tools.rich_utils import EncloseRuleContext
 from cli_base.cli_tools.subprocess_utils import verbose_check_call
+from cli_base.tyro_commands import TyroVerbosityArgType
 from rich import print
 
 from managetemplates.constants import ALL_TEMPLATES, PACKAGE_ROOT, UPDATE_TEMPLATE_REQ_FILENAME
@@ -38,7 +39,7 @@ def cookiecutter_templates2generated(*, force_recreate: bool, only_template: str
                 return pkg_path
 
 
-def update_cookiecutter_templates_requirements(*, verbose: bool = False, only_template: str | None):
+def update_cookiecutter_templates_requirements(*, verbosity: TyroVerbosityArgType, only_template: str | None):
     if only_template:
         template_names = [only_template]
     else:
@@ -54,4 +55,9 @@ def update_cookiecutter_templates_requirements(*, verbose: bool = False, only_te
             if not update_req_path.is_file():
                 print(f'[red]ERROR: file not found: {update_req_path.relative_to(PACKAGE_ROOT)}')
             else:
-                verbose_check_call(sys.executable, UPDATE_TEMPLATE_REQ_FILENAME, cwd=template_path, verbose=verbose)
+                verbose_check_call(
+                    sys.executable,
+                    UPDATE_TEMPLATE_REQ_FILENAME,
+                    cwd=template_path,
+                    verbose=verbosity > 0,
+                )
