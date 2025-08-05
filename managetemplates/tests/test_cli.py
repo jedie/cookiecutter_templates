@@ -17,24 +17,23 @@ class DevCliTestCase(BaseTestCase):
             ),
         )
 
-    def test_pass_tox_command(self):
+    def test_pass_nox_command(self):
         with NoColorRichClickCli():
-            output = invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('tox', '--help'))
+            output = invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('nox', '--help'))
         self.assert_in_content(
             got=output,
             parts=(
-                'usage: tox [-h] ',
-                'list environments',
+                'usage: nox [-h] ',
+                '--list-sessions',
             ),
         )
         with NoColorRichClickCli():
-            output = invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('tox', 'list'))
+            output = invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('nox', '--list-sessions'))
         self.assert_in_content(
             got=output,
             parts=(
-                'default environments:',
-                '3.13',
-                '3.12',
+                '* tests-3.13',
+                '* tests-3.12',
             ),
         )
 
@@ -59,7 +58,7 @@ class DevCliTestCase(BaseTestCase):
             got=output,
             parts=(
                 '.venv/bin/managetemplates_dev coverage --help',
-                './dev-cli.py coverage',
-                ' --list ',
+                'usage: ./dev-cli.py coverage',
+                'Run tests and show coverage.',
             ),
         )

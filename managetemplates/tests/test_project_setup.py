@@ -4,19 +4,21 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from bx_py_utils.path import assert_is_dir, assert_is_file
+from bx_py_utils.test_utils.redirect import RedirectOut
+from cli_base import run_pip_audit
 from cli_base.cli_tools.code_style import assert_code_style
 from cli_base.cli_tools.subprocess_utils import ToolsExecutor
-from cli_base.cli_tools.test_utils.rich_test_utils import invoke
-from manageprojects.test_utils.click_cli_utils import invoke_click
+from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRichClick, invoke
+from cli_base.cli_tools.test_utils.subprocess_mocks import MockToolsExecutor
 from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
+from manageprojects.test_utils.subprocess import SimpleRunReturnCallback
 from manageprojects.test_utils.subprocess import SubprocessCallMock as SubprocessCallMockOrigin
 from packaging.version import Version
 
 from managetemplates import __version__
-from managetemplates.cli_app import cli
+from managetemplates.cli_app import main as cli_app_main
 from managetemplates.cli_dev import PACKAGE_ROOT
-from managetemplates.cli_dev import cli as dev_cli
+from managetemplates.cli_dev import main as cli_dev_main
 from managetemplates.cli_dev import packaging
 from managetemplates.constants import PY_BIN_PATH
 from managetemplates.tests.base import BaseTestCase
@@ -79,30 +81,40 @@ class ProjectSetupTestCase(BaseTestCase):
         version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
         self.assertEqual(str(version), __version__)
 
-        output = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=('version',))
-        self.assertIn(f'managetemplates v{__version__}', output)
+        with NoColorEnvRichClick():
+            stdout = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['version'])
+        self.assertIn(f'managetemplates v{__version__}', stdout)
 
-        output = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=('version',))
-        self.assertIn(f'managetemplates v{__version__}', output)
+        with NoColorEnvRichClick():
+            stdout = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=['version'])
+        self.assertIn(f'managetemplates v{__version__}', stdout)
 
     def test_code_style(self):
         return_code = assert_code_style(package_root=PACKAGE_ROOT)
         self.assertEqual(return_code, 0, 'Code style error, see output above!')
 
     def test_install(self):
-        with SubprocessCallMock() as call_mock:
-            stdout = invoke_click(dev_cli, 'install')
+        with (
+            MockToolsExecutor(
+                target=packaging,
+                return_codes={'uv': 0, 'pip': 0},
+                outputs={},
+            ) as mock,
+            RedirectOut() as buffer,
+        ):
+            cli_dev_main(args=('install',))
 
         self.assertEqual(
-            call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS),
+            mock.calls,
             [
-                ['.../bin/uv', 'sync'],
-                ['.../bin/pip', 'install', '--no-deps', '-e', '.'],
+                {'file_name': 'uv', 'popenargs': ('sync',)},
+                {'file_name': 'pip', 'popenargs': ('install', '--no-deps', '-e', '.')},
             ],
         )
+        self.assertEqual(buffer.stderr, '')
         self.assert_in_content(
-            got=stdout,
-            parts=('pip install --no-deps -e .',),
+            got=buffer.stdout,
+            parts=('managetemplates v',),
         )
 
     def test_update(self):
@@ -120,59 +132,73 @@ class ProjectSetupTestCase(BaseTestCase):
 
         with (
             patch.object(tempfile, 'NamedTemporaryFile', NamedTemporaryFileMock),
-            SubprocessCallMock() as call_mock,
+            MockToolsExecutor(
+                target=packaging,
+                return_codes={'uv': 0, 'pre-commit': 0, 'pip': 0},
+                outputs={},
+            ) as mock1,
+            MockToolsExecutor(
+                target=run_pip_audit,
+                return_codes={'pip-audit': 0, 'uv': 0},
+                outputs={},
+            ) as mock2,
+            RedirectOut() as buffer,
         ):
-            invoke_click(dev_cli, 'update')
-
-        package_path = PACKAGE_ROOT / 'piptools-python' / '{{ cookiecutter.package_name }}'
-        assert_is_dir(package_path)
-
-        req_prod_txt_path = package_path / 'requirements.txt'
-        assert_is_file(req_prod_txt_path)
-
-        req_dev_txt_path = package_path / 'requirements.dev.txt'
-        assert_is_file(req_dev_txt_path)
+            cli_dev_main(args=('update',))
 
         self.assertEqual(
-            call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS),
+            mock1.calls,
             [
-                ['.../bin/pip', 'install', '-U', 'pip'],
-                ['.../bin/pip', 'install', '-U', 'uv'],
-                ['.../bin/uv', 'lock', '--upgrade'],
-                [
-                    '.../bin/uv',
-                    'export',
-                    '--no-header',
-                    '--frozen',
-                    '--no-editable',
-                    '--no-emit-project',
-                    '-o',
-                    '/tmp/temp_requirements_MOCK.txt',
-                ],
-                [
-                    '.../bin/pip-audit',
-                    '--strict',
-                    '--require-hashes',
-                    '--disable-pip',
-                    '-r',
-                    '/tmp/temp_requirements_MOCK.txt',
-                ],
-                ['.../bin/uv', 'sync'],
-                ['.../bin/pre-commit', 'autoupdate'],
+                {'file_name': 'pip', 'popenargs': ('install', '-U', 'pip')},
+                {'file_name': 'pip', 'popenargs': ('install', '-U', 'uv')},
+                {'file_name': 'uv', 'popenargs': ('lock', '--upgrade')},
+                {'file_name': 'uv', 'popenargs': ('sync',)},
+                {'file_name': 'pre-commit', 'popenargs': ('autoupdate',)},
             ],
+        )
+        self.assertEqual(
+            mock2.calls,
+            [
+                {
+                    'file_name': 'uv',
+                    'popenargs': (
+                        'export',
+                        '--no-header',
+                        '--frozen',
+                        '--no-editable',
+                        '--no-emit-project',
+                        '-o',
+                        '/tmp/temp_requirements_MOCK.txt',
+                    ),
+                },
+                {
+                    'file_name': 'pip-audit',
+                    'popenargs': (
+                        '--strict',
+                        '--require-hashes',
+                        '--disable-pip',
+                        '-r',
+                        '/tmp/temp_requirements_MOCK.txt',
+                    ),
+                },
+            ],
+        )
+        self.assertEqual(buffer.stderr, '')
+        self.assert_in_content(
+            got=buffer.stdout,
+            parts=('managetemplates v',),
         )
 
     def test_update_template_req(self):
-        with SubprocessCallMock() as call_mock:
-            invoke_click(cli, 'update-template-req')
+        with SubprocessCallMock(return_callback=SimpleRunReturnCallback(stdout='1234567')) as call_mock:
+            cli_app_main(args=('update-template-req',))
 
         self.assertEqual(
             call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS, with_cwd=True),
             [
+                ['...$ /usr/bin/git', 'rev-parse', '--short', 'HEAD'],
                 ['.../make-uv-python$ .../bin/python3', 'update_requirements.py'],
                 ['.../managed-django-project$ .../bin/python3', 'update_requirements.py'],
-                ['.../pipenv-python$ .../bin/python3', 'update_requirements.py'],
-                ['.../piptools-python$ .../bin/python3', 'update_requirements.py'],
                 ['.../uv-python$ .../bin/python3', 'update_requirements.py'],
                 ['.../yunohost_django_package$ .../bin/python3', 'update_requirements.py'],
             ],
@@ -182,22 +208,33 @@ class ProjectSetupTestCase(BaseTestCase):
         with (
             patch.object(packaging, 'run_unittest_cli') as func1,
             patch.object(packaging, 'publish_package') as func2,
+            RedirectOut() as buffer,
         ):
-            stdout = invoke_click(dev_cli, 'publish')
+            cli_dev_main(args=('publish',))
 
         func1.assert_called_once()
         func2.assert_called_once()
-        self.assertEqual(stdout, '')
-
-    def test_filesystem_var_syntax(self):
-        stdout = invoke_click(cli, 'fix-filesystem')
+        self.assertEqual(buffer.stderr, '')
         self.assert_in_content(
-            got=stdout,
-            parts=('Nothing to rename, ok.',),
+            got=buffer.stdout,
+            parts=('managetemplates v',),
         )
 
+    def test_filesystem_var_syntax(self):
+        with RedirectOut() as buffer, self.assertRaises(SystemExit) as cm:
+            cli_app_main(args=('fix-filesystem',))
+        self.assertEqual(buffer.stderr, '')
+        self.assert_in_content(
+            got=buffer.stdout,
+            parts=(
+                'managetemplates v',
+                'Nothing to rename, ok.',
+            ),
+        )
+        self.assertEqual(cm.exception.code, 0)
+
     def test_file_content_var_syntax(self):
-        stdout = invoke_click(cli, 'fix-file-content')
+        stdout = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['fix-file-content'])
         self.assert_in_content(
             got=stdout,
             parts=('Nothing to fixed, ok.',),

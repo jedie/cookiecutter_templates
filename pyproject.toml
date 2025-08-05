@@ -9,21 +9,20 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "cli-base-utilities>=0.11.0",  # https://github.com/jedie/cli-base-utilities
     "manageprojects>=0.16.0",  # https://github.com/jedie/manageprojects
+    "cli-base-utilities>=0.21.1",  # https://github.com/jedie/cli-base-utilities
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
-    "click",  # https://github.com/pallets/click/
-    "rich-click",  # https://github.com/ewels/rich-click
+    "tyro",  # https://github.com/brentyi/tyro
     "rich",  # https://github.com/Textualize/rich
     "django_example",  # Only to get the current version of this package ;)
 ]
 [dependency-groups]
 dev = [
+    "manageprojects",  # https://github.com/jedie/manageprojects
+    "urllib3", # for bx_py_utils.test_utils.deny_requests.deny_any_real_request() in tests
     "uv",  # https://github.com/astral-sh/uv
     "hatchling",  # https://github.com/pypa/hatch/tree/master/backend
-    "build",  # https://github.com/pypa/build
-    "tox",  # https://github.com/tox-dev/tox
-    "tox-uv",  # https://github.com/tox-dev/tox-uv
+    "nox",  # https://github.com/wntrblm/nox
     "coverage",  # https://github.com/nedbat/coveragepy
     "autopep8",  # https://github.com/hhatto/autopep8
     "pyupgrade",  # https://github.com/asottile/pyupgrade
@@ -43,11 +42,6 @@ dev = [
     # https://github.com/pycqa/isort
     # https://github.com/pygments/pygments
     "darker[flynt, isort, color]",
-
-    # Work-a-round for: https://github.com/jazzband/pip-tools/issues/1866
-    # see also: https://github.com/jazzband/pip-tools/issues/994#issuecomment-1321226661
-    # backports.tarfile is needed for python <3.12
-    'backports.tarfile', # via jaraco-context -> keyring -> twine
 ]
 
 [project.urls]
@@ -82,8 +76,7 @@ version_module_name = "managetemplates"  # Used by "update-readme-history" git h
 
 
 [tool.darker]
-src = ['cli.py', 'managetemplates'] # Exclude all Cookiecutter Templates!
-config = './pyproject.toml'
+src = ['.']
 revision = "origin/main..."
 line_length = 119
 color = true
@@ -92,9 +85,6 @@ diff = false
 check = false
 stdout = false
 isort = true
-lint = [
-    "flake8",
-]
 log_level = "INFO"
 
 
@@ -112,7 +102,7 @@ lines_after_imports=2
 branch = true
 parallel = true
 concurrency = ["multiprocessing"]
-source = ['managetemplates']
+source = ['.']
 command_line = '-m unittest --verbose --locals --buffer'
 
 [tool.coverage.report]
@@ -125,19 +115,6 @@ exclude_lines = [
     'pragma: no cover',
     'raise NotImplementedError',
     'if __name__ == .__main__.:',
-]
-
-
-[tool.tox]  # https://tox.wiki/en/latest/config.html#pyproject-toml
-isolated_build = true
-env_list = ["3.13", "3.12", "3.11"]
-skip_missing_interpreters = true
-
-[tool.tox.env_run_base]
-runner = "uv-venv-lock-runner"
-with_dev = true
-commands = [
-    ["python3", "-m", "coverage", "run", "--context", "'{envname}'"]
 ]
 
 
@@ -163,6 +140,7 @@ applied_migrations = [
     "cb3b71e", # 2024-03-12T08:19:30+01:00
     "a968634", # 2024-09-25T22:03:22+02:00
     "8e360b3", # 2024-11-13T17:19:44+01:00
+    "e259304", # 2025-06-10T08:32:49+02:00
 ]
 
 [manageprojects.cookiecutter_context.cookiecutter]

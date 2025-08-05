@@ -120,23 +120,28 @@ The output of `./cli.py --help` looks like:
 
 [comment]: <> (✂✂✂ auto generated main help start ✂✂✂)
 ```
-Usage: ./cli.py [OPTIONS] COMMAND [ARGS]...
+usage: ./cli.py [-h] {fix-file-content,fix-filesystem,reverse,templates2generated,update-template-req,version}
 
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
-│ --help      Show this message and exit.                                                          │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
-│ fix-file-content       Unify cookiecutter variables in file content. e.g.: "{{foo}}" -> "{{ foo  │
-│                        }}"                                                                       │
-│ fix-filesystem         Unify cookiecutter variables in the file/directory paths. e.g.:           │
-│                        "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"                      │
-│ reverse                Reverse a /generated_templates/<pkg_name>/ back to Cookiecutter template  │
-│                        in: ./<pkg_name>/                                                         │
-│ templates2generated    Generate all cookiecutter templates                                       │
-│ update-readme-history  Update project history base on git commits/tags in README.md              │
-│ update-template-req    Update requirements of all cookiecutter templates                         │
-│ version                Print version and exit                                                    │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─ options ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ -h, --help        show this help message and exit                                                                  │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ {fix-file-content,fix-filesystem,reverse,templates2generated,update-template-req,version}                          │
+│     fix-file-content                                                                                               │
+│                   Unify cookiecutter variables in file content. e.g.: "{{foo}}" -> "{{ foo }}"                     │
+│     fix-filesystem                                                                                                 │
+│                   Unify cookiecutter variables in the file/directory paths. e.g.: "/{{foo}}/{{bar}}.txt" -> "/{{   │
+│                   foo }}/{{ bar }}.txt"                                                                            │
+│     reverse       Reverse a /generated_templates/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/ Note: │
+│                   The reversed cookiecutter template files cannot be accepted 1-to-1.                              │
+│     templates2generated                                                                                            │
+│                   Generate all cookiecutter templates                                                              │
+│     update-template-req                                                                                            │
+│                   Update requirements of all cookiecutter templates                                                │
+│     version       Print version and exit                                                                           │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated main help end ✂✂✂)
 
@@ -156,26 +161,40 @@ Run tests, e.g.:
 
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```
-Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
+usage: ./dev-cli.py [-h]
+                    {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-re
+adme-history,update-test-snapshot-files,version}
 
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
-│ --help      Show this message and exit.                                                          │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
-│ check-code-style            Check code style by calling darker + flake8                          │
-│ coverage                    Run tests and show coverage.                                         │
-│ fix-code-style              Fix code style of all managetemplates source code files via darker   │
-│ install                     Install requirements and 'managetemplates' via pip as editable.      │
-│ mypy                        Run Mypy (configured in pyproject.toml)                              │
-│ pip-audit                   Run pip-audit check against current requirements files               │
-│ publish                     Build and upload this project to PyPi                                │
-│ test                        Run unittests                                                        │
-│ tox                         Run tox                                                              │
-│ update                      Update "requirements*.txt" dependencies files                        │
-│ update-test-snapshot-files  Update all test snapshot files (by remove and recreate all snapshot  │
-│                             files)                                                               │
-│ version                     Print version and exit                                               │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─ options ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ -h, --help        show this help message and exit                                                                  │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-readme-history,upd │
+│ ate-test-snapshot-files,version}                                                                                   │
+│     check-code-style                                                                                               │
+│                   Check code style by calling darker + flake8                                                      │
+│     coverage      Run tests and show coverage.                                                                     │
+│     fix-code-style                                                                                                 │
+│                   Fix code style of all managetemplates source code files via darker                               │
+│     install       Install requirements and 'managetemplates' via pip as editable.                                  │
+│     mypy          Run Mypy (configured in pyproject.toml)                                                          │
+│     nox           Run nox                                                                                          │
+│     pip-audit     Run pip-audit check against current requirements files                                           │
+│     publish       Build and upload this project to PyPi                                                            │
+│     test          Run unittests                                                                                    │
+│     update        Update "requirements*.txt" dependencies files                                                    │
+│     update-readme-history                                                                                          │
+│                   Update project history base on git commits/tags in README.md Will be exited with 1 if the        │
+│                   README.md was updated otherwise with 0.                                                          │
+│                                                                                                                    │
+│                   Also, callable via e.g.:                                                                         │
+│                       python -m cli_base update-readme-history -v                                                  │
+│     update-test-snapshot-files                                                                                     │
+│                   Update all test snapshot files (by remove and recreate all snapshot files)                       │
+│     version       Print version and exit                                                                           │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated dev help end ✂✂✂)
 
@@ -184,7 +203,8 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
-* [v0.7.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.7.0)
+* [v0.8.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.8.0)
+  * 2025-08-05 - Update managetemplates e.g.: click -> tyro
   * 2025-08-05 - update precommit in manage-django-project
   * 2025-08-05 - Update make-uv-python requirements
   * 2025-08-05 - Update managed-django-project requirements
