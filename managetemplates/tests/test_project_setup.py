@@ -17,9 +17,8 @@ from packaging.version import Version
 
 from managetemplates import __version__
 from managetemplates.cli_app import main as cli_app_main
-from managetemplates.cli_dev import PACKAGE_ROOT
+from managetemplates.cli_dev import PACKAGE_ROOT, packaging
 from managetemplates.cli_dev import main as cli_dev_main
-from managetemplates.cli_dev import packaging
 from managetemplates.constants import PY_BIN_PATH
 from managetemplates.tests.base import BaseTestCase
 
@@ -190,7 +189,10 @@ class ProjectSetupTestCase(BaseTestCase):
         )
 
     def test_update_template_req(self):
-        with SubprocessCallMock(return_callback=SimpleRunReturnCallback(stdout='1234567')) as call_mock:
+        with (
+            RedirectOut() as buffer,
+            SubprocessCallMock(return_callback=SimpleRunReturnCallback(stdout='1234567')) as call_mock,
+        ):
             cli_app_main(args=('update-template-req',))
 
         self.assertEqual(
@@ -202,6 +204,11 @@ class ProjectSetupTestCase(BaseTestCase):
                 ['.../uv-python$ .../bin/python3', 'update_requirements.py'],
                 ['.../yunohost_django_package$ .../bin/python3', 'update_requirements.py'],
             ],
+        )
+        self.assertEqual(buffer.stderr, '')
+        self.assert_in_content(
+            got=buffer.stdout,
+            parts=('managetemplates v',),
         )
 
     def test_publish(self):
