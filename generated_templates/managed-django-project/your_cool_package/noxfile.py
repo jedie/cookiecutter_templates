@@ -3,7 +3,7 @@ from nox.sessions import Session
 
 
 PYTHON_VERSIONS = ['3.13', '3.12', '3.11']
-DJANGO_VERSIONS = ['5.1', '5.0', '4.2']
+DJANGO_VERSIONS = ['5.2', '5.1', '4.2']
 
 
 @nox.session(python=PYTHON_VERSIONS)
@@ -22,7 +22,7 @@ def tests(session: Session, django: str):
         'uv',
         'pip',
         'install',
-        f'django~={django}',
+        f'django>={django},<={django}.999',
         env={'UV_PROJECT_ENVIRONMENT': session.virtualenv.location},
     )
     session.run('python', '-m', 'coverage', 'run', '--context', f'py{session.python}-django{django}')
