@@ -22,7 +22,7 @@ def tests(session: Session, django: str):
         'uv',
         'pip',
         'install',
-        f'django~={django}',
+        f'django>={django},<={django}.999',
         env={'UV_PROJECT_ENVIRONMENT': session.virtualenv.location},
     )
     session.run('python', '-m', 'coverage', 'run', '--context', f'py{session.python}-django{django}')
