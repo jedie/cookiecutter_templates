@@ -185,10 +185,10 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.7.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.7.0)
+  * 2025-08-05 - Update requirements
   * 2025-08-05 - Update nox in Django projects and use: DJANGO_VERSIONS = ['5.2', '5.1', '4.2']
   * 2025-08-05 - Bugfix nox config to install the correct Django version
   * 2025-06-10 - Cleanup README
-  * 2025-06-10 - Update requirements
   * 2025-06-10 - Remove pipenv and piptools templates
   * 2025-06-10 - split PHONY
   * 2025-06-10 - make-uv-python: tox -> nox + setuptools -> hatchling
@@ -334,41 +334,37 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
   * 2023-04-10 - Update requirements in templates
   * 2023-04-10 - use the real URl to https://github.com/jedie/django_example
   * 2023-04-10 - Update django_example.__version__ in yunohost_django_package/cookiecutter.json
-  * 2023-04-10 - Dev (#65)
-  * 2023-04-10 - templates2generated: force recreate as default (#64)
-  * 2023-04-10 - Enhance managed-django-project (#61)
-  * 2023-04-10 - Hacky way to expand the failed test output (#62)
-  * 2023-04-10 - +license = "{{ cookiecutter.license }}" (#60) (#63)
-  * 2023-04-07 - +license = "{{ cookiecutter.license }}" (#60)
-  * 2023-04-06 - WIP:  add generated template into repository (#54)
+  * 2023-04-10 - Dev
+  * 2023-04-10 - templates2generated: force recreate as default
+  * 2023-04-10 - Enhance managed-django-project
+  * 2023-04-10 - Hacky way to expand the failed test output
+  * 2023-04-10 - +license = "{{ cookiecutter.license }}" (#60)
+  * 2023-04-07 - +license = "{{ cookiecutter.license }}"
+  * 2023-04-06 - WIP:  add generated template into repository
   * 2023-04-05 - Udpate managed-django-project to manage_django_project v0.3.0
-  * 2023-04-04 - NEW: "managed-django-project" template (#59)
-  * 2023-04-04 - Dev (#58)
-  * 2023-04-04 - Update yunohost_django_package template (#57)
-  * 2023-04-02 - Add setuptools_scm to include all files from git repository (#56)
+  * 2023-04-04 - NEW: "managed-django-project" template
+  * 2023-04-04 - Update yunohost_django_package template
+  * 2023-04-02 - Add setuptools_scm to include all files from git repository
   * 2023-04-02 - fix poetry-python
   * 2023-04-02 - Fix darker/flynt/isort/Pygments combination
-  * 2023-03-17 - Update templates (#53)
-  * 2023-03-17 - Use: dynamic = ["version"] (#52)
-  * 2023-03-07 - Run DocTests via helper from bx_py_utils (#51)
-  * 2023-03-06 - Coverage2 (#50)
-  * 2023-03-06 - Bugfix link to codecov.io (#49)
-  * 2023-03-06 - Py 3.11 tomllib vs. tomli (#48)
+  * 2023-03-17 - Update templates
+  * 2023-03-17 - Use: dynamic = ["version"]
+  * 2023-03-07 - Run DocTests via helper from bx_py_utils
+  * 2023-03-06 - Coverage2
+  * 2023-03-06 - Bugfix link to codecov.io
+  * 2023-03-06 - Py 3.11 tomllib vs. tomli
   * 2023-03-06 - Updates
   * 2023-03-06 - unify github action configs
   * 2023-03-06 - fix coverage setup
-  * 2023-02-20 - Tox (#44)
-  * 2023-02-19 - replace "coveralls" with "coverage" (#43)
-  * 2023-02-19 - piptools-python: Replace typer CLI with click and add flynt to darker (#42)
-  * 2023-02-19 - Update poetry-django-app (#41)
-  * 2023-02-19 - Update via manageprojects (#40)
-  * 2023-02-19 - Dev (#39)
-  * 2023-02-18 - Dev (#38)
-  * 2023-02-18 - add "make install-base-req" target to install needed OS base packages (#37)
+  * 2023-02-20 - Tox
+  * 2023-02-19 - replace "coveralls" with "coverage"
+  * 2023-02-19 - piptools-python: Replace typer CLI with click and add flynt to darker
+  * 2023-02-19 - Update via manageprojects
+  * 2023-02-18 - add "make install-base-req" target to install needed OS base packages
   * 2023-02-07 - Update .flake8
-  * 2023-02-07 - Cleanup Makefiles (#36)
+  * 2023-02-07 - Cleanup Makefiles
   * 2023-02-07 - Update pythonapp.yml
-  * 2023-02-07 - Add a reuseable Django App (#35)
+  * 2023-02-07 - Add a reuseable Django App
   * 2023-02-05 - Bugfix cli and tests
   * 2023-02-05 - Bugfix publish test
   * 2023-02-05 - Bugfix tests and capture logs
@@ -381,7 +377,6 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
   * 2023-02-05 - Force unique var syntax in filesystem path by unittest
   * 2023-02-05 - Apply "fix-filesystem"
   * 2023-02-05 - Add "fix-filesystem" CLI command to rename e.g.: "/{{foo}}/{{bar}}.txt" -> "/{{ foo }}/{{ bar }}.txt"
-  * 2023-01-25 - Dev (#31)
   * 2023-01-13 - Fix github actions
   * 2023-01-13 - Move test files to the templates
   * 2023-01-13 - poetry-python: Refactor tox setup
@@ -399,10 +394,9 @@ Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
   * 2023-01-10 - Use constants.ALL_TEMPLATES
   * 2023-01-10 - Test if dir exists
   * 2023-01-09 - Use a more relaxed flak8 exclude rule
-  * 2023-01-08 - update requirements (#22)
   * 2023-01-08 - Doc strings: fix github link to darker project
   * 2022-12-30 - Refactor "dependencies" definition
-  * 2022-12-30 - [tool.setuptools] -> include all packages (#18)
+  * 2022-12-30 - [tool.setuptools] -> include all packages
   * 2022-12-30 - poetry-python: Use rich print and add "version" command
   * 2022-12-30 - set max line length to 119
   * 2022-12-30 - pipenv-python: add .flake8
