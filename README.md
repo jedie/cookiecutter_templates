@@ -204,6 +204,7 @@ adme-history,update-test-snapshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.9.0...main)
+  * 2025-09-03 - make-uv-python: Replace darker with ruff
   * 2025-09-03 - uv-python:_replace darker with ruff
 * [v0.9.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.9.0)
   * 2025-08-05 - less test output

@@ -1,12 +1,13 @@
-import subprocess
 from importlib.metadata import version
 from pathlib import Path
 from unittest import TestCase
 
+from cli_base.cli_tools.code_style import assert_code_style
 from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from packaging.version import Version
 
 import your_cool_package
+
 
 PACKAGE_ROOT = Path(your_cool_package.__file__).parent.parent
 
@@ -26,17 +27,8 @@ class ProjectSetupTestCase(TestCase):
         self.assertEqual(str(your_cool_package_version), your_cool_package.__version__)  # Don't allow wrong formatting
 
     def test_code_style(self):
-        try:
-            output = subprocess.check_output(['make', 'lint'], stderr=subprocess.STDOUT, cwd=PACKAGE_ROOT, text=True)
-        except subprocess.CalledProcessError:
-            # Code style is not correct -> Try to fix it
-            subprocess.check_call(['make', 'fix-code-style'], stderr=subprocess.STDOUT, cwd=PACKAGE_ROOT)
-
-            # Check again:
-            subprocess.check_call(['make', 'lint'], cwd=PACKAGE_ROOT)
-        else:
-            self.assertIn('darker', output)
-            self.assertIn('flake8', output)
+        return_code = assert_code_style(package_root=PACKAGE_ROOT)
+        self.assertEqual(return_code, 0, 'Code style error, see output above!')
 
     def test_check_editor_config(self):
         check_editor_config(package_root=PACKAGE_ROOT)

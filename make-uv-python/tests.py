@@ -7,6 +7,7 @@ from managetemplates.tests.base import PackageTestBase, TempGitRepo
 
 
 class MakeUvPythonTemplateTestCase(PackageTestBase):
+    # force_recreate = True
     template_name = 'make-uv-python'
     pkg_name = 'your_cool_package'
 
@@ -21,15 +22,14 @@ class MakeUvPythonTemplateTestCase(PackageTestBase):
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'python')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'uv')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'nox')
-            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'darker')
-            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'flake8')
+            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'ruff')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'coverage')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'twine')
 
-            output = self.test_project.check_output('make', 'fix-code-style', exit_on_error=True)
+            output = self.test_project.check_output('make', 'lint', exit_on_error=True)
             try:
-                self.assert_in('.venv/bin/darker', output)
-                self.assert_in('.venv/bin/flake8 .', output)
+                self.assertIn('ruff', output, f'Output was:\n{output}')
+                self.assertIn('All checks passed!', output, f'Output was:\n{output}')
             except Exception:
                 temp_git.display_git_diff()
                 raise
