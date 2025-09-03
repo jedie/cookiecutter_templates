@@ -9,7 +9,7 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "{{ cookiecutter.upstream_pkg_name }}>={{ cookiecutter.upstream_version }}",  # {{ cookiecutter.upstream_url }}
+    "{{ cookiecutter.project_id }}>={{ cookiecutter.upstream_version }}",  # {{ cookiecutter.upstream_url }}
     "django_yunohost_integration",  # https://github.com/YunoHost-Apps/django_yunohost_integration
     "gunicorn",
     "psycopg[binary]", # https://github.com/psycopg/psycopg

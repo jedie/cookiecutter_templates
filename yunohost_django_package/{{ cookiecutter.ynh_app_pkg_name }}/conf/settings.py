@@ -18,7 +18,7 @@ from django_yunohost_integration.secret_key import get_or_create_secret as __get
 
 
 # {{ cookiecutter.upstream_url }}
-from {{ cookiecutter.upstream_pkg_name }}.settings.prod import *  # noqa:F401,F403 isort:skip
+from {{ cookiecutter.project_id }}.settings.prod import *  # noqa:F401,F403 isort:skip
 
 
 DATA_DIR_PATH = __Path('__DATA_DIR__')  # /home/yunohost.app/$app/
@@ -192,7 +192,7 @@ LOGGING = {
             'level': LOG_LEVEL,
             'propagate': False,
         },
-        '{{ cookiecutter.upstream_pkg_app_name }}': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
+        '{{ cookiecutter.project_id }}': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
     },
 }
 

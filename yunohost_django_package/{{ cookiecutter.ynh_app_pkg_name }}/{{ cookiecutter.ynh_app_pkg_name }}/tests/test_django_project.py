@@ -35,7 +35,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
             msg=f'{settings.INSTALL_DIR_PATH=}',
         )
         self.assertTrue(
-            str(settings.LOG_FILE_PATH).endswith('/local_test/var_log_{{ cookiecutter.upstream_pkg_name }}.log'),
+            str(settings.LOG_FILE_PATH).endswith('/local_test/var_log_{{ cookiecutter.project_id }}.log'),
             msg=f'{settings.LOG_FILE_PATH=}',
         )
         self.assertEqual(settings.PATH_URL, 'app_path')
@@ -62,7 +62,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         # Logging example correct?
         log_filename = settings.LOGGING['handlers']['log_file']['filename']
-        self.assertTrue(log_filename.endswith('/local_test/var_log_{{ cookiecutter.upstream_pkg_name }}.log'), log_filename)
+        self.assertTrue(log_filename.endswith('/local_test/var_log_{{ cookiecutter.project_id }}.log'), log_filename)
         self.assertEqual(
             settings.LOGGING['loggers']['django_yunohost_integration'],
             {
@@ -91,7 +91,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
             fetch_redirect_response=False,
         )
 
-        with self.assertLogs('{{ cookiecutter.upstream_pkg_name }}') as logs:
+        with self.assertLogs('{{ cookiecutter.project_id }}') as logs:
             response = self.client.get('/app_path/', secure=True)
             self.assert_html_parts(
                 response,
@@ -102,7 +102,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
                     '<tr><td>META:</td><td></td></tr>',
                 ),
             )
-        self.assertEqual(logs.output, ['INFO:{{ cookiecutter.upstream_pkg_name }}.views:DebugView request from user: AnonymousUser'])
+        self.assertEqual(logs.output, ['INFO:{{ cookiecutter.project_id }}.views:DebugView request from user: AnonymousUser'])
 
     @override_settings(SECURE_SSL_REDIRECT=False)
     def test_login_happy_path(self):
@@ -110,7 +110,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         self.client.cookies['yunohost.portal'] = create_jwt(username='test')
 
-        with self.assertLogs('django_yunohost_integration') as logs, self.assertLogs('{{ cookiecutter.upstream_pkg_name }}') as app_logs:
+        with self.assertLogs('django_yunohost_integration') as logs, self.assertLogs('{{ cookiecutter.project_id }}') as app_logs:
             response = self.client.get(
                 path='/app_path/',
                 HTTP_YNH_USER='test',
@@ -145,7 +145,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
                 'INFO:django_yunohost_integration.sso_auth.auth_middleware:Remote user "test" was logged in',
             ],
         )
-        self.assertEqual(app_logs.output, ['INFO:{{ cookiecutter.upstream_pkg_name }}.views:DebugView request from user: test'])
+        self.assertEqual(app_logs.output, ['INFO:{{ cookiecutter.project_id }}.views:DebugView request from user: test'])
 
     @override_settings(SECURE_SSL_REDIRECT=False)
     def test_create_unknown_user(self):
@@ -153,7 +153,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         self.client.cookies['yunohost.portal'] = create_jwt(username='test')
 
-        with self.assertLogs('django_yunohost_integration') as logs, self.assertLogs('{{ cookiecutter.upstream_pkg_name }}') as app_logs:
+        with self.assertLogs('django_yunohost_integration') as logs, self.assertLogs('{{ cookiecutter.project_id }}') as app_logs:
             response = self.client.get(
                 path='/app_path/',
                 HTTP_YNH_USER='test',
@@ -188,7 +188,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
                 'INFO:django_yunohost_integration.sso_auth.auth_middleware:Remote user "test" was logged in',
             ],
         )
-        self.assertEqual(app_logs.output, ['INFO:{{ cookiecutter.upstream_pkg_name }}.views:DebugView request from user: test'])
+        self.assertEqual(app_logs.output, ['INFO:{{ cookiecutter.project_id }}.views:DebugView request from user: test'])
 
     @override_settings(SECURE_SSL_REDIRECT=False)
     def test_wrong_cookie(self):

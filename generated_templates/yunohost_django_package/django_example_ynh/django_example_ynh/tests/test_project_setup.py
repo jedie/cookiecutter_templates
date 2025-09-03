@@ -3,9 +3,9 @@ import tomllib
 from bx_django_utils.filename import clean_filename
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from django.test.testcases import TestCase
+from django_example import __version__ as upstream_version
 from django_tools.unittest_utils.project_setup import check_editor_config
 from django_yunohost_integration.path_utils import get_project_root
-from django_example import __version__ as upstream_version
 
 from django_example_ynh import __version__ as ynh_pkg_version
 

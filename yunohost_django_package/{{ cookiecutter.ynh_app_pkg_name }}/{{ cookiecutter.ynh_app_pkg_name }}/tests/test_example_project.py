@@ -16,7 +16,7 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
         ###############################################################################
         # Test as anonymous user
 
-        with self.assertLogs('{{ cookiecutter.upstream_pkg_name }}') as logs:
+        with self.assertLogs('{{ cookiecutter.project_id }}') as logs:
             response = self.client.get(
                 path='/app_path/',
                 secure=True,
@@ -30,14 +30,14 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
                 '<tr><td>META:</td><td></td></tr>',
             ),
         )
-        self.assertEqual(logs.output, ['INFO:{{ cookiecutter.upstream_pkg_name }}.views:DebugView request from user: AnonymousUser'])
+        self.assertEqual(logs.output, ['INFO:{{ cookiecutter.project_id }}.views:DebugView request from user: AnonymousUser'])
 
         ###############################################################################
         # Test as SSO user
 
         self.client.cookies['yunohost.portal'] = create_jwt(username='test')
 
-        with self.assertLogs('{{ cookiecutter.upstream_pkg_name }}') as logs:
+        with self.assertLogs('{{ cookiecutter.project_id }}') as logs:
             response = self.client.get(
                 path='/app_path/',
                 HTTP_YNH_USER='test',
@@ -53,4 +53,4 @@ class ExampleProjectTestCase(HtmlAssertionMixin, TestCase):
                 f'<tr><td>Process ID:</td><td>{os.getpid()}</td></tr>',
             ),
         )
-        self.assertEqual(logs.output, ['INFO:{{ cookiecutter.upstream_pkg_name }}.views:DebugView request from user: test'])
+        self.assertEqual(logs.output, ['INFO:{{ cookiecutter.project_id }}.views:DebugView request from user: test'])
