@@ -64,15 +64,12 @@ ignore-vuln=[]
 version_module_name = "your_cool_package"  # Used by "update-readme-history" git hook
 
 
-
-
 [tool.ruff]
 # https://docs.astral.sh/ruff/configuration/
 line-length = 120
 exclude = [
   ".*/",
 ]
-
 
 [tool.ruff.lint]
 preview = true  # Needed for some of the rules

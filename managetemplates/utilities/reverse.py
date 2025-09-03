@@ -1,5 +1,5 @@
-import shutil
 from pathlib import Path
+import shutil
 
 from bx_py_utils.path import assert_is_file
 from cli_base.cli_tools.git import Git

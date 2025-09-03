@@ -1,17 +1,16 @@
-import subprocess
 from pathlib import Path
+import subprocess
 from unittest import TestCase
 
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from django.conf import settings
 from django.core.cache import cache
 from django.core.management import call_command
+from manage import BASE_PATH
 from manage_django_project.management.commands import code_style
 from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from packaging.version import Version
-
 from your_cool_package import __version__
-from manage import BASE_PATH
 
 
 class ProjectSetupTestCase(TestCase):

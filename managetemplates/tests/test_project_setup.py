@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import tempfile
 from pathlib import Path
+import tempfile
 from unittest.mock import patch
 
 from bx_py_utils.test_utils.redirect import RedirectOut

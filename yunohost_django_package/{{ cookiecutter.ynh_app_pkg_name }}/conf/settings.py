@@ -1,3 +1,5 @@
+# ruff: noqa: F405
+
 ################################################################################
 ################################################################################
 
@@ -17,9 +19,6 @@ from django_yunohost_integration.secret_key import get_or_create_secret as __get
 
 # {{ cookiecutter.upstream_url }}
 from {{ cookiecutter.upstream_pkg_name }}.settings.prod import *  # noqa:F401,F403 isort:skip
-
-
-from django_yunohost_integration.base_settings import LOGGING  # noqa:F401 isort:skip
 
 
 DATA_DIR_PATH = __Path('__DATA_DIR__')  # /home/yunohost.app/$app/
@@ -188,7 +187,11 @@ LOGGING = {
         '': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
         'django': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
         'axes': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
-        'django_yunohost_integration': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
+        'django_yunohost_integration': {
+            'handlers': ['log_file', 'mail_admins'],
+            'level': LOG_LEVEL,
+            'propagate': False,
+        },
         '{{ cookiecutter.upstream_pkg_app_name }}': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
     },
 }

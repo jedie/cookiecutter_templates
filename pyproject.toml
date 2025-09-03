@@ -70,6 +70,8 @@ version_module_name = "managetemplates"  # Used by "update-readme-history" git h
 line-length = 120
 exclude = [
   ".*/",
+  "dist",
+  "[{][{]*", # Exclude cookiecutter template directories like {{ cookiecutter.project_slug }}
 ]
 
 [tool.ruff.lint]

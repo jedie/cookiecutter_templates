@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import shutil
 from pathlib import Path
+import shutil
 
 from bx_py_utils.path import assert_is_dir
 from cookiecutter.main import cookiecutter
