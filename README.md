@@ -162,8 +162,8 @@ Run tests, e.g.:
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```
 usage: ./dev-cli.py [-h]
-                    {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-re
-adme-history,update-test-snapshot-files,version}
+                    {coverage,install,lint,mypy,nox,pip-audit,publish,test,update,update-readme-history,update-test-sn
+apshot-files,version}
 
 
 
@@ -171,14 +171,11 @@ adme-history,update-test-snapshot-files,version}
 │ -h, --help        show this help message and exit                                                                  │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-readme-history,upd │
-│ ate-test-snapshot-files,version}                                                                                   │
-│     check-code-style                                                                                               │
-│                   Check code style by calling darker + flake8                                                      │
+│ {coverage,install,lint,mypy,nox,pip-audit,publish,test,update,update-readme-history,update-test-snapshot-files,ver │
+│ sion}                                                                                                              │
 │     coverage      Run tests and show coverage.                                                                     │
-│     fix-code-style                                                                                                 │
-│                   Fix code style of all managetemplates source code files via darker                               │
 │     install       Install requirements and 'managetemplates' via pip as editable.                                  │
+│     lint          Check/fix code style by run: "ruff check --fix"                                                  │
 │     mypy          Run Mypy (configured in pyproject.toml)                                                          │
 │     nox           Run nox                                                                                          │
 │     pip-audit     Run pip-audit check against current requirements files                                           │
@@ -204,6 +201,8 @@ adme-history,update-test-snapshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.9.0...main)
+  * 2025-09-03 - Enforce file permissions via tests
+  * 2025-09-03 - fix README test
   * 2025-09-03 - fix templates
   * 2025-09-03 - add missing rich.print import
   * 2025-09-03 - Bugfix coverage collecting
