@@ -28,7 +28,7 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestBase):
 
         with TempGitRepo(path=self.pkg_path, fresh=True, branch_name='master') as temp_git:
             dev_cli_path = self.pkg_path / 'dev-cli.py'
-            assert_is_file(dev_cli_path)
+            self.assert_is_executeable(dev_cli_path)
 
             req_txt = self.pkg_path / 'conf' / 'requirements.txt'
             assert_is_file(req_txt)
