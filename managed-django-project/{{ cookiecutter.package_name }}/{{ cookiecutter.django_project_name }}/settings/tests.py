@@ -1,6 +1,7 @@
 # ruff: noqa: F405
+
 """
-    Settings used to run tests
+    Django settings for running tests
 """
 from {{ cookiecutter.django_project_name }}.settings.prod import *  # noqa
 

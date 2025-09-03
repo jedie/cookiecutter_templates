@@ -1,6 +1,7 @@
 # ruff: noqa: F405
+
 """
-    Settings used to run tests
+    Django settings for running tests
 """
 from your_cool_package_project.settings.prod import *  # noqa
 
