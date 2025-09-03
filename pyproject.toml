@@ -86,7 +86,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-# https://docs.astral.sh/ruff/rules/#isort-i
+# https://docs.astral.sh/ruff/settings/#lintisort
 lines-after-imports = 2
 force-sort-within-sections = true
 
@@ -102,7 +102,7 @@ source = ['.']
 command_line = '-m unittest --verbose --locals --buffer'
 
 [tool.coverage.report]
-omit = ['.*', '*/tests/*', '{{*']
+omit = ['.*', '*/tests/*', '*/{{*']
 skip_empty = true
 fail_under = 30
 show_missing = true

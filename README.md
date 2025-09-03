@@ -201,11 +201,13 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.9.0...main)
+  * 2025-09-03 - fix yunohost_django_package tests
+  * 2025-09-03 - Bugfix coverage collecting
+  * 2025-09-03 - fix ruff doc link for isort settings
   * 2025-09-03 - Enforce file permissions via tests
   * 2025-09-03 - fix README test
   * 2025-09-03 - fix templates
   * 2025-09-03 - add missing rich.print import
-  * 2025-09-03 - Bugfix coverage collecting
   * 2025-09-03 - managed-django-project: Replace Darker with ruff
   * 2025-09-03 - yunohost_django_package: Replace Draker with ruff
   * 2025-09-03 - fix code style

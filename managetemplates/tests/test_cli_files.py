@@ -26,7 +26,7 @@ CLI_FILENAMES = frozenset(
 
 
 class CliFilesTestCase(TestCase):
-    def test_cli_files_are_executeable(self):
+    def test_cli_files_are_executable(self):
         found_file_names = set()
         for file_path in iter_files(PACKAGE_ROOT):
             file_name = file_path.name
