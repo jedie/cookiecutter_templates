@@ -32,8 +32,8 @@ usage: ./cli.py [-h] {version}
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```
 usage: ./dev-cli.py [-h]
-                    {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-re
-adme-history,update-test-snapshot-files,version}
+                    {coverage,install,lint,mypy,nox,pip-audit,publish,test,update,update-readme-history,update-test-sn
+apshot-files,version}
 
 
 
@@ -41,20 +41,17 @@ adme-history,update-test-snapshot-files,version}
 │ -h, --help        show this help message and exit                                                                  │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ {check-code-style,coverage,fix-code-style,install,mypy,nox,pip-audit,publish,test,update,update-readme-history,upd │
-│ ate-test-snapshot-files,version}                                                                                   │
-│     check-code-style                                                                                               │
-│                   Check code style by calling darker + flake8                                                      │
+│ {coverage,install,lint,mypy,nox,pip-audit,publish,test,update,update-readme-history,update-test-snapshot-files,ver │
+│ sion}                                                                                                              │
 │     coverage      Run tests and show coverage report.                                                              │
-│     fix-code-style                                                                                                 │
-│                   Fix code style of all your_cool_package source code files via darker                             │
 │     install       Install requirements and 'your_cool_package' via pip as editable.                                │
+│     lint          Check/fix code style by run: "ruff check --fix"                                                  │
 │     mypy          Run Mypy (configured in pyproject.toml)                                                          │
 │     nox           Run nox                                                                                          │
 │     pip-audit     Run pip-audit check against current requirements files                                           │
 │     publish       Build and upload this project to PyPi                                                            │
 │     test          Run unittests                                                                                    │
-│     update        Update "requirements*.txt" dependencies files                                                    │
+│     update        Update dependencies (uv.lock) and git pre-commit hooks                                           │
 │     update-readme-history                                                                                          │
 │                   Update project history base on git commits/tags in README.md Will be exited with 1 if the        │
 │                   README.md was updated otherwise with 0.                                                          │

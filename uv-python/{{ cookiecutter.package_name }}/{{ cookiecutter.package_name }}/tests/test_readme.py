@@ -44,9 +44,10 @@ class ReadmeTestCase(BaseTestCase):
             got=stdout,
             parts=(
                 'usage: ./dev-cli.py [-h]',
-                ' check-code-style ',
+                ' lint ',
                 ' coverage ',
                 ' update-readme-history ',
+                ' publish ',
                 constants.CLI_EPILOG,
             ),
         )
