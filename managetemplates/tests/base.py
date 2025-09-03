@@ -95,6 +95,7 @@ class BaseTestCase(TestCase):
 
 
 class PackageTestBase(BaseTestCase):
+    force_recreate = False
     template_name: str = None
     pkg_name: str = None
     base_extra_env = None
@@ -109,8 +110,7 @@ class PackageTestBase(BaseTestCase):
         super().setUp()
         with self.assertLogs('cookiecutter', level=logging.DEBUG) as logs:
             self.pkg_path = cookiecutter_templates2generated(
-                # force_recreate=True
-                force_recreate=False,
+                force_recreate=self.force_recreate,
                 only_template=self.template_name,
             )
         self.assert_in_content(
