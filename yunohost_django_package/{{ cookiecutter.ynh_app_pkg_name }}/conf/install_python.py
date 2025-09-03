@@ -10,7 +10,7 @@
     Origin of this script is:
     * https://github.com/jedie/manageprojects/blob/main/manageprojects/install_python.py
 
-    Licensed under {{ cookiecutter.license }} (Feel free to copy and use it in your project)
+    Licensed under GPL-3.0-or-later (Feel free to copy and use it in your project)
 """
 from __future__ import annotations
 
@@ -18,7 +18,6 @@ import argparse
 import hashlib
 import logging
 import os
-from pathlib import Path
 import re
 import shlex
 import shutil
@@ -27,6 +26,7 @@ import subprocess
 import sys
 import tempfile
 import urllib.request
+from pathlib import Path
 
 
 """DocWrite: install_python.md # Install Python Interpreter

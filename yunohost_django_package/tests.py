@@ -8,6 +8,7 @@ from managetemplates.tests.base import PackageTestBase, TempGitRepo
 
 
 class YunohostDjangoPackageTemplateTestCase(PackageTestBase):
+    # force_recreate = True
     template_name = 'yunohost_django_package'
     pkg_name = 'django_example_ynh'
 
@@ -40,8 +41,7 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestBase):
             assert_is_file(venv_path / 'bin' / 'pip')
             assert_is_file(venv_path / 'bin' / 'uv')
             assert_is_file(venv_path / 'bin' / 'django-admin')
-            assert_is_file(venv_path / 'bin' / 'darker')
-            assert_is_file(venv_path / 'bin' / 'black')
+            assert_is_file(venv_path / 'bin' / 'ruff')
 
             self.test_project.check_call(
                 'python',
