@@ -585,14 +585,14 @@ wheels = [
 
 [[package]]
 name = "django-example"
-version = "0.2.0"
+version = "{{ cookiecutter.upstream_version }}"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "bx-django-utils" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b6/21/916bd5d07e600626457e313b60eaa4b65ea7a7b741158f386ced44e92f9e/django_example-0.2.0.tar.gz", hash = "sha256:2bcaeed97868e8be5c4d7d6a745b054f6983c931d5cefb763e6ff25807f15793", size = 23521, upload-time = "2022-11-21T20:32:02.716Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b6/21/916bd5d07e600626457e313b60eaa4b65ea7a7b741158f386ced44e92f9e/{{ cookiecutter.project_id }}-{{ cookiecutter.upstream_version }}.tar.gz", hash = "sha256:2bcaeed97868e8be5c4d7d6a745b054f6983c931d5cefb763e6ff25807f15793", size = 23521, upload-time = "2022-11-21T20:32:02.716Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b9/90/c5f0b9468ce725500b4fab3d6a317f818de9885b41cd2e7f1c13c0d4cb67/django_example-0.2.0-py3-none-any.whl", hash = "sha256:469beaa9e4f3e5d0ee98f043ee533f0f01fafef128391ac9f4ca9d9f35290da0", size = 28958, upload-time = "2022-11-21T20:31:59.787Z" },
+    { url = "https://files.pythonhosted.org/packages/b9/90/c5f0b9468ce725500b4fab3d6a317f818de9885b41cd2e7f1c13c0d4cb67/{{ cookiecutter.project_id }}-{{ cookiecutter.upstream_version }}-py3-none-any.whl", hash = "sha256:469beaa9e4f3e5d0ee98f043ee533f0f01fafef128391ac9f4ca9d9f35290da0", size = 28958, upload-time = "2022-11-21T20:31:59.787Z" },
 ]
 
 [[package]]
@@ -635,7 +635,7 @@ dev = [
 requires-dist = [
     { name = "cli-base-utilities" },
     { name = "django-axes" },
-    { name = "django-example", specifier = ">=0.2.0" },
+    { name = "django-example", specifier = ">={{ cookiecutter.upstream_version }}" },
     { name = "django-redis" },
     { name = "django-yunohost-integration" },
     { name = "gunicorn" },

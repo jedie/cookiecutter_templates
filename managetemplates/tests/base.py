@@ -1,8 +1,8 @@
+from collections.abc import Iterable
 import logging
 import os
-import shutil
-from collections.abc import Iterable
 from pathlib import Path
+import shutil
 from unittest import TestCase
 
 from bx_py_utils.path import assert_is_dir, assert_is_file

@@ -184,7 +184,7 @@ adme-history,update-test-snapshot-files,version}
 │     pip-audit     Run pip-audit check against current requirements files                                           │
 │     publish       Build and upload this project to PyPi                                                            │
 │     test          Run unittests                                                                                    │
-│     update        Update "requirements*.txt" dependencies files                                                    │
+│     update        Update dependencies (uv.lock) and git pre-commit hooks                                           │
 │     update-readme-history                                                                                          │
 │                   Update project history base on git commits/tags in README.md Will be exited with 1 if the        │
 │                   README.md was updated otherwise with 0.                                                          │
@@ -204,6 +204,9 @@ adme-history,update-test-snapshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.9.0...main)
+  * 2025-09-03 - fix code style
+  * 2025-09-03 - Use assert_code_style() in CLI
+  * 2025-09-03 - Replace darker with ruff
   * 2025-09-03 - make-uv-python: Replace darker with ruff
   * 2025-09-03 - uv-python:_replace darker with ruff
 * [v0.9.0](https://github.com/jedie/cookiecutter_templates/compare/v0.3.0...v0.9.0)

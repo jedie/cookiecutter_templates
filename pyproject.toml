@@ -9,8 +9,8 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "manageprojects>=0.16.0",  # https://github.com/jedie/manageprojects
-    "cli-base-utilities>=0.21.1",  # https://github.com/jedie/cli-base-utilities
+    "manageprojects",  # https://github.com/jedie/manageprojects
+    "cli-base-utilities",  # https://github.com/jedie/cli-base-utilities
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "tyro",  # https://github.com/brentyi/tyro
     "rich",  # https://github.com/Textualize/rich
@@ -24,11 +24,7 @@ dev = [
     "hatchling",  # https://github.com/pypa/hatch/tree/master/backend
     "nox",  # https://github.com/wntrblm/nox
     "coverage",  # https://github.com/nedbat/coveragepy
-    "autopep8",  # https://github.com/hhatto/autopep8
-    "pyupgrade",  # https://github.com/asottile/pyupgrade
-    "flake8",  # https://github.com/pycqa/flake8
-    "flake8-bugbear",  # https://github.com/PyCQA/flake8-bugbear
-    "pyflakes",  # https://github.com/PyCQA/pyflakes
+    "ruff", # https://github.com/astral-sh/ruff
     "codespell",  # https://github.com/codespell-project/codespell
     "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
     "pip-audit",  # https://github.com/pypa/pip-audit
@@ -36,12 +32,6 @@ dev = [
     "twine",  # https://github.com/pypa/twine
     "pre-commit",  # https://github.com/pre-commit/pre-commit
     "typeguard",  # https://github.com/agronholm/typeguard/
-
-    # https://github.com/akaihola/darker
-    # https://github.com/ikamensh/flynt
-    # https://github.com/pycqa/isort
-    # https://github.com/pygments/pygments
-    "darker[flynt, isort, color]",
 ]
 
 [project.urls]
@@ -75,27 +65,33 @@ ignore-vuln=[]
 version_module_name = "managetemplates"  # Used by "update-readme-history" git hook
 
 
-[tool.darker]
-src = ['.']
-revision = "origin/main..."
-line_length = 119
-color = true
-skip_string_normalization = true
-diff = false
-check = false
-stdout = false
-isort = true
-log_level = "INFO"
+[tool.ruff]
+# https://docs.astral.sh/ruff/configuration/
+line-length = 120
+exclude = [
+  ".*/",
+  "dist",
+  "[{][{]*", # Exclude cookiecutter template directories like {{ cookiecutter.project_slug }}
+]
 
+[tool.ruff.lint]
+preview = true  # Needed for some of the rules
+extend-select = [
+    "E", # pycodestyle: https://docs.astral.sh/ruff/rules/#error-e
+    "I", # isort: https://docs.astral.sh/ruff/rules/#isort-i
+]
+ignore = [
+    "E402", # https://docs.astral.sh/ruff/rules/module-import-not-at-top-of-file/
+    "E731", # https://docs.astral.sh/ruff/rules/lambda-assignment/
+]
 
-[tool.isort]
-# https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
-atomic=true
-profile='black'
-skip_glob=['.*', '*/htmlcov/*']
-known_first_party=['managetemplates']
-line_length=119
-lines_after_imports=2
+[tool.ruff.lint.isort]
+# https://docs.astral.sh/ruff/rules/#isort-i
+lines-after-imports = 2
+force-sort-within-sections = true
+
+[tool.ruff.format]
+quote-style = "single"
 
 
 [tool.coverage.run]
@@ -141,6 +137,7 @@ applied_migrations = [
     "a968634", # 2024-09-25T22:03:22+02:00
     "8e360b3", # 2024-11-13T17:19:44+01:00
     "e259304", # 2025-06-10T08:32:49+02:00
+    "f909e9f", # 2025-09-03T14:13:21+02:00
 ]
 
 [manageprojects.cookiecutter_context.cookiecutter]

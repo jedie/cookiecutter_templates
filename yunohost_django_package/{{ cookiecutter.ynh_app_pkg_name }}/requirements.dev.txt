@@ -35,17 +35,17 @@ autopep8==2.3.1 \
     --hash=sha256:a203fe0fcad7939987422140ab17a930f684763bf7335bdb6709991dd7ef6c2d \
     --hash=sha256:e889a44238a4d9a64d74d6e7b81c65a9c2d2dcd5dc898a6d054568c0d2479e0e
     # via
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   manageprojects
 backports-tarfile==1.2.0 \
     --hash=sha256:77e284d754527b01fb1e6fa8a1afe577858ebe4e9dad8919e34c862cb399bc34 \
     --hash=sha256:7ecb5ff4d016780ea7a9c7d0230e566f658bc0e192a6c02e3cfef76975659663 \
     --hash=sha256:d75e02c268746e1b8144c278978b6e98e85de6ad16f8e4b0844a154557eca991
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 beautifulsoup4==4.12.3 \
     --hash=sha256:74e3d1928edc070d21748185c46e3fb33490f22f52a3addee9aee0f4f7781051 \
     --hash=sha256:b80878c9f40111313e55da8ba20bdba06d8fa3969fc68304167741bbf9e082ed
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 binaryornot==0.4.4 \
     --hash=sha256:359501dfc9d40632edc9fac890e19542db1a287bbcfa58175b66658392018061 \
     --hash=sha256:b8b71173c917bddcd2c16070412e369c3ed7f0528926f70cac18a6c97fd563e4
@@ -96,7 +96,7 @@ bx-django-utils==84 \
     # via
     #   django-example
     #   django-tools
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 bx-py-utils==106 \
     --hash=sha256:1b5e7622310c5ef814de241419bc0f0929c3d0445e1418fa477d2be3f7da0332 \
     --hash=sha256:26d6d3353ccd7d93ae322d33f8dde1b14d01b88f10329a714cd43da67b2e3d9f \
@@ -312,7 +312,7 @@ cli-base-utilities==0.15.0 \
     --hash=sha256:eba1357ada1fd557aff738e45c9cbb5e35dfe5cc0ba1e8f5e2717603f85d5e92 \
     --hash=sha256:fa17fb5782745b773aa3e1f2bbca0eab616eba22ce965c3698bfe28f5c7ee503
     # via
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   manageprojects
 click==8.1.8 \
     --hash=sha256:2c6541c56b8070312894a3ba9b2c1279bb5e78cd77e154511c25c2d148d4769f \
@@ -330,7 +330,7 @@ codespell==2.3.0 \
     --hash=sha256:360c7d10f75e65f67bad720af7007e1060a5d395670ec11a7ed1fed9dd17471f \
     --hash=sha256:a9c7cef2501c9cfede2110fd6d4e5e62296920efe9abfb84648df866e47f58d1
     # via
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   manageprojects
 colorama==0.4.6 \
     --hash=sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44 \
@@ -413,7 +413,7 @@ coverage==7.6.9 \
     --hash=sha256:f7b15f589593110ae767ce997775d645b47e5cbbf54fd322f8ebea6277466cec \
     --hash=sha256:fd1213c86e48dfdc5a0cc676551db467495a95a662d2396ecd58e719191446e1 \
     --hash=sha256:ff74026a461eb0660366fb01c650c1d00f833a086b336bdad7ab00cc952072b3
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 cryptography==44.0.0 \
     --hash=sha256:1923cb251c04be85eec9fda837661c67c1049063305d6be5721643c22dd4e2b7 \
     --hash=sha256:37d76e6863da3774cd9db5b409a9ecfd2c71c981c38788d3fcfaf177f447b731 \
@@ -453,7 +453,7 @@ darker==2.1.1 \
     --hash=sha256:a6e6a682c0604e76fe9aec7650e96a944f517563c69b28fcc076db9d957d98ea \
     --hash=sha256:ead701414c45359fc0312bc285614d3285fc135476d43f3bc08d989ee19d9020
     # via
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   manageprojects
 darkgraylib==1.2.1 \
     --hash=sha256:60c59de69842367ce0c78c32c451fa8e9d29500e681312d9864a7416bcdb7792 \
@@ -486,10 +486,10 @@ django-axes==7.0.1 \
     --hash=sha256:31832eff26735fd1c600b30d987eb848fea175e59b256da43f36fe205a474961 \
     --hash=sha256:8d3792ebbfabaa3113df762d9f495fbb47cdc938d952c07982112b06289fda1b
     # via django-yunohost-integration
-django-example==0.2.0 \
+django-example=={{ cookiecutter.upstream_version }} \
     --hash=sha256:2bcaeed97868e8be5c4d7d6a745b054f6983c931d5cefb763e6ff25807f15793 \
     --hash=sha256:469beaa9e4f3e5d0ee98f043ee533f0f01fafef128391ac9f4ca9d9f35290da0
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 django-redis==5.4.0 \
     --hash=sha256:0079832ef196b588288343915fbbe99cee6e3381bd4949320fb421e5625b2018 \
     --hash=sha256:6a02abaa34b0fea8bf9b707d2c363ab6adc7409950b2db93602e6cb292818c42 \
@@ -503,7 +503,7 @@ django-tools==0.56.2 \
 django-yunohost-integration==0.9.0 \
     --hash=sha256:01d3e30bb5d5a07b5c520f7b29c27f83cf25d06c41a55a06100d49f0ed2ccc87 \
     --hash=sha256:a00c96c70021fbfa1b52a2cc0a584eb6595b0223d71fcf71cda85c784cd8e342
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 docstring-parser==0.16 \
     --hash=sha256:538beabd0af1e2db0146b6bd3caa526c35a34d61af9fd2887f3a8a27a739aa6e \
     --hash=sha256:bf0a1387354d3691d102edef7ec124f219ef639982d096e26e3b60aeffa90637
@@ -518,7 +518,7 @@ editorconfig==0.17.0 \
     --hash=sha256:eabd4f2c49f29ec0284cb47a3b733cf6ddbafac949f90f26228b1fcf25673263 \
     --hash=sha256:fe491719c5f65959ec00b167d07740e7ffec9a3f362038c72b289330b9991dfc
     # via
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   manageprojects
 filelock==3.16.1 \
     --hash=sha256:2082e5703d51fbf98ea75855d9d5527e33d8ff23099bec374a134febee6946b0 \
@@ -532,7 +532,7 @@ flake8==7.1.1 \
     --hash=sha256:1655b1e0ef48cb379a4893ac851225d58392ccde0b16e41395b7960af51e66ce \
     --hash=sha256:597477df7860daa5aa0fdd84bf5208a043ab96b8e96ab708770ae0364dd03213
     # via
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   flake8-bugbear
     #   manageprojects
 flake8-bugbear==24.12.12 \
@@ -540,7 +540,7 @@ flake8-bugbear==24.12.12 \
     --hash=sha256:46273cef0a6b6ff48ca2d69e472f41420a42a46e24b2a8972e4f0d6733d12a64 \
     --hash=sha256:e7ff91ee89d2bcffaa119dd6d47392f79c69d1b3fa8e37521d4e0f7354c63d55
     # via
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   manageprojects
 flynt==1.0.1 \
     --hash=sha256:65d1c546434827275123222a98408e9561bcd67db832dd58f530ff17b8329ec1 \
@@ -619,7 +619,7 @@ manageprojects==0.20.0 \
     --hash=sha256:4dd2f578ecb3b3fa4db8a0f797f7adf4dde4390badb07b605be2ff2bf62cee9c \
     --hash=sha256:83faffe903bab8ed29de2d3ea90f8e8d098efef137b8e2b711dfd01b477f93e6 \
     --hash=sha256:c7c9d3ed7c52a32839fb721184c3248d4d5daea2bf65c451ed7b5d8132d57665
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 markdown-it-py==3.0.0 \
     --hash=sha256:355216845c60bd96232cd8d8c40e8f9765cc86f46880e43a8fd22dc1a1a8cab1 \
     --hash=sha256:6d00561ef69282f31c923e5520f8f7025f6c2bbd1d7796f3d730840cc54130a6 \
@@ -808,7 +808,7 @@ mypy==1.14.0 \
     --hash=sha256:f0b343a1d3989547024377c2ba0dca9c74a2428ad6ed24283c213af8dbb0710b \
     --hash=sha256:fbb7d683fa6bdecaa106e8368aa973ecc0ddb79a9eaeb4b821591ecd07e9e03c
     # via
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   manageprojects
     #   refurb
 mypy-extensions==1.0.0 \
@@ -878,7 +878,7 @@ pip-api==0.0.34 \
 pip-audit==2.7.3 \
     --hash=sha256:08891bbf179bffe478521f150818112bae998424f58bf9285c0078965aef38bc \
     --hash=sha256:46a11faee3323f76adf7987de8171daeb660e8f57d8088cc27fb1c1e5c7747b0
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 pip-requirements-parser==32.0.1 \
     --hash=sha256:4659bc2a667783e7a15d190f6fccf8b2486685b6dba4c19c3876314769c57526 \
     --hash=sha256:53464120dcec4eaa04fdc5d7577ef231a7d1194d397dd9cb066d7155c9be6f27 \
@@ -888,7 +888,7 @@ pip-tools==7.4.1 \
     --hash=sha256:35d594eaaa262f2d3161954aeb25617ee9e597ecf624b77089e5c7ee309e5937 \
     --hash=sha256:4c690e5fbae2f21e87843e89c26191f0d9454f362d8acdbd695716493ec8b3a9 \
     --hash=sha256:864826f5073864450e24dbeeb85ce3920cdfb09848a3d69ebf537b521f14bcc9
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 pkginfo==1.12.0 \
     --hash=sha256:0376144cf88ff8b96cebf54e636e28b18693a78cc56bf5d204065ce7f9e95b17 \
     --hash=sha256:8ad91a0445a036782b9366ef8b8c2c50291f83a553478ba8580c73d3215700cf \
@@ -1003,7 +1003,7 @@ pyflakes==3.2.0 \
     --hash=sha256:84b5be138a2dfbb40689ca07e2152deb896a65c3a3e24c251c5c62489568074a
     # via
     #   autoflake
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   flake8
     #   manageprojects
 pygments==2.18.0 \
@@ -1055,7 +1055,7 @@ pyupgrade==3.19.1 \
     --hash=sha256:d10e8c5f54b8327211828769e98d95d95e4715de632a3414f1eef3f51357b9e2 \
     --hash=sha256:ef9cb142d4d030392f85769fee9b3766bbf5cb0d23f160a163b8d1cf857b803a
     # via
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   manageprojects
 pyyaml==6.0.2 \
     --hash=sha256:01179a4a8559ab5de078078f37e5c1a30d76bb88519906844fd7bdea1b7729ff \
@@ -1200,7 +1200,7 @@ tblib==3.0.0 \
     --hash=sha256:23c90752e27da6a9d3ac7acf86f9585e922196a469e67126d870c0d539d73411 \
     --hash=sha256:80a6c77e59b55e83911e1e607c649836a69c103963c5f28a46cbeef44acf8129 \
     --hash=sha256:93622790a0a29e04f0346458face1e144dc4d32f493714c6c3dff82a4adb77e6
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 text-unidecode==1.3 \
     --hash=sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8 \
     --hash=sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93
@@ -1226,18 +1226,18 @@ tomlkit==0.13.2 \
 tox==4.23.2 \
     --hash=sha256:452bc32bb031f2282881a2118923176445bac783ab97c874b8770ab4c3b76c38 \
     --hash=sha256:86075e00e555df6e82e74cfc333917f91ecb47ffbc868dcafbd2672e332f4a2c
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 twine==6.0.1 \
     --hash=sha256:36158b09df5406e1c9c1fb8edb24fc2be387709443e7376689b938531582ee27 \
     --hash=sha256:9c6025b203b51521d53e200f4a08b116dee7500a38591668c6a6033117bdc218 \
     --hash=sha256:ff357ef94dd653ecd10cc006438854c468c47c48a71e35a20749af82b9c83dae
-    # via django_example_ynh (pyproject.toml)
+    # via {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
 typeguard==4.4.1 \
     --hash=sha256:0d22a89d00b453b47c49875f42b6601b961757541a2e1e0ef517b6e24213c21b \
     --hash=sha256:9324ec07a27ec67fc54a9c063020ca4c0ae6abad5e9f0f9804ca59aee68c6e21 \
     --hash=sha256:d4f4d918f11b53141c2c4e114fffb0d2dd2aaef473b29b9006a23103a9570ce2
     # via
-    #   django_example_ynh (pyproject.toml)
+    #   {{ cookiecutter.ynh_app_pkg_name }} (pyproject.toml)
     #   tyro
 types-python-dateutil==2.9.0.20241206 \
     --hash=sha256:18f493414c26ffba692a72369fea7a154c502646301ebfe3d56a04b3767284cb \

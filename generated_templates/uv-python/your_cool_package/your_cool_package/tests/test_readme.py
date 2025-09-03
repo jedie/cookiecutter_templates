@@ -1,6 +1,6 @@
 from bx_py_utils.auto_doc import assert_readme_block
 from bx_py_utils.path import assert_is_file
-from cli_base.cli_tools.test_utils.rich_test_utils import invoke, NoColorEnvRichClick
+from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRichClick, invoke
 from manageprojects.tests.base import BaseTestCase
 
 from your_cool_package import constants

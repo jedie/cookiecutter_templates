@@ -1,6 +1,5 @@
 import logging
 
-
 from cli_base.tyro_commands import TyroVerbosityArgType
 from rich import print  # noqa
 

@@ -20,9 +20,9 @@ if settings.PATH_URL:
     # Prefix all urls with "PATH_URL":
     urlpatterns = [
         path('', RedirectView.as_view(url=f'{settings.PATH_URL}/')),
-        path(f'{settings.PATH_URL}/', include('{{ cookiecutter.upstream_pkg_name }}.urls')),
+        path(f'{settings.PATH_URL}/', include('{{ cookiecutter.project_id }}.urls')),
     ]
 else:
     # Installed to domain root, without a path prefix
     # Just use the default project urls.py
-    from {{ cookiecutter.upstream_pkg_name }}.urls import urlpatterns  # noqa
+    from {{ cookiecutter.project_id }}.urls import urlpatterns  # noqa
