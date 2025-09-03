@@ -4,6 +4,7 @@ from managetemplates.tests.base import PackageTestBase, TempGitRepo
 
 
 class UvPythonTemplateTestCase(PackageTestBase):
+    # force_recreate = True
     template_name = 'uv-python'
     pkg_name = 'your_cool_package'
 
@@ -39,8 +40,7 @@ class UvPythonTemplateTestCase(PackageTestBase):
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'python')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'nox')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'uv')
-            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'darker')
-            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'flake8')
+            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'ruff')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'coverage')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'twine')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'your_cool_package_dev')
