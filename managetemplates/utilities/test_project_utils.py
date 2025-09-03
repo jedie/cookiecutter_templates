@@ -16,7 +16,10 @@ class TestProject:
     def _build_env(self, *, extra_env: dict | None):
         # Start with a "clean" environment.
         # This will also disable colored output ;)
-        env = dict(PATH=os.environ['PATH'])
+        env = dict(
+            PATH=os.environ['PATH'],
+            PYTHONUNBUFFERED='1',
+        )
         if self.base_extra_env:
             env.update(self.base_extra_env)
         if extra_env:

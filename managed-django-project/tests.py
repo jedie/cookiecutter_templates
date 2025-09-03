@@ -3,7 +3,8 @@ from bx_py_utils.path import assert_is_file
 from managetemplates.tests.base import PackageTestBase, TempGitRepo
 
 
-class PiptoolsPythonTemplateTestCase(PackageTestBase):
+class ManageDjangoProjectTemplateTestCase(PackageTestBase):
+    # force_recreate = True
     template_name = 'managed-django-project'
     pkg_name = 'your_cool_package'
 
@@ -23,8 +24,7 @@ class PiptoolsPythonTemplateTestCase(PackageTestBase):
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'python')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'nox')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'uv')
-            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'darker')
-            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'flake8')
+            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'ruff')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'coverage')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'twine')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'your_cool_package_project')
@@ -36,7 +36,7 @@ class PiptoolsPythonTemplateTestCase(PackageTestBase):
             self.assert_in('[manage_django_project]', output)
 
             output = self.test_project.check_output(manage_bin, 'code_style')
-            self.assert_in('Code style: OK', output)
+            self.assert_in('All checks passed!', output)
 
             output = self.test_project.check_output(manage_bin, 'test')
             self.assert_in('Ran 12 tests', output)

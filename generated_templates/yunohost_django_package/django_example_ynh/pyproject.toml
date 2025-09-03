@@ -15,7 +15,7 @@ dependencies = [
     "psycopg[binary]", # https://github.com/psycopg/psycopg
     "django-redis",
     "django-axes", # https://github.com/jazzband/django-axes
-    "cli-base-utilities",  # https://github.com/john-doh/cli-base-utilities
+    "cli-base-utilities",  # https://github.com/jedie/cli-base-utilities
 ]
 [dependency-groups]
 dev = [
