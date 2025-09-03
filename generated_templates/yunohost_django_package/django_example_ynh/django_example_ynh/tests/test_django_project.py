@@ -66,7 +66,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         self.assertEqual(
             settings.LOGGING['loggers']['django_yunohost_integration'],
             {
-                'handlers': ['console', 'log_file', 'mail_admins'],
+                'handlers': ['log_file', 'mail_admins'],
                 'level': 'INFO',
                 'propagate': False,
             },

@@ -90,8 +90,8 @@ class BaseTestCase(TestCase):
 
     def assert_is_executeable(self, file_path):
         assert_is_file(file_path)
-        if not os.access(file_path, os.F_OK | os.X_OK):
-            raise AssertionError(f'File {file_path} is not executeable!')
+        if not os.access(file_path, os.R_OK | os.X_OK):
+            raise AssertionError(f'File {file_path} is not executable!')
 
 
 class PackageTestBase(BaseTestCase):
