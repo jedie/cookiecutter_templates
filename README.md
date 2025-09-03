@@ -204,6 +204,7 @@ adme-history,update-test-snapshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.9.0...main)
+  * 2025-09-03 - Bugfix coverage collecting
   * 2025-09-03 - managed-django-project: Replace Darker with ruff
   * 2025-09-03 - yunohost_django_package: Replace Draker with ruff
   * 2025-09-03 - fix code style
