@@ -201,6 +201,7 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.9.0...main)
+  * 2025-09-03 - fix yunohost_django_package tests
   * 2025-09-03 - Bugfix coverage collecting
   * 2025-09-03 - fix ruff doc link for isort settings
   * 2025-09-03 - Enforce file permissions via tests
