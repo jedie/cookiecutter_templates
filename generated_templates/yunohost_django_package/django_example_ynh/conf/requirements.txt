@@ -25,21 +25,16 @@ bx-py-utils==111 \
     #   bx-django-utils
     #   cli-base-utilities
     #   django-tools
-cli-base-utilities==0.22.0 \
-    --hash=sha256:5b4ef9c36587185a00b4a09c4f46bfc6f12ce57386dff1e7b9d62b0755c7ab0b \
-    --hash=sha256:7243bf7c1590102f0de8b30b61f533d84608951504e1bccf80321511a849390b
+cli-base-utilities==0.23.0 \
+    --hash=sha256:631838b4b1689b9bb9cfc3728addfb2b0645e578a347ff76db17e1e0cd54f9b0 \
+    --hash=sha256:b464f08374f598cd44b0ffc9e0a059585b155540960f26e0e1894e906d6b59f8
     # via
     #   django-example-ynh
     #   django-yunohost-integration
-click==8.2.1 \
-    --hash=sha256:27c491cc05d968d271d5a1db13e3b5a184636d9d930f148c50b038f0d0646202 \
-    --hash=sha256:61a3265b914e850b85317d0b3109c7f8cd35a670f963866005d6ef1d5175a12b
-    # via cli-base-utilities
 colorama==0.4.6 ; sys_platform == 'win32' \
     --hash=sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44 \
     --hash=sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6
     # via
-    #   click
     #   colorlog
     #   tyro
 colorlog==6.9.0 \
