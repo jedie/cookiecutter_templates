@@ -22,7 +22,7 @@ SERVE_FILES = True
 CACHES = {'default': {'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
 
 # Required for the debug toolbar to be displayed:
-INTERNAL_IPS = ('127.0.0.1', '0.0.0.0', 'localhost')
+INTERNAL_IPS = ('127.{{ cookiecutter.package_version }}', '0.0.0.0', 'localhost')
 
 ALLOWED_HOSTS = INTERNAL_IPS
 

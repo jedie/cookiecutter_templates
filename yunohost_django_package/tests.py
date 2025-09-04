@@ -1,7 +1,7 @@
 import json
 
-from bx_py_utils.path import assert_is_file
 import django_example
+from bx_py_utils.path import assert_is_file
 
 from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.tests.base import PackageTestBase, TempGitRepo

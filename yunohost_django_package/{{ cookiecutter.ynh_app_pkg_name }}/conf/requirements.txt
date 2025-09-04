@@ -61,7 +61,7 @@ django-axes==8.0.0 \
     --hash=sha256:7ddc55f21b704b7e9b3e793a75deac01ff16cb67f561649b04336e1e96980035 \
     --hash=sha256:f95b6ae67fd77d44cc688818cef174914c4ad98c48daf65020b6f03f37220e45
     # via django-example-ynh
-django-example==0.2.0 \
+django-example=={{ cookiecutter.upstream_version }} \
     --hash=sha256:2bcaeed97868e8be5c4d7d6a745b054f6983c931d5cefb763e6ff25807f15793 \
     --hash=sha256:469beaa9e4f3e5d0ee98f043ee533f0f01fafef128391ac9f4ca9d9f35290da0
     # via django-example-ynh
