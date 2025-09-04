@@ -190,15 +190,15 @@ class ProjectSetupTestCase(BaseTestCase):
 
     def test_update_template_req(self):
         with (
+            patch('managetemplates.cli_app.print_version'),
             RedirectOut() as buffer,
-            SubprocessCallMock(return_callback=SimpleRunReturnCallback(stdout='1234567')) as call_mock,
+            SubprocessCallMock(return_callback=SimpleRunReturnCallback(stdout='')) as call_mock,
         ):
             cli_app_main(args=('update-template-req',))
 
         self.assertEqual(
             call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS, with_cwd=True),
             [
-                ['...$ /usr/bin/git', 'rev-parse', '--short', 'HEAD'],
                 ['.../make-uv-python$ .../bin/python3', 'update_requirements.py'],
                 ['.../managed-django-project$ .../bin/python3', 'update_requirements.py'],
                 ['.../uv-python$ .../bin/python3', 'update_requirements.py'],
@@ -208,7 +208,7 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assertEqual(buffer.stderr, '')
         self.assert_in_content(
             got=buffer.stdout,
-            parts=('managetemplates v',),
+            parts=(' Update requirements of ',),
         )
 
     def test_publish(self):

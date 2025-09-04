@@ -200,7 +200,9 @@ apshot-files,version}
 
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
-* [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.9.0...main)
+* [v0.10.0](https://github.com/jedie/cookiecutter_templates/compare/v0.9.0...v0.10.0)
+  * 2025-09-04 - fix file permission changes
+  * 2025-09-04 - fix flaky test
   * 2025-09-04 - update all requirements
   * 2025-09-04 - Update code style and NoColorEnvRichClick -> NoColorEnvRich
   * 2025-09-04 - Update requirements
