@@ -8,11 +8,11 @@ Just call this file, and the magic happens ;)
 """
 
 import hashlib
-from pathlib import Path
 import shlex
 import subprocess
 import sys
 import venv
+from pathlib import Path
 
 
 def print_no_pip_error():

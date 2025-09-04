@@ -1,12 +1,12 @@
 import os
-from pathlib import Path
 import shlex
 import sys
 import unittest.util
+from pathlib import Path
 
+import django
 from bx_py_utils.test_utils.deny_requests import deny_any_real_request
 from cli_base.cli_tools.verbosity import MAX_LOG_LEVEL, setup_logging
-import django
 from django.core.management.commands.test import Command as DjangoTestCommand
 from django_yunohost_integration.local_test import CreateResults, create_local_test
 from django_yunohost_integration.path_utils import get_project_root

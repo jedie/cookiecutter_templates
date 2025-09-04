@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from pathlib import Path
 import tempfile
+from pathlib import Path
 from unittest.mock import patch
 
 from bx_py_utils.test_utils.redirect import RedirectOut
 from cli_base import run_pip_audit
 from cli_base.cli_tools.code_style import assert_code_style
 from cli_base.cli_tools.subprocess_utils import ToolsExecutor
-from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRichClick, invoke
+from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRich, invoke
 from cli_base.cli_tools.test_utils.subprocess_mocks import MockToolsExecutor
 from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from manageprojects.test_utils.subprocess import SimpleRunReturnCallback
@@ -80,11 +80,11 @@ class ProjectSetupTestCase(BaseTestCase):
         version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
         self.assertEqual(str(version), __version__)
 
-        with NoColorEnvRichClick():
+        with NoColorEnvRich():
             stdout = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['version'])
         self.assertIn(f'managetemplates v{__version__}', stdout)
 
-        with NoColorEnvRichClick():
+        with NoColorEnvRich():
             stdout = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=['version'])
         self.assertIn(f'managetemplates v{__version__}', stdout)
 
