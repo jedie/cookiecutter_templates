@@ -47,10 +47,10 @@ class UvPythonTemplateTestCase(PackageTestBase):
 
             output = self.test_project.check_output(dev_cli_bin, '--help')
             self.assert_in('usage: ./dev-cli.py [-h]', output)
-            self.assert_in('check-code-style', output)
-            self.assert_in('coverage', output)
-            self.assert_in('fix-code-style', output)
-            self.assert_in('update-readme-history', output)
+            self.assert_in(' lint ', output)
+            self.assert_in(' coverage ', output)
+            self.assert_in(' publish ', output)
+            self.assert_in(' update-readme-history ', output)
 
             output = self.test_project.check_output(dev_cli_bin, 'nox', '--help')
             self.assert_in('usage: nox [-h]', output)
@@ -62,8 +62,8 @@ class UvPythonTemplateTestCase(PackageTestBase):
             self.assert_in('tests-3.12', output)
             self.assert_in('.venv/bin/nox -l', output)
 
-            output = self.test_project.check_output(dev_cli_bin, 'check-code-style')
-            self.assert_in('Code style: OK', output)
+            output = self.test_project.check_output(dev_cli_bin, 'lint')
+            self.assert_in('All checks passed!', output)
 
             output = self.test_project.check_output(
                 dev_cli_bin,
