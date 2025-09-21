@@ -90,7 +90,8 @@ ignore-vuln=[
 # https://docs.astral.sh/ruff/configuration/
 line-length = 120
 exclude = [
-  ".*/",
+    ".*/",
+    "*/migrations/*"
 ]
 
 [tool.ruff.lint]

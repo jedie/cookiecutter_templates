@@ -57,7 +57,7 @@ def update_cookiecutter_templates_requirements(*, verbosity: TyroVerbosityArgTyp
             else:
                 verbose_check_call(
                     sys.executable,
-                    UPDATE_TEMPLATE_REQ_FILENAME,
-                    cwd=template_path,
+                    update_req_path,
+                    cwd=PACKAGE_ROOT,
                     verbose=verbosity > 0,
                 )

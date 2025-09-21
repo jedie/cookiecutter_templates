@@ -8,8 +8,8 @@ __pycache__
 *.orig
 
 !.github
+!.run
 !.editorconfig
-!.flake8
 !.gitignore
 !.gitkeep
 !/doc/screenshots/.gitkeep

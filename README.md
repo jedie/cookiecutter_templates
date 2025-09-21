@@ -201,8 +201,16 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2025-09-21 - managed-django-project: Update pre-commit hooks
+  * 2025-09-21 - managed-django-project: Update ruff config
+  * 2025-09-21 - Add more run configs
+  * 2025-09-21 - Update .gitignore
+  * 2025-09-21 - Add PyCharm run config files
+  * 2025-09-21 - Update tests
+  * 2025-09-21 - Remove obsolete "requirements*.txt" files
+  * 2025-09-21 - Remove obsolete .flake8 file
+  * 2025-09-21 - Update requirements
   * 2025-09-21 - Update pre-commit config and version
-  * 2025-09-20 - Update requirements
   * 2025-09-15 - make-uv-python: Use "--disable-pip" in "pip-audit" call
   * 2025-09-05 - expand github CI matrix: python-version: ["3.13", "3.12", "3.11"]
 * [v0.10.0](https://github.com/jedie/cookiecutter_templates/compare/v0.9.0...v0.10.0)

@@ -240,7 +240,7 @@ wheels = [
 
 [[package]]
 name = "cli-base-utilities"
-version = "0.23.0"
+version = "0.23.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "bx-py-utils" },
@@ -250,9 +250,9 @@ dependencies = [
     { name = "tomlkit" },
     { name = "tyro" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/63/e1/df2185db43a81a5dfe4aec21fba1adf14bc150d81d4fcc8801c673f2e5c6/cli_base_utilities-0.23.0.tar.gz", hash = "sha256:631838b4b1689b9bb9cfc3728addfb2b0645e578a347ff76db17e1e0cd54f9b0", size = 124171, upload-time = "2025-09-04T15:19:00.453Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/95/bd/5bc1d6fb2c4a7fe413be757ae6ffac89dc77a644684df6e14b7be80726ec/cli_base_utilities-0.23.3.tar.gz", hash = "sha256:1045c1f1b3990a3cda0ad9f0da8edc6e9ae2b0cf02861c11f104fda4a3b660e3", size = 128329, upload-time = "2025-09-20T18:44:30.883Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/86/c7/0b1e41defe8ecf60ebe85d786e51d6f8d9e7d4d32f2e643e683f3bddc0a3/cli_base_utilities-0.23.0-py3-none-any.whl", hash = "sha256:b464f08374f598cd44b0ffc9e0a059585b155540960f26e0e1894e906d6b59f8", size = 87035, upload-time = "2025-09-04T15:18:59.074Z" },
+    { url = "https://files.pythonhosted.org/packages/ce/61/e13d130e647e0be784a5e5ae7b1b68128d9156f577f8e563e5f916f86666/cli_base_utilities-0.23.3-py3-none-any.whl", hash = "sha256:d0cc4d5475869c781f3afded4ad64de25fa080ee0c2a88cf66f216f0e4290c55", size = 87834, upload-time = "2025-09-20T18:44:29.692Z" },
 ]
 
 [[package]]
@@ -521,11 +521,11 @@ wheels = [
 
 [[package]]
 name = "docutils"
-version = "0.22.1"
+version = "0.22.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/e4/47/d869000fb74438584858acc628a364b277fc012695f0dfd513cb10f99768/docutils-0.22.1.tar.gz", hash = "sha256:d2fb50923a313532b6d41a77776d24cb459a594be9b7e4afa1fbcb5bda1893e6", size = 2291655, upload-time = "2025-09-17T17:58:45.409Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/4a/c0/89fe6215b443b919cb98a5002e107cb5026854ed1ccb6b5833e0768419d1/docutils-0.22.2.tar.gz", hash = "sha256:9fdb771707c8784c8f2728b67cb2c691305933d68137ef95a75db5f4dfbc213d", size = 2289092, upload-time = "2025-09-20T17:55:47.994Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8c/dc/1948b90c5d9dbfa4d1fd3991013a042ba3ac62ebd3afdcb3fac08366e755/docutils-0.22.1-py3-none-any.whl", hash = "sha256:806e896f256a17466426544038f30cb860a99f5d4af640e36c284bfcb1824512", size = 638455, upload-time = "2025-09-17T17:58:42.498Z" },
+    { url = "https://files.pythonhosted.org/packages/66/dd/f95350e853a4468ec37478414fc04ae2d61dad7a947b3015c3dcc51a09b9/docutils-0.22.2-py3-none-any.whl", hash = "sha256:b0e98d679283fc3bb0ead8a5da7f501baa632654e7056e9c5846842213d674d8", size = 632667, upload-time = "2025-09-20T17:55:43.052Z" },
 ]
 
 [[package]]
@@ -1137,11 +1137,11 @@ wheels = [
 
 [[package]]
 name = "pyparsing"
-version = "3.2.4"
+version = "3.2.5"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/98/c9/b4594e6a81371dfa9eb7a2c110ad682acf985d96115ae8b25a1d63b4bf3b/pyparsing-3.2.4.tar.gz", hash = "sha256:fff89494f45559d0f2ce46613b419f632bbb6afbdaed49696d322bcf98a58e99", size = 1098809, upload-time = "2025-09-13T05:47:19.732Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f2/a5/181488fc2b9d093e3972d2a472855aae8a03f000592dbfce716a512b3359/pyparsing-3.2.5.tar.gz", hash = "sha256:2df8d5b7b2802ef88e8d016a2eb9c7aeaa923529cd251ed0fe4608275d4105b6", size = 1099274, upload-time = "2025-09-21T04:11:06.277Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/53/b8/fbab973592e23ae313042d450fc26fa24282ebffba21ba373786e1ce63b4/pyparsing-3.2.4-py3-none-any.whl", hash = "sha256:91d0fcde680d42cd031daf3a6ba20da3107e08a75de50da58360e7d94ab24d36", size = 113869, upload-time = "2025-09-13T05:47:17.863Z" },
+    { url = "https://files.pythonhosted.org/packages/10/5e/1aa9a93198c6b64513c9d7752de7422c06402de6600a8767da1524f9570b/pyparsing-3.2.5-py3-none-any.whl", hash = "sha256:e38a4f02064cf41fe6593d328d0512495ad1f3d8a91c4f73fc401b3079a59a5e", size = 113890, upload-time = "2025-09-21T04:11:04.117Z" },
 ]
 
 [[package]]
