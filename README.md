@@ -201,6 +201,7 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2025-09-21 - Update pre-commit config and version
   * 2025-09-20 - Update requirements
   * 2025-09-15 - make-uv-python: Use "--disable-pip" in "pip-audit" call
   * 2025-09-05 - expand github CI matrix: python-version: ["3.13", "3.12", "3.11"]
