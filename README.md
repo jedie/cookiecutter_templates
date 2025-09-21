@@ -201,6 +201,7 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2025-09-21 - Update .gitignore
   * 2025-09-21 - Add PyCharm run config files
   * 2025-09-21 - Update tests
   * 2025-09-21 - Remove obsolete "requirements*.txt" files
