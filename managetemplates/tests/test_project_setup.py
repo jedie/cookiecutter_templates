@@ -199,10 +199,10 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assertEqual(
             call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS, with_cwd=True),
             [
-                ['.../make-uv-python$ .../bin/python3', 'update_requirements.py'],
-                ['.../managed-django-project$ .../bin/python3', 'update_requirements.py'],
-                ['.../uv-python$ .../bin/python3', 'update_requirements.py'],
-                ['.../yunohost_django_package$ .../bin/python3', 'update_requirements.py'],
+                ['...$ .venv/bin/python3', '.../make-uv-python/update_requirements.py'],
+                ['...$ .venv/bin/python3', '.../managed-django-project/update_requirements.py'],
+                ['...$ .venv/bin/python3', '.../uv-python/update_requirements.py'],
+                ['...$ .venv/bin/python3', '.../yunohost_django_package/update_requirements.py'],
             ],
         )
         self.assertEqual(buffer.stderr, '')
