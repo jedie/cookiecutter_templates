@@ -201,6 +201,7 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2025-09-22 - yunohost_django_package: add args to main()
   * 2025-09-22 - Update uv-python
   * 2025-09-21 - managed-django-project: Update pre-commit hooks
   * 2025-09-21 - managed-django-project: Update ruff config
