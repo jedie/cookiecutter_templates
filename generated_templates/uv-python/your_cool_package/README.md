@@ -12,17 +12,19 @@ A minimal Python package
 
 [comment]: <> (✂✂✂ auto generated main help start ✂✂✂)
 ```
-usage: ./cli.py [-h] {version}
+usage: ./cli.py [-h] {shell-completion,version}
 
 
 
-╭─ options ─────────────────────────────────────────╮
-│ -h, --help        show this help message and exit │
-╰───────────────────────────────────────────────────╯
-╭─ subcommands ─────────────────────────────────────╮
-│ {version}                                         │
-│     version       Print version and exit          │
-╰───────────────────────────────────────────────────╯
+╭─ options ─────────────────────────────────────────────────────────────────────────────╮
+│ -h, --help        show this help message and exit                                     │
+╰───────────────────────────────────────────────────────────────────────────────────────╯
+╭─ subcommands ─────────────────────────────────────────────────────────────────────────╮
+│ {shell-completion,version}                                                            │
+│     shell-completion                                                                  │
+│                   Setup shell completion for this CLI (Currently only for bash shell) │
+│     version       Print version and exit                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated main help end ✂✂✂)
 
@@ -32,8 +34,8 @@ usage: ./cli.py [-h] {version}
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```
 usage: ./dev-cli.py [-h]
-                    {coverage,install,lint,mypy,nox,pip-audit,publish,test,update,update-readme-history,update-test-sn
-apshot-files,version}
+                    {coverage,install,lint,mypy,nox,pip-audit,publish,shell-completion,test,update,update-readme-histo
+ry,update-test-snapshot-files,version}
 
 
 
@@ -41,8 +43,8 @@ apshot-files,version}
 │ -h, --help        show this help message and exit                                                                  │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ {coverage,install,lint,mypy,nox,pip-audit,publish,test,update,update-readme-history,update-test-snapshot-files,ver │
-│ sion}                                                                                                              │
+│ {coverage,install,lint,mypy,nox,pip-audit,publish,shell-completion,test,update,update-readme-history,update-test-s │
+│ napshot-files,version}                                                                                             │
 │     coverage      Run tests and show coverage report.                                                              │
 │     install       Install requirements and 'your_cool_package' via pip as editable.                                │
 │     lint          Check/fix code style by run: "ruff check --fix"                                                  │
@@ -50,6 +52,8 @@ apshot-files,version}
 │     nox           Run nox                                                                                          │
 │     pip-audit     Run pip-audit check against current requirements files                                           │
 │     publish       Build and upload this project to PyPi                                                            │
+│     shell-completion                                                                                               │
+│                   Setup shell completion for this CLI (Currently only for bash shell)                              │
 │     test          Run unittests                                                                                    │
 │     update        Update dependencies (uv.lock) and git pre-commit hooks                                           │
 │     update-readme-history                                                                                          │
