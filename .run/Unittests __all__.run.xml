@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Unittests **alles**" type="tests" factoryName="Unittests">
+  <configuration default="false" name="Unittests **all**" type="tests" factoryName="Unittests">
     <module name="cookiecutter_templates" />
     <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />
