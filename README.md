@@ -201,8 +201,9 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
-  * 2025-10-13 - fix "test_project_setup"
   * 2025-10-13 - Update requirements
+  * 2025-10-13 - Bugfix managed-django-project/update_requirements.py
+  * 2025-10-13 - fix "test_project_setup"
   * 2025-10-13 - Ignore GHSA-4xh5-x5gv-qwph ;(
   * 2025-09-25 - Remove flake8 from nox config
   * 2025-09-22 - yunohost_django_package: add args to main()
