@@ -176,6 +176,8 @@ class ProjectSetupTestCase(BaseTestCase):
                         '--strict',
                         '--require-hashes',
                         '--disable-pip',
+                        '--ignore-vuln',
+                        'GHSA-4xh5-x5gv-qwph',
                         '-r',
                         '/tmp/temp_requirements_MOCK.txt',
                     ),
