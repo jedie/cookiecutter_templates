@@ -82,7 +82,7 @@ requirements=["requirements.dev.txt"]
 strict=true
 require_hashes=true
 ignore-vuln=[
-#    "CVE-2019-8341", # Jinja2: Side Template Injection (SSTI)
+    "GHSA-4xh5-x5gv-qwph",  # https://github.com/advisories/GHSA-4xh5-x5gv-qwph
 ]
 
 

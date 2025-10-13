@@ -64,7 +64,9 @@ version = {attr = "{{ cookiecutter.ynh_app_pkg_name }}.__version__"}
 requirements=["requirements.dev.txt"]
 strict=true
 require_hashes=true
-ignore-vuln=[]
+ignore-vuln=[
+    "GHSA-4xh5-x5gv-qwph",  # https://github.com/advisories/GHSA-4xh5-x5gv-qwph
+]
 
 
 [tool.ruff]
