@@ -8,7 +8,7 @@ from bx_py_utils.test_utils.redirect import RedirectOut
 from cli_base import run_pip_audit
 from cli_base.cli_tools.code_style import assert_code_style
 from cli_base.cli_tools.subprocess_utils import ToolsExecutor
-from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRich, invoke
+from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRich, invoke, strip_ansi_codes
 from cli_base.cli_tools.test_utils.subprocess_mocks import MockToolsExecutor
 from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from manageprojects.test_utils.subprocess import SimpleRunReturnCallback
@@ -112,7 +112,7 @@ class ProjectSetupTestCase(BaseTestCase):
         )
         self.assertEqual(buffer.stderr, '')
         self.assert_in_content(
-            got=buffer.stdout,
+            got=strip_ansi_codes(buffer.stdout),
             parts=('managetemplates v',),
         )
 
@@ -186,13 +186,12 @@ class ProjectSetupTestCase(BaseTestCase):
         )
         self.assertEqual(buffer.stderr, '')
         self.assert_in_content(
-            got=buffer.stdout,
+            got=strip_ansi_codes(buffer.stdout),
             parts=('managetemplates v',),
         )
 
     def test_update_template_req(self):
         with (
-            patch('managetemplates.cli_app.print_version'),
             RedirectOut() as buffer,
             SubprocessCallMock(return_callback=SimpleRunReturnCallback(stdout='')) as call_mock,
         ):
@@ -201,6 +200,7 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assertEqual(
             call_mock.get_popenargs(rstrip_paths=RSTRIP_PATHS, with_cwd=True),
             [
+                ['...$ /usr/bin/git', 'rev-parse', '--short', 'HEAD'],
                 ['...$ .venv/bin/python3', '.../make-uv-python/update_requirements.py'],
                 ['...$ .venv/bin/python3', '.../managed-django-project/update_requirements.py'],
                 ['...$ .venv/bin/python3', '.../uv-python/update_requirements.py'],
@@ -209,7 +209,7 @@ class ProjectSetupTestCase(BaseTestCase):
         )
         self.assertEqual(buffer.stderr, '')
         self.assert_in_content(
-            got=buffer.stdout,
+            got=strip_ansi_codes(buffer.stdout),
             parts=(' Update requirements of ',),
         )
 
@@ -225,7 +225,7 @@ class ProjectSetupTestCase(BaseTestCase):
         func2.assert_called_once()
         self.assertEqual(buffer.stderr, '')
         self.assert_in_content(
-            got=buffer.stdout,
+            got=strip_ansi_codes(buffer.stdout),
             parts=('managetemplates v',),
         )
 
@@ -234,7 +234,7 @@ class ProjectSetupTestCase(BaseTestCase):
             cli_app_main(args=('fix-filesystem',))
         self.assertEqual(buffer.stderr, '')
         self.assert_in_content(
-            got=buffer.stdout,
+            got=strip_ansi_codes(buffer.stdout),
             parts=(
                 'managetemplates v',
                 'Nothing to rename, ok.',
