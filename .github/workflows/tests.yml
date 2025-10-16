@@ -21,7 +21,7 @@ jobs:
           'uv-python',
           'yunohost_django_package'
         ]
-        python-version: ["3.13", "3.12", "3.11"]
+        python-version: ["3.14", "3.13", "3.12", "3.11"]
     steps:
     - name: Checkout
       run: |
