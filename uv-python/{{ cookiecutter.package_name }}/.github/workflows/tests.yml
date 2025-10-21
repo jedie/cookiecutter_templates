@@ -1,5 +1,7 @@
 {# https://jinja.palletsprojects.com/en/latest/templates/#escaping #}{% raw %}
 name: tests
+permissions:
+  contents: read
 
 on:
   push:
