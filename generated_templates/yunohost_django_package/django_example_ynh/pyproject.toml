@@ -64,9 +64,7 @@ version = {attr = "django_example_ynh.__version__"}
 requirements=["requirements.dev.txt"]
 strict=true
 require_hashes=true
-ignore-vuln=[
-    "GHSA-4xh5-x5gv-qwph",  # https://github.com/advisories/GHSA-4xh5-x5gv-qwph
-]
+ignore-vuln=[]
 
 
 [tool.ruff]

@@ -54,13 +54,9 @@ path = "{{ cookiecutter.package_name }}/__init__.py"
 
 
 [tool.cli_base.pip_audit]
-requirements=["requirements.dev.txt"]
 strict=true
 require_hashes=true
-ignore-vuln=[
-    "GHSA-4xh5-x5gv-qwph",  # https://github.com/advisories/GHSA-4xh5-x5gv-qwph
-]
-
+ignore-vuln=[]
 
 [tool.cli_base]
 version_module_name = "{{ cookiecutter.package_name }}"  # Used by "update-readme-history" git hook
