@@ -7,18 +7,32 @@ readme = "README.md"
 authors = [
     {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
 ]
-requires-python = ">=3.11"
+
+# Until we can update to Django 5.2, we need to stay with Python <3.14
+requires-python = ">=3.11,<3.14"
 dependencies = [
     "{{ cookiecutter.project_id }}>={{ cookiecutter.upstream_version }}",  # {{ cookiecutter.upstream_url }}
-    "django_yunohost_integration",  # https://github.com/YunoHost-Apps/django_yunohost_integration
+    #
+    # extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
+    # see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
+    "django_yunohost_integration[ynh]>=0.10.4",  # https://github.com/YunoHost-Apps/django_yunohost_integration
+    #
     "gunicorn",
+    #
+    # Stay with Django <= 5.1, because >=5.2 requires postgresql >= 14
+    # See: https://docs.djangoproject.com/en/dev/ref/databases/#postgresql-notes
+    # But current YunoHost v12.x postgresql version is 13.x
+    "Django<5.2",
     "psycopg[binary]", # https://github.com/psycopg/psycopg
+    #
     "django-redis",
     "django-axes", # https://github.com/jazzband/django-axes
     "cli-base-utilities",  # https://github.com/jedie/cli-base-utilities
 ]
 [dependency-groups]
 dev = [
+    "django-debug-toolbar",  # http://django-debug-toolbar.readthedocs.io/en/stable/changes.html
+    "manage_django_project",  # https://github.com/{{ cookiecutter.github_username }}/manage_django_project
     "manageprojects",  # https://github.com/{{ cookiecutter.github_username }}/manageprojects
     "bx_django_utils",  # https://github.com/boxine/bx_django_utils
     "beautifulsoup4",  # https://pypi.org/project/beautifulsoup4/
@@ -112,27 +126,6 @@ exclude_lines = [
     'raise NotImplementedError',
     'if __name__ == .__main__.:',
 ]
-
-
-[tool.tox]  # https://tox.wiki/en/latest/config.html#pyproject-toml
-legacy_tox_ini = """
-[tox]
-isolated_build = True
-envlist = py{313,312,311}
-skip_missing_interpreters = True
-
-[testenv]
-passenv = *
-skip_install = true
-commands_pre =
-    pip install -U pip-tools
-    pip-sync requirements.dev.txt
-commands =
-    {envpython} -m coverage run --context='{envname}'
-    {envpython} -m coverage combine --append
-    {envpython} -m coverage xml
-    {envpython} -m coverage report
-"""
 
 
 [tool.mypy]
