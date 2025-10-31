@@ -201,8 +201,14 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
-  * 2025-10-30 - Update YunoHost template
-  * 2025-10-25 - Update requirements
+  * 2025-10-31 - fix requirements
+  * 2025-10-31 - fix run configs
+  * 2025-10-31 - Update generated templates
+  * 2025-10-31 - Update requirements
+  * 2025-10-31 - Remove template run configs. Seems that PyCharm is confused about these
+  * 2025-10-31 - Update YunoHost template
+  * 2025-10-31 - YunoHost: Update requirements
+  * 2025-10-31 - YunoHost: Fix "[install.log_level]" section
   * 2025-10-25 - Remove "GHSA-4xh5-x5gv-qwph" exception
   * 2025-10-21 - GitHub Actions: Set permission to "read"
   * 2025-10-16 - Expand test matrix with Python v3.14

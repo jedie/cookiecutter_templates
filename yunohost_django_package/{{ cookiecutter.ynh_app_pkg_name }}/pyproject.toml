@@ -15,19 +15,17 @@ dependencies = [
     #
     # extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
     # see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
-    "django_yunohost_integration[ynh]>=0.10.4",  # https://github.com/YunoHost-Apps/django_yunohost_integration
-    #
-    "gunicorn",
+    "django_yunohost_integration>=0.10.7",  # https://github.com/YunoHost-Apps/django_yunohost_integration
     #
     # Stay with Django <= 5.1, because >=5.2 requires postgresql >= 14
     # See: https://docs.djangoproject.com/en/dev/ref/databases/#postgresql-notes
     # But current YunoHost v12.x postgresql version is 13.x
     "Django<5.2",
-    "psycopg[binary]", # https://github.com/psycopg/psycopg
     #
-    "django-redis",
-    "django-axes", # https://github.com/jazzband/django-axes
-    "cli-base-utilities",  # https://github.com/jedie/cli-base-utilities
+    'gunicorn',
+    'psycopg[binary]', # https://github.com/psycopg/psycopg
+    'django-redis',
+    'django-axes', # https://github.com/jazzband/django-axes
 ]
 [dependency-groups]
 dev = [
