@@ -658,7 +658,7 @@ wheels = [
 
 [[package]]
 name = "django-yunohost-integration"
-version = "0.10.6"
+version = "0.10.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cli-base-utilities" },
@@ -670,9 +670,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "tyro" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ef/ce/58c589b854a01d6e0479c7339cd69ea4db9d926f70dba87e21789ad10ae6/django_yunohost_integration-0.10.6.tar.gz", hash = "sha256:2710d9f10d05731833fa0bbd3c64c8608b3f9ee98b81b7aeb07cf791ee8efc98", size = 108606, upload-time = "2025-10-31T18:11:35.03Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/4d/7a/bd43741922ca1f545c5f05ef4a2232cf5f96171c97950833fa9d89bf3808/django_yunohost_integration-0.10.7.tar.gz", hash = "sha256:fbe69ce93b83c0bed9f55b1a55a84ad9dff5c8ebd17da8a1712c063df1d9f0e2", size = 107775, upload-time = "2025-10-31T20:18:14.85Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2e/d3/ba6938f9f63dffe6b454d951e345269ffbfcc93d25c00797312ec8bbfa73/django_yunohost_integration-0.10.6-py3-none-any.whl", hash = "sha256:e8ecab0000c8bbae0620ea35df0b180e73713e79c5ae470b16b49bf9e50dffa9", size = 53382, upload-time = "2025-10-31T18:11:33.47Z" },
+    { url = "https://files.pythonhosted.org/packages/bf/12/cb31bb7fbf20fd524b4d701be375e3fd36c2f55d7eac80f25a56b3177ea2/django_yunohost_integration-0.10.7-py3-none-any.whl", hash = "sha256:94727ea41fe4685626ef6f4b7f195b72f69cc7a587e15697d9955d217231af8e", size = 52317, upload-time = "2025-10-31T20:18:13.208Z" },
 ]
 
 [[package]]

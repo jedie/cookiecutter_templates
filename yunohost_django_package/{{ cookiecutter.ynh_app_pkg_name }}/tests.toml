@@ -36,29 +36,23 @@ test_format = 1.0
     # -------------------------------
     [default.curl_tests]
 
-    # Sadly testing redirections to SSO is not possible yet,
-    # Because "multisite" and "change_url" used other domains/subdomains
-    # See: https://ci-apps-dev.yunohost.org/ci/job/14259
+    # The root page is accessible by anonymous user:
+    root_page1.path = "/"
+    root_page1.logged_on_sso = false
+    root_page1.expect_title  = "Example Project / Debug View"
+    root_page1.expect_content = "Log in to see more information" # <<< only visible when not logged in
+    root_page1.auto_test_assets = true
 
-#    # Access the root page not logged in results in redirect to portal to login
-#    home.path = "/"
-#    home.logged_on_sso = false
-#    home.expect_effective_url = "https://sub.domain.tld/yunohost/sso/?next=/"
-#
-#    # Access the Django Admin not logged in results in redirect to portal to login
-#    admin.path = "/admin/"
-#    admin.logged_on_sso = false
-#    admin.expect_effective_url = "https://sub.domain.tld/yunohost/sso/?next=/admin/"
+    # Same info page accessed by logged in user:
+    root_page2.path = "/"
+    root_page2.logged_on_sso = true
+    root_page2.expect_title  = "Example Project / Debug View"
+    root_page2.expect_content = "OS Environment" # <<< only visible when logged in
+    root_page2.auto_test_assets = true
 
-    # Access root page as logged in user:
-    home_logged_in.path = "/"
-    home_logged_in.logged_on_sso = true
-    # home_logged_in.expect_title  = "{{ cookiecutter.upstream_pkg_app_name }}"
-    # home_logged_in.expect_content = "{{ cookiecutter.upstream_pkg_app_name }}"
-    home_logged_in.auto_test_assets = true
-
-    # Access the Django Admin as logged in user:
-    admin_logged_in.path = "/admin/"
-    admin_logged_in.logged_on_sso = true
-    # admin_logged_in.expect_content = "Django {{ cookiecutter.upstream_pkg_app_name }}"
-    admin_logged_in.auto_test_assets = true
+    # There is a special view that requires login:
+    login_required3.path = "/login-required/"
+    login_required3.logged_on_sso = true
+    login_required3.expect_title  = "Site administration | Django site admin"
+    login_required3.expect_content  = 'You pass the "LoginRequired" check, ok.'
+    login_required3.auto_test_assets = true
