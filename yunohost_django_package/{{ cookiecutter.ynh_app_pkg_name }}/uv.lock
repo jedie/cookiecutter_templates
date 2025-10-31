@@ -548,7 +548,6 @@ wheels = [
 name = "django-example-ynh"
 source = { editable = "." }
 dependencies = [
-    { name = "cli-base-utilities" },
     { name = "django" },
     { name = "django-axes" },
     { name = "django-example" },
@@ -580,12 +579,11 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "cli-base-utilities" },
     { name = "django", specifier = "<5.2" },
     { name = "django-axes" },
     { name = "django-example", specifier = ">=0.2.0" },
     { name = "django-redis" },
-    { name = "django-yunohost-integration", extras = ["ynh"], specifier = ">=0.10.4" },
+    { name = "django-yunohost-integration", specifier = ">=0.10.7" },
     { name = "gunicorn" },
     { name = "psycopg", extras = ["binary"] },
 ]

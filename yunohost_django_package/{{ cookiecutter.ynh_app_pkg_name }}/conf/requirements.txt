@@ -28,9 +28,7 @@ bx-py-utils==113 \
 cli-base-utilities==0.25.0 \
     --hash=sha256:061a0401d5c72cc50ea4268b1a70d6230362c48e34452ca4ea642dc187d4294d \
     --hash=sha256:a4d4ec2208ab56dff45ebbccfb3f0a81d3548200b1f530f86b4c82b77b616ee9
-    # via
-    #   django-example-ynh
-    #   django-yunohost-integration
+    # via django-yunohost-integration
 colorama==0.4.6 ; sys_platform == 'win32' \
     --hash=sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44 \
     --hash=sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6
