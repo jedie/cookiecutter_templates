@@ -31,6 +31,7 @@ else:
     # Just use the default project urls.py
     from django_example.urls import urlpatterns  # noqa
 
-    urlpatterns.append(
-        path('sso-login/', SSOwatLoginRedirectView.as_view(), name='ssowat-login'),
-    )
+    urlpatterns = [
+        path('admin/sso-login/', SSOwatLoginRedirectView.as_view(), name='ssowat-login'),
+        *urlpatterns
+    ]
