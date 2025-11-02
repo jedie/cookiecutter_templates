@@ -56,3 +56,9 @@ test_format = 1.0
     login_required3.expect_title  = "Site administration | Django site admin"
     login_required3.expect_content  = 'You pass the "LoginRequired" check, ok.'
     login_required3.auto_test_assets = true
+
+    # Access the Django Admin as logged in user:
+    admin_logged_in.path = "/admin/"
+    admin_logged_in.logged_on_sso = true
+    admin_logged_in.expect_content = "Django Admin"
+    admin_logged_in.auto_test_assets = true
