@@ -198,7 +198,7 @@ LOGGING = {
             'level': LOG_LEVEL,
             'propagate': False,
         },
-        '{{ cookiecutter.project_id }}': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
+        '{{ cookiecutter.upstream_pkg_app_name }}': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
     },
 }
 
