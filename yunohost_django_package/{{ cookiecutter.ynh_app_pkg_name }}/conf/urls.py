@@ -29,7 +29,7 @@ if settings.PATH_URL:
 else:
     # Installed to domain root, without a path prefix
     # Just use the default project urls.py
-    from {{ cookiecutter.project_id }}.urls import urlpatterns  # noqa
+    from {{ cookiecutter.upstream_pkg_name }}.urls import urlpatterns  # noqa
 
     urlpatterns = [
         path('admin/sso-login/', SSOwatLoginRedirectView.as_view(), name='ssowat-login'),
