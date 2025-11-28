@@ -1,9 +1,10 @@
 """
-    Update "uv-python" requirements
-    Will be called by:
+Update "uv-python" requirements
+Will be called by:
 
-        .../cookiecutter_templates$ cli.py update-template-req
+    .../cookiecutter_templates$ cli.py update-template-req
 """
+
 import sys
 
 from bx_py_utils.path import assert_is_dir
