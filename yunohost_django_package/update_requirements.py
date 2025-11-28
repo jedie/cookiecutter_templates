@@ -5,7 +5,6 @@
         .../cookiecutter_templates$ cli.py update-template-req
 """
 
-import subprocess
 import sys
 
 from bx_py_utils.path import assert_is_dir
@@ -31,34 +30,6 @@ def main(verbose):
         src=pkg_path / 'conf' / 'requirements.txt',
         dst=template_path / 'conf' / 'requirements.txt',
     )
-
-    tests = (
-        'test_install_python.IncludeInstallPythonTestCase.test_install_python_is_up2date',
-        'test_setup_python.IncludeSetupPythonTestCase.test_setup_python_is_up2date',
-    )
-    for test in tests:
-        # Special cases: Update the "install_python.py" and "setup_python.py" file:
-        try:
-            verbose_check_call(
-                sys.executable,
-                'dev-cli.py',
-                'test',
-                f'django_example_ynh.tests.{test}',
-                cwd=pkg_path,
-                verbose=verbose,
-                exit_on_error=False,
-            )
-        except subprocess.CalledProcessError:
-            # It's okay that the unittest failed,
-            # Then the "install_python.py"/"setup_python.py" file is not up-to-date.
-            pass
-
-    # Always copy the result:
-    for filename in ('install_python.py', 'setup_python.py'):
-        verbose_copy2(
-            src=pkg_path / 'conf' / filename,
-            dst=template_path / 'conf' / filename,
-        )
 
 
 if __name__ == '__main__':

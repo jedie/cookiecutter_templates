@@ -21,8 +21,6 @@ CLI_FILENAMES = frozenset(
         'dev-cli.py',
         'manage.py',
         'manage_local_test.py',
-        'install_python.py',
-        'setup_python.py',
     }
 )
 
