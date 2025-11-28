@@ -201,6 +201,8 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2025-11-28 - Fix text matrix for Python v3.14 with older Django versions
+  * 2025-11-28 - Remove install/setup Python
   * 2025-11-28 - Update requirements
   * 2025-11-28 - Update nox config
   * 2025-11-25 - Update YunoHost package template
