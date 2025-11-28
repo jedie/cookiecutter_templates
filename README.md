@@ -201,6 +201,7 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2025-11-28 - Update nox config
   * 2025-11-25 - Update YunoHost package template
   * 2025-11-02 - Update YNH package
   * 2025-10-31 - fix requirements
