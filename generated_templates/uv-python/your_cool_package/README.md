@@ -16,15 +16,14 @@ usage: ./cli.py [-h] {shell-completion,version}
 
 
 
-╭─ options ─────────────────────────────────────────────────────────────────────────────╮
-│ -h, --help        show this help message and exit                                     │
-╰───────────────────────────────────────────────────────────────────────────────────────╯
-╭─ subcommands ─────────────────────────────────────────────────────────────────────────╮
-│ {shell-completion,version}                                                            │
-│     shell-completion                                                                  │
-│                   Setup shell completion for this CLI (Currently only for bash shell) │
-│     version       Print version and exit                                              │
-╰───────────────────────────────────────────────────────────────────────────────────────╯
+╭─ options ─────────────────────────────────────────────────────────────────────────────────╮
+│ -h, --help            show this help message and exit                                     │
+╰───────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ subcommands ─────────────────────────────────────────────────────────────────────────────╮
+│ (required)                                                                                │
+│   • shell-completion  Setup shell completion for this CLI (Currently only for bash shell) │
+│   • version           Print version and exit                                              │
+╰───────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated main help end ✂✂✂)
 
@@ -33,39 +32,36 @@ usage: ./cli.py [-h] {shell-completion,version}
 
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```
-usage: ./dev-cli.py [-h]
-                    {coverage,install,lint,mypy,nox,pip-audit,publish,shell-completion,test,update,update-readme-histo
-ry,update-test-snapshot-files,version}
+usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,shell-completion,test,update,update-readme-history,update-test-snapshot-files,version}
 
 
 
-╭─ options ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ -h, --help        show this help message and exit                                                                  │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ {coverage,install,lint,mypy,nox,pip-audit,publish,shell-completion,test,update,update-readme-history,update-test-s │
-│ napshot-files,version}                                                                                             │
-│     coverage      Run tests and show coverage report.                                                              │
-│     install       Install requirements and 'your_cool_package' via pip as editable.                                │
-│     lint          Check/fix code style by run: "ruff check --fix"                                                  │
-│     mypy          Run Mypy (configured in pyproject.toml)                                                          │
-│     nox           Run nox                                                                                          │
-│     pip-audit     Run pip-audit check against current requirements files                                           │
-│     publish       Build and upload this project to PyPi                                                            │
-│     shell-completion                                                                                               │
-│                   Setup shell completion for this CLI (Currently only for bash shell)                              │
-│     test          Run unittests                                                                                    │
-│     update        Update dependencies (uv.lock) and git pre-commit hooks                                           │
-│     update-readme-history                                                                                          │
-│                   Update project history base on git commits/tags in README.md Will be exited with 1 if the        │
-│                   README.md was updated otherwise with 0.                                                          │
-│                                                                                                                    │
-│                   Also, callable via e.g.:                                                                         │
-│                       python -m cli_base update-readme-history -v                                                  │
-│     update-test-snapshot-files                                                                                     │
-│                   Update all test snapshot files (by remove and recreate all snapshot files)                       │
-│     version       Print version and exit                                                                           │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ -h, --help     show this help message and exit                                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ subcommands ────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ (required)                                                                                                           │
+│   • coverage   Run tests and show coverage report.                                                                   │
+│   • install    Install requirements and 'your_cool_package' via pip as editable.                                     │
+│   • lint       Check/fix code style by run: "ruff check --fix"                                                       │
+│   • mypy       Run Mypy (configured in pyproject.toml)                                                               │
+│   • nox        Run nox                                                                                               │
+│   • pip-audit  Run pip-audit check against current requirements files                                                │
+│   • publish    Build and upload this project to PyPi                                                                 │
+│   • shell-completion                                                                                                 │
+│                Setup shell completion for this CLI (Currently only for bash shell)                                   │
+│   • test       Run unittests                                                                                         │
+│   • update     Update dependencies (uv.lock) and git pre-commit hooks                                                │
+│   • update-readme-history                                                                                            │
+│                Update project history base on git commits/tags in README.md Will be exited with 1 if the README.md   │
+│                was updated otherwise with 0.                                                                         │
+│                                                                                                                      │
+│                Also, callable via e.g.:                                                                              │
+│                    python -m cli_base update-readme-history -v                                                       │
+│   • update-test-snapshot-files                                                                                       │
+│                Update all test snapshot files (by remove and recreate all snapshot files)                            │
+│   • version    Print version and exit                                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated dev help end ✂✂✂)
 
