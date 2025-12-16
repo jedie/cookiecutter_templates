@@ -195,6 +195,8 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2025-12-16 - Update make uv requirements
+  * 2025-12-16 - Update manahe django project requirements
   * 2025-12-16 - Update uv-python requirements
   * 2025-12-16 - Update yunohost_django_package requirements
   * 2025-12-16 - Update requirements
