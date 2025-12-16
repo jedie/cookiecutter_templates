@@ -195,6 +195,7 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2025-12-16 - Update yunohost_django_package requirements
   * 2025-12-16 - Update requirements
   * 2025-11-28 - Fix text matrix for Python v3.14 with older Django versions
   * 2025-11-28 - Remove install/setup Python
