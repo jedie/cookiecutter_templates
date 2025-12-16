@@ -124,24 +124,20 @@ usage: ./cli.py [-h] {fix-file-content,fix-filesystem,reverse,templates2generate
 
 
 
-╭─ options ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ -h, --help        show this help message and exit                                                                  │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ {fix-file-content,fix-filesystem,reverse,templates2generated,update-template-req,version}                          │
-│     fix-file-content                                                                                               │
-│                   Unify cookiecutter variables in file content. e.g.: "{{foo}}" -> "{{ foo }}"                     │
-│     fix-filesystem                                                                                                 │
-│                   Unify cookiecutter variables in the file/directory paths. e.g.: "/{{foo}}/{{bar}}.txt" -> "/{{   │
-│                   foo }}/{{ bar }}.txt"                                                                            │
-│     reverse       Reverse a /generated_templates/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/ Note: │
-│                   The reversed cookiecutter template files cannot be accepted 1-to-1.                              │
-│     templates2generated                                                                                            │
-│                   Generate all cookiecutter templates                                                              │
-│     update-template-req                                                                                            │
-│                   Update requirements of all cookiecutter templates                                                │
-│     version       Print version and exit                                                                           │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ -h, --help               show this help message and exit                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ subcommands ────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ (required)                                                                                                           │
+│   • fix-file-content     Unify cookiecutter variables in file content. e.g.: "{{foo}}" -> "{{ foo }}"                │
+│   • fix-filesystem       Unify cookiecutter variables in the file/directory paths. e.g.: "/{{foo}}/{{bar}}.txt" ->   │
+│                          "/{{ foo }}/{{ bar }}.txt"                                                                  │
+│   • reverse              Reverse a /generated_templates/<pkg_name>/ back to Cookiecutter template in: ./<pkg_name>/  │
+│                          Note: The reversed cookiecutter template files cannot be accepted 1-to-1.                   │
+│   • templates2generated  Generate all cookiecutter templates                                                         │
+│   • update-template-req  Update requirements of all cookiecutter templates                                           │
+│   • version              Print version and exit                                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated main help end ✂✂✂)
 
@@ -161,37 +157,35 @@ Run tests, e.g.:
 
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```
-usage: ./dev-cli.py [-h]
-                    {coverage,install,lint,mypy,nox,pip-audit,publish,test,update,update-readme-history,update-test-sn
-apshot-files,version}
+usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,update,update-readme-history,update-test-snapshot-files,version}
 
 
 
-╭─ options ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ -h, --help        show this help message and exit                                                                  │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ subcommands ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ {coverage,install,lint,mypy,nox,pip-audit,publish,test,update,update-readme-history,update-test-snapshot-files,ver │
-│ sion}                                                                                                              │
-│     coverage      Run tests and show coverage.                                                                     │
-│     install       Install requirements and 'managetemplates' via pip as editable.                                  │
-│     lint          Check/fix code style by run: "ruff check --fix"                                                  │
-│     mypy          Run Mypy (configured in pyproject.toml)                                                          │
-│     nox           Run nox                                                                                          │
-│     pip-audit     Run pip-audit check against current requirements files                                           │
-│     publish       Build and upload this project to PyPi                                                            │
-│     test          Run unittests                                                                                    │
-│     update        Update dependencies (uv.lock) and git pre-commit hooks                                           │
-│     update-readme-history                                                                                          │
-│                   Update project history base on git commits/tags in README.md Will be exited with 1 if the        │
-│                   README.md was updated otherwise with 0.                                                          │
-│                                                                                                                    │
-│                   Also, callable via e.g.:                                                                         │
-│                       python -m cli_base update-readme-history -v                                                  │
-│     update-test-snapshot-files                                                                                     │
-│                   Update all test snapshot files (by remove and recreate all snapshot files)                       │
-│     version       Print version and exit                                                                           │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ -h, --help    show this help message and exit                                                                        │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ subcommands ────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ (required)                                                                                                           │
+│   • coverage  Run tests and show coverage.                                                                           │
+│   • install   Install requirements and 'managetemplates' via pip as editable.                                        │
+│   • lint      Check/fix code style by run: "ruff check --fix"                                                        │
+│   • mypy      Run Mypy (configured in pyproject.toml)                                                                │
+│   • nox       Run nox                                                                                                │
+│   • pip-audit                                                                                                        │
+│               Run pip-audit check against current requirements files                                                 │
+│   • publish   Build and upload this project to PyPi                                                                  │
+│   • test      Run unittests                                                                                          │
+│   • update    Update dependencies (uv.lock) and git pre-commit hooks                                                 │
+│   • update-readme-history                                                                                            │
+│               Update project history base on git commits/tags in README.md Will be exited with 1 if the README.md    │
+│               was updated otherwise with 0.                                                                          │
+│                                                                                                                      │
+│               Also, callable via e.g.:                                                                               │
+│                   python -m cli_base update-readme-history -v                                                        │
+│   • update-test-snapshot-files                                                                                       │
+│               Update all test snapshot files (by remove and recreate all snapshot files)                             │
+│   • version   Print version and exit                                                                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 [comment]: <> (✂✂✂ auto generated dev help end ✂✂✂)
 
@@ -201,9 +195,9 @@ apshot-files,version}
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2025-12-16 - Update requirements
   * 2025-11-28 - Fix text matrix for Python v3.14 with older Django versions
   * 2025-11-28 - Remove install/setup Python
-  * 2025-11-28 - Update requirements
   * 2025-11-28 - Update nox config
   * 2025-11-25 - Update YunoHost package template
   * 2025-11-02 - Update YNH package
