@@ -1,12 +1,14 @@
 import logging
 import os
 import shutil
+import warnings
 from collections.abc import Iterable
 from pathlib import Path
 from unittest import TestCase
 
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from cli_base.cli_tools.git import Git
+from cli_base.cli_tools.test_utils.assertion import assert_in
 from cli_base.cli_tools.test_utils.git_utils import init_git
 
 from managetemplates.constants import ALL_TEMPLATES
@@ -79,14 +81,13 @@ class BaseTestCase(TestCase):
             raise
 
     def assert_in_content(self, *, got: str, parts: Iterable[str]):
-        assert parts
-        missing_parts = [part for part in parts if part not in got]
-        if missing_parts:
-            print('-' * 79)
-            print(got)
-            print('-' * 79)
-            info = ', '.join(repr(part) for part in missing_parts)
-            raise AssertionError(f'Text parts: {info} not found in: {got!r}')
+        warnings.warn(
+            DeprecationWarning(
+                "assert_in_content() is deprecated, use cli_base.cli_tools.test_utils.assertion.assert_in() instead"
+            ),
+            stacklevel=2,
+        )
+        assert_in(content=got, parts=tuple(parts))
 
     def assert_is_executeable(self, file_path):
         assert_is_file(file_path)
@@ -113,8 +114,8 @@ class PackageTestBase(BaseTestCase):
                 force_recreate=self.force_recreate,
                 only_template=self.template_name,
             )
-        self.assert_in_content(
-            got='\n'.join(logs.output),
+        assert_in(
+            content='\n'.join(logs.output),
             parts=(
                 f'{self.template_name}/cookiecutter.json',
                 f'/{self.pkg_name}/',

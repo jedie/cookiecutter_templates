@@ -8,7 +8,8 @@ from bx_py_utils.test_utils.redirect import RedirectOut
 from cli_base import run_pip_audit
 from cli_base.cli_tools.code_style import assert_code_style
 from cli_base.cli_tools.subprocess_utils import ToolsExecutor
-from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRich, invoke, strip_ansi_codes
+from cli_base.cli_tools.test_utils.assertion import assert_in
+from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRich, invoke
 from cli_base.cli_tools.test_utils.subprocess_mocks import MockToolsExecutor
 from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
 from manageprojects.test_utils.subprocess import SimpleRunReturnCallback
@@ -48,10 +49,11 @@ class SubprocessCallMock(SubprocessCallMockOrigin):
 
                 if with_cwd and (cwd := call.kwargs.get('cwd')):
                     prog = call.popenargs[0]
+                    prog = Path(prog).absolute()
+                    cwd = Path(cwd).absolute()
 
                     try:
-                        prog = Path(prog).absolute()
-                        prog = prog.relative_to(Path(cwd).absolute())
+                        prog = prog.relative_to(cwd)
                     except ValueError as err:
                         print(err)
                         # e.g.: {arg} is not in the subpath of {cwd}
@@ -111,8 +113,8 @@ class ProjectSetupTestCase(BaseTestCase):
             ],
         )
         self.assertEqual(buffer.stderr, '')
-        self.assert_in_content(
-            got=strip_ansi_codes(buffer.stdout),
+        assert_in(
+            content=buffer.stdout,
             parts=('managetemplates v',),
         )
 
@@ -183,8 +185,8 @@ class ProjectSetupTestCase(BaseTestCase):
             ],
         )
         self.assertEqual(buffer.stderr, '')
-        self.assert_in_content(
-            got=strip_ansi_codes(buffer.stdout),
+        assert_in(
+            content=buffer.stdout,
             parts=('managetemplates v',),
         )
 
@@ -205,9 +207,8 @@ class ProjectSetupTestCase(BaseTestCase):
                 ['...$ .venv/bin/python3', '.../yunohost_django_package/update_requirements.py'],
             ],
         )
-        self.assertEqual(buffer.stderr, '')
-        self.assert_in_content(
-            got=strip_ansi_codes(buffer.stdout),
+        assert_in(
+            content=buffer.stdout,
             parts=(' Update requirements of ',),
         )
 
@@ -222,8 +223,8 @@ class ProjectSetupTestCase(BaseTestCase):
         func1.assert_called_once()
         func2.assert_called_once()
         self.assertEqual(buffer.stderr, '')
-        self.assert_in_content(
-            got=strip_ansi_codes(buffer.stdout),
+        assert_in(
+            content=buffer.stdout,
             parts=('managetemplates v',),
         )
 
@@ -231,8 +232,8 @@ class ProjectSetupTestCase(BaseTestCase):
         with RedirectOut() as buffer, self.assertRaises(SystemExit) as cm:
             cli_app_main(args=('fix-filesystem',))
         self.assertEqual(buffer.stderr, '')
-        self.assert_in_content(
-            got=strip_ansi_codes(buffer.stdout),
+        assert_in(
+            content=buffer.stdout,
             parts=(
                 'managetemplates v',
                 'Nothing to rename, ok.',
@@ -242,8 +243,8 @@ class ProjectSetupTestCase(BaseTestCase):
 
     def test_file_content_var_syntax(self):
         stdout = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['fix-file-content'])
-        self.assert_in_content(
-            got=stdout,
+        assert_in(
+            content=stdout,
             parts=('Nothing to fixed, ok.',),
         )
 

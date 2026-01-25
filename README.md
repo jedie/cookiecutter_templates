@@ -195,6 +195,7 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2026-01-25 - Use assert_in() from cli_base
   * 2026-01-25 - Update requirements
   * 2025-12-16 - Update make uv requirements
   * 2025-12-16 - Update manahe django project requirements
