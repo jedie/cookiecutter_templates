@@ -128,8 +128,14 @@ class ProjectSetupTestCase(BaseTestCase):
             def __enter__(self):
                 return self
 
+            def write(self, data):
+                assert data == 'Mocked exported requirements.txt content', f'{data=}'
+
+            def flush(self):
+                pass
+
             def __exit__(self, exc_type, exc_val, exc_tb):
-                assert exc_type is None, f'{exc_type=}'
+                assert exc_type is None, f'{exc_type=} {exc_val=} {exc_tb=}'
 
         with (
             patch.object(tempfile, 'NamedTemporaryFile', NamedTemporaryFileMock),
@@ -141,7 +147,7 @@ class ProjectSetupTestCase(BaseTestCase):
             MockToolsExecutor(
                 target=run_pip_audit,
                 return_codes={'pip-audit': 0, 'uv': 0},
-                outputs={},
+                outputs={'uv': 'Mocked exported requirements.txt content'},
             ) as mock2,
             RedirectOut() as buffer,
         ):
@@ -162,15 +168,8 @@ class ProjectSetupTestCase(BaseTestCase):
             [
                 {
                     'file_name': 'uv',
-                    'popenargs': (
-                        'export',
-                        '--no-header',
-                        '--frozen',
-                        '--no-editable',
-                        '--no-emit-project',
-                        '-o',
-                        '/tmp/temp_requirements_MOCK.txt',
-                    ),
+                    'kwargs': {'text': False},
+                    'popenargs': ('export', '--no-header', '--frozen', '--no-editable', '--no-emit-project'),
                 },
                 {
                     'file_name': 'pip-audit',
