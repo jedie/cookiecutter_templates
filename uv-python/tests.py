@@ -22,7 +22,7 @@ class UvPythonTemplateTestCase(PackageTestBase):
 
             assert_is_file(self.pkg_path / '.venv-app' / 'bin' / 'pip')
             assert_is_file(self.pkg_path / '.venv-app' / 'bin' / 'python')
-            assert_is_file(self.pkg_path / '.venv-app' / 'bin' / 'your_cool_package_app')
+            assert_is_file(self.pkg_path / '.venv-app' / 'bin' / 'your_cool_package')
 
             output = self.test_project.check_output(cli_bin, '--help')
             self.assert_in('usage: ./cli.py [-h]', output)
@@ -43,7 +43,7 @@ class UvPythonTemplateTestCase(PackageTestBase):
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'ruff')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'coverage')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'twine')
-            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'your_cool_package_dev')
+            assert_is_file(self.pkg_path / '.venv' / 'bin' / 'your_cool_package')  # The normal CLI
 
             output = self.test_project.check_output(dev_cli_bin, '--help')
             self.assert_in('usage: ./dev-cli.py [-h]', output)

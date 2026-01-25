@@ -7,9 +7,9 @@ readme = "README.md"
 authors = [
     {name = '{{ cookiecutter.full_name }}', email = '{{ cookiecutter.author_email }}'}
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
-    "cli-base-utilities>=0.17.0",  # https://github.com/jedie/cli-base-utilities
+    "cli-base-utilities>=0.27.1",  # https://github.com/{{ cookiecutter.github_username }}/cli-base-utilities
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "tyro",  # https://github.com/brentyi/tyro
     "rich",  # https://github.com/Textualize/rich
@@ -38,8 +38,15 @@ Documentation = "{{ cookiecutter.package_url }}"
 Source = "{{ cookiecutter.package_url }}"
 
 [project.scripts]
-{{ cookiecutter.package_name }}_app = "{{ cookiecutter.package_name }}.__main__:main"
-{{ cookiecutter.package_name }}_dev = "{{ cookiecutter.package_name }}.cli_dev:main"
+{{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.__main__:main"
+
+
+[tool.bx_py_utils.doc_write]
+docstring_prefix = 'DocWrite:'
+macro_prefix = 'DocWriteMacro:'
+output_base_path = './docs/'
+search_paths = ['./{{ cookiecutter.package_name }}/']
+delete_obsolete_files = true
 
 
 [build-system]

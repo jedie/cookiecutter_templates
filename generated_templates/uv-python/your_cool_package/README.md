@@ -28,7 +28,23 @@ usage: ./cli.py [-h] {shell-completion,version}
 [comment]: <> (✂✂✂ auto generated main help end ✂✂✂)
 
 
-## dev CLI
+## start development
+
+At least `uv` is needed. Install e.g.: via pipx:
+```bash
+apt-get install pipx
+pipx install uv
+```
+
+Clone the project and just start the CLI help commands.
+A virtual environment will be created/updated automatically.
+
+```bash
+~$ git clone https://github.com/john-doh/your_cool_package.git
+~$ cd your_cool_package
+~/your_cool_package$ ./cli.py --help
+~/your_cool_package$ ./dev-cli.py --help
+```
 
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```

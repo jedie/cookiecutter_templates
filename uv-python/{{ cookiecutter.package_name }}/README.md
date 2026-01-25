@@ -28,7 +28,23 @@ usage: ./cli.py [-h] {shell-completion,version}
 [comment]: <> (✂✂✂ auto generated main help end ✂✂✂)
 
 
-## dev CLI
+## start development
+
+At least `uv` is needed. Install e.g.: via pipx:
+```bash
+apt-get install pipx
+pipx install uv
+```
+
+Clone the project and just start the CLI help commands.
+A virtual environment will be created/updated automatically.
+
+```bash
+~$ git clone {{ cookiecutter.package_url }}.git
+~$ cd {{ cookiecutter.package_name }}
+~/{{ cookiecutter.package_name }}$ ./cli.py --help
+~/{{ cookiecutter.package_name }}$ ./dev-cli.py --help
+```
 
 [comment]: <> (✂✂✂ auto generated dev help start ✂✂✂)
 ```

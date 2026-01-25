@@ -204,6 +204,7 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2026-01-25 - Update "uv-python": Use uv direct in CLI bootstrap
   * 2026-01-25 - Use "uv" direct in own CLI scripts and remove tests with Python 3.11
   * 2026-01-25 - Update tests
   * 2026-01-25 - Use assert_in() from cli_base
