@@ -5,6 +5,7 @@
 import importlib
 import logging
 import sys
+from typing import Sequence
 
 from bx_py_utils.path import assert_is_file
 from cli_base.autodiscover import import_all_files
@@ -46,7 +47,7 @@ def version():
     sys.exit(0)
 
 
-def main(args: tuple[str] | None = None):
+def main(args: Sequence[str] | None = None):
     print_version(managetemplates)
 
     if len(sys.argv) >= 2:
@@ -55,6 +56,7 @@ def main(args: tuple[str] | None = None):
         command_map = {
             'test': run_unittest_cli,
             'nox': run_nox,
+            # No: 'coverage' entry here! We have a custom coverage command!
         }
         if real_func := command_map.get(command):
             real_func(argv=sys.argv, exit_after_run=True)
@@ -62,7 +64,7 @@ def main(args: tuple[str] | None = None):
     app.cli(
         prog='./dev-cli.py',
         description=constants.CLI_EPILOG,
-        args=args,
         use_underscores=False,  # use hyphens instead of underscores
         sort_subcommands=True,
+        args=args,
     )

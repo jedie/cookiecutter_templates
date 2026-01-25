@@ -13,8 +13,8 @@ class DevCliTestCase(BaseTestCase):
         assert_in(
             content=output,
             parts=(
-                'pip install --no-deps -e .',
-                f'Successfully installed managetemplates-{__version__}',
+                'Built managetemplates',
+                f'managetemplates=={__version__}',
             ),
         )
 
@@ -24,7 +24,8 @@ class DevCliTestCase(BaseTestCase):
         assert_in(
             content=output,
             parts=(
-                'usage: nox [-h] ',
+                'managetemplates.cli_dev nox --help',
+                'usage: nox [-h]',
                 '--list-sessions',
             ),
         )
@@ -44,7 +45,7 @@ class DevCliTestCase(BaseTestCase):
         assert_in(
             content=output,
             parts=(
-                'usage: python',  # Works with "python" and "python3" ;)
+                'managetemplates.cli_dev test --help',
                 ' -m unittest [-h] ',
                 '--failfast',
                 '--locals',
@@ -57,8 +58,9 @@ class DevCliTestCase(BaseTestCase):
             output = invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('coverage', '--help'))
         assert_in(
             content=output,
+            # Note: We use our custom coverage command, not the original!
             parts=(
-                '.venv/bin/managetemplates_dev coverage --help',
+                'managetemplates.cli_dev coverage --help',
                 'usage: ./dev-cli.py coverage',
                 'Run tests and show coverage.',
             ),

@@ -29,7 +29,7 @@ def version():
     sys.exit(0)
 
 
-def main(args: tuple[str] | None = None):
+def main(args: tuple[str, ...] | None = None):
     print_version(managetemplates)
     app.cli(
         prog='./cli.py',
