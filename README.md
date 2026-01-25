@@ -195,11 +195,13 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2026-01-25 - Update tests
+  * 2026-01-25 - Use assert_in() from cli_base
+  * 2026-01-25 - Update requirements
   * 2025-12-16 - Update make uv requirements
   * 2025-12-16 - Update manahe django project requirements
   * 2025-12-16 - Update uv-python requirements
   * 2025-12-16 - Update yunohost_django_package requirements
-  * 2025-12-16 - Update requirements
   * 2025-11-28 - Fix text matrix for Python v3.14 with older Django versions
   * 2025-11-28 - Remove install/setup Python
   * 2025-11-28 - Update nox config
@@ -226,7 +228,6 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
   * 2025-09-21 - Add more run configs
   * 2025-09-21 - Update .gitignore
   * 2025-09-21 - Add PyCharm run config files
-  * 2025-09-21 - Update tests
   * 2025-09-21 - Remove obsolete "requirements*.txt" files
   * 2025-09-21 - Remove obsolete .flake8 file
   * 2025-09-21 - Update pre-commit config and version

@@ -1,3 +1,4 @@
+from cli_base.cli_tools.test_utils.assertion import assert_in
 from cli_base.cli_tools.test_utils.rich_test_utils import NoColorEnvRich, invoke
 from manageprojects.tests.base import BaseTestCase
 
@@ -9,8 +10,8 @@ class DevCliTestCase(BaseTestCase):
     def test_install(self):
         with NoColorEnvRich():
             output = invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('install',))
-        self.assert_in_content(
-            got=output,
+        assert_in(
+            content=output,
             parts=(
                 'pip install --no-deps -e .',
                 f'Successfully installed managetemplates-{__version__}',
@@ -20,8 +21,8 @@ class DevCliTestCase(BaseTestCase):
     def test_pass_nox_command(self):
         with NoColorEnvRich():
             output = invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('nox', '--help'))
-        self.assert_in_content(
-            got=output,
+        assert_in(
+            content=output,
             parts=(
                 'usage: nox [-h] ',
                 '--list-sessions',
@@ -29,8 +30,8 @@ class DevCliTestCase(BaseTestCase):
         )
         with NoColorEnvRich():
             output = invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('nox', '--list-sessions'))
-        self.assert_in_content(
-            got=output,
+        assert_in(
+            content=output,
             parts=(
                 '* tests-3.13',
                 '* tests-3.12',
@@ -40,8 +41,8 @@ class DevCliTestCase(BaseTestCase):
     def test_pass_unittest_command(self):
         with NoColorEnvRich():
             output = invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('test', '--help'))
-        self.assert_in_content(
-            got=output,
+        assert_in(
+            content=output,
             parts=(
                 'usage: python',  # Works with "python" and "python3" ;)
                 ' -m unittest [-h] ',
@@ -54,8 +55,8 @@ class DevCliTestCase(BaseTestCase):
     def test_coverage_help(self):
         with NoColorEnvRich():
             output = invoke(cli_bin=constants.PACKAGE_ROOT / 'dev-cli.py', args=('coverage', '--help'))
-        self.assert_in_content(
-            got=output,
+        assert_in(
+            content=output,
             parts=(
                 '.venv/bin/managetemplates_dev coverage --help',
                 'usage: ./dev-cli.py coverage',
