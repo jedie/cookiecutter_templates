@@ -109,7 +109,7 @@ class ProjectSetupTestCase(BaseTestCase):
             mock.calls,
             [
                 {'file_name': 'uv', 'popenargs': ('sync',)},
-                {'file_name': 'pip', 'popenargs': ('install', '--no-deps', '-e', '.')},
+                {'file_name': 'uv', 'popenargs': ('pip', 'install', '--no-deps', '-e', '.')},
             ],
         )
         self.assertEqual(buffer.stderr, '')
@@ -156,8 +156,6 @@ class ProjectSetupTestCase(BaseTestCase):
         self.assertEqual(
             mock1.calls,
             [
-                {'file_name': 'pip', 'popenargs': ('install', '-U', 'pip')},
-                {'file_name': 'pip', 'popenargs': ('install', '-U', 'uv')},
                 {'file_name': 'uv', 'popenargs': ('lock', '--upgrade')},
                 {'file_name': 'uv', 'popenargs': ('sync',)},
                 {'file_name': 'pre-commit', 'popenargs': ('autoupdate',)},
