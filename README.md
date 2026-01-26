@@ -204,6 +204,9 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2026-01-26 - uv-python: Fix CLI call outside from project directory
+  * 2026-01-26 - make-uv-python: Call "pip-audit" after requirements update
+  * 2026-01-26 - make-uv-python: Use "--locked" instead of "--frozen" for pip-audit run
   * 2026-01-26 - make-uv-python: Use system installed "uv"
   * 2026-01-26 - Better `self.assert_in()` without print()
   * 2026-01-25 - Update "uv-python": Use uv direct in CLI bootstrap

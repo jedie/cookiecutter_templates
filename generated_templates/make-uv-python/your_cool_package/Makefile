@@ -14,6 +14,7 @@ install:  ## Install via "uv" (Used system installed "uv" tool, e.g.: "pipx inst
 update-requirements:  ## Update requirements
 	uv lock --upgrade
 	uv sync
+	$(make) pip-audit
 
 .PHONY: lint
 lint: ## Check/fix code style by run: "ruff check --fix"
@@ -46,8 +47,9 @@ mypy:  ## Run mypy
 
 .PHONY: pip-audit
 pip-audit:  ## Run https://github.com/pypa/pip-audit
-	uv export --no-header --frozen --no-editable --no-emit-project -o /tmp/temp_requirements.txt
-	uv run pip-audit --strict --require-hashes --disable-pip -r /tmp/temp_requirements.txt
+	uv export --no-header --locked --no-emit-project > /tmp/temp_requirements.txt
+	uv run pip-audit --skip-editable --strict --require-hashes --disable-pip -r /tmp/temp_requirements.txt
+
 
 .PHONY: publish
 publish:  ## Release new version to PyPi
