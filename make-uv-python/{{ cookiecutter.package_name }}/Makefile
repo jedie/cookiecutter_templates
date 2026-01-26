@@ -14,6 +14,7 @@ install:  ## Install via "uv" (Used system installed "uv" tool, e.g.: "pipx inst
 update-requirements:  ## Update requirements
 	uv lock --upgrade
 	uv sync
+	$(make) pip-audit
 
 .PHONY: lint
 lint: ## Check/fix code style by run: "ruff check --fix"
