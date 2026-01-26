@@ -1,5 +1,4 @@
 SHELL := /bin/bash
-export PATH := .venv/bin:$(PATH)
 
 all: help
 
@@ -7,63 +6,53 @@ all: help
 help:  ## List all commands
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z0-9 -_]+:.*?## / {printf "\033[36m%-26s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-.PHONY: install-base-req
-install-base-req:  ## Install needed base packages via apt
-	sudo apt install python3-pip python3-venv
-
 .PHONY: install
-install:  ## Install the project in a Python virtualenv
-	python3 -m venv .venv
-	.venv/bin/pip install -U pip
-	.venv/bin/pip install -U uv
-	.venv/bin/uv sync
+install:  ## Install via "uv" (Used system installed "uv" tool, e.g.: "pipx install uv")
+	uv sync
 
 .PHONY: update-requirements
 update-requirements:  ## Update requirements
-	python3 -m venv .venv
-	.venv/bin/pip install -U pip
-	.venv/bin/pip install -U uv
-	.venv/bin/uv lock --upgrade
-	.venv/bin/uv sync
+	uv lock --upgrade
+	uv sync
 
 .PHONY: lint
 lint: ## Check/fix code style by run: "ruff check --fix"
-	.venv/bin/ruff check --fix
+	uv run ruff check --fix
 
 .PHONY: nox
 nox:  ## Run tests via nox with all environments
-	.venv/bin/nox
+	uv run nox
 
 .PHONY: test
 test: ## Run tests
-	.venv/bin/python3 -m unittest --verbose --locals
+	uv run python3 -m unittest --verbose --locals
 
 .PHONY: coverage
 coverage:  ## Run tests with coverage
-	.venv/bin/coverage run
-	.venv/bin/coverage combine --append
-	.venv/bin/coverage report
-	.venv/bin/coverage xml
-	.venv/bin/coverage json
+	uv run coverage run
+	uv run coverage combine --append
+	uv run coverage report
+	uv run coverage xml
+	uv run coverage json
 
 .PHONY: update-test-snapshot-files
 update-test-snapshot-files:   ## Update all snapshot files (by remove and recreate all snapshot files)
 	find . -type f -name '*.snapshot.*' -delete
-	RAISE_SNAPSHOT_ERRORS=0 .venv/bin/python3 -m unittest
+	RAISE_SNAPSHOT_ERRORS=0 uv run python3 -m unittest
 
 .PHONY: mypy
 mypy:  ## Run mypy
-	.venv/bin/mypy .
+	uv run mypy .
 
 .PHONY: pip-audit
 pip-audit:  ## Run https://github.com/pypa/pip-audit
-	.venv/bin/uv export --no-header --frozen --no-editable --no-emit-project -o /tmp/temp_requirements.txt
-	.venv/bin/pip-audit --strict --require-hashes --disable-pip -r /tmp/temp_requirements.txt
+	uv export --no-header --frozen --no-editable --no-emit-project -o /tmp/temp_requirements.txt
+	uv run pip-audit --strict --require-hashes --disable-pip -r /tmp/temp_requirements.txt
 
 .PHONY: publish
 publish:  ## Release new version to PyPi
-	.venv/bin/pip install -e .
-	.venv/bin/python3 your_cool_package_tests/publish.py
+	uv run pip install -e .
+	uv run python3 your_cool_package_tests/publish.py
 
 .PHONY: clean
 clean: ## Remove created files from the test project

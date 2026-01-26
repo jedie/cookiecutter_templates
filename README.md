@@ -13,7 +13,7 @@ Patches welcome!
 * Requirement management with [uv](https://github.com/astral-sh/uv)
 * Makefile with a simple "help" menu
 * used [pyproject.toml](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/) for everything
-* Base requirements are only: `python3-venv` and `python3-pip` (uv will ne installed via pip in `.venv`)
+* Base requirements is only `uv` (e.g.: `pipx install uv`)
 * Has basic unittest
 
 
@@ -204,6 +204,8 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2026-01-26 - make-uv-python: Use system installed "uv"
+  * 2026-01-26 - Better `self.assert_in()` without print()
   * 2026-01-25 - Update "uv-python": Use uv direct in CLI bootstrap
   * 2026-01-25 - Use "uv" direct in own CLI scripts and remove tests with Python 3.11
   * 2026-01-25 - Update tests
