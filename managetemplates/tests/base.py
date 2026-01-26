@@ -74,11 +74,17 @@ class BaseTestCase(TestCase):
     def assert_in(self, member, container, msg=None):
         try:
             self.assertIn(member, container, msg)
-        except AssertionError:
-            print('-' * 100)
-            print(container)
-            print('-' * 100)
-            raise
+        except AssertionError as err:
+            error_message = (
+                f'assert_in(): {member=} not found in container:\n'
+                '∨∨∨∨∨∨∨∨∨∨∨∨ [Content start] ∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨\n'
+                f'{container}\n'
+                '∧∧∧∧∧∧∧∧∧∧∧∧ [Content end] ∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧∧\n'
+                f'Origin error message:\n'
+                f'{err}\n'
+                '================================================================================================\n\n'
+            )
+            raise AssertionError(error_message)
 
     def assert_in_content(self, *, got: str, parts: Iterable[str]):
         warnings.warn(

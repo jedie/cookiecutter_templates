@@ -14,9 +14,9 @@ class MakeUvPythonTemplateTestCase(PackageTestBase):
     def test_basic(self):
         with TempGitRepo(path=self.pkg_path, fresh=True) as temp_git:
 
-            if not Path(self.pkg_path / '.venv' / 'bin' / 'darker').exists():
+            if not Path(self.pkg_path / '.venv' / 'bin' / 'ruff').exists():
                 output = self.test_project.check_output('make', 'install')
-                self.assert_in('.venv/bin/uv sync', output)
+                self.assert_in('uv sync', output)
 
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'pip')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'python')
