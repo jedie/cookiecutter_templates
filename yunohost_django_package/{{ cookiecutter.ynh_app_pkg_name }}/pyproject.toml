@@ -47,6 +47,24 @@ dev = [
     "typeguard",  # https://github.com/agronholm/typeguard/
 ]
 
+
+[tool.uv]
+# Don't install bleed-edge versions of dependencies, to avoid undetected issues and supply chain attacks.
+exclude-newer = "1 week"
+
+# Exclude own packages from the "exclude-newer" rule and
+# add external packages temporarily to fix known issues or current CVEs
+# TODO: Remove requests - v2.33.0 fixed CVE-2026-25645
+exclude-newer-package = { requests = "2026-03-25T18:00:00Z" }
+
+
+[tool.cli_base.pip_audit]
+strict=true
+require_hashes=true
+ignore-vuln=[
+    "CVE-2026-4539", # https://github.com/pygments/pygments/issues/3058#issuecomment-4127344972
+]
+
 [project.urls]
 Documentation = "{{ cookiecutter.ynh_app_url }}"
 Source = "{{ cookiecutter.ynh_app_url }}"
@@ -71,14 +89,6 @@ include = ["{{ cookiecutter.ynh_app_pkg_name }}*"]
 version = {attr = "{{ cookiecutter.ynh_app_pkg_name }}.__version__"}
 
 
-[tool.cli_base.pip_audit]
-# https://github.com/jedie/cli-base-utilities/blob/main/docs/pip_audit.md
-requirements=["requirements.dev.txt"]
-strict=true
-require_hashes=true
-ignore-vuln=[]
-
-
 [tool.ruff]
 # https://docs.astral.sh/ruff/configuration/
 line-length = 120
@@ -95,6 +105,8 @@ extend-select = [
 ignore = [
     "E402", # https://docs.astral.sh/ruff/rules/module-import-not-at-top-of-file/
     "E731", # https://docs.astral.sh/ruff/rules/lambda-assignment/
+    "PLW1508", # Invalid type for environment variable default
+    "C408", # Unnecessary `dict()` call (rewrite as a literal)
 ]
 
 [tool.ruff.lint.isort]

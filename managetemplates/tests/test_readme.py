@@ -21,7 +21,7 @@ Use with [manageprojects](https://github.com/jedie/manageprojects), e.g.:
 ```shell
 ./cli.py start-project https://github.com/jedie/cookiecutter_templates/ --directory %(template_name)s ~/foobar/
 ```
-'''.strip()  # noqa:E501
+'''.strip()
 
 
 def assert_cli_help_in_readme(text_block: str, marker: str):

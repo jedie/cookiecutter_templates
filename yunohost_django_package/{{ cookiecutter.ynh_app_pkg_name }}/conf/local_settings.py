@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
     Here it's possible to overwrite everything in settings.py
 

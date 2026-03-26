@@ -43,6 +43,27 @@ dev = [
     "django-override-storage",  # https://github.com/danifus/django-override-storage
 ]
 
+
+[tool.uv]
+# Don't install bleed-edge versions of dependencies, to avoid undetected issues and supply chain attacks.
+exclude-newer = "1 week"
+
+# Exclude own packages from the "exclude-newer" rule and
+# add external packages temporarily to fix known issues or current CVEs
+# TODO: Remove requests - v2.33.0 fixed CVE-2026-25645
+exclude-newer-package = { requests = "2026-03-25T18:00:00Z" }
+
+
+[tool.cli_base.pip_audit]
+strict=true
+require_hashes=true
+ignore-vuln=[
+    "CVE-2026-4539", # https://github.com/pygments/pygments/issues/3058#issuecomment-4127344972
+]
+
+[tool.cli_base]
+version_module_name = "{{ cookiecutter.package_name }}" # Used by "update-readme-history" pre-commit hook
+
 [project.urls]
 Documentation = "{{ cookiecutter.package_url }}"
 Source = "{{ cookiecutter.package_url }}"
@@ -73,16 +94,6 @@ packages = ["{{ cookiecutter.package_name }}", "{{ cookiecutter.django_project_n
 path = "{{ cookiecutter.package_name }}/__init__.py"
 
 
-[tool.cli_base]
-version_module_name = "{{ cookiecutter.package_name }}" # Used by "update-readme-history" pre-commit hook
-
-
-[tool.cli_base.pip_audit]
-strict=true
-require_hashes=true
-ignore-vuln=[]
-
-
 [tool.ruff]
 # https://docs.astral.sh/ruff/configuration/
 line-length = 120
@@ -100,6 +111,8 @@ extend-select = [
 ignore = [
     "E402", # https://docs.astral.sh/ruff/rules/module-import-not-at-top-of-file/
     "E731", # https://docs.astral.sh/ruff/rules/lambda-assignment/
+    "PLW1508", # Invalid type for environment variable default
+    "C408", # Unnecessary `dict()` call (rewrite as a literal)
 ]
 
 [tool.ruff.lint.isort]
