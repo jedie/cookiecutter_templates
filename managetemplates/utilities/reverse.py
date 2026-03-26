@@ -8,7 +8,7 @@ from cookiecutter.generate import generate_context
 from cookiecutter.prompt import prompt_for_config
 from manageprojects.cookiecutter_generator import create_cookiecutter_template
 from manageprojects.utilities.temp_path import TemporaryDirectory
-from rich import print  # noqa
+from rich import print
 from rich.rule import Rule
 
 from managetemplates import constants
