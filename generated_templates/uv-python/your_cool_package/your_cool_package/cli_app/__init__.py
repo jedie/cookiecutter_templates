@@ -33,7 +33,7 @@ def version():
 def main(args: Sequence[str] | None = None):
     print_version(your_cool_package)
     app.cli(
-        prog='./cli.py',
+        prog='your_cool_package',  # Enforce program name if pipx used
         description=constants.CLI_EPILOG,
         use_underscores=False,  # use hyphens instead of underscores
         sort_subcommands=True,

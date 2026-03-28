@@ -41,7 +41,7 @@ exclude-newer = "1 week"
 # Exclude own packages from the "exclude-newer" rule and
 # add external packages temporarily to fix known issues or current CVEs
 # TODO: Remove requests - v2.33.0 fixed CVE-2026-25645
-exclude-newer-package = { requests = "2026-03-25T18:00:00Z" }
+exclude-newer-package = { requests = "2026-03-25T18:00:00Z", cryptography="2026-03-27T00:00:00Z" }
 
 
 [tool.cli_base.pip_audit]
@@ -117,7 +117,7 @@ source = ['.']
 command_line = '-m unittest --verbose --locals --buffer'
 
 [tool.coverage.report]
-omit = ['.*', '*/tests/*']
+omit = ['.*', '*/tests/*', 'noxfile.py']
 skip_empty = true
 fail_under = 30
 show_missing = true

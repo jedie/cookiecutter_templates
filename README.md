@@ -204,6 +204,8 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2026-03-28 - update "uv-python" template
+  * 2026-03-26 - more relaxed ruff rules et
   * 2026-03-26 - +exclude-newer = "1 week"
   * 2026-03-25 - Update requirements
   * 2026-01-26 - uv-python: Fix CLI call outside from project directory
