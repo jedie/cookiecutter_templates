@@ -10,7 +10,7 @@ from cli_base.cli_tools.verbosity import MAX_LOG_LEVEL, setup_logging
 from django.core.management.commands.test import Command as DjangoTestCommand
 from django_yunohost_integration.local_test import CreateResults, create_local_test
 from django_yunohost_integration.path_utils import get_project_root
-from rich import print  # noqa
+from rich import print
 from typeguard import install_import_hook
 
 
