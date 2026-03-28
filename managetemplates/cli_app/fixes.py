@@ -2,7 +2,7 @@
 
 import sys
 
-from rich import print  # noqa
+from rich import print
 
 from managetemplates import constants
 from managetemplates.cli_app import app

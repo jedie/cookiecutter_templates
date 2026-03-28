@@ -1,7 +1,7 @@
 import logging
 
 from cli_base.tyro_commands import TyroVerbosityArgType
-from rich import print  # noqa
+from rich import print
 
 from managetemplates.cli_app import app
 from managetemplates.cli_dev.annotations import TyroOptionalTemplateNameArgType

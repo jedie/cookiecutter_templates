@@ -25,7 +25,7 @@ class UvPythonTemplateTestCase(PackageTestBase):
             assert_is_file(self.pkg_path / '.venv-app' / 'bin' / 'your_cool_package')
 
             output = self.test_project.check_output(cli_bin, '--help')
-            self.assert_in('usage: ./cli.py [-h]', output)
+            self.assert_in('usage: your_cool_package [-h]', output)
 
             ############################################################################
             # Bootstrap by call the ./dev-cli.py
