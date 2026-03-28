@@ -29,7 +29,7 @@ if settings.PATH_URL:
 else:
     # Installed to domain root, without a path prefix
     # Just use the default project urls.py
-    from django_example.urls import urlpatterns  # noqa
+    from django_example.urls import urlpatterns
 
     urlpatterns = [
         path('admin/sso-login/', SSOwatLoginRedirectView.as_view(), name='ssowat-login'),

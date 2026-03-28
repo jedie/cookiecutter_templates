@@ -2,8 +2,6 @@
 
 import sys
 
-from rich import print
-
 from managetemplates import constants
 from managetemplates.cli_app import app
 from managetemplates.utilities.template_var_syntax import content_template_var_syntax, filesystem_template_var_syntax
