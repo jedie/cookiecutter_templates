@@ -30,10 +30,11 @@ dev = [
 # Don't install bleed-edge versions of dependencies, to avoid undetected issues and supply chain attacks.
 exclude-newer = "1 week"
 
+[tool.uv.exclude-newer-package]
 # Exclude own packages from the "exclude-newer" rule and
 # add external packages temporarily to fix known issues or current CVEs
-# TODO: Remove requests - v2.33.0 fixed CVE-2026-25645
-exclude-newer-package = { requests = "2026-03-25T18:00:00Z", cryptography="2026-03-27T00:00:00Z" }
+cryptography = "2026-04-08T12:00:00Z"
+django = "2026-04-08T12:00:00Z"
 
 
 [project.urls]
