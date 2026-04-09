@@ -5,7 +5,7 @@ from pathlib import Path
 import django
 from bx_py_utils.test_utils.deny_requests import deny_any_real_request
 from manage_django_project.config import project_info
-from rich import print
+from rich import print  # noqa
 from typeguard import install_import_hook
 
 import {{ cookiecutter.package_name }}

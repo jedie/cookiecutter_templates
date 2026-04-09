@@ -31,7 +31,7 @@ class TempGitRepo:
         if self.fresh and self.git_path.is_dir():
             shutil.rmtree(self.git_path)
 
-        self.git, git_hash = init_git(path=self.path, branch_name=self.branch_name)
+        self.git, _git_hash = init_git(path=self.path, branch_name=self.branch_name)
         return self
 
     def display_git_diff(self):
@@ -67,7 +67,7 @@ class BaseTestCase(TestCase):
             # Start tests always with a fresh git
             shutil.rmtree(git_path)
 
-        git, git_hash = init_git(path=pkg_path)  # Helpful to display diffs, see below ;)
+        git, _git_hash = init_git(path=pkg_path)  # Helpful to display diffs, see below ;)
 
         return git
 

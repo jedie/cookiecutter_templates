@@ -7,7 +7,7 @@ import sys
 
 from cli_base.autodiscover import import_all_files
 from cli_base.cli_tools.version_info import print_version
-from rich import print
+from rich import print  # noqa
 from tyro.extras import SubcommandApp
 
 import managetemplates
