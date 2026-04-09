@@ -18,10 +18,10 @@ def cookiecutter_templates2generated(*, force_recreate: bool, only_template: str
     else:
         template_names = sorted(ALL_TEMPLATES)
 
-    for only_template in template_names:
-        with EncloseRuleContext(f'templates2generated: {only_template!r}'):
+    for template_name in template_names:
+        with EncloseRuleContext(f'templates2generated: {template_name!r}'):
             extra_context = {}
-            if only_template == 'yunohost_django_package':
+            if template_name == 'yunohost_django_package':
                 extra_context = dict(
                     # Some projects test depends on the current upstream version
                     # So we have to set these version correct here:
@@ -29,7 +29,7 @@ def cookiecutter_templates2generated(*, force_recreate: bool, only_template: str
                 )
 
             pkg_path: Path = run_cookiecutter(
-                template_name=only_template,
+                template_name=template_name,
                 force_recreate=force_recreate,
                 extra_context=extra_context,
             )

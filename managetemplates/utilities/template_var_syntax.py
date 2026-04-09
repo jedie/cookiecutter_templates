@@ -18,21 +18,21 @@ def filesystem_template_var_syntax(path: Path) -> int:
         # copy all renamed files into TEMP
 
         rename_map = {}
-        for path in git.ls_files(verbose=False):
-            assert_is_file(path)
+        for git_path in git.ls_files(verbose=False):
+            assert_is_file(git_path)
 
-            origin_path_str = str(path)
+            origin_path_str = str(git_path)
             new_path_str = re.sub(r'{{(\S+?)}}', r'{{ \1 }}', origin_path_str)  # fmt: skip
             if new_path_str != origin_path_str:
                 new_path = Path(new_path_str)
                 rel_new_path = new_path.relative_to(git_root_path)
-                print(path.relative_to(git_root_path), '->', rel_new_path)
+                print(git_path.relative_to(git_root_path), '->', rel_new_path)
 
                 new_tmp_path = temp_dir / rel_new_path
                 new_tmp_path.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(path, new_tmp_path)
+                shutil.copy2(git_path, new_tmp_path)
 
-                rename_map[path] = new_tmp_path
+                rename_map[git_path] = new_tmp_path
 
         # Replace all old files with renamed one, from TEMP:
 
@@ -68,12 +68,12 @@ def content_template_var_syntax(path: Path, excludes=('*.md', '*.snapshot.*')) -
     git = Git(cwd=path, detect_root=True)
     git_root_path = git.cwd
     fixed_files = 0
-    for path in git.ls_files(verbose=False):
-        if fnmatches(path, excludes):
+    for git_path in git.ls_files(verbose=False):
+        if fnmatches(git_path, excludes):
             continue
 
-        assert_is_file(path)
-        origin_content = path.read_text(encoding='UTF-8')
+        assert_is_file(git_path)
+        origin_content = git_path.read_text(encoding='UTF-8')
         buffer = []
         skip_file = False
         for line_number, line in enumerate(origin_content.splitlines(keepends=True)):
@@ -89,8 +89,8 @@ def content_template_var_syntax(path: Path, excludes=('*.md', '*.snapshot.*')) -
 
         new_content = ''.join(buffer)
         if origin_content != new_content:
-            print(f'Fix content of: {path.relative_to(git_root_path)}')
-            path.write_text(new_content, encoding='UTF-8')
+            print(f'Fix content of: {git_path.relative_to(git_root_path)}')
+            git_path.write_text(new_content, encoding='UTF-8')
             fixed_files += 1
 
     if not fixed_files:
