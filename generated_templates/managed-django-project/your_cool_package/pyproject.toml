@@ -66,8 +66,8 @@ ignore-vuln=[
 version_module_name = "your_cool_package" # Used by "update-readme-history" pre-commit hook
 
 [project.urls]
-Documentation = "https://github.com/john-doh/your_cool_package"
-Source = "https://github.com/john-doh/your_cool_package"
+Documentation = "https://github.com/john-doh/your-cool-package"
+Source = "https://github.com/john-doh/your-cool-package"
 
 
 [project.scripts]

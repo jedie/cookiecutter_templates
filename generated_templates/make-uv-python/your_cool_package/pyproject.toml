@@ -38,8 +38,8 @@ django = "2026-04-08T12:00:00Z"
 
 
 [project.urls]
-Documentation = "https://github.com/john-doh/your_cool_package/"
-Source = "https://github.com/john-doh/your_cool_package/"
+Documentation = "https://github.com/john-doh/your-cool-package/"
+Source = "https://github.com/john-doh/your-cool-package/"
 
 [project.scripts]
 your_cool_package = "your_cool_package.__main__:main"

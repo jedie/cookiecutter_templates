@@ -31,7 +31,7 @@ def version():
 
 def main(args: Sequence[str] | None = None):
     project_name = '{{ cookiecutter.project_name }}'  # Enforce program name if pipx used
-    print_version(module={{cookiecutter.package_name}}, project_name=project_name)
+    print_version(module={{ cookiecutter.package_name }}, project_name=project_name)
     app.cli(
         prog=project_name,
         description=constants.CLI_EPILOG,
