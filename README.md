@@ -204,6 +204,8 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2026-04-11 - fix tests
+  * 2026-04-11 - Bugfix CLI
   * 2026-04-11 - fix around {{ cookiecutter.project_name }}
   * 2026-04-11 - cleanup github actions
   * 2026-04-11 - Update uv-python template
