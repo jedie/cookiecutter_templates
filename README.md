@@ -204,6 +204,7 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2026-04-11 - udpate requirements "cli-base-utilities>=0.30.0"
   * 2026-04-11 - Update "uv-python" template
   * 2026-04-09 - fix code styles
   * 2026-04-09 - Update requirements and use [tool.uv.exclude-newer-package]
