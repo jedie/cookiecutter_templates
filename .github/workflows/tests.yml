@@ -79,7 +79,7 @@ jobs:
         ./dev-cli.py coverage --template-name ${{ matrix.package }}
 
     - name: 'Upload coverage report'
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@main
       # https://github.com/marketplace/actions/codecov
       with:
         fail_ci_if_error: false

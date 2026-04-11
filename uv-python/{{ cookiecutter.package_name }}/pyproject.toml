@@ -9,7 +9,7 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "cli-base-utilities>=0.27.1",  # https://github.com/{{ cookiecutter.github_username }}/cli-base-utilities
+    "cli-base-utilities>=0.30.0",  # https://github.com/{{ cookiecutter.github_username }}/cli-base-utilities
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "tyro",  # https://github.com/brentyi/tyro
     "rich",  # https://github.com/Textualize/rich
@@ -41,6 +41,8 @@ exclude-newer = "1 week"
 [tool.uv.exclude-newer-package]
 # Exclude own packages from the "exclude-newer" rule and
 # add external packages temporarily to fix known issues or current CVEs
+cli-base-utilities = "2026-04-11T23:00:00Z"
+uv = "2026-04-10T12:00:00Z"
 cryptography = "2026-04-08T12:00:00Z"
 django = "2026-04-08T12:00:00Z"
 
@@ -98,8 +100,7 @@ extend-select = [
 ignore = [
     "E402", # https://docs.astral.sh/ruff/rules/module-import-not-at-top-of-file/
     "E731", # https://docs.astral.sh/ruff/rules/lambda-assignment/
-    "PLW1508", # Invalid type for environment variable default
-    "C408", # Unnecessary `dict()` call (rewrite as a literal)
+    "DTZ005", # https://docs.astral.sh/ruff/rules/call-datetime-now-without-tzinfo/
 ]
 
 [tool.ruff.lint.isort]

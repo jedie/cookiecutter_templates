@@ -48,7 +48,7 @@ def version():
 
 
 def main(args: Sequence[str] | None = None):
-    print_version(your_cool_package)
+    print_version(module=your_cool_package, project_name='your-cool-package')
 
     if len(sys.argv) >= 2:
         # Check if we can just pass a command call to origin CLI:

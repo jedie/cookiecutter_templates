@@ -2,6 +2,7 @@ import json
 
 import django_example
 from bx_py_utils.path import assert_is_file
+from cli_base.cli_tools.test_utils.assertion import assert_in
 
 from managetemplates.constants import PACKAGE_ROOT
 from managetemplates.tests.base import PackageTestBase, TempGitRepo
@@ -34,7 +35,7 @@ class YunohostDjangoPackageTemplateTestCase(PackageTestBase):
             assert_is_file(req_txt)
 
             output = self.test_project.check_output('python', 'dev-cli.py', '--help')
-            self.assertIn('usage: ./dev-cli.py [-h]', output)
+            assert_in(content=output, parts=('usage: ./dev-cli.py [-h]',))
 
             venv_path = self.pkg_path / '.venv'
             assert_is_file(venv_path / 'bin' / 'python')

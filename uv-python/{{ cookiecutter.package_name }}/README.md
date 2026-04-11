@@ -1,18 +1,40 @@
-# {{ cookiecutter.package_name }}
+# {{ cookiecutter.project_name }}
 
 [![tests]({{ cookiecutter.package_url }}/actions/workflows/tests.yml/badge.svg?branch=main)]({{ cookiecutter.package_url }}/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/github/{{ cookiecutter.github_username }}/{{ cookiecutter.package_name }}/branch/main/graph/badge.svg)](https://app.codecov.io/github/{{ cookiecutter.github_username }}/{{ cookiecutter.package_name }})
+[![codecov](https://codecov.io/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/branch/main/graph/badge.svg)](https://app.codecov.io/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }})
 [![{{ cookiecutter.package_name }} @ PyPi](https://img.shields.io/pypi/v/{{ cookiecutter.package_name }}?label={{ cookiecutter.package_name }}%20%40%20PyPi)](https://pypi.org/project/{{ cookiecutter.package_name }}/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/{{ cookiecutter.package_name }})]({{ cookiecutter.package_url }}/blob/main/pyproject.toml)
 [![License {{ cookiecutter.license }}](https://img.shields.io/pypi/l/{{ cookiecutter.package_name }})]({{ cookiecutter.package_url }}/blob/main/LICENSE)
 
 {{ cookiecutter.package_description }}
 
-## CLI
+## Usage
+
+### preperation
+
+Note: If you using a Raspberry Pi: Check that https://www.piwheels.org/ are in use.
+For this, just look into `etc/pip.conf` it should be looked like this:
+```bash
+~/pysmartmeter$ cat /etc/pip.conf
+[global]
+extra-index-url=https://www.piwheels.org/simple
+```
+
+### Installation
+
+The easiest way is to install "{{ cookiecutter.project_name }}" via [pipx](https://pipx.pypa.io/), e.g.:
+```bash
+~$ sudo apt install pipx
+~$ pipx install --verbose {{ cookiecutter.project_name }}
+```
+Then just call `{{ cookiecutter.project_name }}` CLI, e.g.:
+```bash
+~$ {{ cookiecutter.project_name }} --help
+```
 
 [comment]: <> (✂✂✂ auto generated main help start ✂✂✂)
 ```
-usage: ./cli.py [-h] {shell-completion,version}
+usage: {{ cookiecutter.project_name }} [-h] {shell-completion,version}
 
 
 

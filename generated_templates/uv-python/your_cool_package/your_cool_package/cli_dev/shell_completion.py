@@ -3,6 +3,7 @@ import logging
 from cli_base.cli_tools.shell_completion import setup_tyro_shell_completion
 from cli_base.cli_tools.verbosity import setup_logging
 from cli_base.tyro_commands import TyroVerbosityArgType
+from rich import print  # noqa
 
 from your_cool_package.cli_dev import app
 

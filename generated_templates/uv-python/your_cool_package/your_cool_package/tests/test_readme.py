@@ -40,7 +40,7 @@ class ReadmeTestCase(BaseTestCase):
         assert_in(
             content=stdout,
             parts=(
-                'usage: ./cli.py [-h]',
+                'usage: your-cool-package [-h]',
                 ' version ',
                 'Print version and exit',
                 constants.CLI_EPILOG,

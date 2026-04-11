@@ -1,4 +1,5 @@
 from bx_py_utils.path import assert_is_file
+from cli_base.cli_tools.test_utils.assertion import assert_in
 
 from managetemplates.tests.base import PackageTestBase, TempGitRepo
 
@@ -18,7 +19,7 @@ class ManageDjangoProjectTemplateTestCase(PackageTestBase):
             # Bootstrap by call the ./manage.py
 
             output = self.test_project.check_output(manage_bin, 'version')
-            self.assert_in('your_cool_package_project v0.0.1', output)
+            assert_in(content=output, parts=('your_cool_package_project v0.0.1',))
 
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'pip')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'python')
@@ -30,16 +31,25 @@ class ManageDjangoProjectTemplateTestCase(PackageTestBase):
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'your_cool_package_project')
 
             output = self.test_project.check_output(manage_bin, '--help')
-            self.assert_in('Available subcommands:', output)
-            self.assert_in('[django]', output)
-            self.assert_in('runserver', output)
-            self.assert_in('[manage_django_project]', output)
+            assert_in(
+                content=output,
+                parts=(
+                    'Available subcommands:',
+                    '[django]',
+                    'runserver',
+                    '[manage_django_project]',
+                ),
+            )
 
             output = self.test_project.check_output(manage_bin, 'code_style')
-            self.assert_in('All checks passed!', output)
+            try:
+                assert_in(content=output, parts=('ruff', 'All checks passed!'))
+            except Exception:
+                temp_git.display_git_diff()
+                raise
 
             output = self.test_project.check_output(manage_bin, 'test')
-            self.assert_in('Ran 12 tests', output)
+            assert_in(content=output, parts=('Ran 12 tests',))
 
             # The project unittests checks also the code style and tries to fix them,
             # in this case, we have a code difference:
