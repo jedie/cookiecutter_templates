@@ -204,6 +204,7 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2026-04-11 - cleanup github actions
   * 2026-04-11 - use assert_in()
   * 2026-04-22 - Update requirements
   * 2026-04-22 - Update test matrix
