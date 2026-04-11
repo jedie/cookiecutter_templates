@@ -7,12 +7,10 @@ import sys
 from collections.abc import Sequence
 
 from cli_base.autodiscover import import_all_files
-from cli_base.cli_tools.version_info import print_version
-from rich import print  # noqa
+from rich import print
 from tyro.extras import SubcommandApp
 
-import your_cool_package
-from your_cool_package import constants
+from your_cool_package import __version__, constants
 
 
 logger = logging.getLogger(__name__)
@@ -31,9 +29,10 @@ def version():
 
 
 def main(args: Sequence[str] | None = None):
-    print_version(your_cool_package)
+    prog = 'your-cool-package'  # Enforce program name if pipx used
+    print(f'[bold][green]{prog}[/green] v{__version__}')
     app.cli(
-        prog='your_cool_package',  # Enforce program name if pipx used
+        prog=prog,
         description=constants.CLI_EPILOG,
         use_underscores=False,  # use hyphens instead of underscores
         sort_subcommands=True,

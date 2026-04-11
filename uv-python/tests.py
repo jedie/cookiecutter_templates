@@ -18,14 +18,14 @@ class UvPythonTemplateTestCase(PackageTestBase):
             self.assert_is_executeable(cli_bin)
 
             output = self.test_project.check_output(cli_bin, 'version')
-            self.assert_in('your_cool_package v0.0.1', output)
+            self.assert_in('your-cool-package v0.0.1', output)
 
             assert_is_file(self.pkg_path / '.venv-app' / 'bin' / 'pip')
             assert_is_file(self.pkg_path / '.venv-app' / 'bin' / 'python')
             assert_is_file(self.pkg_path / '.venv-app' / 'bin' / 'your_cool_package')
 
             output = self.test_project.check_output(cli_bin, '--help')
-            self.assert_in('usage: your_cool_package [-h]', output)
+            self.assert_in('usage: your-cool-package [-h]', output)
 
             ############################################################################
             # Bootstrap by call the ./dev-cli.py
