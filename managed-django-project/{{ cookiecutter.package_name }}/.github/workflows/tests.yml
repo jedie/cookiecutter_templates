@@ -35,7 +35,7 @@ jobs:
         git checkout $GITHUB_SHA || (git fetch && git checkout $GITHUB_SHA)
 
     - name: 'Set up Python ${{ matrix.python-version }}'
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@main
       # https://github.com/marketplace/actions/setup-python
       with:
         python-version: '${{ matrix.python-version }}'
@@ -63,7 +63,7 @@ jobs:
         ./manage.py nox -e "tests-${{ matrix.python-version }}(django='${{ matrix.django-version }}')"
 
     - name: 'Upload coverage report'
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@main
       # https://github.com/marketplace/actions/codecov
       with:
         fail_ci_if_error: false
