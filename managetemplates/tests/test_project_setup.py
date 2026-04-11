@@ -84,11 +84,11 @@ class ProjectSetupTestCase(BaseTestCase):
 
         with NoColorEnvRich():
             stdout = invoke(cli_bin=PACKAGE_ROOT / 'cli.py', args=['version'])
-        self.assertIn(f'managetemplates v{__version__}', stdout)
+        assert_in(content=stdout, parts=(f'managetemplates v{__version__}',))
 
         with NoColorEnvRich():
             stdout = invoke(cli_bin=PACKAGE_ROOT / 'dev-cli.py', args=['version'])
-        self.assertIn(f'managetemplates v{__version__}', stdout)
+        assert_in(content=stdout, parts=(f'managetemplates v{__version__}',))
 
     def test_code_style(self):
         return_code = assert_code_style(package_root=PACKAGE_ROOT)

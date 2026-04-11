@@ -48,7 +48,7 @@ def version():
 
 
 def main(args: Sequence[str] | None = None):
-    print_version({{ cookiecutter.package_name }})
+    print_version(module={{cookiecutter.package_name}}, project_name='{{ cookiecutter.project_name }}')
 
     if len(sys.argv) >= 2:
         # Check if we can just pass a command call to origin CLI:

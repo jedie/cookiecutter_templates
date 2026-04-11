@@ -35,7 +35,7 @@ class UvPythonTemplateTestCase(PackageTestBase):
             self.assert_is_executeable(dev_cli_bin)
 
             output = self.test_project.check_output(dev_cli_bin, 'version')
-            assert_in(content=output, parts=('your_cool_package v0.0.1',))
+            assert_in(content=output, parts=('your-cool-package v0.0.1',))
 
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'pip')
             assert_is_file(self.pkg_path / '.venv' / 'bin' / 'python')
@@ -92,7 +92,14 @@ class UvPythonTemplateTestCase(PackageTestBase):
                     GITHUB_ACTION='1',  # Disable README history test ;)
                 ),
             )
-            assert_in(content=output, parts=('Ran 8 tests',))
+            assert_in(
+                content=output,
+                parts=(
+                    'your_cool_package.cli_dev test',
+                    'your-cool-package v0.0.1',
+                    'Ran 9 tests',
+                ),
+            )
 
             # The project unittests checks also the code style and tries to fix them,
             # in this case, we have a code difference:

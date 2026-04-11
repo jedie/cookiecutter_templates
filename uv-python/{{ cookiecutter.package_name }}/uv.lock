@@ -3,7 +3,7 @@ revision = 3
 requires-python = ">=3.12"
 
 [options]
-exclude-newer = "2026-04-04T10:59:21.557264392Z"
+exclude-newer = "2026-04-04T11:19:31.653495101Z"
 exclude-newer-span = "P1W"
 
 [options.exclude-newer-package]
@@ -1573,7 +1573,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "bx-py-utils" },
-    { name = "cli-base-utilities" },
+    { name = "cli-base-utilities", specifier = ">=0.30.0" },
     { name = "rich" },
     { name = "tyro" },
 ]
