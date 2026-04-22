@@ -204,11 +204,11 @@ usage: ./dev-cli.py [-h] {coverage,install,lint,mypy,nox,pip-audit,publish,test,
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [**dev**](https://github.com/jedie/cookiecutter_templates/compare/v0.10.0...main)
+  * 2026-04-22 - Update requirements
   * 2026-04-22 - Update test matrix
   * 2026-04-09 - fix code styles
   * 2026-04-09 - Update requirements and use [tool.uv.exclude-newer-package]
   * 2026-03-28 - apply ruff fixes
-  * 2026-03-28 - update requirements
   * 2026-03-28 - cleanup rich print imports
   * 2026-03-28 - update "uv-python" template
   * 2026-03-26 - more relaxed ruff rules et
